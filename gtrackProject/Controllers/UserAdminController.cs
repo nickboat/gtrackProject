@@ -55,34 +55,41 @@ namespace gtrackProject.Controllers
         // POST api/useradmin
         [HttpPost]
         [ResponseType(typeof(IdentityUser))]
-        public async Task<IHttpActionResult> PostUser(IdentityUser usr, string roleId)
-        {//todo user with multi role
+        public async Task<IHttpActionResult> PostUser(IdentityUser usr)
+        {
             /*if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usrIden = new IdentityUser(usr.UserName);
-            var usrresult = await UserManager.CreateAsync(usrIden);
+            var usrRoles = usr.Roles;
 
-            if (!usrresult.Succeeded)
+            if (usrRoles.Count > 0)
             {
-                ModelState.AddModelError("", usrresult.Errors.First());
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                if (!String.IsNullOrEmpty(roleId))
+                foreach (var role in usrRoles)
                 {
-                    var role = await RoleManager.FindByIdAsync(roleId);
-                    var result = await UserManager.AddToRoleAsync(usrIden.Id, role.Name);
+                    if (!RoleManager.RoleExists(role.Role.Name))
+                    {
+                        return BadRequest();
+                    }
+
+                    var usrIden = new IdentityUser(usr.UserName);
+
+                    var result = await UserManager.AddToRoleAsync(usrIden.Id, role.RoleId);
                     if (!result.Succeeded)
                     {
                         ModelState.AddModelError("", result.Errors.First());
                         BadRequest(ModelState);
                     }
                 }
+            }
 
+            var usrresult = await UserManager.CreateAsync(usrIden);
+
+            if (!usrresult.Succeeded)
+            {
+                ModelState.AddModelError("", usrresult.Errors.First());
+                return BadRequest(ModelState);
             }*/
 
             return Ok(usr);
