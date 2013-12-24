@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using gtrackProject.Models;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -28,13 +24,13 @@ namespace gtrackProject.Controllers
             RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
         }
 
-        // GET api/Admin/GetRoles
+        // GET api/RoleAdmin
         public IQueryable<IdentityRole> GetRoles()
         {
             return AspContext.Roles;
         }
 
-        // GET api/Admin/GetRole
+        // GET api/RoleAdmin/(Id)
         [HttpGet]
         [ResponseType(typeof(IdentityRole))]
         public async Task<IHttpActionResult> GetRole(string id)
@@ -53,7 +49,7 @@ namespace gtrackProject.Controllers
             return Ok(role);
         }
 
-        // POST api/Admin/PostRole
+        // POST api/RoleAdmin/
         [HttpPost]
         [ResponseType(typeof(IdentityRole))]
         public async Task<IHttpActionResult> PostRole(IdentityRole rolePost)
@@ -75,7 +71,7 @@ namespace gtrackProject.Controllers
             return Ok(role);
         }
 
-        // PUT api/Admin/PutRole
+        // PUT api/RoleAdmin/(Id)
         [HttpPut]
         public async Task<IHttpActionResult> PutRole(string id, IdentityRole rolePut)
         {
@@ -113,12 +109,12 @@ namespace gtrackProject.Controllers
                 ModelState.AddModelError("", roleresult.Errors.First());
                 return BadRequest(ModelState);
             }*/
-            
+            //UpdateAsync is not work! or I don't know how to use it. Database not update value.
 
             return Ok(rolePut);
         }
 
-        // DELETE api/Admin/DeleteRole
+        // DELETE api/RoleAdmin/(Id)
         [HttpDelete]
         [ResponseType(typeof(IdentityRole))]
         public async Task<IHttpActionResult> DeleteRole(string id)
