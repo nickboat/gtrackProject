@@ -28,7 +28,7 @@ namespace gtrackProject.Controllers
         }
 
         // GET api/useradmin
-        public IEnumerable<IdentityUser> GetUsers()
+        public IQueryable<IdentityUser> GetUsers()
         {
             return AspContext.Users;
         }
