@@ -8,34 +8,49 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using gtrackProject.Models;
+using gtrackProject.Models.account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace gtrackProject.Controllers
 {
+    //[Authorize(Roles = "admin")]
     public class UserAdminController : ApiController
     {
         public UserManager<IdentityUser> UserManager { get; private set; }
         public RoleManager<IdentityRole> RoleManager { get; private set; }
         public IdentityDbContext AspContext { get; private set; }
-
+        public gtrackDbContext GtrackContext { get; private set; }
 
         public UserAdminController()
         {
             AspContext = new IdentityDbContext();
+            GtrackContext = new gtrackDbContext();
             UserManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
             RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
         }
 
         // GET api/useradmin
-        public IQueryable<IdentityUser> GetUsers()
+        public IEnumerable<UserAdminModel> GetUsers()
         {
-            return AspContext.Users;
+            var users = AspContext.Users;
+
+            return (from usr in users
+                let usrRoles = usr.Roles
+                let roleAdmins = usrRoles.Select(role => new RoleAdminModel
+                {
+                    Id = role.Role.Id, Name = role.Role.Name
+                }).ToList()
+                select new UserAdminModel
+                {
+                    Id = usr.Id, Name = usr.UserName, usrRoles = roleAdmins
+                }).ToList();
         }
 
         // GET api/useradmin/(Id)
         [HttpGet]
-        [ResponseType(typeof(IdentityUser))]
+        [ResponseType(typeof(UserAdminModel))]
         public async Task<IHttpActionResult> GetUser(string id)
         {
             if (id == null)
@@ -44,62 +59,82 @@ namespace gtrackProject.Controllers
             }
 
             var usr = await UserManager.FindByIdAsync(id);
+
             if (usr == null)
             {
                 return NotFound();
             }
 
-            return Ok(usr);
+            var roles = usr.Roles;
+            var roleAdmins = roles.Select(role => new RoleAdminModel
+            {
+                Id = role.Role.Id, Name = role.Role.Name
+            }).ToList();
+
+            var usrAdmin = new UserAdminModel
+            {
+                Id = usr.Id,
+                Name = usr.UserName,
+                usrRoles = roleAdmins
+            };
+
+
+            return Ok(usrAdmin);
         }
 
         // POST api/useradmin
         [HttpPost]
-        [ResponseType(typeof(IdentityUser))]
-        public async Task<IHttpActionResult> PostUser(IdentityUser usr)
+        [ResponseType(typeof(UserAdminModel))]
+        public async Task<IHttpActionResult> PostUser(UserAdminModel usr)
         {
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usrRoles = usr.Roles;
+            var usrRoles = usr.usrRoles;
 
-            if (usrRoles.Count > 0)
+            var roleAdminModels = usrRoles as RoleAdminModel[] ?? usrRoles.ToArray();
+            if (!roleAdminModels.Any())
             {
-                foreach (var role in usrRoles)
-                {
-                    if (!RoleManager.RoleExists(role.Role.Name))
-                    {
-                        return BadRequest();
-                    }
-
-                    var usrIden = new IdentityUser(usr.UserName);
-
-                    var result = await UserManager.AddToRoleAsync(usrIden.Id, role.RoleId);
-                    if (!result.Succeeded)
-                    {
-                        ModelState.AddModelError("", result.Errors.First());
-                        BadRequest(ModelState);
-                    }
-                }
+                return BadRequest("User much have a role or more!!!");
             }
 
-            var usrresult = await UserManager.CreateAsync(usrIden);
+            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
+            {
+                return BadRequest("Invalid Role!!!");
+            }
 
+            var usrIden = new IdentityUser(usr.Name);
+            var usrresult = await UserManager.CreateAsync(usrIden);
             if (!usrresult.Succeeded)
             {
                 ModelState.AddModelError("", usrresult.Errors.First());
                 return BadRequest(ModelState);
-            }*/
+            }
+
+            foreach (var role in roleAdminModels)
+            {
+                var result = await UserManager.AddToRoleAsync(usrIden.Id, role.Name);
+                if (result.Succeeded) continue;
+                ModelState.AddModelError("", result.Errors.First());
+                BadRequest(ModelState);
+            }
+
+            var usrProfile = new user_profile
+            {
+                ASP_Id = usrIden.Id
+            };
+            GtrackContext.user_profile.Add(usrProfile);
 
             return Ok(usr);
         }
 
-        // PUT api/useradmin/(Id)?roleId=(role id)
+        // PUT api/useradmin/(Id)
         [HttpPut]
-        public async Task<IHttpActionResult> PutUser(string id, IdentityUser usr, string roleId)
-        {//todo user with multi role
-            /*if (!ModelState.IsValid)
+        public async Task<IHttpActionResult> PutUser(string id, UserAdminModel usr)
+        {
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -109,31 +144,39 @@ namespace gtrackProject.Controllers
                 return BadRequest();
             }
 
-            var role = await UserManager.FindByIdAsync(id);
-            if (role != null)
-            {
-                AspContext.Entry(usr).State = EntityState.Modified;
-                try
-                {
-                    await AspContext.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return NotFound();
-                }
-            }
-            else
-            {
-                return NotFound();
-            }*/
+            var usrRoles = usr.usrRoles;
 
-            /*var roleresult = await RoleManager.UpdateAsync(rolePut);
-            if (!roleresult.Succeeded)
+            var roleAdminModels = usrRoles as RoleAdminModel[] ?? usrRoles.ToArray();
+            if (!roleAdminModels.Any())
             {
-                ModelState.AddModelError("", roleresult.Errors.First());
-                return BadRequest(ModelState);
-            }*/
-            //UpdateAsync is not work! or I don't know how to use it. Database not update value.
+                return BadRequest("User much have a role or more!!!");
+            }
+
+            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
+            {
+                return BadRequest("Invalid Role!!!");
+            }
+
+            var usrIden = UserManager.FindById(id);
+            if (usrIden.UserName != usr.Name)
+            {
+                return BadRequest("Change username Not Allow!!!");
+            }
+
+            var currentRoles = new List<IdentityUserRole>();
+            currentRoles.AddRange(usrIden.Roles);
+            foreach (var role in currentRoles)
+            {
+                UserManager.RemoveFromRole(id, role.Role.Name);
+            }
+
+            foreach (var role in roleAdminModels)
+            {
+                var result = await UserManager.AddToRoleAsync(usrIden.Id, role.Name);
+                if (result.Succeeded) continue;
+                ModelState.AddModelError("", result.Errors.First());
+                BadRequest(ModelState);
+            }
 
             return Ok(usr);
         }
@@ -158,6 +201,11 @@ namespace gtrackProject.Controllers
             AspContext.Users.Remove(usr);
             AspContext.SaveChanges();
             //If you look at DeleteAsync with a decompiler you'll see it throws a NotImplementedException, and so does not provide the ability to delete a role!
+
+            var usrProfile = GtrackContext.user_profile.First(u => u.ASP_Id == id);
+            GtrackContext.user_profile.Remove(usrProfile);
+            await GtrackContext.SaveChangesAsync();
+
             return Ok(usr);
         }
     }

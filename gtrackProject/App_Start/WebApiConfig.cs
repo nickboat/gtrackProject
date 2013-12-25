@@ -12,6 +12,12 @@ namespace gtrackProject
     {
         public static void Register(HttpConfiguration config)
         {
+            //ignore Loop Json.net
+            /*config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+                = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling
+                = Newtonsoft.Json.PreserveReferencesHandling.Objects;*/
+
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();

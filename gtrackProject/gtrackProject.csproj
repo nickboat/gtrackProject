@@ -195,6 +195,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\account\AccountBindingModels.cs" />
     <Compile Include="Models\account\AccountViewModels.cs" />
+    <Compile Include="Models\account\UserAdminModel.cs" />
     <Compile Include="Models\driver\driver.cs" />
     <Compile Include="Models\driver\driver_category.cs" />
     <Compile Include="Models\order\fix_orders.cs" />
