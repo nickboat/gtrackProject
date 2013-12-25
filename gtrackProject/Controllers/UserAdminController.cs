@@ -12,6 +12,7 @@ using gtrackProject.Models;
 using gtrackProject.Models.account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.Validation;
 
 namespace gtrackProject.Controllers
 {
@@ -89,6 +90,13 @@ namespace gtrackProject.Controllers
         {
             if (!ModelState.IsValid)
             {
+                //{
+                //"Id":"",
+                //"Pass":"???",
+                //"Name":"???",
+                //"usrRoles":[{"Id":"???","Name":"???"}]
+                //}
+
                 return BadRequest(ModelState);
             }
 
@@ -106,7 +114,7 @@ namespace gtrackProject.Controllers
             }
 
             var usrIden = new IdentityUser(usr.Name);
-            var usrresult = await UserManager.CreateAsync(usrIden);
+            var usrresult = await UserManager.CreateAsync(usrIden,usr.Pass);
             if (!usrresult.Succeeded)
             {
                 ModelState.AddModelError("", usrresult.Errors.First());
@@ -120,12 +128,6 @@ namespace gtrackProject.Controllers
                 ModelState.AddModelError("", result.Errors.First());
                 BadRequest(ModelState);
             }
-
-            var usrProfile = new user_profile
-            {
-                ASP_Id = usrIden.Id
-            };
-            GtrackContext.user_profile.Add(usrProfile);
 
             return Ok(usr);
         }
@@ -183,7 +185,7 @@ namespace gtrackProject.Controllers
 
         // DELETE api/useradmin/5
         [HttpDelete]
-        [ResponseType(typeof(IdentityUser))]
+        [ResponseType(typeof(UserAdminModel))]
         public async Task<IHttpActionResult> DeleteRole(string id)
         {
             if (id == null)
@@ -191,7 +193,8 @@ namespace gtrackProject.Controllers
                 return BadRequest();
             }
 
-            var usr = await UserManager.FindByIdAsync(id);
+            //var usr = await UserManager.FindByIdAsync(id);
+            var usr = AspContext.Users.First(u => u.Id == id);
 
             if (usr == null)
             {
@@ -203,8 +206,20 @@ namespace gtrackProject.Controllers
             //If you look at DeleteAsync with a decompiler you'll see it throws a NotImplementedException, and so does not provide the ability to delete a role!
 
             var usrProfile = GtrackContext.user_profile.First(u => u.ASP_Id == id);
+            if (usrProfile == null)
+            {
+                return Ok(usr);
+            }
+
             GtrackContext.user_profile.Remove(usrProfile);
-            await GtrackContext.SaveChangesAsync();
+            try
+            {
+                GtrackContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             return Ok(usr);
         }

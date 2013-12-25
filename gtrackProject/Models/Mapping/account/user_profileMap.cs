@@ -19,14 +19,12 @@ namespace gtrackProject.Models.Mapping
                 .HasMaxLength(50);
 
             this.Property(t => t.Phone)
-                .IsRequired()
                 .HasMaxLength(15);
 
             this.Property(t => t.Address)
                 .HasMaxLength(255);
 
             this.Property(t => t.Fullname)
-                .IsRequired()
                 .HasMaxLength(100);
 
             this.Property(t => t.Company_Name)
