@@ -188,23 +188,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201312250407024_Initial.cs" />
-    <Compile Include="Migrations\201312250407024_Initial.Designer.cs">
-      <DependentUpon>201312250407024_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201312260705172_Init.cs" />
+    <Compile Include="Migrations\201312260705172_Init.Designer.cs">
+      <DependentUpon>201312260705172_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\account\AccountBindingModels.cs" />
     <Compile Include="Models\account\AccountViewModels.cs" />
     <Compile Include="Models\account\UserAdminModel.cs" />
+    <Compile Include="Models\account\customer.cs" />
     <Compile Include="Models\driver\driver.cs" />
     <Compile Include="Models\driver\driver_category.cs" />
+    <Compile Include="Models\account\employee.cs" />
     <Compile Include="Models\order\fix_orders.cs" />
     <Compile Include="Models\dbContext\gtrackDbContext.cs" />
     <Compile Include="Models\account\hd.cs" />
     <Compile Include="Models\vehicle\lp_type.cs" />
+    <Compile Include="Models\Mapping\account\customerMap.cs" />
     <Compile Include="Models\Mapping\driver\driverMap.cs" />
     <Compile Include="Models\Mapping\driver\driver_categoryMap.cs" />
-    <Compile Include="Models\Mapping\product\fix_ordersMap.cs" />
+    <Compile Include="Models\Mapping\account\employeeMap.cs" />
+    <Compile Include="Models\Mapping\order\fix_ordersMap.cs" />
     <Compile Include="Models\Mapping\account\hdMap.cs" />
     <Compile Include="Models\Mapping\vehicle\lp_typeMap.cs" />
     <Compile Include="Models\Mapping\order\orderMap.cs" />
@@ -226,7 +230,6 @@
     <Compile Include="Models\Mapping\universe\un_cm_signalMap.cs" />
     <Compile Include="Models\Mapping\universe\un_cm_tempMap.cs" />
     <Compile Include="Models\Mapping\universe\un_display_statusMap.cs" />
-    <Compile Include="Models\Mapping\account\user_profileMap.cs" />
     <Compile Include="Models\Mapping\vehicle\vehicleMap.cs" />
     <Compile Include="Models\Mapping\vehicle\vehicle_brandMap.cs" />
     <Compile Include="Models\Mapping\vehicle\vehicle_colorMap.cs" />
@@ -253,7 +256,6 @@
     <Compile Include="Models\universe\un_cm_signal.cs" />
     <Compile Include="Models\universe\un_cm_temp.cs" />
     <Compile Include="Models\universe\un_display_status.cs" />
-    <Compile Include="Models\account\Customer.cs" />
     <Compile Include="Models\vehicle\vehicle.cs" />
     <Compile Include="Models\vehicle\vehicle_brand.cs" />
     <Compile Include="Models\vehicle\vehicle_color.cs" />
@@ -325,8 +327,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201312250407024_Initial.resx">
-      <DependentUpon>201312250407024_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201312260705172_Init.resx">
+      <DependentUpon>201312260705172_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,33 +1,29 @@
 namespace gtrackProject.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<gtrackProject.Models.gtrackDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Models.GtrackDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(gtrackProject.Models.gtrackDbContext context)
+        protected override void Seed(Models.GtrackDbContext context)
         {
             var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
 
             string[] defineRoles = { "admin", "manager", "cs", "qc", "manu", "install", "customer" };
-
-            foreach (var roleName in defineRoles)
+            foreach (var role in from roleName in defineRoles where !roleManager.RoleExists(roleName) select new IdentityRole(roleName))
             {
-                var role = new IdentityRole(roleName);
                 roleManager.Create(role);
             }
 
-            var adminUser = new IdentityUser()
+            var adminUser = new IdentityUser
             {
                 UserName = "admin"
             };
@@ -37,6 +33,7 @@ namespace gtrackProject.Migrations
             {
                 var result = userManager.AddToRole(adminUser.Id, "admin");
             }
+
         }
     }
 }

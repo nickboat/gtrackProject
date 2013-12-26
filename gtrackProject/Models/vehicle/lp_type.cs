@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class lp_type
+    public sealed partial class LpType
     {
-        public lp_type()
+        public LpType()
         {
-            this.vehicles = new List<vehicle>();
+            this.Vehicles = new List<Vehicle>();
         }
 
         public byte Id { get; set; }
         public string Name { get; set; }
         public string Meaning { get; set; }
-        public virtual ICollection<vehicle> vehicles { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

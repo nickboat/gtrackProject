@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class vehicle_typeMap : EntityTypeConfiguration<vehicle_type>
+    public class VehicleTypeMap : EntityTypeConfiguration<VehicleType>
     {
-        public vehicle_typeMap()
+        public VehicleTypeMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
@@ -19,12 +19,12 @@ namespace gtrackProject.Models.Mapping
             this.ToTable("vehicle_type");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.Head_Id).HasColumnName("Head_Id");
+            this.Property(t => t.HeadId).HasColumnName("Head_Id");
 
             // Relationships
-            this.HasRequired(t => t.vehicle_head_type)
-                .WithMany(t => t.vehicle_type)
-                .HasForeignKey(d => d.Head_Id);
+            this.HasRequired(t => t.VehicleHeadType)
+                .WithMany(t => t.VehicleTypes)
+                .HasForeignKey(d => d.HeadId);
 
         }
     }

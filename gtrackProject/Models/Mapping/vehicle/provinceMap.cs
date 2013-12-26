@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class provinceMap : EntityTypeConfiguration<province>
+    public class ProvinceMap : EntityTypeConfiguration<Province>
     {
-        public provinceMap()
+        public ProvinceMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
@@ -19,7 +19,7 @@ namespace gtrackProject.Models.Mapping
                 .IsFixedLength()
                 .HasMaxLength(2);
 
-            this.Property(t => t.ShortNameEN)
+            this.Property(t => t.ShortNameEn)
                 .IsFixedLength()
                 .HasMaxLength(3);
 
@@ -28,7 +28,7 @@ namespace gtrackProject.Models.Mapping
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.ShortName).HasColumnName("ShortName");
-            this.Property(t => t.ShortNameEN).HasColumnName("ShortNameEN");
+            this.Property(t => t.ShortNameEn).HasColumnName("ShortNameEN");
         }
     }
 }

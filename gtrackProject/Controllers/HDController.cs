@@ -15,19 +15,19 @@ namespace gtrackProject.Controllers
 {
     public class HDController : ApiController
     {
-        private gtrackDbContext db = new gtrackDbContext();
+        private GtrackDbContext db = new GtrackDbContext();
 
         // GET api/HD
-        public IQueryable<hd> Gethds()
+        public IQueryable<Hd> Gethds()
         {
-            return db.hds;
+            return db.Hds;
         }
 
         // GET api/HD/5
-        [ResponseType(typeof(hd))]
+        [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Gethd(short id)
         {
-            hd hd = await db.hds.FindAsync(id);
+            Hd hd = await db.Hds.FindAsync(id);
             if (hd == null)
             {
                 return NotFound();
@@ -37,7 +37,7 @@ namespace gtrackProject.Controllers
         }
 
         // PUT api/HD/5
-        public async Task<IHttpActionResult> Puthd(short id, hd hd)
+        public async Task<IHttpActionResult> Puthd(short id, Hd hd)
         {
             if (!ModelState.IsValid)
             {
@@ -71,31 +71,31 @@ namespace gtrackProject.Controllers
         }
 
         // POST api/HD
-        [ResponseType(typeof(hd))]
-        public async Task<IHttpActionResult> Posthd(hd hd)
+        [ResponseType(typeof(Hd))]
+        public async Task<IHttpActionResult> Posthd(Hd hd)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.hds.Add(hd);
+            db.Hds.Add(hd);
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = hd.Id }, hd);
         }
 
         // DELETE api/HD/5
-        [ResponseType(typeof(hd))]
+        [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Deletehd(short id)
         {
-            hd hd = await db.hds.FindAsync(id);
+            Hd hd = await db.Hds.FindAsync(id);
             if (hd == null)
             {
                 return NotFound();
             }
 
-            db.hds.Remove(hd);
+            db.Hds.Remove(hd);
             await db.SaveChangesAsync();
 
             return Ok(hd);
@@ -112,7 +112,7 @@ namespace gtrackProject.Controllers
 
         private bool hdExists(short id)
         {
-            return db.hds.Count(e => e.Id == id) > 0;
+            return db.Hds.Count(e => e.Id == id) > 0;
         }
     }
 }

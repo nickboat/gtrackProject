@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class un_display_status
+    public sealed partial class UnDisplayStatus
     {
-        public un_display_status()
+        public UnDisplayStatus()
         {
-            this.universes = new List<universe>();
+            this.Universes = new List<Universe>();
         }
 
         public byte Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<universe> universes { get; set; }
+        public ICollection<Universe> Universes { get; set; }
     }
 }

@@ -3,26 +3,26 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class driver
+    public sealed partial class Driver
     {
-        public driver()
+        public Driver()
         {
-            this.universes = new List<universe>();
+            this.Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
-        public int IDCard { get; set; }
-        public Nullable<short> ExpireCard { get; set; }
+        public int IdCard { get; set; }
+        public short? ExpireCard { get; set; }
         public string TitleName { get; set; }
         public string FirstName { get; set; }
         public string LastNmae { get; set; }
         public System.DateTime BirthDate { get; set; }
         public string Gender { get; set; }
-        public int DriverIDCard { get; set; }
-        public short ZIPCode { get; set; }
-        public byte Category_Id { get; set; }
-        public Nullable<int> User_Id { get; set; }
-        public virtual driver_category driver_category { get; set; }
-        public virtual ICollection<universe> universes { get; set; }
+        public int DriverIdCard { get; set; }
+        public short ZipCode { get; set; }
+        public byte CategoryId { get; set; }
+        public int? UserId { get; set; }
+        public DriverCategory DriverCategory { get; set; }
+        public ICollection<Universe> Universes { get; set; }
     }
 }

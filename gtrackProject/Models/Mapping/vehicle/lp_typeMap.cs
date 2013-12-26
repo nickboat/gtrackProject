@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class lp_typeMap : EntityTypeConfiguration<lp_type>
+    public class LpTypeMap : EntityTypeConfiguration<LpType>
     {
-        public lp_typeMap()
+        public LpTypeMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

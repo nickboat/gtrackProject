@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class order_status
+    public sealed partial class OrderStatus
     {
-        public order_status()
+        public OrderStatus()
         {
-            this.orders = new List<order>();
+            this.FixOrders = new List<FixOrders>();
+            this.Orders = new List<Order>();
         }
 
         public byte Id { get; set; }
-        public string Status_TH { get; set; }
-        public string Status_EN { get; set; }
-        public virtual ICollection<order> orders { get; set; }
+        public string StatusTh { get; set; }
+        public string StatusEn { get; set; }
+        public ICollection<FixOrders> FixOrders { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

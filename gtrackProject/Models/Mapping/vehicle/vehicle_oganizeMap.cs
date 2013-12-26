@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class vehicle_oganizeMap : EntityTypeConfiguration<vehicle_oganize>
+    public class VehicleOganizeMap : EntityTypeConfiguration<VehicleOganize>
     {
-        public vehicle_oganizeMap()
+        public VehicleOganizeMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

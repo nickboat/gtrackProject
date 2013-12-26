@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class product_gps_version
+    public sealed partial class ProductGpsVersion
     {
-        public product_gps_version()
+        public ProductGpsVersion()
         {
-            this.orders = new List<order>();
-            this.product_gps = new List<product_gps>();
+            this.Orders = new List<Order>();
+            this.ProductGpss = new List<ProductGps>();
         }
 
         public byte Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<order> orders { get; set; }
-        public virtual ICollection<product_gps> product_gps { get; set; }
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<ProductGps> ProductGpss { get; set; }
     }
 }

@@ -3,30 +3,33 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class order
+    public sealed partial class Order
     {
-        public order()
+        public Order()
         {
-            this.universes = new List<universe>();
+            this.Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
         public int CreateBy { get; set; }
         public System.DateTime CreateDate { get; set; }
-        public Nullable<int> CurrentUser { get; set; }
+        public int? CurrentUser { get; set; }
         public int HeadInstall { get; set; }
-        public string HD { get; set; }
-        public Nullable<byte> Version { get; set; }
+        public short HdId { get; set; }
+        public byte? Version { get; set; }
         public int Quantity { get; set; }
         public decimal PricePerUnit { get; set; }
         public decimal FeePerYear { get; set; }
         public string Comment { get; set; }
-        public Nullable<byte> Status { get; set; }
+        public byte? Status { get; set; }
         public System.DateTime Deadline { get; set; }
-        public Nullable<byte> ExtendType_Id { get; set; }
-        public virtual order_extend_type order_extend_type { get; set; }
-        public virtual order_status order_status { get; set; }
-        public virtual product_gps_version product_gps_version { get; set; }
-        public virtual ICollection<universe> universes { get; set; }
+        public byte? ExtendTypeId { get; set; }
+        public Employee CreateByEmployee { get; set; }
+        public Employee CurrentUserEmployee { get; set; }
+        public Hd Hd { get; set; }
+        public OrderExtendType OrderExtendType { get; set; }
+        public OrderStatus OrderStatus { get; set; }
+        public ProductGpsVersion ProductGpsVersion { get; set; }
+        public ICollection<Universe> Universes { get; set; }
     }
 }

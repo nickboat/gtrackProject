@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class hdMap : EntityTypeConfiguration<hd>
+    public class HdMap : EntityTypeConfiguration<Hd>
     {
-        public hdMap()
+        public HdMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
@@ -33,12 +33,12 @@ namespace gtrackProject.Models.Mapping
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.TableName).HasColumnName("TableName");
             this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.HD_Id_upline).HasColumnName("HD_Id_upline");
+            this.Property(t => t.HdIdUpline).HasColumnName("HD_Id_upline");
 
             // Relationships
-            this.HasOptional(t => t.up_hd)
-                .WithMany(t => t.up_hds)
-                .HasForeignKey(d => d.HD_Id_upline);
+            this.HasOptional(t => t.ThisHd)
+                .WithMany(t => t.HdDownLines)
+                .HasForeignKey(d => d.HdIdUpline);
 
         }
     }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class sim_brand
+    public sealed partial class SimBrand
     {
-        public sim_brand()
+        public SimBrand()
         {
-            this.product_gps = new List<product_gps>();
+            this.ProductGpss = new List<ProductGps>();
         }
 
         public byte Id { get; set; }
         public string BrandName { get; set; }
-        public virtual ICollection<product_gps> product_gps { get; set; }
+        public ICollection<ProductGps> ProductGpss { get; set; }
     }
 }

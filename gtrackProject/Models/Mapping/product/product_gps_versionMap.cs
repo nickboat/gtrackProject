@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class product_gps_versionMap : EntityTypeConfiguration<product_gps_version>
+    public class ProductGpsVersionMap : EntityTypeConfiguration<ProductGpsVersion>
     {
-        public product_gps_versionMap()
+        public ProductGpsVersionMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

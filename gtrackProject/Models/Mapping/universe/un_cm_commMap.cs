@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class un_cm_commMap : EntityTypeConfiguration<un_cm_comm>
+    public class UnCmCommMap : EntityTypeConfiguration<UnCmComm>
     {
-        public un_cm_commMap()
+        public UnCmCommMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
@@ -20,18 +20,18 @@ namespace gtrackProject.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(20);
 
-            this.Property(t => t.Msg_TH)
+            this.Property(t => t.MsgTh)
                 .HasMaxLength(255);
 
-            this.Property(t => t.Msg_EN)
+            this.Property(t => t.MsgEn)
                 .HasMaxLength(255);
 
             // Table & Column Mappings
             this.ToTable("un_cm_comm");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.Msg_TH).HasColumnName("Msg_TH");
-            this.Property(t => t.Msg_EN).HasColumnName("Msg_EN");
+            this.Property(t => t.MsgTh).HasColumnName("Msg_TH");
+            this.Property(t => t.MsgEn).HasColumnName("Msg_EN");
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class vehicle_colorMap : EntityTypeConfiguration<vehicle_color>
+    public class VehicleColorMap : EntityTypeConfiguration<VehicleColor>
     {
-        public vehicle_colorMap()
+        public VehicleColorMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

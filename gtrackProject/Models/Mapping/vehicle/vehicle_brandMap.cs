@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class vehicle_brandMap : EntityTypeConfiguration<vehicle_brand>
+    public class VehicleBrandMap : EntityTypeConfiguration<VehicleBrand>
     {
-        public vehicle_brandMap()
+        public VehicleBrandMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

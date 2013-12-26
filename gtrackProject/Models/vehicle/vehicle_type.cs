@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class vehicle_type
+    public sealed partial class VehicleType
     {
-        public vehicle_type()
+        public VehicleType()
         {
-            this.vehicle_model = new List<vehicle_model>();
+            this.VehicleModels = new List<VehicleModel>();
         }
 
         public byte Id { get; set; }
         public string Name { get; set; }
-        public byte Head_Id { get; set; }
-        public virtual vehicle_head_type vehicle_head_type { get; set; }
-        public virtual ICollection<vehicle_model> vehicle_model { get; set; }
+        public byte HeadId { get; set; }
+        public VehicleHeadType VehicleHeadType { get; set; }
+        public ICollection<VehicleModel> VehicleModels { get; set; }
     }
 }

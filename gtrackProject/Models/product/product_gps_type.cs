@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class product_gps_type
+    public sealed partial class ProductGpsType
     {
-        public product_gps_type()
+        public ProductGpsType()
         {
-            this.product_gps = new List<product_gps>();
+            this.ProductGpss = new List<ProductGps>();
         }
 
         public byte Id { get; set; }
-        public string StatusName_TH { get; set; }
-        public string StatusName_EN { get; set; }
-        public virtual ICollection<product_gps> product_gps { get; set; }
+        public string StatusNameTh { get; set; }
+        public string StatusNameEn { get; set; }
+        public ICollection<ProductGps> ProductGpss { get; set; }
     }
 }

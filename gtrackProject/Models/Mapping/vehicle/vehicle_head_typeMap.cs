@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class vehicle_head_typeMap : EntityTypeConfiguration<vehicle_head_type>
+    public class VehicleHeadTypeMap : EntityTypeConfiguration<VehicleHeadType>
     {
-        public vehicle_head_typeMap()
+        public VehicleHeadTypeMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

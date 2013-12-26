@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class driver_category
+    public sealed partial class DriverCategory
     {
-        public driver_category()
+        public DriverCategory()
         {
-            this.drivers = new List<driver>();
+            this.Drivers = new List<Driver>();
         }
 
         public byte Id { get; set; }
         public short Value { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<driver> drivers { get; set; }
+        public ICollection<Driver> Drivers { get; set; }
     }
 }

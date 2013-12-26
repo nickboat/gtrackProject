@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class vehicle_model
+    public sealed partial class VehicleModel
     {
-        public vehicle_model()
+        public VehicleModel()
         {
-            this.vehicles = new List<vehicle>();
+            this.Vehicles = new List<Vehicle>();
         }
 
         public short Id { get; set; }
-        public byte Brand_Id { get; set; }
+        public byte BrandId { get; set; }
         public string Name { get; set; }
-        public Nullable<short> Year { get; set; }
-        public byte Type_Id { get; set; }
-        public virtual vehicle_brand vehicle_brand { get; set; }
-        public virtual ICollection<vehicle> vehicles { get; set; }
-        public virtual vehicle_type vehicle_type { get; set; }
+        public short? Year { get; set; }
+        public byte TypeId { get; set; }
+        public VehicleBrand VehicleBrand { get; set; }
+        public VehicleType VehicleType { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class order_extend_type
+    public sealed partial class OrderExtendType
     {
-        public order_extend_type()
+        public OrderExtendType()
         {
-            this.orders = new List<order>();
+            this.Orders = new List<Order>();
         }
 
         public byte Id { get; set; }
         public string TypeName { get; set; }
         public byte Value { get; set; }
-        public virtual ICollection<order> orders { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

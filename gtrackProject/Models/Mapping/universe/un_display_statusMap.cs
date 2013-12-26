@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class un_display_statusMap : EntityTypeConfiguration<un_display_status>
+    public class UnDisplayStatusMap : EntityTypeConfiguration<UnDisplayStatus>
     {
-        public un_display_statusMap()
+        public UnDisplayStatusMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

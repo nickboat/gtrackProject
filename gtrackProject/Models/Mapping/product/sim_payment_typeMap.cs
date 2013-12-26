@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class sim_payment_typeMap : EntityTypeConfiguration<sim_payment_type>
+    public class SimPaymentTypeMap : EntityTypeConfiguration<SimPaymentType>
     {
-        public sim_payment_typeMap()
+        public SimPaymentTypeMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

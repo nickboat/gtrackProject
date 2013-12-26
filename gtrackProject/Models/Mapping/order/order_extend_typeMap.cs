@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class order_extend_typeMap : EntityTypeConfiguration<order_extend_type>
+    public class OrderExtendTypeMap : EntityTypeConfiguration<OrderExtendType>
     {
-        public order_extend_typeMap()
+        public OrderExtendTypeMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

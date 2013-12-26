@@ -3,114 +3,114 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class universeMap : EntityTypeConfiguration<universe>
+    public class UniverseMap : EntityTypeConfiguration<Universe>
     {
-        public universeMap()
+        public UniverseMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.CM_Command)
+            this.Property(t => t.CmCommand)
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.CM_Engine)
+            this.Property(t => t.CmEngine)
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.CM_Meter)
+            this.Property(t => t.CmMeter)
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.CM_Batt)
+            this.Property(t => t.CmBatt)
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.CM_Temp)
+            this.Property(t => t.CmTemp)
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.CM_GPS)
+            this.Property(t => t.CmGps)
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.CM_SignalStatus)
+            this.Property(t => t.CmSignalStatus)
                 .IsRequired()
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.IpGPS)
+            this.Property(t => t.IpGps)
                 .HasMaxLength(21);
 
             // Table & Column Mappings
             this.ToTable("universe");
-            this.Property(t => t.Vehicle_Id).HasColumnName("Vehicle_Id");
-            this.Property(t => t.GPS_Product_Id).HasColumnName("GPS_Product_Id");
-            this.Property(t => t.CurrentData_Datetime).HasColumnName("CurrentData_Datetime");
-            this.Property(t => t.CorrectData_Id).HasColumnName("CorrectData_Id");
-            this.Property(t => t.CorrectData_Datetime).HasColumnName("CorrectData_Datetime");
-            this.Property(t => t.CM_Command).HasColumnName("CM_Command");
-            this.Property(t => t.CM_Engine).HasColumnName("CM_Engine");
-            this.Property(t => t.CM_Meter).HasColumnName("CM_Meter");
-            this.Property(t => t.CM_Batt).HasColumnName("CM_Batt");
+            this.Property(t => t.VehicleId).HasColumnName("Vehicle_Id");
+            this.Property(t => t.GpsProductId).HasColumnName("GPS_Product_Id");
+            this.Property(t => t.CurrentDataDatetime).HasColumnName("CurrentData_Datetime");
+            this.Property(t => t.CorrectDataId).HasColumnName("CorrectData_Id");
+            this.Property(t => t.CorrectDataDatetime).HasColumnName("CorrectData_Datetime");
+            this.Property(t => t.CmCommand).HasColumnName("CM_Command");
+            this.Property(t => t.CmEngine).HasColumnName("CM_Engine");
+            this.Property(t => t.CmMeter).HasColumnName("CM_Meter");
+            this.Property(t => t.CmBatt).HasColumnName("CM_Batt");
             this.Property(t => t.FuelLevel).HasColumnName("FuelLevel");
-            this.Property(t => t.CM_Temp).HasColumnName("CM_Temp");
+            this.Property(t => t.CmTemp).HasColumnName("CM_Temp");
             this.Property(t => t.TempLevel).HasColumnName("TempLevel");
-            this.Property(t => t.CM_GPS).HasColumnName("CM_GPS");
-            this.Property(t => t.CM_SignalStatus).HasColumnName("CM_SignalStatus");
+            this.Property(t => t.CmGps).HasColumnName("CM_GPS");
+            this.Property(t => t.CmSignalStatus).HasColumnName("CM_SignalStatus");
             this.Property(t => t.Speed).HasColumnName("Speed");
             this.Property(t => t.Direction).HasColumnName("Direction");
-            this.Property(t => t.IpGPS).HasColumnName("IpGPS");
+            this.Property(t => t.IpGps).HasColumnName("IpGPS");
             this.Property(t => t.Port).HasColumnName("Port");
             this.Property(t => t.LaGoogle).HasColumnName("LaGoogle");
             this.Property(t => t.LongGoogle).HasColumnName("LongGoogle");
-            this.Property(t => t.Display_Status).HasColumnName("Display_Status");
-            this.Property(t => t.Driver_Id).HasColumnName("Driver_Id");
-            this.Property(t => t.Order_Id).HasColumnName("Order_Id");
-            this.Property(t => t.FixOrder_Id).HasColumnName("FixOrder_Id");
+            this.Property(t => t.DisplayStatus).HasColumnName("Display_Status");
+            this.Property(t => t.DriverId).HasColumnName("Driver_Id");
+            this.Property(t => t.OrderId).HasColumnName("Order_Id");
+            this.Property(t => t.FixOrderId).HasColumnName("FixOrder_Id");
             this.Property(t => t.Id).HasColumnName("Id");
 
             // Relationships
-            this.HasOptional(t => t.driver)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.Driver_Id);
-            this.HasOptional(t => t.fix_orders)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.FixOrder_Id);
-            this.HasOptional(t => t.order)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.Order_Id);
-            this.HasOptional(t => t.product_gps)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.GPS_Product_Id);
-            this.HasOptional(t => t.un_cm_batt)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.CM_Batt);
-            this.HasOptional(t => t.un_cm_comm)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.CM_Command);
-            this.HasOptional(t => t.un_cm_engine)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.CM_Engine);
-            this.HasOptional(t => t.un_cm_gps)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.CM_GPS);
-            this.HasOptional(t => t.un_cm_meter)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.CM_Meter);
-            this.HasRequired(t => t.un_cm_signal)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.CM_SignalStatus);
-            this.HasOptional(t => t.un_cm_temp)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.CM_Temp);
-            this.HasRequired(t => t.un_display_status)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.Display_Status);
-            this.HasRequired(t => t.vehicle)
-                .WithMany(t => t.universes)
-                .HasForeignKey(d => d.Vehicle_Id);
+            this.HasOptional(t => t.Driver)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.DriverId);
+            this.HasOptional(t => t.FixOrders)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.FixOrderId);
+            this.HasOptional(t => t.Order)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.OrderId);
+            this.HasOptional(t => t.ProductGps)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.GpsProductId);
+            this.HasOptional(t => t.UnCmBatt)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.CmBatt);
+            this.HasOptional(t => t.UnCmComm)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.CmCommand);
+            this.HasOptional(t => t.UnCmEngine)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.CmEngine);
+            this.HasOptional(t => t.UnCmGps)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.CmGps);
+            this.HasOptional(t => t.UnCmMeter)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.CmMeter);
+            this.HasRequired(t => t.UnCmSignal)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.CmSignalStatus);
+            this.HasOptional(t => t.UnCmTemp)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.CmTemp);
+            this.HasRequired(t => t.UnDisplayStatus)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.DisplayStatus);
+            this.HasRequired(t => t.Vehicle)
+                .WithMany(t => t.Universes)
+                .HasForeignKey(d => d.VehicleId);
 
         }
     }

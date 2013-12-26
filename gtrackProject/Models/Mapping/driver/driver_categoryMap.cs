@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace gtrackProject.Models.Mapping
 {
-    public class driver_categoryMap : EntityTypeConfiguration<driver_category>
+    public class DriverCategoryMap : EntityTypeConfiguration<DriverCategory>
     {
-        public driver_categoryMap()
+        public DriverCategoryMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);

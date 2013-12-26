@@ -22,12 +22,12 @@ namespace gtrackProject.Controllers
         public UserManager<IdentityUser> UserManager { get; private set; }
         public RoleManager<IdentityRole> RoleManager { get; private set; }
         public IdentityDbContext AspContext { get; private set; }
-        public gtrackDbContext GtrackContext { get; private set; }
+        public GtrackDbContext GtrackContext { get; private set; }
 
         public UserAdminController()
         {
             AspContext = new IdentityDbContext();
-            GtrackContext = new gtrackDbContext();
+            GtrackContext = new GtrackDbContext();
             UserManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
             RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
         }
@@ -202,10 +202,10 @@ namespace gtrackProject.Controllers
             }
 
             AspContext.Users.Remove(usr);
-            AspContext.SaveChanges();
+            await AspContext.SaveChangesAsync();
             //If you look at DeleteAsync with a decompiler you'll see it throws a NotImplementedException, and so does not provide the ability to delete a role!
 
-            var usrProfile = GtrackContext.user_profile.First(u => u.ASP_Id == id);
+            /*var usrProfile = GtrackContext.user_profile.First(u => u.ASP_Id == id);
             if (usrProfile == null)
             {
                 return Ok(usr);
@@ -219,7 +219,7 @@ namespace gtrackProject.Controllers
             catch (Exception)
             {
                 throw;
-            }
+            }*/
 
             return Ok(usr);
         }

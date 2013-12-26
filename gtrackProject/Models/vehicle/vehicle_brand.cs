@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class vehicle_brand
+    public sealed partial class VehicleBrand
     {
-        public vehicle_brand()
+        public VehicleBrand()
         {
-            this.vehicle_model = new List<vehicle_model>();
+            this.VehicleModels = new List<VehicleModel>();
         }
 
         public byte Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<vehicle_model> vehicle_model { get; set; }
+        public ICollection<VehicleModel> VehicleModels { get; set; }
     }
 }

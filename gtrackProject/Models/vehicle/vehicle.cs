@@ -3,29 +3,29 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class vehicle
+    public sealed partial class Vehicle
     {
-        public vehicle()
+        public Vehicle()
         {
-            this.universes = new List<universe>();
+            this.Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
         public string IdCar { get; set; }
         public string LicensePlate { get; set; }
-        public Nullable<byte> LicensePlate_Type { get; set; }
-        public Nullable<byte> LicensePlate_At { get; set; }
-        public Nullable<short> ModelCar_Id { get; set; }
-        public Nullable<byte> ColorCar_Id { get; set; }
-        public Nullable<byte> OganizeCar_Id { get; set; }
+        public byte? LicensePlateType { get; set; }
+        public byte? LicensePlateAt { get; set; }
+        public short? ModelCarId { get; set; }
+        public byte? ColorCarId { get; set; }
+        public byte? OganizeCarId { get; set; }
         public string BodyNo { get; set; }
-        public short HD_Id { get; set; }
-        public virtual hd hd { get; set; }
-        public virtual lp_type lp_type { get; set; }
-        public virtual province province { get; set; }
-        public virtual ICollection<universe> universes { get; set; }
-        public virtual vehicle_color vehicle_color { get; set; }
-        public virtual vehicle_model vehicle_model { get; set; }
-        public virtual vehicle_oganize vehicle_oganize { get; set; }
+        public short HdId { get; set; }
+        public Hd Hd { get; set; }
+        public LpType LpType { get; set; }
+        public Province Province { get; set; }
+        public ICollection<Universe> Universes { get; set; }
+        public VehicleColor VehicleColor { get; set; }
+        public VehicleModel VehicleModel { get; set; }
+        public VehicleOganize VehicleOganize { get; set; }
     }
 }
