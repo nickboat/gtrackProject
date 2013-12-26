@@ -16,6 +16,9 @@ namespace gtrackProject
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            UnityConfig.RegisterComponents();
+            //Add your Unity registrations in the RegisterComponents method of the UnityConfig class. All components that implement IDisposable should be 
+            //registered with the HierarchicalLifetimeManager to ensure that they are properly disposed at the end of the request.
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
