@@ -3,49 +3,49 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class product_gps
+    public sealed partial class ProductGps
     {
-        public product_gps()
+        public ProductGps()
         {
-            this.product_camera = new List<product_camera>();
-            this.universes = new List<universe>();
+            this.Cameras = new List<ProductCamera>();
+            this.Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
-        public string SIM_Num { get; set; }
-        public Nullable<byte> SIM_Brand_Id { get; set; }
-        public Nullable<byte> SIM_Payment_Type_Id { get; set; }
+        public string SimNum { get; set; }
+        public byte? SimBrandId { get; set; }
+        public byte? SimPaymentTypeId { get; set; }
         public string Serial { get; set; }
         public byte Version { get; set; }
-        public short CreateBy { get; set; }
+        public int? CreateBy { get; set; }
         public System.DateTime CreateDate { get; set; }
-        public Nullable<short> StockBy { get; set; }
-        public Nullable<System.DateTime> StockDate { get; set; }
-        public Nullable<short> QCBy { get; set; }
-        public Nullable<System.DateTime> QCDate { get; set; }
-        public Nullable<short> InstallBy { get; set; }
-        public Nullable<System.DateTime> InstallDate { get; set; }
+        public int? StockBy { get; set; }
+        public DateTime? StockDate { get; set; }
+        public int? QcBy { get; set; }
+        public DateTime? QcDate { get; set; }
+        public int? InstallBy { get; set; }
+        public DateTime? InstallDate { get; set; }
         public string ErrProductComment { get; set; }
-        public Nullable<short> BadBy { get; set; }
-        public Nullable<System.DateTime> BadDate { get; set; }
+        public int? BadBy { get; set; }
+        public DateTime? BadDate { get; set; }
         public string BadComment { get; set; }
-        public Nullable<short> UnuseableBy { get; set; }
-        public Nullable<System.DateTime> UnuseableDate { get; set; }
+        public int? UnuseableBy { get; set; }
+        public DateTime? UnuseableDate { get; set; }
         public string UnuseableComment { get; set; }
-        public Nullable<System.DateTime> ExpireDate { get; set; }
-        public Nullable<System.DateTime> LastExtendDate { get; set; }
-        public Nullable<byte> Status_Id { get; set; }
-        public virtual ICollection<product_camera> product_camera { get; set; }
-        public virtual user_profile user_profile { get; set; }
-        public virtual user_profile user_profile1 { get; set; }
-        public virtual user_profile user_profile2 { get; set; }
-        public virtual user_profile user_profile3 { get; set; }
-        public virtual sim_brand sim_brand { get; set; }
-        public virtual sim_payment_type sim_payment_type { get; set; }
-        public virtual product_gps_type product_gps_type { get; set; }
-        public virtual user_profile user_profile4 { get; set; }
-        public virtual user_profile user_profile5 { get; set; }
-        public virtual product_gps_version product_gps_version { get; set; }
-        public virtual ICollection<universe> universes { get; set; }
+        public DateTime? ExpireDate { get; set; }
+        public DateTime? LastExtendDate { get; set; }
+        public byte? StatusId { get; set; }
+        public Employee CreateByEmployee { get; set; }
+        public Employee StockByEmployee { get; set; }
+        public Employee QcByEmployee { get; set; }
+        public Employee InstallByEmployee { get; set; }
+        public Employee BadByEmployee { get; set; }
+        public Employee UnuseableByEmployee { get; set; }
+        public ICollection<ProductCamera> Cameras { get; set; }
+        public SimBrand SimBrand { get; set; }
+        public SimPaymentType SimPaymentType { get; set; }
+        public ProductGpsType ProductGpsType { get; set; }
+        public ProductGpsVersion ProductGpsVersion { get; set; }
+        public ICollection<Universe> Universes { get; set; }
     }
 }
