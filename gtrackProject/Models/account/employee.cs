@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public sealed partial class Employee
+    public partial class Employee
     {
         public Employee()
         {
@@ -24,7 +24,7 @@ namespace gtrackProject.Models
         public string Phone { get; set; }
         public string AspId { get; set; }
         public string Gender { get; set; }
-        public System.DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public ICollection<FixOrders> FixCreates { get; set; }
         public ICollection<FixOrders> FixCurrents { get; set; }
         public ICollection<Order> OrderCreates { get; set; }

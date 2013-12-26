@@ -184,7 +184,7 @@
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Controllers\HDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\EmployeeAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,7 +195,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\account\AccountBindingModels.cs" />
     <Compile Include="Models\account\AccountViewModels.cs" />
-    <Compile Include="Models\account\UserAdminModel.cs" />
+    <Compile Include="Models\account\EmployeeAdminModel.cs" />
     <Compile Include="Models\account\customer.cs" />
     <Compile Include="Models\driver\driver.cs" />
     <Compile Include="Models\driver\driver_category.cs" />

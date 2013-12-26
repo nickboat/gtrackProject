@@ -13,21 +13,21 @@ using gtrackProject.Models;
 
 namespace gtrackProject.Controllers
 {
-    public class HDController : ApiController
+    public class HdController : ApiController
     {
-        private GtrackDbContext db = new GtrackDbContext();
+        private readonly GtrackDbContext _db = new GtrackDbContext();
 
         // GET api/HD
         public IQueryable<Hd> Gethds()
         {
-            return db.Hds;
+            return _db.Hds;
         }
 
         // GET api/HD/5
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Gethd(short id)
         {
-            Hd hd = await db.Hds.FindAsync(id);
+            var hd = await _db.Hds.FindAsync(id);
             if (hd == null)
             {
                 return NotFound();
@@ -49,15 +49,15 @@ namespace gtrackProject.Controllers
                 return BadRequest();
             }
 
-            db.Entry(hd).State = EntityState.Modified;
+            _db.Entry(hd).State = EntityState.Modified;
 
             try
             {
-                await db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!hdExists(id))
+                if (!HdExists(id))
                 {
                     return NotFound();
                 }
@@ -79,8 +79,8 @@ namespace gtrackProject.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Hds.Add(hd);
-            await db.SaveChangesAsync();
+            _db.Hds.Add(hd);
+            await _db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = hd.Id }, hd);
         }
@@ -89,14 +89,14 @@ namespace gtrackProject.Controllers
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Deletehd(short id)
         {
-            Hd hd = await db.Hds.FindAsync(id);
+            var hd = await _db.Hds.FindAsync(id);
             if (hd == null)
             {
                 return NotFound();
             }
 
-            db.Hds.Remove(hd);
-            await db.SaveChangesAsync();
+            _db.Hds.Remove(hd);
+            await _db.SaveChangesAsync();
 
             return Ok(hd);
         }
@@ -105,14 +105,14 @@ namespace gtrackProject.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool hdExists(short id)
+        private bool HdExists(short id)
         {
-            return db.Hds.Count(e => e.Id == id) > 0;
+            return _db.Hds.Count(e => e.Id == id) > 0;
         }
     }
 }

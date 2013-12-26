@@ -5,15 +5,11 @@ using System.Web;
 
 namespace gtrackProject.Models.account
 {
-    public class UserAdminModel
+    public class EmployeeAdminModel : Employee
     {
-        public string Id { get; set; }
+        public string UserName { get; set; }
 
-        public string Name { get; set; }
-
-        public string Pass { get; set; }
-
-        public IEnumerable<RoleAdminModel> usrRoles { get; set; }
+        public IEnumerable<RoleAdminModel> EmployeeRoles { get; set; }
     }
 
     public class RoleAdminModel
