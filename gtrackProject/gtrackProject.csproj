@@ -253,7 +253,7 @@
     <Compile Include="Models\universe\un_cm_signal.cs" />
     <Compile Include="Models\universe\un_cm_temp.cs" />
     <Compile Include="Models\universe\un_display_status.cs" />
-    <Compile Include="Models\account\user_profile.cs" />
+    <Compile Include="Models\account\Customer.cs" />
     <Compile Include="Models\vehicle\vehicle.cs" />
     <Compile Include="Models\vehicle\vehicle_brand.cs" />
     <Compile Include="Models\vehicle\vehicle_color.cs" />
