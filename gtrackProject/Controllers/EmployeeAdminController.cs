@@ -108,7 +108,6 @@ namespace gtrackProject.Controllers
                 EmployeeRoles = roleAdmins
             };
 
-
             return Ok(employeeAdmin);
         }
 
@@ -144,6 +143,11 @@ namespace gtrackProject.Controllers
             if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
             {
                 return BadRequest("Invalid Role!!!");
+            }
+
+            if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
+            {
+                return BadRequest("This Role Not Allow!!!");
             }
 
             //add to asp.net Identity
@@ -203,6 +207,11 @@ namespace gtrackProject.Controllers
             if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
             {
                 return BadRequest("Invalid Role!!!");
+            }
+
+            if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
+            {
+                return BadRequest("This Role Not Allow!!!");
             }
 
             var usrIden = UserManager.FindById(putEmp.AspId);

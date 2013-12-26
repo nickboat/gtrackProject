@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace gtrackProject.Models
 {
-    public partial class hd
+    public sealed partial class Hd
     {
-        public hd()
+        public Hd()
         {
-            this.vehicles = new List<vehicle>();
-            this.up_hds = new List<hd>();
-            this.user_profile = new List<user_profile>();
+            this.HdDownLines = new List<Hd>();
+            this.Orders = new List<Order>();
+            this.Vehicles = new List<Vehicle>();
         }
 
         public string Value { get; set; }
@@ -17,10 +17,10 @@ namespace gtrackProject.Models
         public string Name { get; set; }
         public string TableName { get; set; }
         public short Id { get; set; }
-        public Nullable<short> HD_Id_upline { get; set; }
-        public virtual ICollection<vehicle> vehicles { get; set; }
-        public virtual ICollection<hd> up_hds { get; set; }
-        public virtual hd up_hd { get; set; }
-        public virtual ICollection<user_profile> user_profile { get; set; }
+        public short? HdIdUpline { get; set; }
+        public ICollection<Hd> HdDownLines { get; set; }
+        public Hd ThisHd { get; set; }
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }
