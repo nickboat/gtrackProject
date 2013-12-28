@@ -78,11 +78,6 @@ namespace gtrackProject.Controllers
         [ResponseType(typeof(EmployeeAdminModel))]
         public async Task<IHttpActionResult> GetUser(int id)
         {
-            if (id < 0)
-            {
-                return BadRequest();
-            }
-
             var emp = await GtrackContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
             if (emp == null)
             {
@@ -272,11 +267,6 @@ namespace gtrackProject.Controllers
         [ResponseType(typeof(EmployeeAdminModel))]
         public async Task<IHttpActionResult> DeleteRole(int id)
         {
-            if (id < 0)
-            {
-                return BadRequest();
-            }
-
             var emp = GtrackContext.Employees.FirstOrDefaultAsync(e => e.Id == id).Result;
             if (emp == null)
             {
