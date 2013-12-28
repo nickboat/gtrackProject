@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System.Configuration;
+using System.Data.Entity.Infrastructure;
+using System.IO;
 using gtrackProject.Models;
 using gtrackProject.Models.account;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -30,26 +33,34 @@ namespace gtrackProject.Repositories
 
         public IEnumerable<EmployeeAdminModel> GetAll()
         {
+            var list = new List<EmployeeAdminModel>();
             var emps = _db.Employees;
-
-            return (from emp in emps
-                let userIden = UserManager.FindByIdAsync(emp.AspId)
-                let roleIdens = userIden.Result.Roles
-                let roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
+            
+            foreach (var emp in emps)
+            {
+                var userIden = UserManager.FindById(emp.AspId);
+                var roleIdens = userIden.Roles;
+                var roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
                 {
                     Id = roleIden.Role.Id,
                     Name = roleIden.Role.Name
-                }).ToList()
-                select new EmployeeAdminModel
+                }).ToList();
+
+                var employeeAdmin = new EmployeeAdminModel
                 {
                     Id = emp.Id,
-                    UserName = userIden.Result.UserName,
+                    UserName = userIden.UserName,
                     FullName = emp.FullName,
                     Phone = emp.Phone,
                     Gender = emp.Gender,
                     BirthDate = emp.BirthDate,
                     EmployeeRoles = roleAdmins
-                }).ToList();
+                };
+                list.Add(employeeAdmin);
+            }
+
+
+            return list;
         }
 
         public EmployeeAdminModel Get(int id)
@@ -57,11 +68,11 @@ namespace gtrackProject.Repositories
             var emp = _db.Employees.FirstOrDefault(e => e.Id == id);
             if (emp == null)
             {
-                return null;
+                throw new KeyNotFoundException("id");
             }
 
-            var userIden = UserManager.FindByIdAsync(emp.AspId);
-            var roleIdens = userIden.Result.Roles;
+            var userIden = UserManager.FindById(emp.AspId);
+            var roleIdens = userIden.Roles;
             var roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
             {
                 Id = roleIden.Role.Id,
@@ -71,7 +82,7 @@ namespace gtrackProject.Repositories
             var employeeAdmin = new EmployeeAdminModel
             {
                 Id = emp.Id,
-                UserName = userIden.Result.UserName,
+                UserName = userIden.UserName,
                 FullName = emp.FullName,
                 Phone = emp.Phone,
                 Gender = emp.Gender,
@@ -90,6 +101,7 @@ namespace gtrackProject.Repositories
             if (!usrResult.Succeeded)
             {
                 //return BadRequest(ModelState);
+                throw new DbUpdateException(usrResult.Errors.First());
             }
             //add user to role
             var postEmpRoles = item.EmployeeRoles;
@@ -98,29 +110,32 @@ namespace gtrackProject.Repositories
             if (!roleAdminModels.Any())
             {
                 //return BadRequest("User much have a role or more!!!");
+                throw new ArgumentNullException("item", "User much have a role or more!!!");
             }
 
             if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
             {
                 //return BadRequest("Invalid Role!!!");
+                throw new ArgumentOutOfRangeException("item", "Invalid Role!!!");
             }
 
             if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
             {
                 //return BadRequest("This Role Not Allow!!!");
+                throw new ArgumentOutOfRangeException("item", "This Role Not Allow To Use!!!");
             }
 
             if (usrIden.UserName != item.UserName)
             {
                 //return BadRequest("Change Username Not Allow!!!");
+                throw new ArgumentException("Change Username Not Allow!!!", "item");
             }
 
-            foreach (var role in roleAdminModels)
+            foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role.Name)).Where(result => !result.Succeeded))
             {
-                var result = UserManager.AddToRole(usrIden.Id, role.Name);
-                if (result.Succeeded) continue;
                 //ModelState.AddModelError("", result.Errors.First());
                 //BadRequest(ModelState);
+                throw new DbUpdateException(result.Errors.First());
             }
 
             //add to _db.employee
@@ -133,7 +148,15 @@ namespace gtrackProject.Repositories
                 BirthDate = item.BirthDate
             };
             _db.Employees.Add(newEmp);
-            _db.SaveChanges();
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new DbUpdateException(ex.Message);
+            }
+            
 
             return item;
         }
@@ -143,16 +166,31 @@ namespace gtrackProject.Repositories
             var emp = _db.Employees.FirstOrDefault(e => e.Id == id);
             if (emp == null)
             {
-                return false;
+                throw new KeyNotFoundException("id");
             }
 
             //remove asp.net identity user
             var usr = AspContext.Users.First(u => u.Id == emp.AspId);
             AspContext.Users.Remove(usr);
-            AspContext.SaveChanges();
+            
+            try
+            {
+                AspContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new DbUpdateException(ex.Message);
+            }
 
             _db.Employees.Remove(emp);
-            _db.SaveChanges();
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new DbUpdateException(ex.Message);
+            }
 
             return true;
         }
@@ -166,21 +204,25 @@ namespace gtrackProject.Repositories
             if (!roleAdminModels.Any())
             {
                 //return BadRequest("User much have a role or more!!!");
+                throw new ArgumentNullException("item", "User much have a role or more!!!");
             }
 
             if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
             {
                 //return BadRequest("Invalid Role!!!");
+                throw new ArgumentOutOfRangeException("item", "Invalid Role!!!");
             }
 
             if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
             {
                 //return BadRequest("This Role Not Allow!!!");
+                throw new ArgumentOutOfRangeException("item", "This Role Not Allow To Use!!!");
             }
 
             if (usrIden.UserName != item.UserName)
             {
                 //return BadRequest("Change Username Not Allow!!!");
+                throw new ArgumentException("Change Username Not Allow!!!","item");
             }
 
             //remove all user's role
@@ -192,12 +234,11 @@ namespace gtrackProject.Repositories
             }
 
             //add new role to user
-            foreach (var role in roleAdminModels)
+            foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role.Name)).Where(result => !result.Succeeded))
             {
-                var result = UserManager.AddToRole(usrIden.Id, role.Name);
-                if (result.Succeeded) continue;
                 //ModelState.AddModelError("", result.Errors.First());
                 //BadRequest(ModelState);
+                throw new DbUpdateException(result.Errors.First());
             }
 
             //edit employee
@@ -210,8 +251,17 @@ namespace gtrackProject.Repositories
                 Gender = item.Gender,
                 BirthDate = item.BirthDate
             };
+
             _db.Entry(newEmp).State = EntityState.Modified;
-            _db.SaveChanges();
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new DbUpdateException(ex.Message);
+            }
+
 
             return true;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +12,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Models;
 using gtrackProject.Models.account;
+using gtrackProject.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity.Validation;
@@ -20,57 +22,21 @@ namespace gtrackProject.Controllers
     //[Authorize(Roles = "admin")]
     public class EmployeeAdminController : ApiController
     {
-        public UserManager<IdentityUser> UserManager { get; private set; }
-        public RoleManager<IdentityRole> RoleManager { get; private set; }
-        public IdentityDbContext AspContext { get; private set; }
-        public GtrackDbContext GtrackContext { get; private set; }
-
-        public EmployeeAdminController()
+        private readonly IEmployeeAdminRepository _repository;
+        
+        public EmployeeAdminController(IEmployeeAdminRepository repository)
         {
-            AspContext = new IdentityDbContext();
-            GtrackContext = new GtrackDbContext();
-            UserManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
-            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+            if (repository == null)
+            {
+                throw new ArgumentNullException("repository");
+            }
+            this._repository = repository;
         }
 
         // GET api/useradmin
         public IEnumerable<EmployeeAdminModel> GetUsers()
         {
-            /*foreach (var emp in emps)
-            {
-                var userIden = UserManager.FindByIdAsync(emp.AspId);
-                var roleIdens = userIden.Result.Roles;
-                var roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
-                {
-                    Id = roleIden.Role.Id, Name = roleIden.Role.Name
-                }).ToList();
-
-                var employee = new EmployeeAdminModel
-                {
-                    Id = emp.Id,
-                    UserName = userIden.Result.UserName,
-                    FullName = emp.FullName,
-                    Phone = emp.Phone,
-                    Gender = emp.Gender,
-                    BirthDate = emp.BirthDate,
-                    EmployeeRoles = roleAdmins
-                };
-                employeeAdmins.Add(employee);
-            }*/
-
-            var emps = GtrackContext.Employees;
-
-            return (from emp in emps
-                let userIden = UserManager.FindByIdAsync(emp.AspId)
-                let roleIdens = userIden.Result.Roles
-                let roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
-                {
-                    Id = roleIden.Role.Id, Name = roleIden.Role.Name
-                }).ToList()
-                select new EmployeeAdminModel
-                {
-                    Id = emp.Id, UserName = userIden.Result.UserName, FullName = emp.FullName, Phone = emp.Phone, Gender = emp.Gender, BirthDate = emp.BirthDate, EmployeeRoles = roleAdmins
-                }).ToList();
+            return _repository.GetAll();
         }
 
         // GET api/useradmin/(Id)
@@ -78,32 +44,15 @@ namespace gtrackProject.Controllers
         [ResponseType(typeof(EmployeeAdminModel))]
         public async Task<IHttpActionResult> GetUser(int id)
         {
-            var emp = await GtrackContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
-            if (emp == null)
+            try
+            {
+                var item = _repository.Get(id);
+                return Ok(item);
+            }
+            catch (KeyNotFoundException)
             {
                 return NotFound();
             }
-
-            var userIden = UserManager.FindByIdAsync(emp.AspId);
-            var roleIdens = userIden.Result.Roles;
-            var roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
-            {
-                Id = roleIden.Role.Id,
-                Name = roleIden.Role.Name
-            }).ToList();
-
-            var employeeAdmin = new EmployeeAdminModel
-            {
-                Id = emp.Id,
-                UserName = userIden.Result.UserName,
-                FullName = emp.FullName,
-                Phone = emp.Phone,
-                Gender = emp.Gender,
-                BirthDate = emp.BirthDate,
-                EmployeeRoles = roleAdmins
-            };
-
-            return Ok(employeeAdmin);
         }
 
         // POST api/useradmin
@@ -127,54 +76,21 @@ namespace gtrackProject.Controllers
                 return BadRequest(ModelState);
             }
 
-            var postEmpRoles = postEmp.EmployeeRoles;
-
-            var roleAdminModels = postEmpRoles as RoleAdminModel[] ?? postEmpRoles.ToArray();
-            if (!roleAdminModels.Any())
+            try
             {
-                return BadRequest("User much have a role or more!!!");
+                postEmp = _repository.Add(postEmp);
+            }
+            catch (DbUpdateException mgsDbUpdateException)
+            {
+                return InternalServerError(mgsDbUpdateException);
+            }
+            catch (ArgumentNullException mgsArgumentNullException)
+            {
+                return BadRequest(mgsArgumentNullException.Message);
             }
 
-            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
-            {
-                return BadRequest("Invalid Role!!!");
-            }
-
-            if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
-            {
-                return BadRequest("This Role Not Allow!!!");
-            }
-
-            //add to asp.net Identity
-            var usrIden = new IdentityUser(postEmp.UserName);
-            var usrResult = await UserManager.CreateAsync(usrIden, postEmp.UserName);//pass is same username **by default**
-            if (!usrResult.Succeeded)
-            {
-                ModelState.AddModelError("", usrResult.Errors.First());
-                return BadRequest(ModelState);
-            }
-            //add user to role
-            foreach (var role in roleAdminModels)
-            {
-                var result = await UserManager.AddToRoleAsync(usrIden.Id, role.Name);
-                if (result.Succeeded) continue;
-                ModelState.AddModelError("", result.Errors.First());
-                BadRequest(ModelState);
-            }
-
-            //add to _db.employee
-            var newEmp = new Employee
-            {
-                AspId = usrIden.Id,
-                FullName = postEmp.FullName,
-                Phone = postEmp.Phone,
-                Gender = postEmp.Gender,
-                BirthDate = postEmp.BirthDate
-            };
-            GtrackContext.Employees.Add(newEmp);
-            await GtrackContext.SaveChangesAsync();
-            
-            return Ok(postEmp);
+            var uri = Url.Link("DefaultApi", new { id = postEmp.Id });
+            return Created(uri, postEmp);
         }
 
         // PUT api/useradmin/(Id)
@@ -191,72 +107,17 @@ namespace gtrackProject.Controllers
                 return BadRequest();
             }
 
-            var usrRoles = putEmp.EmployeeRoles;
-
-            var roleAdminModels = usrRoles as RoleAdminModel[] ?? usrRoles.ToArray();
-            if (!roleAdminModels.Any())
-            {
-                return BadRequest("User much have a role or more!!!");
-            }
-
-            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
-            {
-                return BadRequest("Invalid Role!!!");
-            }
-
-            if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
-            {
-                return BadRequest("This Role Not Allow!!!");
-            }
-
-            var usrIden = UserManager.FindById(putEmp.AspId);
-            if (usrIden.UserName != putEmp.UserName)
-            {
-                return BadRequest("Change Username Not Allow!!!");
-            }
-
-            //remove all user's role
-            var currentRoles = new List<IdentityUserRole>();
-            currentRoles.AddRange(usrIden.Roles);
-            foreach (var role in currentRoles)
-            {
-                UserManager.RemoveFromRole(usrIden.Id, role.Role.Name);
-            }
-
-            //add new role to user
-            foreach (var role in roleAdminModels)
-            {
-                var result = await UserManager.AddToRoleAsync(usrIden.Id, role.Name);
-                if (result.Succeeded) continue;
-                ModelState.AddModelError("", result.Errors.First());
-                BadRequest(ModelState);
-            }
-
-            //edit employee
-            var newEmp = new Employee
-            {
-                Id = putEmp.Id,
-                FullName = putEmp.FullName,
-                Phone = putEmp.Phone,
-                AspId = usrIden.Id,
-                Gender = putEmp.Gender,
-                BirthDate = putEmp.BirthDate
-            };
-            GtrackContext.Entry(newEmp).State = EntityState.Modified;
             try
             {
-                await GtrackContext.SaveChangesAsync();
+                _repository.Update(putEmp);
             }
-            catch (Exception)
+            catch (DbUpdateException mgsDbUpdateException)
             {
-                if (!EmployeeAdminExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return InternalServerError(mgsDbUpdateException);
+            }
+            catch (ArgumentNullException mgsArgumentNullException)
+            {
+                return BadRequest(mgsArgumentNullException.Message);
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -267,35 +128,20 @@ namespace gtrackProject.Controllers
         [ResponseType(typeof(EmployeeAdminModel))]
         public async Task<IHttpActionResult> DeleteRole(int id)
         {
-            var emp = GtrackContext.Employees.FirstOrDefaultAsync(e => e.Id == id).Result;
-            if (emp == null)
+            try
+            {
+                _repository.Remove(id);
+            }
+            catch (KeyNotFoundException)
             {
                 return NotFound();
             }
-
-            //remove asp.net identity user
-            var usr = AspContext.Users.FirstAsync(u => u.Id == emp.AspId).Result;
-            AspContext.Users.Remove(usr);
-            await AspContext.SaveChangesAsync();
-
-            GtrackContext.Employees.Remove(emp);
-            await GtrackContext.SaveChangesAsync();
-
-            return Ok(usr);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            catch (DbUpdateException mgsDbUpdateException)
             {
-                GtrackContext.Dispose();
+                return InternalServerError(mgsDbUpdateException);
             }
-            base.Dispose(disposing);
-        }
 
-        private bool EmployeeAdminExists(int id)
-        {
-            return GtrackContext.Employees.Count(e => e.Id == id) > 0;
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
