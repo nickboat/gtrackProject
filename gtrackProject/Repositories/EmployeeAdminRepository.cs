@@ -108,13 +108,13 @@ namespace gtrackProject.Repositories
             if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
             {
                 //return BadRequest("Invalid Role!!!");
-                throw new ArgumentOutOfRangeException("item", "Invalid Role!!!");
+                throw new ArgumentException("item", "Invalid Role!!!");
             }
 
             if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
             {
                 //return BadRequest("This Role Not Allow!!!");
-                throw new ArgumentOutOfRangeException("item", "This Role Not Allow To Use!!!");
+                throw new ArgumentException("item", "This Role Not Allow To Use!!!");
             }
 
             //add to asp.net Identity
@@ -205,13 +205,13 @@ namespace gtrackProject.Repositories
             if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
             {
                 //return BadRequest("Invalid Role!!!");
-                throw new ArgumentOutOfRangeException("item", "Invalid Role!!!");
+                throw new ArgumentException("item", "Invalid Role!!!");
             }
 
             if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
             {
                 //return BadRequest("This Role Not Allow!!!");
-                throw new ArgumentOutOfRangeException("item", "This Role Not Allow To Use!!!");
+                throw new ArgumentException("item", "This Role Not Allow To Use!!!");
             }
 
             if (usrIden.UserName != item.UserName)

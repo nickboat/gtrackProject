@@ -88,6 +88,10 @@ namespace gtrackProject.Controllers
             {
                 return BadRequest(mgsArgumentNullException.Message);
             }
+            catch (ArgumentException mgsException)
+            {
+                return BadRequest(mgsException.Message);
+            }
 
             var uri = Url.Link("DefaultApi", new { id = postEmp.Id });
             return Created(uri, postEmp);
@@ -118,6 +122,10 @@ namespace gtrackProject.Controllers
             catch (ArgumentNullException mgsArgumentNullException)
             {
                 return BadRequest(mgsArgumentNullException.Message);
+            }
+            catch (ArgumentException mgsException)
+            {
+                return BadRequest(mgsException.Message);
             }
 
             return StatusCode(HttpStatusCode.NoContent);
