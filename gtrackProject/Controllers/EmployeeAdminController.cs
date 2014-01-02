@@ -70,9 +70,9 @@ namespace gtrackProject.Controllers
             {
                 postEmp = _repository.Add(postEmp);
             }
-            catch (DbUpdateException mgsDbUpdateException)
+            catch (DbUpdateConcurrencyException mgsDbUpdateConcurrencyException)
             {
-                return InternalServerError(mgsDbUpdateException);
+                return InternalServerError(mgsDbUpdateConcurrencyException);
             }
             catch (ArgumentNullException mgsArgumentNullException)
             {
@@ -109,9 +109,9 @@ namespace gtrackProject.Controllers
             {
                 return NotFound();
             }
-            catch (DbUpdateException mgsDbUpdateException)
+            catch (DbUpdateConcurrencyException mgsDbUpdateConcurrencyException)
             {
-                return InternalServerError(mgsDbUpdateException);
+                return InternalServerError(mgsDbUpdateConcurrencyException);
             }
             catch (ArgumentNullException mgsArgumentNullException)
             {
@@ -138,9 +138,9 @@ namespace gtrackProject.Controllers
             {
                 return NotFound();
             }
-            catch (DbUpdateException mgsDbUpdateException)
+            catch (DbUpdateConcurrencyException mgsDbUpdateConcurrencyException)
             {
-                return InternalServerError(mgsDbUpdateException);
+                return InternalServerError(mgsDbUpdateConcurrencyException);
             }
 
             return StatusCode(HttpStatusCode.NoContent);

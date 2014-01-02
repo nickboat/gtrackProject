@@ -122,12 +122,12 @@ namespace gtrackProject.Repositories
             var usrResult = UserManager.Create(usrIden, item.UserName);//pass is same username **by default**
             if (!usrResult.Succeeded)
             {
-                throw new DbUpdateException(usrResult.Errors.First());
+                throw new DbUpdateConcurrencyException(usrResult.Errors.First());
             }
 
             foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role)).Where(result => !result.Succeeded))
             {
-                throw new DbUpdateException(result.Errors.First());
+                throw new DbUpdateConcurrencyException(result.Errors.First());
             }
 
             //add to _db.employee
@@ -151,7 +151,7 @@ namespace gtrackProject.Repositories
                 AspContext.Users.Remove(usr);
                 AspContext.SaveChanges();
 
-                throw new DbUpdateException(ex.Message);
+                throw new DbUpdateConcurrencyException(ex.Message);
             }
             item.Id = newEmp.Id;
 
@@ -174,9 +174,9 @@ namespace gtrackProject.Repositories
             {
                 AspContext.SaveChanges();
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
-                throw new DbUpdateException(ex.Message);
+                throw new DbUpdateConcurrencyException(ex.Message);
             }
 
             _db.Employees.Remove(emp);
@@ -184,9 +184,9 @@ namespace gtrackProject.Repositories
             {
                 _db.SaveChanges();
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
-                throw new DbUpdateException(ex.Message);
+                throw new DbUpdateConcurrencyException(ex.Message);
             }
 
             return true;
@@ -233,7 +233,7 @@ namespace gtrackProject.Repositories
             //add new role to user
             foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role)).Where(result => !result.Succeeded))
             {
-                throw new DbUpdateException(result.Errors.First());
+                throw new DbUpdateConcurrencyException(result.Errors.First());
             }
 
             //edit employee
@@ -246,9 +246,9 @@ namespace gtrackProject.Repositories
             {
                 _db.SaveChanges();
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
-                throw new DbUpdateException(ex.Message);
+                throw new DbUpdateConcurrencyException(ex.Message);
             }
 
 

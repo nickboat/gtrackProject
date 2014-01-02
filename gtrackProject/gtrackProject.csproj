@@ -277,6 +277,8 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\EmployeeAdminRepository.cs" />
     <Compile Include="Repositories\IEmployeeAdminRepository.cs" />
+    <Compile Include="Repositories\IRoleAdminRepository.cs" />
+    <Compile Include="Repositories\RoleAdminRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
