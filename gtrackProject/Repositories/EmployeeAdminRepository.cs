@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.Entity.Infrastructure;
 using System.IO;
+using System.Threading.Tasks;
 using gtrackProject.Models;
 using gtrackProject.Models.account;
 using Microsoft.Ajax.Utilities;
@@ -65,15 +66,12 @@ namespace gtrackProject.Repositories
             return list;
         }
 
-        public EmployeeAdminModel Get(int id)
+        public async Task<EmployeeAdminModel> Get(int id)
         {
-            var emp = _db.Employees.FirstOrDefault(e => e.Id == id);
-            if (emp == null)
-            {
-                throw new KeyNotFoundException("id");
-            }
+            var emp = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            if (emp == null) throw new KeyNotFoundException("id");
 
-            var userIden = UserManager.FindById(emp.AspId);
+            var userIden = await UserManager.FindByIdAsync(emp.AspId);
             var roleIdens = userIden.Roles;
             var roleAdmins = new string[roleIdens.Count];
             var i = 0;
@@ -97,7 +95,7 @@ namespace gtrackProject.Repositories
             return employeeAdmin;
         }
 
-        public EmployeeAdminModel Add(EmployeeAdminModel item)
+        public async Task<EmployeeAdminModel> Add(EmployeeAdminModel item)
         {
             //add user to role
             var roleAdminModels = item.Roles;
@@ -119,15 +117,15 @@ namespace gtrackProject.Repositories
 
             //add to asp.net Identity
             var usrIden = new IdentityUser(item.UserName);
-            var usrResult = UserManager.Create(usrIden, item.UserName);//pass is same username **by default**
+            var usrResult = await UserManager.CreateAsync(usrIden, item.UserName);//pass is same username **by default**
             if (!usrResult.Succeeded)
             {
-                throw new DbUpdateConcurrencyException(usrResult.Errors.First());
+                throw new DbUpdateException(usrResult.Errors.First());
             }
 
             foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role)).Where(result => !result.Succeeded))
             {
-                throw new DbUpdateConcurrencyException(result.Errors.First());
+                throw new DbUpdateException(result.Errors.First());
             }
 
             //add to _db.employee
@@ -142,9 +140,9 @@ namespace gtrackProject.Repositories
             _db.Employees.Add(newEmp);
             try
             {
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
                 //remove asp.net identity user
                 var usr = AspContext.Users.First(u => u.Id == usrIden.Id);
@@ -158,21 +156,18 @@ namespace gtrackProject.Repositories
             return item;
         }
 
-        public bool Remove(int id)
+        public async Task<bool> Remove(int id)
         {
-            var emp = _db.Employees.FirstOrDefault(e => e.Id == id);
-            if (emp == null)
-            {
-                throw new KeyNotFoundException("id");
-            }
+            var emp = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            if (emp == null) throw new KeyNotFoundException("id");
 
             //remove asp.net identity user
-            var usr = AspContext.Users.First(u => u.Id == emp.AspId);
+            var usr = await AspContext.Users.FirstAsync(u => u.Id == emp.AspId);
             AspContext.Users.Remove(usr);
             
             try
             {
-                AspContext.SaveChanges();
+                await AspContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -182,7 +177,7 @@ namespace gtrackProject.Repositories
             _db.Employees.Remove(emp);
             try
             {
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -192,15 +187,14 @@ namespace gtrackProject.Repositories
             return true;
         }
 
-        public bool Update(EmployeeAdminModel item)
+        public async Task<bool> Update(EmployeeAdminModel item)
         {
             var roleAdminModels = item.Roles;
-            var emp = _db.Employees.FirstOrDefault(e => e.Id == item.Id);
+            var emp = await _db.Employees.FirstOrDefaultAsync(e => e.Id == item.Id);
             if (emp == null)
             {
                 throw new KeyNotFoundException("id");
             }
-            var usrIden = UserManager.FindById(emp.AspId);
 
             if (roleAdminModels.Any(string.IsNullOrEmpty))
             {
@@ -217,6 +211,7 @@ namespace gtrackProject.Repositories
                 throw new ArgumentException("This Role Not Allow To Use!!!");
             }
 
+            var usrIden = await UserManager.FindByIdAsync(emp.AspId);
             if (usrIden.UserName != item.UserName)
             {
                 throw new ArgumentException("Change Username Not Allow!!!", "UserName");
@@ -227,13 +222,13 @@ namespace gtrackProject.Repositories
             currentRoles.AddRange(usrIden.Roles);
             foreach (var role in currentRoles)
             {
-                UserManager.RemoveFromRole(usrIden.Id, role.Role.Name);
+                await UserManager.RemoveFromRoleAsync(usrIden.Id, role.Role.Name);
             }
 
             //add new role to user
             foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role)).Where(result => !result.Succeeded))
             {
-                throw new DbUpdateConcurrencyException(result.Errors.First());
+                throw new DbUpdateException(result.Errors.First());
             }
 
             //edit employee
@@ -244,7 +239,7 @@ namespace gtrackProject.Repositories
             _db.Entry(emp).State = EntityState.Modified;
             try
             {
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException ex)
             {

@@ -37,7 +37,7 @@ namespace gtrackProject.Controllers
         {
             try
             {
-                var item = _repository.Get(id);
+                var item = await _repository.Get(id);
                 return Ok(item);
             }
             catch (KeyNotFoundException)
@@ -68,11 +68,11 @@ namespace gtrackProject.Controllers
 
             try
             {
-                postEmp = _repository.Add(postEmp);
+                postEmp = await _repository.Add(postEmp);
             }
-            catch (DbUpdateConcurrencyException mgsDbUpdateConcurrencyException)
+            catch (DbUpdateException msgDbUpdateException)
             {
-                return InternalServerError(mgsDbUpdateConcurrencyException);
+                return InternalServerError(msgDbUpdateException);
             }
             catch (ArgumentNullException mgsArgumentNullException)
             {
@@ -103,15 +103,15 @@ namespace gtrackProject.Controllers
 
             try
             {
-                _repository.Update(putEmp);
+                await _repository.Update(putEmp);
             }
             catch (KeyNotFoundException)
             {
                 return NotFound();
             }
-            catch (DbUpdateConcurrencyException mgsDbUpdateConcurrencyException)
+            catch (DbUpdateException mgsDbUpdateException)
             {
-                return InternalServerError(mgsDbUpdateConcurrencyException);
+                return InternalServerError(mgsDbUpdateException);
             }
             catch (ArgumentNullException mgsArgumentNullException)
             {
@@ -132,7 +132,7 @@ namespace gtrackProject.Controllers
         {
             try
             {
-                _repository.Remove(id);
+                await _repository.Remove(id);
             }
             catch (KeyNotFoundException)
             {
