@@ -63,14 +63,14 @@ namespace gtrackProject.Controllers
             if (!ModelState.IsValid)
             {
                 /*{
-                Id = "?",
-                AspId = "?",
-                UserName = "?",
-                FullName = "?",
-                Phone = "?",
-                Gender = "?",
-                BirthDate = "?",
-                "EmployeeRoles":[{"Id":"???","Name":"???"},{"Id":"???","Name":"???"} ...]
+                "Id" : "0",
+                "AspId" : "0",
+                "UserName" : "testboat",
+                "FullName" : "chalothorn",
+                "Phone" : "0849101166",
+                "Gender" : "m",
+                "BirthDate" : "1988-5-31",
+                "EmployeeRoles":[{"Id":"180e01c1-2b12-4ed4-8725-d1e38959828b","Name":"admin"}]
                 }*/
 
                 return BadRequest(ModelState);

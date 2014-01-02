@@ -95,14 +95,6 @@ namespace gtrackProject.Repositories
 
         public EmployeeAdminModel Add(EmployeeAdminModel item)
         {
-            //add to asp.net Identity
-            var usrIden = new IdentityUser(item.UserName);
-            var usrResult = UserManager.Create(usrIden, item.UserName);//pass is same username **by default**
-            if (!usrResult.Succeeded)
-            {
-                //return BadRequest(ModelState);
-                throw new DbUpdateException(usrResult.Errors.First());
-            }
             //add user to role
             var postEmpRoles = item.EmployeeRoles;
             var roleAdminModels = postEmpRoles as RoleAdminModel[] ?? postEmpRoles.ToArray();
@@ -125,10 +117,13 @@ namespace gtrackProject.Repositories
                 throw new ArgumentOutOfRangeException("item", "This Role Not Allow To Use!!!");
             }
 
-            if (usrIden.UserName != item.UserName)
+            //add to asp.net Identity
+            var usrIden = new IdentityUser(item.UserName);
+            var usrResult = UserManager.Create(usrIden, item.UserName);//pass is same username **by default**
+            if (!usrResult.Succeeded)
             {
-                //return BadRequest("Change Username Not Allow!!!");
-                throw new ArgumentException("Change Username Not Allow!!!", "item");
+                //return BadRequest(ModelState);
+                throw new DbUpdateException(usrResult.Errors.First());
             }
 
             foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role.Name)).Where(result => !result.Succeeded))
