@@ -40,11 +40,13 @@ namespace gtrackProject.Repositories
             {
                 var userIden = UserManager.FindById(emp.AspId);
                 var roleIdens = userIden.Roles;
-                var roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
+                var roleAdmins = new string[roleIdens.Count];
+                var i = 0;
+                foreach (var result in roleIdens)
                 {
-                    Id = roleIden.Role.Id,
-                    Name = roleIden.Role.Name
-                }).ToList();
+                    roleAdmins[i] = result.Role.Name;
+                    i++;
+                }
 
                 var employeeAdmin = new EmployeeAdminModel
                 {
@@ -54,7 +56,7 @@ namespace gtrackProject.Repositories
                     Phone = emp.Phone,
                     Gender = emp.Gender,
                     BirthDate = emp.BirthDate,
-                    EmployeeRoles = roleAdmins
+                    Roles = roleAdmins
                 };
                 list.Add(employeeAdmin);
             }
@@ -73,11 +75,13 @@ namespace gtrackProject.Repositories
 
             var userIden = UserManager.FindById(emp.AspId);
             var roleIdens = userIden.Roles;
-            var roleAdmins = roleIdens.Select(roleIden => new RoleAdminModel
+            var roleAdmins = new string[roleIdens.Count];
+            var i = 0;
+            foreach (var result in roleIdens)
             {
-                Id = roleIden.Role.Id,
-                Name = roleIden.Role.Name
-            }).ToList();
+                roleAdmins[i] = result.Role.Name;
+                i++;
+            }
 
             var employeeAdmin = new EmployeeAdminModel
             {
@@ -87,7 +91,7 @@ namespace gtrackProject.Repositories
                 Phone = emp.Phone,
                 Gender = emp.Gender,
                 BirthDate = emp.BirthDate,
-                EmployeeRoles = roleAdmins
+                Roles = roleAdmins
             };
 
             return employeeAdmin;
@@ -96,25 +100,21 @@ namespace gtrackProject.Repositories
         public EmployeeAdminModel Add(EmployeeAdminModel item)
         {
             //add user to role
-            var postEmpRoles = item.EmployeeRoles;
-            var roleAdminModels = postEmpRoles as RoleAdminModel[] ?? postEmpRoles.ToArray();
+            var roleAdminModels = item.Roles;
 
-            if (!roleAdminModels.Any())
+            if (roleAdminModels.Any(string.IsNullOrEmpty))
             {
-                //return BadRequest("User much have a role or more!!!");
-                throw new ArgumentNullException("item", "User much have a role or more!!!");
+                throw new ArgumentNullException("Roles", "Roles cannot be null!!!");
             }
 
-            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
+            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role)))
             {
-                //return BadRequest("Invalid Role!!!");
-                throw new ArgumentException("item", "Invalid Role!!!");
+                throw new ArgumentException("Invalid Role!!!");
             }
 
-            if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
+            if (roleAdminModels.Any(role => role == "admin" || role == "customer"))
             {
-                //return BadRequest("This Role Not Allow!!!");
-                throw new ArgumentException("item", "This Role Not Allow To Use!!!");
+                throw new ArgumentException("This Role Not Allow To Use!!!");
             }
 
             //add to asp.net Identity
@@ -122,14 +122,11 @@ namespace gtrackProject.Repositories
             var usrResult = UserManager.Create(usrIden, item.UserName);//pass is same username **by default**
             if (!usrResult.Succeeded)
             {
-                //return BadRequest(ModelState);
                 throw new DbUpdateException(usrResult.Errors.First());
             }
 
-            foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role.Name)).Where(result => !result.Succeeded))
+            foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role)).Where(result => !result.Succeeded))
             {
-                //ModelState.AddModelError("", result.Errors.First());
-                //BadRequest(ModelState);
                 throw new DbUpdateException(result.Errors.First());
             }
 
@@ -149,6 +146,11 @@ namespace gtrackProject.Repositories
             }
             catch (Exception ex)
             {
+                //remove asp.net identity user
+                var usr = AspContext.Users.First(u => u.Id == usrIden.Id);
+                AspContext.Users.Remove(usr);
+                AspContext.SaveChanges();
+
                 throw new DbUpdateException(ex.Message);
             }
             
@@ -192,8 +194,7 @@ namespace gtrackProject.Repositories
 
         public bool Update(EmployeeAdminModel item)
         {
-            var usrRoles = item.EmployeeRoles;
-            var roleAdminModels = usrRoles as RoleAdminModel[] ?? usrRoles.ToArray();
+            var roleAdminModels = item.Roles;
             var usrIden = UserManager.FindById(item.AspId);
 
             if (!roleAdminModels.Any())
@@ -202,16 +203,16 @@ namespace gtrackProject.Repositories
                 throw new ArgumentNullException("item", "User much have a role or more!!!");
             }
 
-            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role.Name)))
+            if (roleAdminModels.Any(role => !RoleManager.RoleExists(role)))
             {
                 //return BadRequest("Invalid Role!!!");
-                throw new ArgumentException("item", "Invalid Role!!!");
+                throw new ArgumentException("Invalid Role!!!");
             }
 
-            if (roleAdminModels.Any(role => role.Name == "admin" || role.Name == "customer"))
+            if (roleAdminModels.Any(role => role == "admin" || role == "customer"))
             {
                 //return BadRequest("This Role Not Allow!!!");
-                throw new ArgumentException("item", "This Role Not Allow To Use!!!");
+                throw new ArgumentException("This Role Not Allow To Use!!!");
             }
 
             if (usrIden.UserName != item.UserName)
@@ -229,10 +230,8 @@ namespace gtrackProject.Repositories
             }
 
             //add new role to user
-            foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role.Name)).Where(result => !result.Succeeded))
+            foreach (var result in roleAdminModels.Select(role => UserManager.AddToRole(usrIden.Id, role)).Where(result => !result.Succeeded))
             {
-                //ModelState.AddModelError("", result.Errors.First());
-                //BadRequest(ModelState);
                 throw new DbUpdateException(result.Errors.First());
             }
 

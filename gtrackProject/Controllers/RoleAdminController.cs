@@ -62,13 +62,9 @@ namespace gtrackProject.Controllers
             var role = new IdentityRole(rolePost.Name);
             var roleresult = await RoleManager.CreateAsync(role);
 
-            if (!roleresult.Succeeded)
-            {
-                ModelState.AddModelError("", roleresult.Errors.First());
-                return BadRequest(ModelState);
-            }
-
-            return Ok(role);
+            if (roleresult.Succeeded) return Ok(role);
+            ModelState.AddModelError("", roleresult.Errors.First());
+            return BadRequest(ModelState);
         }
 
         // PUT api/RoleAdmin/(Id)

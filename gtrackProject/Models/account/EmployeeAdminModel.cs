@@ -11,13 +11,6 @@ namespace gtrackProject.Models.account
     {
         public string UserName { get; set; }
 
-        public IEnumerable<RoleAdminModel> EmployeeRoles { get; set; }
-    }
-
-    public class RoleAdminModel
-    {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
+        public string[] Roles { get; set; }
     }
 }

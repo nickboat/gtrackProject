@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using gtrackProject.Models;
 using gtrackProject.Models.account;
 using gtrackProject.Repositories;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity.Validation;
 
 namespace gtrackProject.Controllers
 {
@@ -30,7 +21,7 @@ namespace gtrackProject.Controllers
             {
                 throw new ArgumentNullException("repository");
             }
-            this._repository = repository;
+            _repository = repository;
         }
 
         // GET api/useradmin
@@ -70,7 +61,7 @@ namespace gtrackProject.Controllers
                 "Phone" : "0849101166",
                 "Gender" : "m",
                 "BirthDate" : "1988-5-31",
-                "EmployeeRoles":[{"Id":"180e01c1-2b12-4ed4-8725-d1e38959828b","Name":"admin"}]
+                "EmployeeRoles":["??","??"]
                 }*/
 
                 return BadRequest(ModelState);
