@@ -55,13 +55,12 @@ namespace gtrackProject.Controllers
             {
                 /*{
                 "Id" : "0",
-                "AspId" : "0",
                 "UserName" : "testboat",
                 "FullName" : "chalothorn",
                 "Phone" : "0849101166",
                 "Gender" : "m",
                 "BirthDate" : "1988-5-31",
-                "EmployeeRoles":["??","??"]
+                "Roles":["??","??"]
                 }*/
 
                 return BadRequest(ModelState);
@@ -105,6 +104,10 @@ namespace gtrackProject.Controllers
             try
             {
                 _repository.Update(putEmp);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
             }
             catch (DbUpdateException mgsDbUpdateException)
             {

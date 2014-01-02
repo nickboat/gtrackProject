@@ -153,7 +153,7 @@ namespace gtrackProject.Repositories
 
                 throw new DbUpdateException(ex.Message);
             }
-            
+            item.Id = newEmp.Id;
 
             return item;
         }
@@ -195,30 +195,31 @@ namespace gtrackProject.Repositories
         public bool Update(EmployeeAdminModel item)
         {
             var roleAdminModels = item.Roles;
-            var usrIden = UserManager.FindById(item.AspId);
-
-            if (!roleAdminModels.Any())
+            var emp = _db.Employees.FirstOrDefault(e => e.Id == item.Id);
+            if (emp == null)
             {
-                //return BadRequest("User much have a role or more!!!");
-                throw new ArgumentNullException("item", "User much have a role or more!!!");
+                throw new KeyNotFoundException("id");
+            }
+            var usrIden = UserManager.FindById(emp.AspId);
+
+            if (roleAdminModels.Any(string.IsNullOrEmpty))
+            {
+                throw new ArgumentNullException("Roles", "Roles cannot be null!!!");
             }
 
             if (roleAdminModels.Any(role => !RoleManager.RoleExists(role)))
             {
-                //return BadRequest("Invalid Role!!!");
                 throw new ArgumentException("Invalid Role!!!");
             }
 
             if (roleAdminModels.Any(role => role == "admin" || role == "customer"))
             {
-                //return BadRequest("This Role Not Allow!!!");
                 throw new ArgumentException("This Role Not Allow To Use!!!");
             }
 
             if (usrIden.UserName != item.UserName)
             {
-                //return BadRequest("Change Username Not Allow!!!");
-                throw new ArgumentException("Change Username Not Allow!!!","item");
+                throw new ArgumentException("Change Username Not Allow!!!", "UserName");
             }
 
             //remove all user's role
@@ -236,17 +237,11 @@ namespace gtrackProject.Repositories
             }
 
             //edit employee
-            var newEmp = new Employee
-            {
-                Id = item.Id,
-                FullName = item.FullName,
-                Phone = item.Phone,
-                AspId = usrIden.Id,
-                Gender = item.Gender,
-                BirthDate = item.BirthDate
-            };
-
-            _db.Entry(newEmp).State = EntityState.Modified;
+            emp.FullName = item.FullName;
+            emp.Phone = item.Phone;
+            emp.Gender = item.Gender;
+            emp.BirthDate = item.BirthDate;
+            _db.Entry(emp).State = EntityState.Modified;
             try
             {
                 _db.SaveChanges();
