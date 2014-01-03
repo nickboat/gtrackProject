@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.account
 {
     // Models returned by AccountController actions.
 

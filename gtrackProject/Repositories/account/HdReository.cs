@@ -4,15 +4,16 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
-using gtrackProject.Models;
 using gtrackProject.Models.account;
+using gtrackProject.Models.dbContext;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace gtrackProject.Repositories.account
 {
     public class HdReository : IHdRepository
     {
         private GtrackDbContext _db { get; set; }
+        private IdentityDbContext AspContext { get; set; }
 
         public HdReository()
         {
@@ -98,7 +99,26 @@ namespace gtrackProject.Repositories.account
         public async Task<bool> Remove(int id)
         {
             var header = await IdExist(id);
+            var customers = _db.Customers.Where(c => c.Hd_Id == id);
 
+            //delete this hd's customers
+            foreach (var customer in customers)
+            {
+                var c = customer;
+                var usr = await AspContext.Users.FirstAsync(u => u.Id == c.Asp_Id);
+                AspContext.Users.Remove(usr);
+            }
+
+            try
+            {
+                await AspContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new DbUpdateConcurrencyException(ex.Message);
+            }
+
+            //delete this hd
             _db.Hds.Remove(header);
             try
             {

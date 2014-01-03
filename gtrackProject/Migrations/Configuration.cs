@@ -1,3 +1,5 @@
+using gtrackProject.Models.dbContext;
+
 namespace gtrackProject.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -5,14 +7,14 @@ namespace gtrackProject.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Models.GtrackDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<GtrackDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Models.GtrackDbContext context)
+        protected override void Seed(GtrackDbContext context)
         {
             var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());

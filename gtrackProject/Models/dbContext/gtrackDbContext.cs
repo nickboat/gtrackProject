@@ -1,11 +1,11 @@
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using gtrackProject.Models.account;
 using gtrackProject.Models.Mapping;
+using gtrackProject.Models.Mapping.account;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.dbContext
 {
-    public partial class GtrackDbContext : DbContext
+    public class GtrackDbContext : DbContext
     {
         static GtrackDbContext()
         {

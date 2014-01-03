@@ -20,6 +20,7 @@ namespace gtrackProject
             container.RegisterType<IEmployeeAdminRepository, EmployeeAdminRepository>();
             container.RegisterType<IRoleAdminRepository, RoleAdminRepository>();
             container.RegisterType<IHdRepository, HdReository>();
+            container.RegisterType<ICustomerRepository, CustomerRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

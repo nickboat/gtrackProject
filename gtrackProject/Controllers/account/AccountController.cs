@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using gtrackProject.Models;
+using gtrackProject.Models.account;
 using gtrackProject.Providers;
 using gtrackProject.Results;
 using Microsoft.AspNet.Identity;
@@ -310,6 +311,9 @@ namespace gtrackProject.Controllers.account
         }
 
         // POST api/Account/Register
+        //[Authorize(Roles = "cs", Roles = "admin")]
+        // for Register Customer user only
+        //todo maybe wait i think about that
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
@@ -319,20 +323,28 @@ namespace gtrackProject.Controllers.account
                 return BadRequest(ModelState);
             }
 
-            IdentityUser user = new IdentityUser
+            var user = new IdentityUser
             {
                 UserName = model.UserName
             };
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-            IHttpActionResult errorResult = GetErrorResult(result);
+            var result = await UserManager.CreateAsync(user, model.Password);
+            var errorResult = GetErrorResult(result);
 
             if (errorResult != null)
             {
                 return errorResult;
             }
 
-            return Ok();
+            var roleResult = await UserManager.AddToRoleAsync(user.Id, "customer");
+            var roleErrorResult = GetErrorResult(roleResult);
+
+            if (roleErrorResult != null)
+            {
+                return roleErrorResult;
+            }
+
+            return Ok(user);
         }
 
         // POST api/Account/RegisterExternal

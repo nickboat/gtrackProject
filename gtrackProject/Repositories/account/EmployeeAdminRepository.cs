@@ -4,8 +4,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
-using gtrackProject.Models;
 using gtrackProject.Models.account;
+using gtrackProject.Models.dbContext;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -152,37 +152,6 @@ namespace gtrackProject.Repositories.account
             return item;
         }
 
-        public async Task<bool> Remove(int id)
-        {
-            var emp = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
-            if (emp == null) throw new KeyNotFoundException("id");
-
-            //remove asp.net identity user
-            var usr = await AspContext.Users.FirstAsync(u => u.Id == emp.AspId);
-            AspContext.Users.Remove(usr);
-            
-            try
-            {
-                await AspContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new DbUpdateConcurrencyException(ex.Message);
-            }
-
-            _db.Employees.Remove(emp);
-            try
-            {
-                await _db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new DbUpdateConcurrencyException(ex.Message);
-            }
-
-            return true;
-        }
-
         public async Task<bool> Update(EmployeeAdminModel item)
         {
             var roleAdminModels = item.Roles;
@@ -242,6 +211,37 @@ namespace gtrackProject.Repositories.account
                 throw new DbUpdateConcurrencyException(ex.Message);
             }
 
+
+            return true;
+        }
+
+        public async Task<bool> Remove(int id)
+        {
+            var emp = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            if (emp == null) throw new KeyNotFoundException("id");
+
+            //remove asp.net identity user
+            var usr = await AspContext.Users.FirstAsync(u => u.Id == emp.AspId);
+            AspContext.Users.Remove(usr);
+            
+            try
+            {
+                await AspContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new DbUpdateConcurrencyException(ex.Message);
+            }
+
+            _db.Employees.Remove(emp);
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new DbUpdateConcurrencyException(ex.Message);
+            }
 
             return true;
         }

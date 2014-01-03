@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-
-namespace gtrackProject.Models
+namespace gtrackProject.Models.account
 {
-    public partial class Customer
+    public class Customer
     {
         public int Id { get; set; }
         public string Asp_Id { get; set; }

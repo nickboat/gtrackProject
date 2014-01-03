@@ -1,22 +1,22 @@
 using System;
 using System.Collections.Generic;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.account
 {
-    public partial class Employee
+    public class Employee
     {
         public Employee()
         {
-            this.FixCreates = new List<FixOrders>();
-            this.FixCurrents = new List<FixOrders>();
-            this.OrderCreates = new List<Order>();
-            this.OrderCurrents = new List<Order>();
-            this.GpsCreates = new List<ProductGps>();
-            this.GpsStocks = new List<ProductGps>();
-            this.GpsQcs = new List<ProductGps>();
-            this.GpsInstalls = new List<ProductGps>();
-            this.GpsBads = new List<ProductGps>();
-            this.GpsUnuses = new List<ProductGps>();
+            FixCreates = new List<FixOrders>();
+            FixCurrents = new List<FixOrders>();
+            OrderCreates = new List<Order>();
+            OrderCurrents = new List<Order>();
+            GpsCreates = new List<ProductGps>();
+            GpsStocks = new List<ProductGps>();
+            GpsQcs = new List<ProductGps>();
+            GpsInstalls = new List<ProductGps>();
+            GpsBads = new List<ProductGps>();
+            GpsUnuses = new List<ProductGps>();
         }
 
         public int Id { get; set; }

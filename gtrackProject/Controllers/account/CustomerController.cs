@@ -10,12 +10,12 @@ using gtrackProject.Repositories.account;
 
 namespace gtrackProject.Controllers.account
 {
-    //[Authorize(Roles = "admin")]
-    public class EmployeeAdminController : ApiController
+    //[Authorize(Roles = "cs", Roles = "admin")]
+    public class CustomerController : ApiController
     {
-        private readonly IEmployeeAdminRepository _repository;
-        
-        public EmployeeAdminController(IEmployeeAdminRepository repository)
+        private readonly ICustomerRepository _repository;
+
+        public CustomerController(ICustomerRepository repository)
         {
             if (repository == null)
             {
@@ -24,15 +24,16 @@ namespace gtrackProject.Controllers.account
             _repository = repository;
         }
 
-        // GET api/useradmin
-        public IEnumerable<EmployeeAdminModel> GetUsers()
+        [Route("api/GetByHd/{hdId:int}")]
+        [HttpGet]
+        public IEnumerable<CustomerModel> GetByHd(int hdId)
         {
-            return _repository.GetAll();
+            return _repository.GetByHd(hdId);
         }
 
         // GET api/useradmin/(Id)
         [HttpGet]
-        [ResponseType(typeof(EmployeeAdminModel))]
+        [ResponseType(typeof(CustomerModel))]
         public async Task<IHttpActionResult> GetUser(int id)
         {
             try
@@ -48,18 +49,17 @@ namespace gtrackProject.Controllers.account
 
         // POST api/useradmin
         [HttpPost]
-        [ResponseType(typeof(EmployeeAdminModel))]
-        public async Task<IHttpActionResult> PostUser(EmployeeAdminModel postEmp)
+        [ResponseType(typeof(CustomerModel))]
+        public async Task<IHttpActionResult> PostUser(CustomerModel postCust)
         {
             if (!ModelState.IsValid)
             {
                 /*{
-                "UserName" : "testboat",
-                "FullName" : "chalothorn",
-                "Phone" : "0849101166",
-                "Gender" : "m",
-                "BirthDate" : "1988-5-31",
-                "Roles":["??","??"]
+                UserName = userIden.UserName,
+                FullName = cust.FullName,
+                Phone = cust.Phone,
+                CompanyName = cust.CompanyName,
+                Email = cust.Email
                 }*/
 
                 return BadRequest(ModelState);
@@ -67,7 +67,7 @@ namespace gtrackProject.Controllers.account
 
             try
             {
-                postEmp = await _repository.Add(postEmp);
+                postCust = await _repository.Add(postCust);
             }
             catch (DbUpdateException msgDbUpdateException)
             {
@@ -82,26 +82,26 @@ namespace gtrackProject.Controllers.account
                 return BadRequest(mgsException.Message);
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = postEmp.Id }, postEmp);
+            return CreatedAtRoute("DefaultApi", new { id = postCust.Id }, postCust);
         }
 
         // PUT api/useradmin/(Id)
         [HttpPut]
-        public async Task<IHttpActionResult> PutUser(int id, EmployeeAdminModel putEmp)
+        public async Task<IHttpActionResult> PutUser(int id, CustomerModel putCust)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != putEmp.Id)
+            if (id != putCust.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                await _repository.Update(putEmp);
+                await _repository.Update(putCust);
             }
             catch (KeyNotFoundException)
             {
