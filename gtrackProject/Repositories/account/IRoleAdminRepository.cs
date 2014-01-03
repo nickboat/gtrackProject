@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
-namespace gtrackProject.Repositories
+
+namespace gtrackProject.Repositories.account
 {
     public interface IRoleAdminRepository
     {

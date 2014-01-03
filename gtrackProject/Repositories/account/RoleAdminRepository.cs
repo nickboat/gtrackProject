@@ -4,11 +4,10 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace gtrackProject.Repositories
+namespace gtrackProject.Repositories.account
 {
     public class RoleAdminRepository : IRoleAdminRepository
     {

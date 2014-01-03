@@ -1,5 +1,3 @@
-using gtrackProject.Controllers;
-using gtrackProject.Repositories;
 using gtrackProject.Repositories.account;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
@@ -17,11 +15,11 @@ namespace gtrackProject
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();
-            //container.RegisterType<EmployeeAdminController>();
-            container.RegisterType<IEmployeeAdminRepository, EmployeeAdminRepository>();
 
-            //container.RegisterType<RoleAdminController>();
+            //Repositories.account
+            container.RegisterType<IEmployeeAdminRepository, EmployeeAdminRepository>();
             container.RegisterType<IRoleAdminRepository, RoleAdminRepository>();
+            container.RegisterType<IHdRepository, HdReository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

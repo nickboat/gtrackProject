@@ -82,8 +82,7 @@ namespace gtrackProject.Controllers.account
                 return BadRequest(mgsException.Message);
             }
 
-            var uri = Url.Link("DefaultApi", new { id = postEmp.Id });
-            return Created(uri, postEmp);
+            return CreatedAtRoute("DefaultApi", new { id = postEmp.Id }, postEmp);
         }
 
         // PUT api/useradmin/(Id)

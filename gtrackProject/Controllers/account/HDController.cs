@@ -1,36 +1,48 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using gtrackProject.Models;
 using gtrackProject.Models.account;
+using gtrackProject.Repositories.account;
 
 namespace gtrackProject.Controllers.account
 {
     public class HdController : ApiController
     {
-        private readonly GtrackDbContext _db = new GtrackDbContext();
+        private readonly IHdRepository _repository;
+
+        public HdController(IHdRepository repository)
+        {
+            if (repository == null)
+            {
+                throw new  ArgumentException("repository");
+            }
+            _repository = repository;
+        }
 
         // GET api/HD
         public IQueryable<Hd> Gethds()
         {
-            return _db.Hds;
+            return _repository.GetAll();
         }
 
         // GET api/HD/5
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Gethd(short id)
         {
-            var hd = await _db.Hds.FindAsync(id);
-            if (hd == null)
+            try
+            {
+                var hd = await _repository.Get(id);
+                return Ok(hd);
+            }
+            catch (KeyNotFoundException)
             {
                 return NotFound();
             }
-
-            return Ok(hd);
         }
 
         // PUT api/HD/5
@@ -45,23 +57,18 @@ namespace gtrackProject.Controllers.account
             {
                 return BadRequest();
             }
-
-            _db.Entry(hd).State = EntityState.Modified;
-
+            
             try
             {
-                await _db.SaveChangesAsync();
+                await _repository.Update(hd);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException msgDbUpdateConcurrencyException)
             {
-                if (!HdExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return InternalServerError(msgDbUpdateConcurrencyException);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -76,40 +83,40 @@ namespace gtrackProject.Controllers.account
                 return BadRequest(ModelState);
             }
 
-            _db.Hds.Add(hd);
-            await _db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = hd.Id }, hd);
+            try
+            {
+                var header = await _repository.Add(hd);
+                return CreatedAtRoute("DefaultApi", new { id = header.Id }, header);
+            }
+            catch (DbUpdateException msgDbUpdateException)
+            {
+                return InternalServerError(msgDbUpdateException);
+            }
         }
 
         // DELETE api/HD/5
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Deletehd(short id)
         {
-            var hd = await _db.Hds.FindAsync(id);
-            if (hd == null)
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _repository.Remove(id);
+            }
+            catch (DbUpdateConcurrencyException msgDbUpdateConcurrencyException)
+            {
+                return InternalServerError(msgDbUpdateConcurrencyException);
+            }
+            catch (KeyNotFoundException)
             {
                 return NotFound();
             }
 
-            _db.Hds.Remove(hd);
-            await _db.SaveChangesAsync();
-
-            return Ok(hd);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool HdExists(short id)
-        {
-            return _db.Hds.Count(e => e.Id == id) > 0;
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
