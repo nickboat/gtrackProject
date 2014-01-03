@@ -1,15 +1,14 @@
-using System;
 using System.Collections.Generic;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.account
 {
-    public sealed partial class Hd
+    public sealed class Hd
     {
         public Hd()
         {
-            this.HdDownLines = new List<Hd>();
-            this.Orders = new List<Order>();
-            this.Vehicles = new List<Vehicle>();
+            HdDownLines = new List<Hd>();
+            Orders = new List<Order>();
+            Vehicles = new List<Vehicle>();
         }
 
         public string Value { get; set; }

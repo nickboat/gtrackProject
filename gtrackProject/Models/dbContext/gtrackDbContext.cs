@@ -1,5 +1,6 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using gtrackProject.Models.account;
 using gtrackProject.Models.Mapping;
 
 namespace gtrackProject.Models

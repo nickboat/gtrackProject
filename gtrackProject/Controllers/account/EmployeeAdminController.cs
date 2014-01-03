@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Models.account;
-using gtrackProject.Repositories;
+using gtrackProject.Repositories.account;
 
-namespace gtrackProject.Controllers
+namespace gtrackProject.Controllers.account
 {
     //[Authorize(Roles = "admin")]
     public class EmployeeAdminController : ApiController
@@ -54,7 +54,6 @@ namespace gtrackProject.Controllers
             if (!ModelState.IsValid)
             {
                 /*{
-                "Id" : "0",
                 "UserName" : "testboat",
                 "FullName" : "chalothorn",
                 "Phone" : "0849101166",

@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using gtrackProject.Models.account;
-using System.Collections.Generic;
-namespace gtrackProject.Repositories
+
+namespace gtrackProject.Repositories.account
 {
     public interface IEmployeeAdminRepository
     {

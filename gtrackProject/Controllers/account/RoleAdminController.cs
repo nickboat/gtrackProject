@@ -9,7 +9,7 @@ using System.Web.Http.Description;
 using gtrackProject.Repositories;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace gtrackProject.Controllers
+namespace gtrackProject.Controllers.account
 {
     //[Authorize(Roles = "admin")]
     public class RoleAdminController : ApiController

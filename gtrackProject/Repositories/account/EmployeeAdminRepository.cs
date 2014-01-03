@@ -1,19 +1,15 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using gtrackProject.Models;
 using gtrackProject.Models.account;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
 
-namespace gtrackProject.Repositories
+namespace gtrackProject.Repositories.account
 {
     public class EmployeeAdminRepository : IEmployeeAdminRepository
     {
