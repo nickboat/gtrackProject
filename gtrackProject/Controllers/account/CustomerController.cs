@@ -24,8 +24,9 @@ namespace gtrackProject.Controllers.account
             _repository = repository;
         }
 
-        [Route("api/GetByHd/{hdId:int}")]
+        [Route("api/CustomerByHd/{hdId:int}")]
         [HttpGet]
+        [ResponseType(typeof(CustomerModel))]
         public IEnumerable<CustomerModel> GetByHd(int hdId)
         {
             return _repository.GetByHd(hdId);
@@ -73,14 +74,6 @@ namespace gtrackProject.Controllers.account
             {
                 return InternalServerError(msgDbUpdateException);
             }
-            catch (ArgumentNullException mgsArgumentNullException)
-            {
-                return BadRequest(mgsArgumentNullException.Message);
-            }
-            catch (ArgumentException mgsException)
-            {
-                return BadRequest(mgsException.Message);
-            }
 
             return CreatedAtRoute("DefaultApi", new { id = postCust.Id }, postCust);
         }
@@ -110,14 +103,6 @@ namespace gtrackProject.Controllers.account
             catch (DbUpdateException mgsDbUpdateException)
             {
                 return InternalServerError(mgsDbUpdateException);
-            }
-            catch (ArgumentNullException mgsArgumentNullException)
-            {
-                return BadRequest(mgsArgumentNullException.Message);
-            }
-            catch (ArgumentException mgsException)
-            {
-                return BadRequest(mgsException.Message);
             }
 
             return StatusCode(HttpStatusCode.NoContent);
