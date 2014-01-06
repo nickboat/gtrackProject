@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -11,11 +12,11 @@ using gtrackProject.Repositories.product;
 
 namespace gtrackProject.Controllers.product
 {
-    public class SimPaymentController : ApiController
+    public class GpsVersionController : ApiController
     {
-        private readonly ISimPaymentRepository _repository;
+        private readonly IGpsVersionRepository _repository;
 
-        public SimPaymentController(ISimPaymentRepository repository)
+        public GpsVersionController(IGpsVersionRepository repository)
         {
             if (repository == null)
             {
@@ -24,21 +25,21 @@ namespace gtrackProject.Controllers.product
             _repository = repository;
         }
 
-        // GET api/simpayment
-        public IQueryable<SimPaymentType> Get()
+        // GET api/gpsversion
+        public IQueryable<ProductGpsVersion> Get()
         {
             return _repository.GetAll();
         }
 
-        // GET api/simpayment/5
+        // GET api/gpsversion/5
         [HttpGet]
-        [ResponseType(typeof(SimPaymentType))]
+        [ResponseType(typeof(ProductGpsVersion))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
-                var payment = await _repository.Get(id);
-                return Ok(payment);
+                var ver = await _repository.Get(id);
+                return Ok(ver);
             }
             catch (KeyNotFoundException)
             {
@@ -46,10 +47,10 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // POST api/simpayment
+        // POST api/gpsversion
         [HttpPost]
-        [ResponseType(typeof(SimPaymentType))]
-        public async Task<IHttpActionResult> Post([FromBody]SimPaymentType value)
+        [ResponseType(typeof(ProductGpsVersion))]
+        public async Task<IHttpActionResult> Post([FromBody]ProductGpsVersion value)
         {
             if (!ModelState.IsValid)
             {
@@ -58,8 +59,8 @@ namespace gtrackProject.Controllers.product
 
             try
             {
-                var payment = await _repository.Add(value);
-                return Ok(payment);
+                var ver = await _repository.Add(value);
+                return Ok(ver);
             }
             catch (ArgumentException msgArgumentException)
             {
@@ -71,9 +72,9 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // PUT api/simpayment/5
+        // PUT api/gpsversion/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]SimPaymentType value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]ProductGpsVersion value)
         {
             if (!ModelState.IsValid)
             {
@@ -105,9 +106,9 @@ namespace gtrackProject.Controllers.product
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/simpayment/5
+        // DELETE api/gpsversion/5
         [HttpDelete]
-        [ResponseType(typeof(SimPaymentType))]
+        [ResponseType(typeof(ProductGpsVersion))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try
@@ -125,6 +126,5 @@ namespace gtrackProject.Controllers.product
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
     }
 }

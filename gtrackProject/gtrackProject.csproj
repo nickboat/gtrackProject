@@ -196,6 +196,7 @@
     <Compile Include="Controllers\account\HDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\account\EmployeeAdminController.cs" />
+    <Compile Include="Controllers\product\GpsVersionController.cs" />
     <Compile Include="Controllers\product\SimBrandController.cs" />
     <Compile Include="Controllers\product\SimPaymentController.cs" />
     <Compile Include="Global.asax.cs">
