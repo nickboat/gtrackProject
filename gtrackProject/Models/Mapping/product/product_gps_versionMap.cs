@@ -1,23 +1,23 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.product;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.product
 {
     public class ProductGpsVersionMap : EntityTypeConfiguration<ProductGpsVersion>
     {
         public ProductGpsVersionMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Name)
+            Property(t => t.Name)
                 .HasMaxLength(20);
 
             // Table & Column Mappings
-            this.ToTable("product_gps_version");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Name).HasColumnName("Name");
+            ToTable("product_gps_version");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Name).HasColumnName("Name");
         }
     }
 }

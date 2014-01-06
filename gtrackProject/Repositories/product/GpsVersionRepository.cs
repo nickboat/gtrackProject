@@ -4,43 +4,44 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Models.product;
 
 namespace gtrackProject.Repositories.product
 {
-    public class SimPaymentRepository :ISimPaymentRepository
+    public class GpsVersionRepository : IGpsVersionRepository
     {
         private GtrackDbContext _db { get; set; }
-        public SimPaymentRepository()
+        public GpsVersionRepository()
         {
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<SimPaymentType> GetAll()
+        public IQueryable<ProductGpsVersion> GetAll()
         {
-            return _db.SimPaymentTypes;
+            return _db.ProductGpsVersions;
         }
 
-        public async Task<SimPaymentType> Get(byte id)
+        public async Task<ProductGpsVersion> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<SimPaymentType> Add(SimPaymentType item)
+        public async Task<ProductGpsVersion> Add(ProductGpsVersion item)
         {
-            if (await NameExist(item.PaymentName)) return null;
+            if (await NameExist(item.Name)) return null;
 
-            var newPayment = new SimPaymentType()
+            var newVer = new ProductGpsVersion()
             {
-                PaymentName = item.PaymentName
+                Name = item.Name
             };
 
-            newPayment = _db.SimPaymentTypes.Add(newPayment);
+            newVer = _db.ProductGpsVersions.Add(newVer);
             try
             {
                 await _db.SaveChangesAsync();
-                return newPayment;
+                return newVer;
             }
             catch (DbUpdateConcurrencyException exception)
             {
@@ -48,15 +49,15 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(SimPaymentType item)
+        public async Task<bool> Update(ProductGpsVersion item)
         {
-            var payment = await IdExist(item.Id);
+            var ver = await IdExist(item.Id);
 
-            if (await NameExist(item.PaymentName)) return false;
+            if (await NameExist(item.Name)) return false;
 
-            payment.PaymentName = item.PaymentName;
+            ver.Name = item.Name;
 
-            _db.Entry(payment).State = EntityState.Modified;
+            _db.Entry(ver).State = EntityState.Modified;
             try
             {
                 await _db.SaveChangesAsync();
@@ -71,9 +72,9 @@ namespace gtrackProject.Repositories.product
 
         public async Task<bool> Remove(byte id)
         {
-            var payment = await IdExist(id);
+            var ver = await IdExist(id);
 
-            _db.SimPaymentTypes.Remove(payment);
+            _db.ProductGpsVersions.Remove(ver);
             try
             {
                 await _db.SaveChangesAsync();
@@ -86,17 +87,17 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<SimPaymentType> IdExist(byte id)
+        private async Task<ProductGpsVersion> IdExist(byte id)
         {
-            var brand = await _db.SimPaymentTypes.FirstOrDefaultAsync(p => p.Id == id);
-            if (brand != null) return brand;
+            var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(v => v.Id == id);
+            if (ver != null) return ver;
             throw new KeyNotFoundException("id");
         }
 
         private async Task<bool> NameExist(string name)
         {
-            var checkName = await _db.SimPaymentTypes.FirstOrDefaultAsync(p => p.PaymentName == name);
-            if (checkName == null) return false;
+            var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(v => v.Name == name);
+            if (ver == null) return false;
             throw new ArgumentException("This name ( " + name + " ) is already taken");
         }
     }

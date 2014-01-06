@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
+using gtrackProject.Models.order;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.product
 {
-    public sealed partial class ProductGpsVersion
+    public sealed class ProductGpsVersion
     {
         public ProductGpsVersion()
         {
-            this.Orders = new List<Order>();
-            this.ProductGpss = new List<ProductGps>();
+            Orders = new List<Order>();
+            ProductGpss = new List<ProductGps>();
         }
 
         public byte Id { get; set; }

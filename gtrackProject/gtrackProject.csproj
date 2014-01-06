@@ -287,6 +287,8 @@
     <Compile Include="Repositories\account\IHdRepository.cs" />
     <Compile Include="Repositories\account\IRoleAdminRepository.cs" />
     <Compile Include="Repositories\account\RoleAdminRepository.cs" />
+    <Compile Include="Repositories\product\GpsVersionRepository.cs" />
+    <Compile Include="Repositories\product\IGpsVersionRepository.cs" />
     <Compile Include="Repositories\product\ISimBrandRepository.cs" />
     <Compile Include="Repositories\product\ISimPaymentRepository.cs" />
     <Compile Include="Repositories\product\SimBrandRepository.cs" />
