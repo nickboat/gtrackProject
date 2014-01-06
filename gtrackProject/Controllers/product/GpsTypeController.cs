@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -11,11 +12,11 @@ using gtrackProject.Repositories.product;
 
 namespace gtrackProject.Controllers.product
 {
-    public class GpsVersionController : ApiController
+    public class GpsTypeController : ApiController
     {
-        private readonly IGpsVersionRepository _repository;
+        private readonly IGpsTypeRepository _repository;
 
-        public GpsVersionController(IGpsVersionRepository repository)
+        public GpsTypeController(IGpsTypeRepository repository)
         {
             if (repository == null)
             {
@@ -24,21 +25,21 @@ namespace gtrackProject.Controllers.product
             _repository = repository;
         }
 
-        // GET api/gpsversion
-        public IQueryable<ProductGpsVersion> Get()
+        // GET api/simpayment
+        public IQueryable<ProductGpsType> Get()
         {
             return _repository.GetAll();
         }
 
-        // GET api/gpsversion/5
+        // GET api/simpayment/5
         [HttpGet]
-        [ResponseType(typeof(ProductGpsVersion))]
+        [ResponseType(typeof(ProductGpsType))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
-                var ver = await _repository.Get(id);
-                return Ok(ver);
+                var type = await _repository.Get(id);
+                return Ok(type);
             }
             catch (KeyNotFoundException)
             {
@@ -46,10 +47,10 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // POST api/gpsversion
+        // POST api/simpayment
         [HttpPost]
-        [ResponseType(typeof(ProductGpsVersion))]
-        public async Task<IHttpActionResult> Post([FromBody]ProductGpsVersion value)
+        [ResponseType(typeof(ProductGpsType))]
+        public async Task<IHttpActionResult> Post([FromBody]ProductGpsType value)
         {
             if (!ModelState.IsValid)
             {
@@ -58,8 +59,8 @@ namespace gtrackProject.Controllers.product
 
             try
             {
-                var ver = await _repository.Add(value);
-                return Ok(ver);
+                var type = await _repository.Add(value);
+                return Ok(type);
             }
             catch (ArgumentException msgArgumentException)
             {
@@ -71,9 +72,9 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // PUT api/gpsversion/5
+        // PUT api/simpayment/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]ProductGpsVersion value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]ProductGpsType value)
         {
             if (!ModelState.IsValid)
             {
@@ -105,9 +106,9 @@ namespace gtrackProject.Controllers.product
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/gpsversion/5
+        // DELETE api/simpayment/5
         [HttpDelete]
-        [ResponseType(typeof(ProductGpsVersion))]
+        [ResponseType(typeof(ProductGpsType))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try

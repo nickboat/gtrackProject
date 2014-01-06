@@ -196,6 +196,7 @@
     <Compile Include="Controllers\account\HDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\account\EmployeeAdminController.cs" />
+    <Compile Include="Controllers\product\GpsTypeController.cs" />
     <Compile Include="Controllers\product\GpsVersionController.cs" />
     <Compile Include="Controllers\product\SimBrandController.cs" />
     <Compile Include="Controllers\product\SimPaymentController.cs" />
@@ -288,7 +289,9 @@
     <Compile Include="Repositories\account\IHdRepository.cs" />
     <Compile Include="Repositories\account\IRoleAdminRepository.cs" />
     <Compile Include="Repositories\account\RoleAdminRepository.cs" />
+    <Compile Include="Repositories\product\GpsTypeRepository.cs" />
     <Compile Include="Repositories\product\GpsVersionRepository.cs" />
+    <Compile Include="Repositories\product\IGpsTypeRepository.cs" />
     <Compile Include="Repositories\product\IGpsVersionRepository.cs" />
     <Compile Include="Repositories\product\ISimBrandRepository.cs" />
     <Compile Include="Repositories\product\ISimPaymentRepository.cs" />

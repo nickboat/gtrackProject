@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.product
 {
-    public sealed partial class ProductGpsType
+    public sealed class ProductGpsType
     {
         public ProductGpsType()
         {
-            this.ProductGpss = new List<ProductGps>();
+            ProductGpss = new List<ProductGps>();
         }
 
         public byte Id { get; set; }
