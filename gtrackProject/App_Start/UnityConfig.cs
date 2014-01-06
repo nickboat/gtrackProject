@@ -25,6 +25,7 @@ namespace gtrackProject
 
             //Repositories.product
             container.RegisterType<ISimBrandRepository, SimBrandRepository>();
+            container.RegisterType<ISimPaymentRepository, SimPaymentRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using gtrackProject.Models;
+using gtrackProject.Models.product;
 using gtrackProject.Repositories.product;
 
 namespace gtrackProject.Controllers.product
 {
-    public class SimBrandController : ApiController
+    public class SimPaymentController : ApiController
     {
-        private readonly ISimBrandRepository _repository;
+        private readonly ISimPaymentRepository _repository;
 
-        public SimBrandController(ISimBrandRepository repository)
+        public SimPaymentController(ISimPaymentRepository repository)
         {
             if (repository == null)
             {
@@ -24,21 +25,21 @@ namespace gtrackProject.Controllers.product
             _repository = repository;
         }
 
-        // GET api/simbrand
-        public IQueryable<SimBrand> Get()
+        // GET api/simpayment
+        public IQueryable<SimPaymentType> Get()
         {
             return _repository.GetAll();
         }
 
-        // GET api/simbrand/5
+        // GET api/simpayment/5
         [HttpGet]
-        [ResponseType(typeof(SimBrand))]
+        [ResponseType(typeof(SimPaymentType))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
-                var brand = await _repository.Get(id);
-                return Ok(brand);
+                var payment = await _repository.Get(id);
+                return Ok(payment);
             }
             catch (KeyNotFoundException)
             {
@@ -46,10 +47,10 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // POST api/simbrand
+        // POST api/simpayment
         [HttpPost]
-        [ResponseType(typeof(SimBrand))]
-        public async Task<IHttpActionResult> Post([FromBody]SimBrand value)
+        [ResponseType(typeof(SimPaymentType))]
+        public async Task<IHttpActionResult> Post([FromBody]SimPaymentType value)
         {
             if (!ModelState.IsValid)
             {
@@ -58,8 +59,8 @@ namespace gtrackProject.Controllers.product
 
             try
             {
-                var brand = await _repository.Add(value);
-                return Ok(brand);
+                var payment = await _repository.Add(value);
+                return Ok(payment);
             }
             catch (ArgumentException msgArgumentException)
             {
@@ -71,9 +72,9 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // PUT api/simbrand/5
+        // PUT api/simpayment/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]SimBrand value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]SimPaymentType value)
         {
             if (!ModelState.IsValid)
             {
@@ -105,9 +106,9 @@ namespace gtrackProject.Controllers.product
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/simbrand/5
+        // DELETE api/simpayment/5
         [HttpDelete]
-        [ResponseType(typeof(SimBrand))]
+        [ResponseType(typeof(SimPaymentType))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try
@@ -122,8 +123,9 @@ namespace gtrackProject.Controllers.product
             {
                 return NotFound();
             }
-            
+
             return StatusCode(HttpStatusCode.NoContent);
         }
+
     }
 }

@@ -1,23 +1,23 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.product;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.product
 {
     public class SimPaymentTypeMap : EntityTypeConfiguration<SimPaymentType>
     {
         public SimPaymentTypeMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.PaymentName)
+            Property(t => t.PaymentName)
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("sim_payment_type");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.PaymentName).HasColumnName("PaymentName");
+            ToTable("sim_payment_type");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.PaymentName).HasColumnName("PaymentName");
         }
     }
 }

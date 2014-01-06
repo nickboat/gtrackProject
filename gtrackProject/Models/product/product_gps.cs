@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using gtrackProject.Models.account;
+using gtrackProject.Models.product;
 
 namespace gtrackProject.Models
 {
