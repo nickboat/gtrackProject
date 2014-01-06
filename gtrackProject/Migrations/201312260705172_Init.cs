@@ -19,7 +19,9 @@ namespace gtrackProject.Migrations
                         Email = c.String(maxLength: 100),
                         CompanyName = c.String(maxLength: 100),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.hds", t => t.Hd_Id, cascadeDelete: true)
+                .Index(t => t.Hd_Id);
             
             CreateTable(
                 "dbo.driver_category",

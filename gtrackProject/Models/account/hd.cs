@@ -9,6 +9,7 @@ namespace gtrackProject.Models.account
             HdDownLines = new List<Hd>();
             Orders = new List<Order>();
             Vehicles = new List<Vehicle>();
+            Customers = new List<Customer>();
         }
 
         public string Value { get; set; }
@@ -21,5 +22,7 @@ namespace gtrackProject.Models.account
         public Hd ThisHd { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
+        public ICollection<Customer> Customers { get; set; }
+
     }
 }

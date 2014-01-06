@@ -9,5 +9,6 @@ namespace gtrackProject.Models.account
         public string Phone { get; set; }
         public string Email { get; set; }
         public string CompanyName { get; set; }
+        public Hd Hd { get; set; }
     }
 }
