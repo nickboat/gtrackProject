@@ -1,4 +1,5 @@
 using gtrackProject.Repositories.account;
+using gtrackProject.Repositories.product;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using Unity.WebApi;
@@ -21,6 +22,9 @@ namespace gtrackProject
             container.RegisterType<IRoleAdminRepository, RoleAdminRepository>();
             container.RegisterType<IHdRepository, HdReository>();
             container.RegisterType<ICustomerRepository, CustomerRepository>();
+
+            //Repositories.product
+            container.RegisterType<ISimBrandRepository, SimBrandRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

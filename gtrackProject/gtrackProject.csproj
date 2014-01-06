@@ -196,6 +196,7 @@
     <Compile Include="Controllers\account\HDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\account\EmployeeAdminController.cs" />
+    <Compile Include="Controllers\product\SimBrandController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -285,6 +286,8 @@
     <Compile Include="Repositories\account\IHdRepository.cs" />
     <Compile Include="Repositories\account\IRoleAdminRepository.cs" />
     <Compile Include="Repositories\account\RoleAdminRepository.cs" />
+    <Compile Include="Repositories\product\ISimBrandRepository.cs" />
+    <Compile Include="Repositories\product\SimBrandRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
