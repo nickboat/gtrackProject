@@ -1,27 +1,27 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.vehicle;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.vehicle
 {
     public class LpTypeMap : EntityTypeConfiguration<LpType>
     {
         public LpTypeMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Name)
+            Property(t => t.Name)
                 .HasMaxLength(20);
 
-            this.Property(t => t.Meaning)
+            Property(t => t.Meaning)
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("lp_type");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.Meaning).HasColumnName("Meaning");
+            ToTable("lp_type");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Name).HasColumnName("Name");
+            Property(t => t.Meaning).HasColumnName("Meaning");
         }
     }
 }

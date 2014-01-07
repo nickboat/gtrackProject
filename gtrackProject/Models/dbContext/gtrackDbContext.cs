@@ -3,8 +3,10 @@ using gtrackProject.Models.account;
 using gtrackProject.Models.Mapping;
 using gtrackProject.Models.Mapping.account;
 using gtrackProject.Models.Mapping.product;
+using gtrackProject.Models.Mapping.vehicle;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
+using gtrackProject.Models.vehicle;
 
 namespace gtrackProject.Models.dbContext
 {

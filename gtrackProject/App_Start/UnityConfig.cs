@@ -2,6 +2,8 @@ using gtrackProject.Repositories.account;
 using gtrackProject.Repositories.account.IRepos;
 using gtrackProject.Repositories.product;
 using gtrackProject.Repositories.product.IRepos;
+using gtrackProject.Repositories.vehicle;
+using gtrackProject.Repositories.vehicle.IRepos;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using Unity.WebApi;
@@ -32,6 +34,9 @@ namespace gtrackProject
             container.RegisterType<IGpsTypeRepository, GpsTypeRepository>();
             container.RegisterType<ICameraRepository, CameraRepository>();
             container.RegisterType<IProductGpsRepository, ProductGpsRepository>();
+
+            //Repositories.vehicle
+            container.RegisterType<ILpTypeRepository, LpTypeRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
