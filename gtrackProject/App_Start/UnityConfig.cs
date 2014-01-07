@@ -37,6 +37,7 @@ namespace gtrackProject
 
             //Repositories.vehicle
             container.RegisterType<ILpTypeRepository, LpTypeRepository>();
+            container.RegisterType<IProvinceRepository, ProvinceRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
