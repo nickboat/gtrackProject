@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using gtrackProject.Models.account;
 using gtrackProject.Models.dbContext;
+using gtrackProject.Repositories.account.IRepos;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Repositories.account;
+using gtrackProject.Repositories.account.IRepos;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace gtrackProject.Controllers.account

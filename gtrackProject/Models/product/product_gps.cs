@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using gtrackProject.Models.account;
-using gtrackProject.Models.product;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.product
 {
-    public sealed partial class ProductGps
+    public sealed class ProductGps
     {
         public ProductGps()
         {
-            this.Cameras = new List<ProductCamera>();
-            this.Universes = new List<Universe>();
+            Cameras = new List<ProductCamera>();
+            Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
@@ -19,8 +18,8 @@ namespace gtrackProject.Models
         public byte? SimPaymentTypeId { get; set; }
         public string Serial { get; set; }
         public byte Version { get; set; }
-        public int? CreateBy { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public int CreateBy { get; set; }
+        public DateTime CreateDate { get; set; }
         public int? StockBy { get; set; }
         public DateTime? StockDate { get; set; }
         public int? QcBy { get; set; }

@@ -1,24 +1,24 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.product;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.product
 {
     public class SimBrandMap : EntityTypeConfiguration<SimBrand>
     {
         public SimBrandMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.BrandName)
+            Property(t => t.BrandName)
                 .IsRequired()
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("sim_brand");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.BrandName).HasColumnName("BrandName");
+            ToTable("sim_brand");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.BrandName).HasColumnName("BrandName");
         }
     }
 }

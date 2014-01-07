@@ -1,28 +1,28 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.product;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.product
 {
     public class ProductCameraMap : EntityTypeConfiguration<ProductCamera>
     {
         public ProductCameraMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Serial)
+            Property(t => t.Serial)
                 .IsRequired()
                 .HasMaxLength(20);
 
             // Table & Column Mappings
-            this.ToTable("product_camera");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Serial).HasColumnName("Serial");
-            this.Property(t => t.ProductId).HasColumnName("Product_Id");
+            ToTable("product_camera");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Serial).HasColumnName("Serial");
+            Property(t => t.ProductId).HasColumnName("Product_Id");
 
             // Relationships
-            this.HasRequired(t => t.ProductGps)
+            HasRequired(t => t.ProductGps)
                 .WithMany(t => t.Cameras)
                 .HasForeignKey(d => d.ProductId);
 

@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Models.product;
 using gtrackProject.Repositories.product;
+using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Controllers.product
 {

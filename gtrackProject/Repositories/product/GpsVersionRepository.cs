@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Models.product;
+using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Repositories.product
 {

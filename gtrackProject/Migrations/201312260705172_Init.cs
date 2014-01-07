@@ -155,7 +155,7 @@ namespace gtrackProject.Migrations
                         SIM_Payment_Type_Id = c.Byte(),
                         Serial = c.String(nullable: false, maxLength: 10),
                         Version = c.Byte(nullable: false),
-                        CreateBy = c.Int(),
+                        CreateBy = c.Int(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                         StockBy = c.Int(),
                         StockDate = c.DateTime(),
@@ -202,7 +202,7 @@ namespace gtrackProject.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Serial = c.String(nullable: false, maxLength: 20),
-                        Product_Id = c.Int(nullable: false),
+                        Product_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.product_gps", t => t.Product_Id, cascadeDelete: true)
