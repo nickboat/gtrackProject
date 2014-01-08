@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.vehicle
 {
-    public sealed partial class VehicleModel
+    public sealed class VehicleModel
     {
         public VehicleModel()
         {
-            this.Vehicles = new List<Vehicle>();
+            Vehicles = new List<Vehicle>();
         }
 
         public short Id { get; set; }

@@ -1,16 +1,17 @@
-using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.vehicle
 {
-    public sealed partial class VehicleHeadType
+    public sealed class VehicleHeadType
     {
         public VehicleHeadType()
         {
-            this.VehicleTypes = new List<VehicleType>();
+            VehicleTypes = new List<VehicleType>();
         }
 
         public byte Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public ICollection<VehicleType> VehicleTypes { get; set; }
     }

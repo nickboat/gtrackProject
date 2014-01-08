@@ -11,11 +11,11 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
-    public class VehicleOgnController : ApiController
+    public class VehicleHTypeController : ApiController
     {
-        private readonly IVehicleOganizeRepository _repository;
+        private readonly IVehicleHeadTypeRepository _repository;
 
-        public VehicleOgnController(IVehicleOganizeRepository repository)
+        public VehicleHTypeController(IVehicleHeadTypeRepository repository)
         {
             if (repository == null)
             {
@@ -24,21 +24,21 @@ namespace gtrackProject.Controllers.vehicle
             _repository = repository;
         }
 
-        // GET api/VehicleOgn
-        public IQueryable<VehicleOganize> Get()
+        // GET api/VehicleHType
+        public IQueryable<VehicleHeadType> Get()
         {
             return _repository.GetAll();
         }
 
-        // GET api/VehicleOgn/5
+        // GET api/VehicleHType/5
         [HttpGet]
-        [ResponseType(typeof(VehicleOganize))]
+        [ResponseType(typeof(VehicleHeadType))]
         public async Task<IHttpActionResult> Get(int id)
         {
             try
             {
-                var ogn = await _repository.Get(id);
-                return Ok(ogn);
+                var ht = await _repository.Get(id);
+                return Ok(ht);
             }
             catch (KeyNotFoundException)
             {
@@ -46,10 +46,10 @@ namespace gtrackProject.Controllers.vehicle
             }
         }
 
-        // POST api/VehicleOgn
+        // POST api/VehicleHType
         [HttpPost]
-        [ResponseType(typeof(VehicleOganize))]
-        public async Task<IHttpActionResult> Post([FromBody]VehicleOganize value)
+        [ResponseType(typeof(VehicleHeadType))]
+        public async Task<IHttpActionResult> Post([FromBody]VehicleHeadType value)
         {
             if (!ModelState.IsValid)
             {
@@ -58,8 +58,8 @@ namespace gtrackProject.Controllers.vehicle
 
             try
             {
-                var ogn = await _repository.Add(value);
-                return Ok(ogn);
+                var ht = await _repository.Add(value);
+                return Ok(ht);
             }
             catch (ArgumentException msgArgumentException)
             {
@@ -71,9 +71,9 @@ namespace gtrackProject.Controllers.vehicle
             }
         }
 
-        // PUT api/VehicleOgn/5
+        // PUT api/VehicleHType/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]VehicleOganize value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]VehicleHeadType value)
         {
             if (!ModelState.IsValid)
             {
@@ -105,9 +105,9 @@ namespace gtrackProject.Controllers.vehicle
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/VehicleOgn/5
+        // DELETE api/VehicleHType/5
         [HttpDelete]
-        [ResponseType(typeof(VehicleOganize))]
+        [ResponseType(typeof(VehicleHeadType))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try
