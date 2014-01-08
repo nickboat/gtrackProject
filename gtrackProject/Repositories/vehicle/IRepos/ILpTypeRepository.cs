@@ -7,9 +7,9 @@ namespace gtrackProject.Repositories.vehicle.IRepos
     public interface ILpTypeRepository
     {
         IQueryable<LpType> GetAll();
-        Task<LpType> Get(int id);
+        Task<LpType> Get(byte id);
         Task<LpType> Add(LpType item);
         Task<bool> Update(LpType item);
-        Task<bool> Remove(int id);
+        Task<bool> Remove(byte id);
     }
 }

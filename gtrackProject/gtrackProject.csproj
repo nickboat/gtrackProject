@@ -313,11 +313,13 @@
     <Compile Include="Repositories\vehicle\IRepos\IVehicleColorRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleHeadTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleOganizeRepository.cs" />
+    <Compile Include="Repositories\vehicle\IRepos\IVehicleTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\LpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\ProvinceRepository.cs" />
     <Compile Include="Repositories\vehicle\VehicleColorRository.cs" />
     <Compile Include="Repositories\vehicle\VehicleHeadTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\VehicleOganizeRepository.cs" />
+    <Compile Include="Repositories\vehicle\VehicleTypeRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

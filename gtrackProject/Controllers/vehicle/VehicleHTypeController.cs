@@ -33,7 +33,7 @@ namespace gtrackProject.Controllers.vehicle
         // GET api/VehicleHType/5
         [HttpGet]
         [ResponseType(typeof(VehicleHeadType))]
-        public async Task<IHttpActionResult> Get(int id)
+        public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace gtrackProject.Controllers.vehicle
 
         // PUT api/VehicleHType/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]VehicleHeadType value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]VehicleHeadType value)
         {
             if (!ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // DELETE api/VehicleHType/5
-        [HttpDelete]
+        /*[HttpDelete]
         [ResponseType(typeof(VehicleHeadType))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
@@ -124,6 +124,6 @@ namespace gtrackProject.Controllers.vehicle
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
     }
 }

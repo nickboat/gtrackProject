@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -9,39 +10,38 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Repositories.vehicle
 {
-    public class ProvinceRepository : IProvinceRepository
+    public class VehicleTypeRepository : IVehicleTypeRepository
     {
         private GtrackDbContext _db { get; set; }
 
-        public ProvinceRepository()
+        public VehicleTypeRepository()
         {
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<Province> GetAll()
+        public IQueryable<VehicleType> GetAll()
         {
-            return _db.Provincess;
+            return _db.VehicleTypes;
         }
 
-        public async Task<Province> Get(byte id)
+        public async Task<VehicleType> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<Province> Add(Province item)
+        public async Task<VehicleType> Add(VehicleType item)
         {
-            var pv = new Province
+            var type = new VehicleType
             {
                 Name = item.Name,
-                ShortName = item.ShortName,
-                ShortNameEn = item.ShortNameEn
+                HeadId = await HeadExist(item.HeadId)
             };
 
-            pv = _db.Provincess.Add(pv);
+            type = _db.VehicleTypes.Add(type);
             try
             {
                 await _db.SaveChangesAsync();
-                return pv;
+                return type;
             }
             catch (DbUpdateConcurrencyException exception)
             {
@@ -49,15 +49,14 @@ namespace gtrackProject.Repositories.vehicle
             }
         }
 
-        public async Task<bool> Update(Province item)
+        public async Task<bool> Update(VehicleType item)
         {
-            var pv = await IdExist(item.Id);
+            var type = await IdExist(item.Id);
 
-            pv.Name = item.Name;
-            pv.ShortName = item.ShortName;
-            pv.ShortNameEn = item.ShortNameEn;
+            type.Name = item.Name;
+            type.HeadId = await HeadExist(item.HeadId);
 
-            _db.Entry(pv).State = EntityState.Modified;
+            _db.Entry(type).State = EntityState.Modified;
             try
             {
                 await _db.SaveChangesAsync();
@@ -74,7 +73,7 @@ namespace gtrackProject.Repositories.vehicle
         {
             var pv = await IdExist(id);
 
-            _db.Provincess.Remove(pv);
+            _db.VehicleTypes.Remove(pv);
             try
             {
                 await _db.SaveChangesAsync();
@@ -87,11 +86,18 @@ namespace gtrackProject.Repositories.vehicle
             return true;
         }
 
-        private async Task<Province> IdExist(byte id)
+        private async Task<VehicleType> IdExist(byte id)
         {
-            var cam = await _db.Provincess.FirstOrDefaultAsync(c => c.Id == id);
-            if (cam != null) return cam;
+            var type = await _db.VehicleTypes.FirstOrDefaultAsync(o => o.Id == id);
+            if (type != null) return type;
             throw new KeyNotFoundException("id");
+        }
+
+        private async Task<byte> HeadExist(byte id)
+        {
+            var type = await _db.VehicleHeadTypes.FirstOrDefaultAsync(h => h.Id == id);
+            if (type != null) return id;
+            throw new ArgumentException("HeadTypeId");
         }
     }
 }

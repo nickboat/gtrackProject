@@ -23,7 +23,7 @@ namespace gtrackProject.Repositories.vehicle
             return _db.VehicleColors;
         }
 
-        public async Task<VehicleColor> Get(int id)
+        public async Task<VehicleColor> Get(byte id)
         {
             return await IdExist(id);
         }
@@ -66,7 +66,7 @@ namespace gtrackProject.Repositories.vehicle
             return true;
         }
 
-        public async Task<bool> Remove(int id)
+        public async Task<bool> Remove(byte id)
         {
             var color = await IdExist(id);
 
@@ -83,7 +83,7 @@ namespace gtrackProject.Repositories.vehicle
             return true;
         }
 
-        private async Task<VehicleColor> IdExist(int id)
+        private async Task<VehicleColor> IdExist(byte id)
         {
             var color = await _db.VehicleColors.FirstOrDefaultAsync(c => c.Id == id);
             if (color != null) return color;

@@ -23,7 +23,7 @@ namespace gtrackProject.Repositories.vehicle
             return _db.VehicleOganizes;
         }
 
-        public async Task<VehicleOganize> Get(int id)
+        public async Task<VehicleOganize> Get(byte id)
         {
             return await IdExist(id);
         }
@@ -66,7 +66,7 @@ namespace gtrackProject.Repositories.vehicle
             return true;
         }
 
-        public async Task<bool> Remove(int id)
+        public async Task<bool> Remove(byte id)
         {
             var pv = await IdExist(id);
 
@@ -83,7 +83,7 @@ namespace gtrackProject.Repositories.vehicle
             return true;
         }
 
-        private async Task<VehicleOganize> IdExist(int id)
+        private async Task<VehicleOganize> IdExist(byte id)
         {
             var ogn = await _db.VehicleOganizes.FirstOrDefaultAsync(o => o.Id == id);
             if (ogn != null) return ogn;

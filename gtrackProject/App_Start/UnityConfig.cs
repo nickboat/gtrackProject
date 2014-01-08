@@ -40,6 +40,8 @@ namespace gtrackProject
             container.RegisterType<IProvinceRepository, ProvinceRepository>();
             container.RegisterType<IVehicleColorRepository, VehicleColorRository>();
             container.RegisterType<IVehicleOganizeRepository, VehicleOganizeRepository>();
+            container.RegisterType<IVehicleHeadTypeRepository, VehicleHeadTypeRepository>();
+            container.RegisterType<IVehicleTypeRepository, VehicleTypeRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

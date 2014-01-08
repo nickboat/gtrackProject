@@ -25,7 +25,7 @@ namespace gtrackProject.Repositories.vehicle
             return _db.LpTypes;
         }
 
-        public async Task<LpType> Get(int id)
+        public async Task<LpType> Get(byte id)
         {
             return await IdExist(id);
         }
@@ -70,7 +70,7 @@ namespace gtrackProject.Repositories.vehicle
             return true;
         }
 
-        public async Task<bool> Remove(int id)
+        public async Task<bool> Remove(byte id)
         {
             var type = await IdExist(id);
 
@@ -87,7 +87,7 @@ namespace gtrackProject.Repositories.vehicle
             return true;
         }
 
-        private async Task<LpType> IdExist(int id)
+        private async Task<LpType> IdExist(byte id)
         {
             var lp = await _db.LpTypes.FirstOrDefaultAsync(l => l.Id == id);
             if (lp != null) return lp;

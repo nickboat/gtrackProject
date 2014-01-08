@@ -34,7 +34,7 @@ namespace gtrackProject.Controllers.vehicle
         // GET api/lptype/5
         [HttpGet]
         [ResponseType(typeof(LpType))]
-        public async Task<IHttpActionResult> Get(int id)
+        public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace gtrackProject.Controllers.vehicle
 
         // PUT api/lptype/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]LpType value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]LpType value)
         {
             if (!ModelState.IsValid)
             {

@@ -7,9 +7,9 @@ namespace gtrackProject.Repositories.vehicle.IRepos
     public interface IVehicleOganizeRepository
     {
         IQueryable<VehicleOganize> GetAll();
-        Task<VehicleOganize> Get(int id);
+        Task<VehicleOganize> Get(byte id);
         Task<VehicleOganize> Add(VehicleOganize item);
         Task<bool> Update(VehicleOganize item);
-        Task<bool> Remove(int id);
+        Task<bool> Remove(byte id);
     }
 }

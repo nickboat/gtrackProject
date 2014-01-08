@@ -33,7 +33,7 @@ namespace gtrackProject.Controllers.vehicle
         // GET api/VehicleOgn/5
         [HttpGet]
         [ResponseType(typeof(VehicleOganize))]
-        public async Task<IHttpActionResult> Get(int id)
+        public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace gtrackProject.Controllers.vehicle
 
         // PUT api/VehicleOgn/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]VehicleOganize value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]VehicleOganize value)
         {
             if (!ModelState.IsValid)
             {

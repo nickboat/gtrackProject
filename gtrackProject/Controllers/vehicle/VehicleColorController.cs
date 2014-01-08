@@ -33,7 +33,7 @@ namespace gtrackProject.Controllers.vehicle
         // GET api/VehicleColor/5
         [HttpGet]
         [ResponseType(typeof(VehicleColor))]
-        public async Task<IHttpActionResult> Get(int id)
+        public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace gtrackProject.Controllers.vehicle
 
         // PUT api/VehicleColor/5
         //[HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]VehicleColor value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]VehicleColor value)
         {
             if (!ModelState.IsValid)
             {

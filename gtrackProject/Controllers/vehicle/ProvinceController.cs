@@ -31,7 +31,7 @@ namespace gtrackProject.Controllers.vehicle
         // GET api/province/5
         [HttpGet]
         [ResponseType(typeof(Province))]
-        public async Task<IHttpActionResult> Get(int id)
+        public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace gtrackProject.Controllers.vehicle
 
         // PUT api/province/5
         //[HttpPut]
-        //public async Task<IHttpActionResult> Put(int id, [FromBody]Province value)
+        //public async Task<IHttpActionResult> Put(byte id, [FromBody]Province value)
         //{
         //    if (!ModelState.IsValid)
         //    {

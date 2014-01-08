@@ -7,9 +7,9 @@ namespace gtrackProject.Repositories.vehicle.IRepos
     public interface IProvinceRepository
     {
         IQueryable<Province> GetAll();
-        Task<Province> Get(int id);
+        Task<Province> Get(byte id);
         Task<Province> Add(Province item);
         Task<bool> Update(Province item);
-        Task<bool> Remove(int id);
+        Task<bool> Remove(byte id);
     }
 }
