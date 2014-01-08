@@ -1,24 +1,24 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.vehicle;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.vehicle
 {
     public class VehicleColorMap : EntityTypeConfiguration<VehicleColor>
     {
         public VehicleColorMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Name)
+            Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("vehicle_color");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Name).HasColumnName("Name");
+            ToTable("vehicle_color");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Name).HasColumnName("Name");
         }
     }
 }

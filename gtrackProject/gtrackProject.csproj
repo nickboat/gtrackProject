@@ -204,6 +204,7 @@
     <Compile Include="Controllers\product\SimPaymentController.cs" />
     <Compile Include="Controllers\vehicle\LpTypeController.cs" />
     <Compile Include="Controllers\vehicle\ProvinceController.cs" />
+    <Compile Include="Controllers\vehicle\VehicleColorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -307,8 +308,10 @@
     <Compile Include="Repositories\product\SimPaymentRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\ILpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IProvinceRepository.cs" />
+    <Compile Include="Repositories\vehicle\IRepos\IVehicleColorRepository.cs" />
     <Compile Include="Repositories\vehicle\LpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\ProvinceRepository.cs" />
+    <Compile Include="Repositories\vehicle\VehicleColorRository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
