@@ -9,11 +9,11 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Repositories.vehicle
 {
-    public class VehicleColorRository : IVehicleColorRepository
+    public class VehicleColorRepository : IVehicleColorRepository
     {
         private GtrackDbContext _db { get; set; }
 
-        public VehicleColorRository()
+        public VehicleColorRepository()
         {
             _db = new GtrackDbContext();
         }
