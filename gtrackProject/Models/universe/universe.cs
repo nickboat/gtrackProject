@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
+using gtrackProject.Models.vehicle;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.universe
 {
-    public partial class Universe
+    public class Universe
     {
         public int VehicleId { get; set; }
         public int? GpsProductId { get; set; }

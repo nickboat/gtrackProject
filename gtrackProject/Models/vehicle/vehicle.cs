@@ -1,18 +1,19 @@
-using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using gtrackProject.Models.account;
-using gtrackProject.Models.vehicle;
+using gtrackProject.Models.universe;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.vehicle
 {
-    public sealed partial class Vehicle
+    public sealed class Vehicle
     {
         public Vehicle()
         {
-            this.Universes = new List<Universe>();
+            Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
+        [Required]
         public string IdCar { get; set; }
         public string LicensePlate { get; set; }
         public byte? LicensePlateType { get; set; }
@@ -21,6 +22,7 @@ namespace gtrackProject.Models
         public byte? ColorCarId { get; set; }
         public byte? OganizeCarId { get; set; }
         public string BodyNo { get; set; }
+        [Required]
         public short HdId { get; set; }
         public Hd Hd { get; set; }
         public LpType LpType { get; set; }

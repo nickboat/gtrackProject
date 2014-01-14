@@ -59,19 +59,19 @@ namespace gtrackProject.Models.Mapping.product
             // Relationships
             HasOptional(t => t.CreateByEmployee)
                 .WithMany(t => t.GpsCreates)
-                .HasForeignKey(d => d.BadBy);
+                .HasForeignKey(d => d.CreateBy);
             HasOptional(t => t.StockByEmployee)
                 .WithMany(t => t.GpsStocks)
-                .HasForeignKey(d => d.CreateBy);
+                .HasForeignKey(d => d.StockBy);
             HasOptional(t => t.QcByEmployee)
                 .WithMany(t => t.GpsQcs)
-                .HasForeignKey(d => d.InstallBy);
+                .HasForeignKey(d => d.QcBy);
             HasOptional(t => t.InstallByEmployee)
                 .WithMany(t => t.GpsInstalls)
-                .HasForeignKey(d => d.QcBy);
+                .HasForeignKey(d => d.InstallBy);
             HasOptional(t => t.BadByEmployee)
                 .WithMany(t => t.GpsBads)
-                .HasForeignKey(d => d.StockBy);
+                .HasForeignKey(d => d.BadBy);
             HasOptional(t => t.UnuseableByEmployee)
                 .WithMany(t => t.GpsUnuses)
                 .HasForeignKey(d => d.UnuseableBy);

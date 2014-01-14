@@ -206,6 +206,7 @@
     <Compile Include="Controllers\vehicle\ProvinceController.cs" />
     <Compile Include="Controllers\vehicle\VehicleBrandController.cs" />
     <Compile Include="Controllers\vehicle\VehicleColorController.cs" />
+    <Compile Include="Controllers\vehicle\VehicleController.cs" />
     <Compile Include="Controllers\vehicle\VehicleHTypeController.cs" />
     <Compile Include="Controllers\vehicle\VehicleModelController.cs" />
     <Compile Include="Controllers\vehicle\VehicleOgnController.cs" />
@@ -318,6 +319,7 @@
     <Compile Include="Repositories\vehicle\IRepos\IVehicleHeadTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleModelRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleOganizeRepository.cs" />
+    <Compile Include="Repositories\vehicle\IRepos\IVehicleRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\LpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\ProvinceRepository.cs" />
@@ -326,6 +328,7 @@
     <Compile Include="Repositories\vehicle\VehicleHeadTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\VehicleModelRepository.cs" />
     <Compile Include="Repositories\vehicle\VehicleOganizeRepository.cs" />
+    <Compile Include="Repositories\vehicle\VehicleRepository.cs" />
     <Compile Include="Repositories\vehicle\VehicleTypeRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
