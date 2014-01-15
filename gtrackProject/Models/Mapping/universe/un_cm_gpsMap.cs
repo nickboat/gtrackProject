@@ -1,37 +1,37 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.universe;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.universe
 {
     public class UnCmGpsMap : EntityTypeConfiguration<UnCmGps>
     {
         public UnCmGpsMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Id)
+            Property(t => t.Id)
                 .IsRequired()
                 .IsFixedLength()
                 .HasMaxLength(1);
 
-            this.Property(t => t.Name)
+            Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(20);
 
-            this.Property(t => t.MsgTh)
+            Property(t => t.MsgTh)
                 .HasMaxLength(255);
 
-            this.Property(t => t.MsgEn)
+            Property(t => t.MsgEn)
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("un_cm_gps");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.MsgTh).HasColumnName("Msg_TH");
-            this.Property(t => t.MsgEn).HasColumnName("Msg_EN");
+            ToTable("un_cm_gps");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Name).HasColumnName("Name");
+            Property(t => t.MsgTh).HasColumnName("Msg_TH");
+            Property(t => t.MsgEn).HasColumnName("Msg_EN");
         }
     }
 }
