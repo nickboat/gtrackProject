@@ -73,9 +73,9 @@ namespace gtrackProject.Repositories.universe
 
         public async Task<bool> Remove(string id)
         {
-            var pv = await IdExist(id);
+            var comm = await IdExist(id);
 
-            _db.UnCmComms.Remove(pv);
+            _db.UnCmComms.Remove(comm);
             try
             {
                 await _db.SaveChangesAsync();

@@ -51,6 +51,7 @@ namespace gtrackProject
             //Repositories.universe
             container.RegisterType<IUnCmBattRepository, UnCmBattRepository>();
             container.RegisterType<IUnCmCommRepository, UnCmCommRepository>();
+            container.RegisterType<IUnCmEngineRepository, UnCmEngineRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

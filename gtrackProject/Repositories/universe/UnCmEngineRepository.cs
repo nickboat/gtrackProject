@@ -9,40 +9,40 @@ using gtrackProject.Repositories.universe.IRepos;
 
 namespace gtrackProject.Repositories.universe
 {
-    public class UnCmBattRepository : IUnCmBattRepository
+    public class UnCmEngineRepository : IUnCmEngineRepository
     {
         private GtrackDbContext _db { get; set; }
 
-        public UnCmBattRepository()
+        public UnCmEngineRepository()
         {
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<UnCmBatt> GetAll()
+        public IQueryable<UnCmEngine> GetAll()
         {
-            return _db.UnCmBatts;
+            return _db.UnCmEngines;
         }
 
-        public async Task<UnCmBatt> Get(string id)
+        public async Task<UnCmEngine> Get(string id)
         {
             return await IdExist(id);
         }
 
-        public async Task<UnCmBatt> Add(UnCmBatt item)
+        public async Task<UnCmEngine> Add(UnCmEngine item)
         {
-            var batt = new UnCmBatt
+            var engine = new UnCmEngine
             {
                 Name = item.Name,
             };
 
-            if (!string.IsNullOrEmpty(item.MsgEn)) batt.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) batt.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgEn)) engine.MsgEn = item.MsgEn;
+            if (!string.IsNullOrEmpty(item.MsgTh)) engine.MsgEn = item.MsgTh;
 
-            batt = _db.UnCmBatts.Add(batt);
+            engine = _db.UnCmEngines.Add(engine);
             try
             {
                 await _db.SaveChangesAsync();
-                return batt;
+                return engine;
             }
             catch (DbUpdateConcurrencyException exception)
             {
@@ -50,15 +50,15 @@ namespace gtrackProject.Repositories.universe
             }
         }
 
-        public async Task<bool> Update(UnCmBatt item)
+        public async Task<bool> Update(UnCmEngine item)
         {
-            var batt = await IdExist(item.Id);
+            var engine = await IdExist(item.Id);
 
-            batt.Name = item.Name;
-            if (!string.IsNullOrEmpty(item.MsgEn)) batt.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) batt.MsgEn = item.MsgTh;
+            engine.Name = item.Name;
+            if (!string.IsNullOrEmpty(item.MsgEn)) engine.MsgEn = item.MsgEn;
+            if (!string.IsNullOrEmpty(item.MsgTh)) engine.MsgEn = item.MsgTh;
 
-            _db.Entry(batt).State = EntityState.Modified;
+            _db.Entry(engine).State = EntityState.Modified;
             try
             {
                 await _db.SaveChangesAsync();
@@ -73,9 +73,9 @@ namespace gtrackProject.Repositories.universe
 
         public async Task<bool> Remove(string id)
         {
-            var batt = await IdExist(id);
+            var engine = await IdExist(id);
 
-            _db.UnCmBatts.Remove(batt);
+            _db.UnCmEngines.Remove(engine);
             try
             {
                 await _db.SaveChangesAsync();
@@ -88,10 +88,10 @@ namespace gtrackProject.Repositories.universe
             return true;
         }
 
-        private async Task<UnCmBatt> IdExist(string id)
+        private async Task<UnCmEngine> IdExist(string id)
         {
-            var batt = await _db.UnCmBatts.FirstOrDefaultAsync(o => o.Id == id);
-            if (batt != null) return batt;
+            var engine = await _db.UnCmEngines.FirstOrDefaultAsync(o => o.Id == id);
+            if (engine != null) return engine;
             throw new KeyNotFoundException("id");
         }
     }
