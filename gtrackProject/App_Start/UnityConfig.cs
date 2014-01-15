@@ -2,6 +2,8 @@ using gtrackProject.Repositories.account;
 using gtrackProject.Repositories.account.IRepos;
 using gtrackProject.Repositories.product;
 using gtrackProject.Repositories.product.IRepos;
+using gtrackProject.Repositories.universe;
+using gtrackProject.Repositories.universe.IRepos;
 using gtrackProject.Repositories.vehicle;
 using gtrackProject.Repositories.vehicle.IRepos;
 using Microsoft.Practices.Unity;
@@ -45,6 +47,9 @@ namespace gtrackProject
             container.RegisterType<IVehicleBrandRepository, VehicleBrandRepository>();
             container.RegisterType<IVehicleModelRepository, VehicleModelRepository>();
             container.RegisterType<IVehicleRepository, VehicleRepository>();
+
+            //Repositories.universe
+            container.RegisterType<IUnCmBattRepository, UnCmBattRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
