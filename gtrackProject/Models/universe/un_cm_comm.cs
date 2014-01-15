@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
-using gtrackProject.Models.universe;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.universe
 {
-    public sealed partial class UnCmComm
+    public sealed class UnCmComm
     {
         public UnCmComm()
         {
-            this.Universes = new List<Universe>();
+            Universes = new List<Universe>();
         }
 
         public string Id { get; set; }

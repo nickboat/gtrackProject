@@ -203,6 +203,7 @@
     <Compile Include="Controllers\product\SimBrandController.cs" />
     <Compile Include="Controllers\product\SimPaymentController.cs" />
     <Compile Include="Controllers\universe\UnCmBattController.cs" />
+    <Compile Include="Controllers\universe\UnCmCommController.cs" />
     <Compile Include="Controllers\vehicle\LpTypeController.cs" />
     <Compile Include="Controllers\vehicle\ProvinceController.cs" />
     <Compile Include="Controllers\vehicle\VehicleBrandController.cs" />
@@ -314,7 +315,9 @@
     <Compile Include="Repositories\product\SimBrandRepository.cs" />
     <Compile Include="Repositories\product\SimPaymentRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmBattRepository.cs" />
+    <Compile Include="Repositories\universe\IRepos\IUnCmCommRepository.cs" />
     <Compile Include="Repositories\universe\UnCmBattRepository.cs" />
+    <Compile Include="Repositories\universe\UnCmCommRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\ILpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IProvinceRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleBrandRepository.cs" />

@@ -11,11 +11,11 @@ using gtrackProject.Repositories.universe.IRepos;
 
 namespace gtrackProject.Controllers.universe
 {
-    public class UnCmBattController : ApiController
+    public class UnCmCommController : ApiController
     {
-        private readonly IUnCmBattRepository _repository;
+        private readonly IUnCmCommRepository _repository;
 
-        public UnCmBattController(IUnCmBattRepository repository)
+        public UnCmCommController(IUnCmCommRepository repository)
         {
             if (repository == null)
             {
@@ -24,21 +24,21 @@ namespace gtrackProject.Controllers.universe
             _repository = repository;
         }
 
-        // GET api/UnCmBatt
-        public IQueryable<UnCmBatt> Get()
+        // GET api/UnCmComm
+        public IQueryable<UnCmComm> Get()
         {
             return _repository.GetAll();
         }
 
-        // GET api/UnCmBatt/5
+        // GET api/UnCmComm/5
         [HttpGet]
-        [ResponseType(typeof(UnCmBatt))]
+        [ResponseType(typeof(UnCmComm))]
         public async Task<IHttpActionResult> Get(string id)
         {
             try
             {
-                var batt = await _repository.Get(id);
-                return Ok(batt);
+                var comm = await _repository.Get(id);
+                return Ok(comm);
             }
             catch (KeyNotFoundException)
             {
@@ -46,10 +46,10 @@ namespace gtrackProject.Controllers.universe
             }
         }
 
-        // POST api/UnCmBatt
+        // POST api/UnCmComm
         [HttpPost]
-        [ResponseType(typeof(UnCmBatt))]
-        public async Task<IHttpActionResult> Post([FromBody]UnCmBatt value)
+        [ResponseType(typeof(UnCmComm))]
+        public async Task<IHttpActionResult> Post([FromBody]UnCmComm value)
         {
             if (!ModelState.IsValid)
             {
@@ -58,8 +58,8 @@ namespace gtrackProject.Controllers.universe
 
             try
             {
-                var batt = await _repository.Add(value);
-                return Ok(batt);
+                var comm = await _repository.Add(value);
+                return Ok(comm);
             }
             catch (ArgumentException msgArgumentException)
             {
@@ -71,9 +71,9 @@ namespace gtrackProject.Controllers.universe
             }
         }
 
-        // PUT api/UnCmBatt/5
+        // PUT api/UnCmComm/5
         [HttpPut]
-        public async Task<IHttpActionResult> Put(string id, [FromBody]UnCmBatt value)
+        public async Task<IHttpActionResult> Put(string id, [FromBody]UnCmComm value)
         {
             if (!ModelState.IsValid)
             {
@@ -105,9 +105,9 @@ namespace gtrackProject.Controllers.universe
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/UnCmBatt/5
+        // DELETE api/UnCmComm/5
         [HttpDelete]
-        [ResponseType(typeof(UnCmBatt))]
+        [ResponseType(typeof(UnCmComm))]
         public async Task<IHttpActionResult> Delete(string id)
         {
             try
