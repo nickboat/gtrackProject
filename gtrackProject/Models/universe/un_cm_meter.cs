@@ -1,17 +1,17 @@
-using System;
 using System.Collections.Generic;
-using gtrackProject.Models.universe;
+using System.ComponentModel.DataAnnotations;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.universe
 {
-    public sealed partial class UnCmMeter
+    public sealed class UnCmMeter
     {
         public UnCmMeter()
         {
-            this.Universes = new List<Universe>();
+            Universes = new List<Universe>();
         }
-
+        [Required]
         public string Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string MsgTh { get; set; }
         public string MsgEn { get; set; }
