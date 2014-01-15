@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
 using gtrackProject.Models.vehicle;
@@ -7,26 +8,32 @@ namespace gtrackProject.Models.universe
 {
     public class Universe
     {
+        [Required]
         public int VehicleId { get; set; }
         public int? GpsProductId { get; set; }
         public DateTime? CurrentDataDatetime { get; set; }
-        public int? CorrectDataId { get; set; }
+        public int? CorrectDataId { get; set; }//id in backup
         public DateTime? CorrectDataDatetime { get; set; }
         public string CmCommand { get; set; }
         public string CmEngine { get; set; }
         public string CmMeter { get; set; }
         public string CmBatt { get; set; }
+        [Range(0,100)]
         public decimal? FuelLevel { get; set; }
         public string CmTemp { get; set; }
+        [Range(0, 140)]
         public byte? TempLevel { get; set; }
         public string CmGps { get; set; }
         public string CmSignalStatus { get; set; }
+        [Range(0, 300)]
         public short? Speed { get; set; }
+        [Range(0, 359)]
         public decimal? Direction { get; set; }
         public string IpGps { get; set; }
         public short? Port { get; set; }
         public decimal? LaGoogle { get; set; }
         public decimal? LongGoogle { get; set; }
+        [Required]
         public byte DisplayStatus { get; set; }
         public int? DriverId { get; set; }
         public int? OrderId { get; set; }

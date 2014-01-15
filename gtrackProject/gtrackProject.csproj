@@ -210,6 +210,7 @@
     <Compile Include="Controllers\universe\UnCmSignalController.cs" />
     <Compile Include="Controllers\universe\UnCmTempController.cs" />
     <Compile Include="Controllers\universe\UnDisplayController.cs" />
+    <Compile Include="Controllers\universe\UniverseController.cs" />
     <Compile Include="Controllers\vehicle\LpTypeController.cs" />
     <Compile Include="Controllers\vehicle\ProvinceController.cs" />
     <Compile Include="Controllers\vehicle\VehicleBrandController.cs" />
@@ -328,6 +329,7 @@
     <Compile Include="Repositories\universe\IRepos\IUnCmMeterRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmSignalRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmTempRepository.cs" />
+    <Compile Include="Repositories\universe\IRepos\IUniverseRepository.cs" />
     <Compile Include="Repositories\universe\UnCmBattRepository.cs" />
     <Compile Include="Repositories\universe\UnCmCommRepository.cs" />
     <Compile Include="Repositories\universe\UnDisplayRepository.cs" />
@@ -336,6 +338,7 @@
     <Compile Include="Repositories\universe\UnCmMeterRepository.cs" />
     <Compile Include="Repositories\universe\UnCmSignalRepository.cs" />
     <Compile Include="Repositories\universe\UnCmTempRepository.cs" />
+    <Compile Include="Repositories\universe\UniverseRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\ILpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IProvinceRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleBrandRepository.cs" />

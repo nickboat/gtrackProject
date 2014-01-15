@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using gtrackProject.Models.dbContext;
+using gtrackProject.Models.universe;
 using gtrackProject.Models.vehicle;
 using gtrackProject.Repositories.vehicle.IRepos;
 
@@ -56,6 +57,23 @@ namespace gtrackProject.Repositories.vehicle
             try
             {
                 await _db.SaveChangesAsync();
+
+                //add universe
+                var newUn = new Universe
+                {
+                    VehicleId = newVeh.Id,
+                    DisplayStatus = 2
+                };
+                _db.Universes.Add(newUn);
+                try
+                {
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException exception)
+                {
+                    throw new DbUpdateConcurrencyException(exception.Message);
+                }
+
                 return newVeh;
             }
             catch (DbUpdateConcurrencyException exception)
