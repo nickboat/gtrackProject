@@ -209,6 +209,7 @@
     <Compile Include="Controllers\universe\UnCmMeterController.cs" />
     <Compile Include="Controllers\universe\UnCmSignalController.cs" />
     <Compile Include="Controllers\universe\UnCmTempController.cs" />
+    <Compile Include="Controllers\universe\UnDisplayController.cs" />
     <Compile Include="Controllers\vehicle\LpTypeController.cs" />
     <Compile Include="Controllers\vehicle\ProvinceController.cs" />
     <Compile Include="Controllers\vehicle\VehicleBrandController.cs" />
@@ -321,6 +322,7 @@
     <Compile Include="Repositories\product\SimPaymentRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmBattRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmCommRepository.cs" />
+    <Compile Include="Repositories\universe\IRepos\IUnDisplayRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmEngineRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmGpsRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmMeterRepository.cs" />
@@ -328,6 +330,7 @@
     <Compile Include="Repositories\universe\IRepos\IUnCmTempRepository.cs" />
     <Compile Include="Repositories\universe\UnCmBattRepository.cs" />
     <Compile Include="Repositories\universe\UnCmCommRepository.cs" />
+    <Compile Include="Repositories\universe\UnDisplayRepository.cs" />
     <Compile Include="Repositories\universe\UnCmEngineRepository.cs" />
     <Compile Include="Repositories\universe\UnCmGpsRepository.cs" />
     <Compile Include="Repositories\universe\UnCmMeterRepository.cs" />

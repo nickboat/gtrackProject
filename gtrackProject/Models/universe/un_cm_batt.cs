@@ -10,7 +10,7 @@ namespace gtrackProject.Models.universe
             Universes = new List<Universe>();
         }
 
-        [Required]
+        [Required, StringLength(1)]
         public string Id { get; set; }
         [Required]
         public string Name { get; set; }
