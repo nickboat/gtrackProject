@@ -1,37 +1,37 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.order;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.order
 {
     public class FixOrdersMap : EntityTypeConfiguration<FixOrders>
     {
         public FixOrdersMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Comment)
+            Property(t => t.Comment)
                 .HasMaxLength(100);
 
             // Table & Column Mappings
-            this.ToTable("fix_orders");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.CreateBy).HasColumnName("CreateBy");
-            this.Property(t => t.CreateDate).HasColumnName("CreateDate");
-            this.Property(t => t.CurrentUser).HasColumnName("CurrentUser");
-            this.Property(t => t.HeadInstall).HasColumnName("HeadInstall");
-            this.Property(t => t.Comment).HasColumnName("Comment");
-            this.Property(t => t.Status).HasColumnName("Status");
+            ToTable("fix_orders");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.CreateBy).HasColumnName("CreateBy");
+            Property(t => t.CreateDate).HasColumnName("CreateDate");
+            Property(t => t.CurrentUser).HasColumnName("CurrentUser");
+            Property(t => t.HeadInstall).HasColumnName("HeadInstall");
+            Property(t => t.Comment).HasColumnName("Comment");
+            Property(t => t.Status).HasColumnName("Status");
 
             // Relationships
-            this.HasOptional(t => t.CreateByEmployee)
+            HasOptional(t => t.CreateByEmployee)
                 .WithMany(t => t.FixCreates)
                 .HasForeignKey(d => d.CreateBy);
-            this.HasRequired(t => t.CurrentUsermployee)
+            HasRequired(t => t.CurrentUsermployee)
                 .WithMany(t => t.FixCurrents)
                 .HasForeignKey(d => d.HeadInstall);
-            this.HasOptional(t => t.OrderStatus)
+            HasOptional(t => t.OrderStatus)
                 .WithMany(t => t.FixOrders)
                 .HasForeignKey(d => d.Status);
 

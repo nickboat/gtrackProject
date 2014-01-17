@@ -197,6 +197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\account\EmployeeAdminController.cs" />
     <Compile Include="Controllers\order\ExtendTypeController.cs" />
+    <Compile Include="Controllers\order\FixOrderController.cs" />
     <Compile Include="Controllers\order\OrderStatusController.cs" />
     <Compile Include="Controllers\product\CameraController.cs" />
     <Compile Include="Controllers\product\GpsTypeController.cs" />
@@ -311,6 +312,8 @@
     <Compile Include="Repositories\account\IRepos\IHdRepository.cs" />
     <Compile Include="Repositories\account\IRepos\IRoleAdminRepository.cs" />
     <Compile Include="Repositories\account\RoleAdminRepository.cs" />
+    <Compile Include="Repositories\order\FixOrderRepository.cs" />
+    <Compile Include="Repositories\order\IRepos\IFixOrderRepository.cs" />
     <Compile Include="Repositories\order\IRepos\IOdExtendTypeRepository.cs" />
     <Compile Include="Repositories\order\IRepos\IOdStatusRepository.cs" />
     <Compile Include="Repositories\order\OdExtendTypeRepository.cs" />

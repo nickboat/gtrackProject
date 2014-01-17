@@ -1,30 +1,31 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using gtrackProject.Models.account;
 using gtrackProject.Models.product;
 using gtrackProject.Models.universe;
 
 namespace gtrackProject.Models.order
 {
-    public sealed partial class Order
+    public sealed class Order
     {
         public Order()
         {
-            this.Universes = new List<Universe>();
+            Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
-        public int CreateBy { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        [Required] public int CreateBy { get; set; }
+        [Required] public System.DateTime CreateDate { get; set; }
         public int? CurrentUser { get; set; }
-        public int HeadInstall { get; set; }
-        public short HdId { get; set; }
-        public byte? Version { get; set; }
-        public int Quantity { get; set; }
-        public decimal PricePerUnit { get; set; }
-        public decimal FeePerYear { get; set; }
+        public int? HeadInstall { get; set; }
+        [Required] public short HdId { get; set; }
+        [Required] public byte Version { get; set; }
+        [Required] public int Quantity { get; set; }
+        [Required] public decimal PricePerUnit { get; set; }
+        [Required] public decimal FeePerYear { get; set; }
         public string Comment { get; set; }
-        public byte? Status { get; set; }
-        public System.DateTime Deadline { get; set; }
+        [Required] public byte Status { get; set; }
+        [Required] public System.DateTime Deadline { get; set; }
         public byte? ExtendTypeId { get; set; }
         public Employee CreateByEmployee { get; set; }
         public Employee CurrentUserEmployee { get; set; }

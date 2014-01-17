@@ -117,12 +117,12 @@ namespace gtrackProject.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CreateBy = c.Int(),
+                        CreateBy = c.Int(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                         CurrentUser = c.Int(),
-                        HeadInstall = c.Int(nullable: false),
+                        HeadInstall = c.Int(),
                         Comment = c.String(maxLength: 100),
-                        Status = c.Byte(),
+                        Status = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.employee", t => t.CreateBy)
@@ -235,14 +235,14 @@ namespace gtrackProject.Migrations
                         CreateBy = c.Int(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                         CurrentUser = c.Int(),
-                        HeadInstall = c.Int(nullable: false),
+                        HeadInstall = c.Int(),
                         Hd_id = c.Short(nullable: false),
-                        Version = c.Byte(),
+                        Version = c.Byte(nullable: false),
                         Quantity = c.Int(nullable: false),
                         PricePerUnit = c.Decimal(nullable: false, precision: 18, scale: 2),
                         FeePerYear = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Comment = c.String(maxLength: 100),
-                        Status = c.Byte(),
+                        Status = c.Byte(nullable: false),
                         Deadline = c.DateTime(nullable: false),
                         ExtendType_Id = c.Byte(),
                     })

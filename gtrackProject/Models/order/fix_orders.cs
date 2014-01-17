@@ -1,25 +1,24 @@
-using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using gtrackProject.Models.account;
-using gtrackProject.Models.order;
 using gtrackProject.Models.universe;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.order
 {
-    public sealed partial class FixOrders
+    public sealed class FixOrders
     {
         public FixOrders()
         {
-            this.Universes = new List<Universe>();
+            Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
-        public int? CreateBy { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        [Required] public int CreateBy { get; set; }
+        [Required] public System.DateTime CreateDate { get; set; }
         public int? CurrentUser { get; set; }
-        public int HeadInstall { get; set; }
+        public int? HeadInstall { get; set; }
         public string Comment { get; set; }
-        public byte? Status { get; set; }
+        [Required] public byte Status { get; set; }
         public Employee CreateByEmployee { get; set; }
         public Employee CurrentUsermployee { get; set; }
         public OrderStatus OrderStatus { get; set; }

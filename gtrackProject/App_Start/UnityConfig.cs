@@ -64,6 +64,7 @@ namespace gtrackProject
             //Repositories.order
             container.RegisterType<IOdExtendTypeRepository, OdExtendTypeRepository>();
             container.RegisterType<IOdStatusRepository, OdStatusRepository>();
+            container.RegisterType<IFixOrderRepository, FixOrderRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
