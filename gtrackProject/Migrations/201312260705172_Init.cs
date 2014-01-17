@@ -48,7 +48,7 @@ namespace gtrackProject.Migrations
                         DriverIDCard = c.Int(nullable: false),
                         ZIPCode = c.Short(nullable: false),
                         Category_Id = c.Byte(nullable: false),
-                        User_Id = c.Int(),
+                        Asp_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.driver_category", t => t.Category_Id, cascadeDelete: true)

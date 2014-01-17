@@ -40,7 +40,7 @@ namespace gtrackProject.Models.Mapping.driver
             Property(t => t.DriverIdCard).HasColumnName("DriverIDCard");
             Property(t => t.ZipCode).HasColumnName("ZIPCode");
             Property(t => t.CategoryId).HasColumnName("Category_Id");
-            Property(t => t.UserId).HasColumnName("User_Id");
+            Property(t => t.AspId).HasColumnName("Asp_Id");
 
             // Relationships
             HasRequired(t => t.DriverCategory)

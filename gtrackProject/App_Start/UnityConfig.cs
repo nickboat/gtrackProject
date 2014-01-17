@@ -71,6 +71,7 @@ namespace gtrackProject
 
             //Repositories.order
             container.RegisterType<IDriverCateRepository, DriverCateRepository>();
+            container.RegisterType<IDriverRepository, DriverRepository>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
