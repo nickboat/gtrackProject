@@ -1,18 +1,18 @@
-using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.driver
 {
-    public sealed partial class DriverCategory
+    public sealed class DriverCategory
     {
         public DriverCategory()
         {
-            this.Drivers = new List<Driver>();
+            Drivers = new List<Driver>();
         }
 
         public byte Id { get; set; }
-        public short Value { get; set; }
-        public string Name { get; set; }
+        [Required] public short Value { get; set; }
+        [Required] public string Name { get; set; }
         public ICollection<Driver> Drivers { get; set; }
     }
 }

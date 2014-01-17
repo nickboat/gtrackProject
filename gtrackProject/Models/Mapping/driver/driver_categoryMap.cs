@@ -1,25 +1,25 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.driver;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.driver
 {
     public class DriverCategoryMap : EntityTypeConfiguration<DriverCategory>
     {
         public DriverCategoryMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Name)
+            Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("driver_category");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Value).HasColumnName("Value");
-            this.Property(t => t.Name).HasColumnName("Name");
+            ToTable("driver_category");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Value).HasColumnName("Value");
+            Property(t => t.Name).HasColumnName("Name");
         }
     }
 }

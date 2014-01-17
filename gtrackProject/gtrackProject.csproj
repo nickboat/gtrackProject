@@ -194,6 +194,7 @@
     <Compile Include="Controllers\account\CustomerController.cs" />
     <Compile Include="Controllers\account\RoleAdminController.cs" />
     <Compile Include="Controllers\account\HDController.cs" />
+    <Compile Include="Controllers\driver\DriverCateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\account\EmployeeAdminController.cs" />
     <Compile Include="Controllers\order\ExtendTypeController.cs" />
@@ -313,6 +314,8 @@
     <Compile Include="Repositories\account\IRepos\IHdRepository.cs" />
     <Compile Include="Repositories\account\IRepos\IRoleAdminRepository.cs" />
     <Compile Include="Repositories\account\RoleAdminRepository.cs" />
+    <Compile Include="Repositories\driver\DriverCateRepository.cs" />
+    <Compile Include="Repositories\driver\IRepos\IDriverCateRepository.cs" />
     <Compile Include="Repositories\order\FixOrderRepository.cs" />
     <Compile Include="Repositories\order\IRepos\IFixOrderRepository.cs" />
     <Compile Include="Repositories\order\IRepos\IOdExtendTypeRepository.cs" />

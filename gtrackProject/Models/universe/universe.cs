@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using gtrackProject.Models.driver;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
 using gtrackProject.Models.vehicle;

@@ -1,5 +1,7 @@
 using gtrackProject.Repositories.account;
 using gtrackProject.Repositories.account.IRepos;
+using gtrackProject.Repositories.driver;
+using gtrackProject.Repositories.driver.IRepos;
 using gtrackProject.Repositories.order;
 using gtrackProject.Repositories.order.IRepos;
 using gtrackProject.Repositories.product;
@@ -66,7 +68,10 @@ namespace gtrackProject
             container.RegisterType<IOdStatusRepository, OdStatusRepository>();
             container.RegisterType<IFixOrderRepository, FixOrderRepository>();
             container.RegisterType<IOrderRepository, OrderRepository>();
-            
+
+            //Repositories.order
+            container.RegisterType<IDriverCateRepository, DriverCateRepository>();
+
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using gtrackProject.Models.universe;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.driver
 {
-    public sealed partial class Driver
+    public sealed class Driver
     {
         public Driver()
         {
-            this.Universes = new List<Universe>();
+            Universes = new List<Universe>();
         }
 
         public int Id { get; set; }
