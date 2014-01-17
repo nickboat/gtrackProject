@@ -1,29 +1,29 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.order;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.order
 {
     public class OrderStatusMap : EntityTypeConfiguration<OrderStatus>
     {
         public OrderStatusMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.StatusTh)
+            Property(t => t.StatusTh)
                 .IsRequired()
                 .HasMaxLength(15);
 
-            this.Property(t => t.StatusEn)
+            Property(t => t.StatusEn)
                 .IsRequired()
                 .HasMaxLength(15);
 
             // Table & Column Mappings
-            this.ToTable("order_status");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.StatusTh).HasColumnName("Status_TH");
-            this.Property(t => t.StatusEn).HasColumnName("Status_EN");
+            ToTable("order_status");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.StatusTh).HasColumnName("Status_TH");
+            Property(t => t.StatusEn).HasColumnName("Status_EN");
         }
     }
 }

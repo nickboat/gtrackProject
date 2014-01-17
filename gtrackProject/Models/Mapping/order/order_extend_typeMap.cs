@@ -1,25 +1,25 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using gtrackProject.Models.order;
 
-namespace gtrackProject.Models.Mapping
+namespace gtrackProject.Models.Mapping.order
 {
     public class OrderExtendTypeMap : EntityTypeConfiguration<OrderExtendType>
     {
         public OrderExtendTypeMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.TypeName)
+            Property(t => t.TypeName)
                 .IsRequired()
                 .HasMaxLength(10);
 
             // Table & Column Mappings
-            this.ToTable("order_extend_type");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.TypeName).HasColumnName("TypeName");
-            this.Property(t => t.Value).HasColumnName("Value");
+            ToTable("order_extend_type");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.TypeName).HasColumnName("TypeName");
+            Property(t => t.Value).HasColumnName("Value");
         }
     }
 }

@@ -1,18 +1,19 @@
-using System;
 using System.Collections.Generic;
-using gtrackProject.Models.order;
+using System.ComponentModel.DataAnnotations;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.order
 {
-    public sealed partial class OrderExtendType
+    public sealed class OrderExtendType
     {
         public OrderExtendType()
         {
-            this.Orders = new List<Order>();
+            Orders = new List<Order>();
         }
 
         public byte Id { get; set; }
+        [Required]
         public string TypeName { get; set; }
+        [Required, Range(1,99)]
         public byte Value { get; set; }
         public ICollection<Order> Orders { get; set; }
     }

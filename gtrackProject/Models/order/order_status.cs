@@ -1,19 +1,20 @@
-using System;
 using System.Collections.Generic;
-using gtrackProject.Models.order;
+using System.ComponentModel.DataAnnotations;
 
-namespace gtrackProject.Models
+namespace gtrackProject.Models.order
 {
-    public sealed partial class OrderStatus
+    public sealed class OrderStatus
     {
         public OrderStatus()
         {
-            this.FixOrders = new List<FixOrders>();
-            this.Orders = new List<Order>();
+            FixOrders = new List<FixOrders>();
+            Orders = new List<Order>();
         }
 
         public byte Id { get; set; }
+        [Required]
         public string StatusTh { get; set; }
+        [Required]
         public string StatusEn { get; set; }
         public ICollection<FixOrders> FixOrders { get; set; }
         public ICollection<Order> Orders { get; set; }
