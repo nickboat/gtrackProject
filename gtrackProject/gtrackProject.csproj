@@ -198,6 +198,7 @@
     <Compile Include="Controllers\account\EmployeeAdminController.cs" />
     <Compile Include="Controllers\order\ExtendTypeController.cs" />
     <Compile Include="Controllers\order\FixOrderController.cs" />
+    <Compile Include="Controllers\order\OrderController.cs" />
     <Compile Include="Controllers\order\OrderStatusController.cs" />
     <Compile Include="Controllers\product\CameraController.cs" />
     <Compile Include="Controllers\product\GpsTypeController.cs" />
@@ -316,8 +317,10 @@
     <Compile Include="Repositories\order\IRepos\IFixOrderRepository.cs" />
     <Compile Include="Repositories\order\IRepos\IOdExtendTypeRepository.cs" />
     <Compile Include="Repositories\order\IRepos\IOdStatusRepository.cs" />
+    <Compile Include="Repositories\order\IRepos\IOrderRepository.cs" />
     <Compile Include="Repositories\order\OdExtendTypeRepository.cs" />
     <Compile Include="Repositories\order\OdStatusRepository.cs" />
+    <Compile Include="Repositories\order\OrderRepository.cs" />
     <Compile Include="Repositories\product\CameraRepository.cs" />
     <Compile Include="Repositories\product\GpsTypeRepository.cs" />
     <Compile Include="Repositories\product\GpsVersionRepository.cs" />

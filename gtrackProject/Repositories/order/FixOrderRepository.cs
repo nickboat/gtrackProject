@@ -57,7 +57,7 @@ namespace gtrackProject.Repositories.order
         public async Task<bool> Update(FixOrders item)
         {
             var fix = await IdExist(item.Id);
-            fix.Status = item.Status;
+            fix.Status = await StatusExist(item.Status);
 
             if (item.CurrentUser != null) fix.CurrentUser = await EmpExist(item.CurrentUser.Value);
             if (item.HeadInstall != null) fix.HeadInstall = await EmpExist(item.HeadInstall.Value);
@@ -103,7 +103,13 @@ namespace gtrackProject.Repositories.order
         {
             var emp = await _db.Employees.FirstOrDefaultAsync(o => o.Id == id);
             if (emp != null) return id;
-            throw new ArgumentException("Employees Not Found");
+            throw new ArgumentException("Employee Not Found");
+        }
+        private async Task<byte> StatusExist(byte id)
+        {
+            var status = await _db.OrderStatuss.FirstOrDefaultAsync(o => o.Id == id);
+            if (status != null) return id;
+            throw new ArgumentException("OrderStatus Not Found");
         }
     }
 }
