@@ -145,7 +145,7 @@ namespace gtrackProject.Repositories.account
             var random = new Random();
             while (true)
             {
-                const string chars = "abcdefghijklmnopgrstuvwxyz123456789";
+                const string chars = "abcdefghijklmnopgrstuvwxyz123456789";//without Zero
                 //var random = new Random();
                 var result = new string(Enumerable.Repeat(chars, 3).Select(s => s[random.Next(s.Length)]).ToArray());
 

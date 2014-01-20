@@ -120,7 +120,7 @@ namespace gtrackProject.Repositories.vehicle
         public async Task<bool> Remove(int id)
         {
             var veh = await IdExist(id);
-
+            
             _db.Vehicles.Remove(veh);
             try
             {

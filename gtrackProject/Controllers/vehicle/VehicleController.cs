@@ -80,11 +80,11 @@ namespace gtrackProject.Controllers.vehicle
 
             try
             {
+                var maxIdCar = _repository.GetAll().Where(c => c.HdId == hdId).Max(c => c.IdCar);
+                if (maxIdCar == null) throw new ArgumentNullException("maxIdCar");
+
                 for (var i = 0; i < q; i++)
                 {
-                    var maxIdCar = _repository.GetAll().Where(c => c.HdId == hdId).Max(c => c.IdCar);
-                    if (maxIdCar == null) throw new ArgumentNullException("maxIdCar");
-
                     var max = Convert.ToInt32(maxIdCar) + 1;
 
                     var newVeh = new Vehicle

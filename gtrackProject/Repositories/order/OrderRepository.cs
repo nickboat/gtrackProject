@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Models.order;
+using gtrackProject.Models.universe;
+using gtrackProject.Models.vehicle;
 using gtrackProject.Repositories.order.IRepos;
 
 namespace gtrackProject.Repositories.order
@@ -53,17 +55,26 @@ namespace gtrackProject.Repositories.order
             try
             {
                 await _db.SaveChangesAsync();
+                await addVehicle(order.Quantity, order.HdId, order.Id);
+
                 return order;
             }
             catch (DbUpdateConcurrencyException exception)
             {
                 throw new DbUpdateConcurrencyException(exception.Message);
             }
+
         }
 
         public async Task<bool> Update(Order item)
         {
             var order = await IdExist(item.Id);
+            var changeHd = false;
+            var changeQuantity = false;
+
+            if (order.HdId != item.HdId) changeHd = true;
+            if (order.Quantity != item.Quantity) changeQuantity = true;            
+
             order.CreateBy = await EmpExist(item.CreateBy);
             order.CreateDate = item.CreateDate;
             order.HdId = await HdExist(item.HdId);
@@ -72,12 +83,14 @@ namespace gtrackProject.Repositories.order
             order.PricePerUnit = item.PricePerUnit;
             order.FeePerYear = item.FeePerYear;
             order.Status = await StatusExist(item.Status);
-            order.Deadline = item.Deadline;
+            order.Deadline = item.Deadline;            
 
             if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
             if (item.HeadInstall != null) order.HeadInstall = await EmpExist(item.HeadInstall.Value);
             if (item.Comment != null) order.Comment = item.Comment;
             if (item.ExtendTypeId != null) order.ExtendTypeId = await ExtendExist(item.ExtendTypeId.Value);
+
+            if (changeHd || changeQuantity) await changeOrder(changeHd, changeQuantity, order.HdId, item.HdId, order.Quantity, order.Id);
 
             _db.Entry(order).State = EntityState.Modified;
             try
@@ -95,6 +108,8 @@ namespace gtrackProject.Repositories.order
         public async Task<bool> Remove(int id)
         {
             var order = await IdExist(id);
+
+            await removeVehicle(id);
 
             _db.Orders.Remove(order);
             try
@@ -144,6 +159,132 @@ namespace gtrackProject.Repositories.order
             var status = await _db.OrderStatuss.FirstOrDefaultAsync(o => o.Id == id);
             if (status != null) return id;
             throw new ArgumentException("OrderStatus Not Found");
+        }
+
+        private async Task<bool> addVehicle(int quantity,short hdId,int orderId)
+        {
+            var maxIdCar = _db.Vehicles.Where(c => c.HdId == hdId).Max(c => c.IdCar);
+            if (maxIdCar == null) throw new ArgumentNullException("maxIdCar");
+
+            for (int i = 0; i < quantity; i++)
+            {
+                var max = Convert.ToInt32(maxIdCar) + 1;
+
+                var newVeh = new Vehicle
+                {
+                    IdCar = max.ToString("D6"),
+                    HdId = hdId
+                };
+
+                newVeh = _db.Vehicles.Add(newVeh);
+                try
+                {
+                    await _db.SaveChangesAsync();
+
+                    //add universe
+                    var newUn = new Universe
+                    {
+                        VehicleId = newVeh.Id,
+                        OrderId = orderId,
+                        DisplayStatus = 2
+                    };
+                    _db.Universes.Add(newUn);
+                    try
+                    {
+                        await _db.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException exception)
+                    {
+                        throw new DbUpdateConcurrencyException(exception.Message);
+                    }
+                }
+                catch (DbUpdateConcurrencyException exception)
+                {
+                    throw new DbUpdateConcurrencyException(exception.Message);
+                }
+            }
+
+            return true;
+        }
+
+        private async Task<bool> changeOrder(bool changeHd, bool changeQ, short hdOld, short hdNew, int q, int orderId)
+        {
+            if (changeHd)
+            {
+                var vehs = await _db.Vehicles.Where(v => v.HdId == hdOld).ToListAsync();
+                foreach (var veh in vehs)
+                {
+                    _db.Vehicles.Remove(veh);
+                    try
+                    {
+                        await _db.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException exception)
+                    {
+                        throw new DbUpdateConcurrencyException(exception.Message);
+                    }                    
+                }
+                await addVehicle(q, hdNew, orderId);
+                return true;
+            }
+            else // changeHd = false , changeQ = true
+            {
+                var unOrders = await _db.Universes.Where(u => u.OrderId == orderId).OrderByDescending(u => u.VehicleId).ToListAsync();
+                
+                if (unOrders != null)
+                {
+                    int sub = 0;
+                    if (unOrders.Count() > q)
+                    {
+                        sub = unOrders.Count() - q;
+                        for (int i = 0; i < sub; i++)
+                        {
+                            var veh = _db.Vehicles.FirstOrDefault(v => v.Id == unOrders[i].VehicleId);
+
+                            _db.Vehicles.Remove(veh);
+                            try
+                            {
+                                await _db.SaveChangesAsync();
+                            }
+                            catch (DbUpdateConcurrencyException exception)
+                            {
+                                throw new DbUpdateConcurrencyException(exception.Message);
+                            }
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        sub = q - unOrders.Count();
+                        await addVehicle(sub, hdOld, orderId);
+                        return true;
+                    }                    
+                }
+                else
+                {
+                    throw new KeyNotFoundException("orderId");
+                }
+            }
+        }
+
+        private async Task<bool> removeVehicle(int orderId)
+        {
+            var unOrders = await _db.Universes.Where(u => u.OrderId == orderId).OrderByDescending(u => u.VehicleId).ToListAsync();
+            foreach (var un in unOrders)
+            {
+                var veh = _db.Vehicles.FirstOrDefault(v => v.Id == un.VehicleId);
+
+                _db.Vehicles.Remove(veh);
+                try
+                {
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException exception)
+                {
+                    throw new DbUpdateConcurrencyException(exception.Message);
+                }
+            }
+            return true;
         }
     }
 }
