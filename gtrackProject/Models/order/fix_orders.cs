@@ -13,12 +13,12 @@ namespace gtrackProject.Models.order
         }
 
         public int Id { get; set; }
-        [Required] public int CreateBy { get; set; }
+        public int? CreateBy { get; set; }
         [Required] public System.DateTime CreateDate { get; set; }
         public int? CurrentUser { get; set; }
         public int? HeadInstall { get; set; }
         public string Comment { get; set; }
-        [Required] public byte Status { get; set; }
+        public byte? Status { get; set; }
         public Employee CreateByEmployee { get; set; }
         public Employee CurrentUsermployee { get; set; }
         public OrderStatus OrderStatus { get; set; }

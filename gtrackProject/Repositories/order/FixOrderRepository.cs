@@ -31,9 +31,18 @@ namespace gtrackProject.Repositories.order
 
         public async Task<FixOrders> Add(FixOrders item)
         {
+            if (!item.CreateBy.HasValue)
+            {
+                throw new ArgumentNullException("CreateBy", "CreateBy is Required");
+            }
+            if (!item.Status.HasValue)
+            {
+                throw new ArgumentNullException("Status", "Status is Required");
+            }
+
             var fix = new FixOrders
             {
-                CreateBy = await EmpExist(item.CreateBy),
+                CreateBy = await EmpExist(item.CreateBy.Value),
                 CreateDate = item.CreateDate,
                 Status = 1
             };
@@ -56,8 +65,18 @@ namespace gtrackProject.Repositories.order
 
         public async Task<bool> Update(FixOrders item)
         {
+            if (!item.CreateBy.HasValue)
+            {
+                throw new ArgumentNullException("CreateBy", "CreateBy is Required");
+            }
+
+            if (!item.Status.HasValue)
+            {
+                throw new ArgumentNullException("Status", "Status is Required");
+            }
+
             var fix = await IdExist(item.Id);
-            fix.Status = await StatusExist(item.Status);
+            fix.Status = await StatusExist(item.Status.Value);
 
             if (item.CurrentUser != null) fix.CurrentUser = await EmpExist(item.CurrentUser.Value);
             if (item.HeadInstall != null) fix.HeadInstall = await EmpExist(item.HeadInstall.Value);

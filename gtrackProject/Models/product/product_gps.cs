@@ -19,7 +19,7 @@ namespace gtrackProject.Models.product
         public byte? SimPaymentTypeId { get; set; }
         public string Serial { get; set; }
         public byte Version { get; set; }
-        public int CreateBy { get; set; }
+        public int? CreateBy { get; set; }
         public DateTime CreateDate { get; set; }
         public int? StockBy { get; set; }
         public DateTime? StockDate { get; set; }

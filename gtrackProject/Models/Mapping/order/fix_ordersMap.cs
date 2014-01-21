@@ -34,7 +34,7 @@ namespace gtrackProject.Models.Mapping.order
             HasOptional(t => t.OrderStatus)
                 .WithMany(t => t.FixOrders)
                 .HasForeignKey(d => d.Status);
-
+                        
         }
     }
 }

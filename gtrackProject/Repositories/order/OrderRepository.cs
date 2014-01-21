@@ -33,12 +33,21 @@ namespace gtrackProject.Repositories.order
 
         public async Task<Order> Add(Order item)
         {
+            if (!item.CreateBy.HasValue)
+            {
+                throw new ArgumentNullException("CreateBy", "CreateBy is Required");
+            }
+            if (!item.Version.HasValue)
+            {
+                throw new ArgumentNullException("Version", "Version is Required");
+            }
+
             var order = new Order
             {
-                CreateBy = await EmpExist(item.CreateBy),
+                CreateBy = await EmpExist(item.CreateBy.Value),
                 CreateDate = item.CreateDate,
                 HdId = await HdExist(item.HdId),
-                Version = await VersionExist(item.Version),
+                Version = await VersionExist(item.Version.Value),
                 Quantity = item.Quantity,
                 PricePerUnit = item.PricePerUnit,
                 FeePerYear = item.FeePerYear,
@@ -68,6 +77,19 @@ namespace gtrackProject.Repositories.order
 
         public async Task<bool> Update(Order item)
         {
+            if (!item.CreateBy.HasValue)
+            {
+                throw new ArgumentNullException("CreateBy", "CreateBy is Required");
+            }
+            if (!item.Version.HasValue)
+            {
+                throw new ArgumentNullException("Version", "Version is Required");
+            }
+            if (!item.Status.HasValue)
+            {
+                throw new ArgumentNullException("Status", "Status is Required");
+            }
+
             var order = await IdExist(item.Id);
             var changeHd = false;
             var changeQuantity = false;
@@ -75,14 +97,14 @@ namespace gtrackProject.Repositories.order
             if (order.HdId != item.HdId) changeHd = true;
             if (order.Quantity != item.Quantity) changeQuantity = true;            
 
-            order.CreateBy = await EmpExist(item.CreateBy);
+            order.CreateBy = await EmpExist(item.CreateBy.Value);
             order.CreateDate = item.CreateDate;
             order.HdId = await HdExist(item.HdId);
-            order.Version = await VersionExist(item.Version);
+            order.Version = await VersionExist(item.Version.Value);
             order.Quantity = item.Quantity;
             order.PricePerUnit = item.PricePerUnit;
             order.FeePerYear = item.FeePerYear;
-            order.Status = await StatusExist(item.Status);
+            order.Status = await StatusExist(item.Status.Value);
             order.Deadline = item.Deadline;            
 
             if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);

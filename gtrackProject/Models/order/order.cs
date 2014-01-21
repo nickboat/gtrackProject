@@ -14,17 +14,17 @@ namespace gtrackProject.Models.order
         }
 
         public int Id { get; set; }
-        [Required] public int CreateBy { get; set; }
+        public int? CreateBy { get; set; }
         [Required] public System.DateTime CreateDate { get; set; }
         public int? CurrentUser { get; set; }
         public int? HeadInstall { get; set; }
         [Required] public short HdId { get; set; }
-        [Required] public byte Version { get; set; }
+        public byte? Version { get; set; }
         [Required] public int Quantity { get; set; }
         [Required] public decimal PricePerUnit { get; set; }
         [Required] public decimal FeePerYear { get; set; }
         public string Comment { get; set; }
-        [Required] public byte Status { get; set; }
+        public byte? Status { get; set; }
         [Required] public System.DateTime Deadline { get; set; }
         public byte? ExtendTypeId { get; set; }
         public Employee CreateByEmployee { get; set; }

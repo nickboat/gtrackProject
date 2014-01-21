@@ -31,6 +31,11 @@ namespace gtrackProject.Repositories.product
 
         public async Task<ProductGps> Add(ProductGps item)
         {
+            if (!item.CreateBy.HasValue)
+            {
+                throw new ArgumentNullException("CreateBy", "CreateBy is Required");
+            }
+
             var newProduct = new ProductGps();
 
             //config
@@ -47,7 +52,7 @@ namespace gtrackProject.Repositories.product
 
             //status
             newProduct.CreateDate = item.CreateDate;
-            newProduct.CreateBy = await empExist(item.CreateBy);
+            newProduct.CreateBy = await empExist(item.CreateBy.Value);
             newProduct.StatusId = 1;
 
             newProduct = _db.ProductGpss.Add(newProduct);
