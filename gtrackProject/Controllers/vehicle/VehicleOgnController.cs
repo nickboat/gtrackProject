@@ -11,10 +11,19 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
+    /// <summary>
+    /// VehicleOgnController - CRUD Vehicle's Oganize By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class VehicleOgnController : ApiController
     {
         private readonly IVehicleOganizeRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IVehicleOganizeRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public VehicleOgnController(IVehicleOganizeRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // GET api/VehicleOgn
+        /// <summary>
+        /// Gets All VehicleOganizes
+        /// </summary>
+        /// <returns>VehicleOganize</returns>
         public IQueryable<VehicleOganize> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/VehicleOgn/5
+        /// <summary>
+        /// Get a VehicleOganize
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>VehicleOganize</returns>
         [HttpGet]
         [ResponseType(typeof(VehicleOganize))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // POST api/VehicleOgn
+        /// <summary>
+        /// Post a VehicleOganize
+        /// </summary>
+        /// <param name="value">The <see cref="VehicleOganize"/>.</param>
+        /// <returns>VehicleOganize</returns>
         [HttpPost]
         [ResponseType(typeof(VehicleOganize))]
         public async Task<IHttpActionResult> Post([FromBody]VehicleOganize value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // PUT api/VehicleOgn/5
+        /// <summary>
+        /// Put a VehicleOganize
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="VehicleOganize"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]VehicleOganize value)
         {
@@ -106,6 +135,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // DELETE api/VehicleOgn/5
+        /// <summary>
+        /// Delete a VehicleOganize
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>HTTP STatus</returns>
         [HttpDelete]
         [ResponseType(typeof(VehicleOganize))]
         public async Task<IHttpActionResult> Delete(byte id)

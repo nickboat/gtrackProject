@@ -1644,5 +1644,394 @@
             <returns></returns>
             todo put universe fromurl - possible???
         </member>
+        <member name="T:gtrackProject.Controllers.vehicle.LpTypeController">
+            <summary>
+            LpTypeController - CRUD Vehicle's LicensePlate By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.LpTypeController.#ctor(gtrackProject.Repositories.vehicle.IRepos.ILpTypeRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.ILpTypeRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.LpTypeController.Get">
+            <summary>
+            Gets All LpTypes
+            </summary>
+            <returns>LpTypes</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.LpTypeController.Get(System.Byte)">
+            <summary>
+            Get a LpType
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>LpType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.LpTypeController.Post(gtrackProject.Models.vehicle.LpType)">
+            <summary>
+            Post a LpType
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.LpType"/>.</param>
+            <returns>LpType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.LpTypeController.Put(System.Byte,gtrackProject.Models.vehicle.LpType)">
+            <summary>
+            Put a LpType
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.LpType"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.LpTypeController.Delete(System.Byte)">
+            <summary>
+            Delete a LpType
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.ProvinceController">
+            <summary>
+            ProvinceController - Read only Provinces.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.ProvinceController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IProvinceRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IProvinceRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.ProvinceController.Get">
+            <summary>
+            Gets All Provinces
+            </summary>
+            <returns>Provinces</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.ProvinceController.Get(System.Byte)">
+            <summary>
+            Get a Province
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>Province</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.VehicleBrandController">
+            <summary>
+            VehicleBrandController - CRUD Vehicle's Brand By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleBrandController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleBrandRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IVehicleBrandRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleBrandController.Get">
+            <summary>
+            Gets All VehicleBrands
+            </summary>
+            <returns>VehicleBrands</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleBrandController.Get(System.Byte)">
+            <summary>
+            Get a VehicleBrand
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>VehicleBrand</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleBrandController.Post(gtrackProject.Models.vehicle.VehicleBrand)">
+            <summary>
+            Post a VehicleBrand
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleBrand"/>.</param>
+            <returns>VehicleBrand</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleBrandController.Put(System.Byte,gtrackProject.Models.vehicle.VehicleBrand)">
+            <summary>
+            Put a VehicleBrand
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleBrand"/>.</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleBrandController.Delete(System.Byte)">
+            <summary>
+            Delete a VehicleBrand
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.VehicleColorController">
+            <summary>
+            VehicleColorController - CRU Vehicle's Color By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleColorController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleColorRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IVehicleColorRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleColorController.Get">
+            <summary>
+            Gets All VehicleColors
+            </summary>
+            <returns>VehicleColors</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleColorController.Get(System.Byte)">
+            <summary>
+            Get a VehicleColor
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>VehicleColor</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleColorController.Post(gtrackProject.Models.vehicle.VehicleColor)">
+            <summary>
+            Post a VehicleColor
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleColor"/>.</param>
+            <returns>VehicleColor</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleColorController.Put(System.Byte,gtrackProject.Models.vehicle.VehicleColor)">
+            <summary>
+            Put a VehicleColor
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleColor"/>.</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.VehicleController">
+            <summary>
+            VehicleController - CRUD Vehicle By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IVehicleRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Get">
+            <summary>
+            Gets All Vehicles
+            </summary>
+            <returns>Vehicles</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Get(System.Int32)">
+            <summary>
+            Get a Vehicle
+            </summary>
+            <param name="id">Vehicle</param>
+            <returns>Vehicle</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Post(gtrackProject.Models.vehicle.Vehicle)">
+            <summary>
+            Post a Vehicle
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.Vehicle"/>.</param>
+            <returns>Vehicle</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Post(System.Int16,System.Int32)">
+            <summary>
+            Post a Vehicle *FromUrl*
+            </summary>
+            <param name="hdId">id *short*</param>
+            <param name="q">quantity *int*</param>
+            <returns>HTTP Status</returns>
+            <exception cref="T:System.ArgumentNullException">maxIdCar isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Put(System.Int32,gtrackProject.Models.vehicle.Vehicle)">
+            <summary>
+            Put a Vehicle
+            </summary>
+            <param name="id">id *int*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.Vehicle"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Delete(System.Int32)">
+            <summary>
+            Delete a Vehicle
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.VehicleHTypeController">
+            <summary>
+            VehicleHTypeController - CRU Vehicle's HeadType By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleHTypeController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleHeadTypeRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IVehicleHeadTypeRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleHTypeController.Get">
+            <summary>
+            Gets All VehicleHeadTypes
+            </summary>
+            <returns>VehicleHeadTypes</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleHTypeController.Get(System.Byte)">
+            <summary>
+            Get a VehicleHeadType
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>VehicleHeadType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleHTypeController.Post(gtrackProject.Models.vehicle.VehicleHeadType)">
+            <summary>
+            Post a VehicleHeadType
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleHeadType"/>.</param>
+            <returns>VehicleHeadType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleHTypeController.Put(System.Byte,gtrackProject.Models.vehicle.VehicleHeadType)">
+            <summary>
+            Put a VehicleHeadType
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleHeadType"/>.</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.VehicleModelController">
+            <summary>
+            VehicleModelController - CRUD Vehicle's Model By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleModelController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleModelRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IVehicleModelRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleModelController.Get">
+            <summary>
+            Gets All VehicleModels
+            </summary>
+            <returns>VehicleModels</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleModelController.Get(System.Int16)">
+            <summary>
+            Get a VehicleModel
+            </summary>
+            <param name="id">id *short*</param>
+            <returns>VehicleModel</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleModelController.Post(gtrackProject.Models.vehicle.VehicleModel)">
+            <summary>
+            Post a VehicleModel
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleModel"/>.</param>
+            <returns>VehicleModel</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleModelController.Put(System.Int16,gtrackProject.Models.vehicle.VehicleModel)">
+            <summary>
+            Put a VehicleModel
+            </summary>
+            <param name="id">id *short*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleModel"/>.</param>
+            <returns>TTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleModelController.Delete(System.Int16)">
+            <summary>
+            Delete a VehicleModel
+            </summary>
+            <param name="id">id *short*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.VehicleOgnController">
+            <summary>
+            VehicleOgnController - CRUD Vehicle's Oganize By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleOgnController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleOganizeRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IVehicleOganizeRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleOgnController.Get">
+            <summary>
+            Gets All VehicleOganizes
+            </summary>
+            <returns>VehicleOganize</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleOgnController.Get(System.Byte)">
+            <summary>
+            Get a VehicleOganize
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>VehicleOganize</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleOgnController.Post(gtrackProject.Models.vehicle.VehicleOganize)">
+            <summary>
+            Post a VehicleOganize
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleOganize"/>.</param>
+            <returns>VehicleOganize</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleOgnController.Put(System.Byte,gtrackProject.Models.vehicle.VehicleOganize)">
+            <summary>
+            Put a VehicleOganize
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleOganize"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleOgnController.Delete(System.Byte)">
+            <summary>
+            Delete a VehicleOganize
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP STatus</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.vehicle.VehicleTypeController">
+            <summary>
+            VehicleTypeController - CRU Vehicle's Type By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleTypeController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleTypeRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.vehicle.IRepos.IVehicleTypeRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleTypeController.Get">
+            <summary>
+            Gets All VehicleTypes
+            </summary>
+            <returns>VehicleTypes</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleTypeController.Get(System.Byte)">
+            <summary>
+            Get a VehicleType
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>VehicleType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleTypeController.Post(gtrackProject.Models.vehicle.VehicleType)">
+            <summary>
+            Post a VehicleType
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.vehicle.VehicleType"/>.</param>
+            <returns>VehicleType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.vehicle.VehicleTypeController.Put(System.Byte,gtrackProject.Models.vehicle.VehicleType)">
+            <summary>
+            Put a VehicleType
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">the <see cref="T:gtrackProject.Models.vehicle.VehicleType"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
     </members>
 </doc>

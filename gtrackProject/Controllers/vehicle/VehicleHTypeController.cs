@@ -11,10 +11,19 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
+    /// <summary>
+    /// VehicleHTypeController - CRU Vehicle's HeadType By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class VehicleHTypeController : ApiController
     {
         private readonly IVehicleHeadTypeRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IVehicleHeadTypeRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public VehicleHTypeController(IVehicleHeadTypeRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // GET api/VehicleHType
+        /// <summary>
+        /// Gets All VehicleHeadTypes
+        /// </summary>
+        /// <returns>VehicleHeadTypes</returns>
         public IQueryable<VehicleHeadType> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/VehicleHType/5
+        /// <summary>
+        /// Get a VehicleHeadType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>VehicleHeadType</returns>
         [HttpGet]
         [ResponseType(typeof(VehicleHeadType))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // POST api/VehicleHType
+        /// <summary>
+        /// Post a VehicleHeadType
+        /// </summary>
+        /// <param name="value">The <see cref="VehicleHeadType"/>.</param>
+        /// <returns>VehicleHeadType</returns>
         [HttpPost]
         [ResponseType(typeof(VehicleHeadType))]
         public async Task<IHttpActionResult> Post([FromBody]VehicleHeadType value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // PUT api/VehicleHType/5
+        /// <summary>
+        /// Put a VehicleHeadType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="VehicleHeadType"/>.</param>
+        /// <returns>HTTP Stauts</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]VehicleHeadType value)
         {

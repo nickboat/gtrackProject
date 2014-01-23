@@ -11,10 +11,19 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
+    /// <summary>
+    /// LpTypeController - CRUD Vehicle's LicensePlate By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class LpTypeController : ApiController
     {
         private readonly ILpTypeRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="ILpTypeRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public LpTypeController(ILpTypeRepository repository)
         {
             if (repository == null)
@@ -26,12 +35,21 @@ namespace gtrackProject.Controllers.vehicle
 
 
         // GET api/lptype
+        /// <summary>
+        /// Gets All LpTypes
+        /// </summary>
+        /// <returns>LpTypes</returns>
         public IQueryable<LpType> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/lptype/5
+        /// <summary>
+        /// Get a LpType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>LpType</returns>
         [HttpGet]
         [ResponseType(typeof(LpType))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -48,6 +66,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // POST api/lptype
+        /// <summary>
+        /// Post a LpType
+        /// </summary>
+        /// <param name="value">The <see cref="LpType"/>.</param>
+        /// <returns>LpType</returns>
         [HttpPost]
         [ResponseType(typeof(LpType))]
         public async Task<IHttpActionResult> Post([FromBody]LpType value)
@@ -73,6 +96,12 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // PUT api/lptype/5
+        /// <summary>
+        /// Put a LpType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="LpType"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]LpType value)
         {
@@ -107,6 +136,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // DELETE api/lptype/5
+        /// <summary>
+        /// Delete a LpType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(LpType))]
         public async Task<IHttpActionResult> Delete(byte id)

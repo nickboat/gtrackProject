@@ -11,10 +11,19 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
+    /// <summary>
+    /// VehicleModelController - CRUD Vehicle's Model By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class VehicleModelController : ApiController
     {
         private readonly IVehicleModelRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IVehicleModelRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public VehicleModelController(IVehicleModelRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // GET api/VehicleModel
+        /// <summary>
+        /// Gets All VehicleModels
+        /// </summary>
+        /// <returns>VehicleModels</returns>
         public IQueryable<VehicleModel> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/VehicleModel/5
+        /// <summary>
+        /// Get a VehicleModel
+        /// </summary>
+        /// <param name="id">id *short*</param>
+        /// <returns>VehicleModel</returns>
         [HttpGet]
         [ResponseType(typeof(VehicleModel))]
         public async Task<IHttpActionResult> Get(short id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // POST api/VehicleModel
+        /// <summary>
+        /// Post a VehicleModel
+        /// </summary>
+        /// <param name="value">The <see cref="VehicleModel"/>.</param>
+        /// <returns>VehicleModel</returns>
         [HttpPost]
         [ResponseType(typeof(VehicleModel))]
         public async Task<IHttpActionResult> Post([FromBody]VehicleModel value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // PUT api/VehicleModel/5
+        /// <summary>
+        /// Put a VehicleModel
+        /// </summary>
+        /// <param name="id">id *short*</param>
+        /// <param name="value">The <see cref="VehicleModel"/>.</param>
+        /// <returns>TTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(short id, [FromBody]VehicleModel value)
         {
@@ -106,6 +135,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // DELETE api/VehicleModel/5
+        /// <summary>
+        /// Delete a VehicleModel
+        /// </summary>
+        /// <param name="id">id *short*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(VehicleModel))]
         public async Task<IHttpActionResult> Delete(short id)

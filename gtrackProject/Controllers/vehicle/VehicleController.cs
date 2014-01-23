@@ -11,10 +11,20 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
+    /// <summary>
+    /// VehicleController - CRUD Vehicle By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
+    //todo manage role for this class
     public class VehicleController : ApiController
     {
         private readonly IVehicleRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IVehicleRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public VehicleController(IVehicleRepository repository)
         {
             if (repository == null)
@@ -25,12 +35,21 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // GET api/Vehicle
+        /// <summary>
+        /// Gets All Vehicles
+        /// </summary>
+        /// <returns>Vehicles</returns>
         public IQueryable<Vehicle> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/Vehicle/5
+        /// <summary>
+        /// Get a Vehicle
+        /// </summary>
+        /// <param name="id">Vehicle</param>
+        /// <returns>Vehicle</returns>
         [HttpGet]
         [ResponseType(typeof(Vehicle))]
         public async Task<IHttpActionResult> Get(int id)
@@ -47,6 +66,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // POST api/Vehicle
+        /// <summary>
+        /// Post a Vehicle
+        /// </summary>
+        /// <param name="value">The <see cref="Vehicle"/>.</param>
+        /// <returns>Vehicle</returns>
         [HttpPost]
         [ResponseType(typeof(Vehicle))]
         public async Task<IHttpActionResult> Post([FromBody]Vehicle value)
@@ -72,6 +96,13 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // POST api/Vehicle?hdId=0&q=0
+        /// <summary>
+        /// Post a Vehicle *FromUrl*
+        /// </summary>
+        /// <param name="hdId">id *short*</param>
+        /// <param name="q">quantity *int*</param>
+        /// <returns>HTTP Status</returns>
+        /// <exception cref="ArgumentNullException">maxIdCar isNull</exception>
         [HttpPost]
         public async Task<IHttpActionResult> Post([FromUri]short hdId, [FromUri]int q) //q = quantity
         {
@@ -109,6 +140,12 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // PUT api/Vehicle/5
+        /// <summary>
+        /// Put a Vehicle
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="value">The <see cref="Vehicle"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(int id, [FromBody]Vehicle value)
         {
@@ -143,6 +180,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // DELETE api/Vehicle/5
+        /// <summary>
+        /// Delete a Vehicle
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(Vehicle))]
         public async Task<IHttpActionResult> Delete(int id)

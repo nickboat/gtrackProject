@@ -11,10 +11,19 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
+    /// <summary>
+    /// VehicleColorController - CRU Vehicle's Color By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class VehicleColorController : ApiController
     {
         private readonly IVehicleColorRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IVehicleColorRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public VehicleColorController(IVehicleColorRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // GET api/VehicleColor
+        /// <summary>
+        /// Gets All VehicleColors
+        /// </summary>
+        /// <returns>VehicleColors</returns>
         public IQueryable<VehicleColor> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/VehicleColor/5
+        /// <summary>
+        /// Get a VehicleColor
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>VehicleColor</returns>
         [HttpGet]
         [ResponseType(typeof(VehicleColor))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // POST api/VehicleColor
+        /// <summary>
+        /// Post a VehicleColor
+        /// </summary>
+        /// <param name="value">The <see cref="VehicleColor"/>.</param>
+        /// <returns>VehicleColor</returns>
         [HttpPost]
         [ResponseType(typeof(VehicleColor))]
         public async Task<IHttpActionResult> Post([FromBody]VehicleColor value)
@@ -73,6 +96,12 @@ namespace gtrackProject.Controllers.vehicle
 
         // PUT api/VehicleColor/5
         //[HttpPut]
+        /// <summary>
+        /// Put a VehicleColor
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="VehicleColor"/>.</param>
+        /// <returns>HTTP Stauts</returns>
         public async Task<IHttpActionResult> Put(byte id, [FromBody]VehicleColor value)
         {
             if (!ModelState.IsValid)

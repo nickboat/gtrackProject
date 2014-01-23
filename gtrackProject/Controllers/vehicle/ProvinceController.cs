@@ -9,10 +9,19 @@ using gtrackProject.Repositories.vehicle.IRepos;
 
 namespace gtrackProject.Controllers.vehicle
 {
+    /// <summary>
+    /// ProvinceController - Read only Provinces.
+    /// </summary>
+    [Authorize]
     public class ProvinceController : ApiController
     {
         private readonly IProvinceRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IProvinceRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public ProvinceController(IProvinceRepository repository)
         {
             if (repository == null)
@@ -23,12 +32,21 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // GET api/province
+        /// <summary>
+        /// Gets All Provinces
+        /// </summary>
+        /// <returns>Provinces</returns>
         public IQueryable<Province> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/province/5
+        /// <summary>
+        /// Get a Province
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>Province</returns>
         [HttpGet]
         [ResponseType(typeof(Province))]
         public async Task<IHttpActionResult> Get(byte id)
