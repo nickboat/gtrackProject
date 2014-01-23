@@ -11,10 +11,19 @@ using gtrackProject.Repositories.account.IRepos;
 
 namespace gtrackProject.Controllers.account
 {
+    /// <summary>
+    /// HdController - CRUD Header By cs,admin.
+    /// </summary>
+    [Authorize(Roles = "cs", Roles = "admin")]
     public class HdController : ApiController
     {
         private readonly IHdRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IHdRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public HdController(IHdRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.account
         }
 
         // GET api/HD
+        /// <summary>
+        /// Gets All headers. *Queryable*
+        /// </summary>
+        /// <returns>Hd</returns>
         public IQueryable<Hd> Gethds()
         {
             return _repository.GetAll();
         }
 
         // GET api/HD/5
+        /// <summary>
+        /// Gets a header.
+        /// </summary>
+        /// <param name="id">id *short*</param>
+        /// <returns>Hd</returns>
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Gethd(short id)
         {
@@ -46,6 +64,12 @@ namespace gtrackProject.Controllers.account
         }
 
         // PUT api/HD/5
+        /// <summary>
+        /// Put a header
+        /// </summary>
+        /// <param name="id">id *short*</param>
+        /// <param name="hd">The <see cref="Hd"/>.</param>
+        /// <returns>HTTP Status</returns>
         public async Task<IHttpActionResult> Puthd(short id, Hd hd)
         {
             if (!ModelState.IsValid)
@@ -75,6 +99,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // POST api/HD
+        /// <summary>
+        /// Post a header
+        /// </summary>
+        /// <param name="hd">The <see cref="Hd"/>.</param>
+        /// <returns>Hd</returns>
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Posthd(Hd hd)
         {
@@ -95,6 +124,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // DELETE api/HD/5
+        /// <summary>
+        /// Delete a header
+        /// </summary>
+        /// <param name="id">id *short*</param>
+        /// <returns>HTTP Status</returns>
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Deletehd(short id)
         {

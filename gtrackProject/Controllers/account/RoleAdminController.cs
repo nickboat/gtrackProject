@@ -6,17 +6,24 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using gtrackProject.Repositories.account;
 using gtrackProject.Repositories.account.IRepos;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace gtrackProject.Controllers.account
 {
-    //[Authorize(Roles = "admin")]
+    /// <summary>
+    /// RoleAdminController - CRUD User's role By Admin Only.
+    /// </summary>
+    [Authorize(Roles = "admin")]
     public class RoleAdminController : ApiController
     {
         private readonly IRoleAdminRepository _repository;
         
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IRoleAdminRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public RoleAdminController(IRoleAdminRepository repository)
         {
             if (repository == null)
@@ -26,12 +33,21 @@ namespace gtrackProject.Controllers.account
             _repository = repository;
         }
 
+        /// <summary>
+        /// Gets All roles. *Queryable*
+        /// </summary>
+        /// <returns>IdentityRole</returns>
         // GET api/RoleAdmin
         public IQueryable<IdentityRole> GetRoles()
         {
             return _repository.GetAll();
         }
 
+        /// <summary>
+        /// Gets a role.
+        /// </summary>
+        /// <param name="id">id by AspIdentity *nvarchar 128*</param>
+        /// <returns>IdentityRole</returns>
         // GET api/RoleAdmin/(Id)
         [HttpGet]
         [ResponseType(typeof(IdentityRole))]
@@ -48,6 +64,11 @@ namespace gtrackProject.Controllers.account
             }
         }
 
+        /// <summary>
+        /// Post a role.
+        /// </summary>
+        /// <param name="rolePost">The <see cref="IdentityRole"/>.</param>
+        /// <returns>IdentityRole</returns>
         // POST api/RoleAdmin/
         [HttpPost]
         [ResponseType(typeof(IdentityRole))]
@@ -69,6 +90,12 @@ namespace gtrackProject.Controllers.account
             }
         }
 
+        /// <summary>
+        /// Put a role.
+        /// </summary>
+        /// <param name="id">id by AspIdentity. *nvarchar 128*</param>
+        /// <param name="rolePut">The <see cref="IdentityRole"/>.</param>
+        /// <returns>HTTP Status</returns>
         // PUT api/RoleAdmin/(Id)
         [HttpPut]
         public async Task<IHttpActionResult> PutRole(string id, IdentityRole rolePut)
@@ -99,6 +126,11 @@ namespace gtrackProject.Controllers.account
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// DELETE a role.
+        /// </summary>
+        /// <param name="id">id by AspIdentity. *nvarchar 128*</param>
+        /// <returns>HTTP Status</returns>
         // DELETE api/RoleAdmin/(Id)
         [HttpDelete]
         [ResponseType(typeof(IdentityRole))]

@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using gtrackProject.Models;
 using gtrackProject.Models.account;
 using gtrackProject.Providers;
 using gtrackProject.Results;
@@ -18,17 +17,28 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace gtrackProject.Controllers.account
 {
+    /// <summary>
+    /// Default AccountController to manage all account with OWIN Security and OAuth
+    /// </summary>
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
 
+        /// <summary>
+        /// Startup User & token
+        /// </summary>
         public AccountController()
             : this(Startup.UserManagerFactory(), Startup.OAuthOptions.AccessTokenFormat)
         {
         }
 
+        /// <summary>
+        /// Init User & token
+        /// </summary>
+        /// <param name="userManager">The <see cref="IdentityUser"/>.</param>
+        /// <param name="accessTokenFormat">The <see cref="AuthenticationTicket"/>.</param>
         public AccountController(UserManager<IdentityUser> userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
@@ -40,6 +50,10 @@ namespace gtrackProject.Controllers.account
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         // GET api/Account/UserInfo
+        /// <summary>
+        /// Get UserInfo.
+        /// </summary>
+        /// <returns>UserInfoViewModel.</returns>
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
@@ -55,6 +69,10 @@ namespace gtrackProject.Controllers.account
         }
 
         // POST api/Account/Logout
+        /// <summary>
+        /// Logout!!!
+        /// </summary>
+        /// <returns>HTTP Status</returns>
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
@@ -63,19 +81,25 @@ namespace gtrackProject.Controllers.account
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
+        /// <summary>
+        /// Get ManageInfo.
+        /// </summary>
+        /// <param name="returnUrl">return Url.</param>
+        /// <param name="generateState">generateState (true,false)</param>
+        /// <returns>ManageInfoViewModel</returns>
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
             {
                 return null;
             }
 
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
+            var logins = new List<UserLoginInfoViewModel>();
 
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
+            foreach (var linkedAccount in user.Logins)
             {
                 logins.Add(new UserLoginInfoViewModel
                 {
@@ -103,6 +127,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // POST api/Account/ChangePassword
+        /// <summary>
+        /// ChangePassword!!!
+        /// </summary>
+        /// <param name="model">The <see cref="ChangePasswordBindingModel"/>.</param>
+        /// <returns>HTTP Status</returns>
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -111,19 +140,19 @@ namespace gtrackProject.Controllers.account
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            IHttpActionResult errorResult = GetErrorResult(result);
+            var errorResult = GetErrorResult(result);
 
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            return errorResult ?? Ok();
         }
 
         // POST api/Account/SetPassword
+        /// <summary>
+        /// SetPassword!!!
+        /// </summary>
+        /// <param name="model">The <see cref="SetPasswordBindingModel"/>.</param>
+        /// <returns>HTTP Status</returns>
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
@@ -132,18 +161,18 @@ namespace gtrackProject.Controllers.account
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-            IHttpActionResult errorResult = GetErrorResult(result);
+            var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+            var errorResult = GetErrorResult(result);
 
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            return errorResult ?? Ok();
         }
 
         // POST api/Account/AddExternalLogin
+        /// <summary>
+        /// Add ExternalLogin
+        /// </summary>
+        /// <param name="model">The <see cref="AddExternalLoginBindingModel"/>.</param>
+        /// <returns>HTTP Status</returns>
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
@@ -154,7 +183,7 @@ namespace gtrackProject.Controllers.account
 
             Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-            AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+            var ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
 
             if (ticket == null || ticket.Identity == null || (ticket.Properties != null
                 && ticket.Properties.ExpiresUtc.HasValue
@@ -163,27 +192,27 @@ namespace gtrackProject.Controllers.account
                 return BadRequest("External login failure.");
             }
 
-            ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
+            var externalData = ExternalLoginData.FromIdentity(ticket.Identity);
 
             if (externalData == null)
             {
                 return BadRequest("The external login is already associated with an account.");
             }
 
-            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
+            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
                 new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
-            IHttpActionResult errorResult = GetErrorResult(result);
-
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            var errorResult = GetErrorResult(result);
+            
+            return errorResult ?? Ok();
         }
 
         // POST api/Account/RemoveLogin
+        /// <summary>
+        /// RemoveLogin!!!
+        /// </summary>
+        /// <param name="model">The <see cref="RemoveLoginBindingModel"/>.</param>
+        /// <returns>HTTP Status</returns>
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
@@ -204,17 +233,18 @@ namespace gtrackProject.Controllers.account
                     new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
 
-            IHttpActionResult errorResult = GetErrorResult(result);
+            var errorResult = GetErrorResult(result);
 
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            return errorResult ?? Ok();
         }
 
         // GET api/Account/ExternalLogin
+        /// <summary>
+        /// Get ExternalLogin
+        /// </summary>
+        /// <param name="provider">provider</param>
+        /// <param name="error">error msg</param>
+        /// <returns>HTTP Status</returns>
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
@@ -231,7 +261,7 @@ namespace gtrackProject.Controllers.account
                 return new ChallengeResult(provider, this);
             }
 
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             if (externalLogin == null)
             {
@@ -244,25 +274,25 @@ namespace gtrackProject.Controllers.account
                 return new ChallengeResult(provider, this);
             }
 
-            IdentityUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
-            bool hasRegistered = user != null;
+            var hasRegistered = user != null;
 
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                ClaimsIdentity oAuthIdentity = await UserManager.CreateIdentityAsync(user,
+                var oAuthIdentity = await UserManager.CreateIdentityAsync(user,
                     OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await UserManager.CreateIdentityAsync(user,
+                var cookieIdentity = await UserManager.CreateIdentityAsync(user,
                     CookieAuthenticationDefaults.AuthenticationType);
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
             {
                 IEnumerable<Claim> claims = externalLogin.GetClaims();
-                ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
                 Authentication.SignIn(identity);
             }
 
@@ -270,12 +300,18 @@ namespace gtrackProject.Controllers.account
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
+        /// <summary>
+        /// Get ExternalLogins
+        /// </summary>
+        /// <param name="returnUrl">return Url</param>
+        /// <param name="generateState">generateState (true,false)</param>
+        /// <returns>List ExternalLoginViewModel</returns>
         [AllowAnonymous]
         [Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
-            IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
-            List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
+            var descriptions = Authentication.GetExternalAuthenticationTypes();
+            var logins = new List<ExternalLoginViewModel>();
 
             string state;
 
@@ -289,9 +325,9 @@ namespace gtrackProject.Controllers.account
                 state = null;
             }
 
-            foreach (AuthenticationDescription description in descriptions)
+            foreach (var description in descriptions)
             {
-                ExternalLoginViewModel login = new ExternalLoginViewModel
+                var login = new ExternalLoginViewModel
                 {
                     Name = description.Caption,
                     Url = Url.Route("ExternalLogin", new
@@ -311,10 +347,14 @@ namespace gtrackProject.Controllers.account
         }
 
         // POST api/Account/Register
-        //[Authorize(Roles = "cs", Roles = "admin")]
-        // for Register Customer user only
+        /// <summary>
+        /// Register User *by "customer service","admin"* Not AllowAnonymous
+        /// </summary>
+        /// <param name="model">The <see cref="RegisterBindingModel"/>.</param>
+        /// <returns>IdentityUser</returns>
+        [Authorize(Roles = "cs", Roles = "admin")]
         //todo maybe wait i think about that
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
@@ -339,15 +379,15 @@ namespace gtrackProject.Controllers.account
             var roleResult = await UserManager.AddToRoleAsync(user.Id, "customer");
             var roleErrorResult = GetErrorResult(roleResult);
 
-            if (roleErrorResult != null)
-            {
-                return roleErrorResult;
-            }
-
-            return Ok(user);
+            return roleErrorResult ?? Ok(user);
         }
 
         // POST api/Account/RegisterExternal
+        /// <summary>
+        /// RegisterExternal
+        /// </summary>
+        /// <param name="model">The <see cref="RegisterExternalBindingModel"/>.</param>
+        /// <returns>HTTP Status</returns>
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
@@ -358,14 +398,14 @@ namespace gtrackProject.Controllers.account
                 return BadRequest(ModelState);
             }
 
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             if (externalLogin == null)
             {
                 return InternalServerError();
             }
 
-            IdentityUser user = new IdentityUser
+            var user = new IdentityUser
             {
                 UserName = model.UserName
             };
@@ -374,15 +414,10 @@ namespace gtrackProject.Controllers.account
                 LoginProvider = externalLogin.LoginProvider,
                 ProviderKey = externalLogin.ProviderKey
             });
-            IdentityResult result = await UserManager.CreateAsync(user);
-            IHttpActionResult errorResult = GetErrorResult(result);
+            var result = await UserManager.CreateAsync(user);
+            var errorResult = GetErrorResult(result);
 
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            return errorResult ?? Ok();
         }
 
         protected override void Dispose(bool disposing)

@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Models.account;
-using gtrackProject.Repositories.account;
 using gtrackProject.Repositories.account.IRepos;
 
 namespace gtrackProject.Controllers.account
 {
-    //[Authorize(Roles = "cs", Roles = "admin")]
+    /// <summary>
+    /// CustomerController - CRUD Customer User By cs,admin.
+    /// </summary>
+    [Authorize(Roles = "cs", Roles = "admin")]
     public class CustomerController : ApiController
     {
         private readonly ICustomerRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"><see cref="ICustomerRepository"/></param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public CustomerController(ICustomerRepository repository)
         {
             if (repository == null)
@@ -25,6 +32,11 @@ namespace gtrackProject.Controllers.account
             _repository = repository;
         }
 
+        /// <summary>
+        /// Gets All Customer by header
+        /// </summary>
+        /// <param name="hdId">header id *int*</param>
+        /// <returns>CustomerModel</returns>
         [Route("api/CustomerByHd/{hdId:int}")]
         [HttpGet]
         [ResponseType(typeof(CustomerModel))]
@@ -34,6 +46,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // GET api/useradmin/(Id)
+        /// <summary>
+        /// Get Customer
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>CustomerModel</returns>
         [HttpGet]
         [ResponseType(typeof(CustomerModel))]
         public async Task<IHttpActionResult> GetUser(int id)
@@ -50,6 +67,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // POST api/useradmin
+        /// <summary>
+        /// Post Customer
+        /// </summary>
+        /// <param name="postCust">The <see cref="CustomerModel"/>.</param>
+        /// <returns>CustomerModel</returns>
         [HttpPost]
         [ResponseType(typeof(CustomerModel))]
         public async Task<IHttpActionResult> PostUser(CustomerModel postCust)
@@ -80,6 +102,12 @@ namespace gtrackProject.Controllers.account
         }
 
         // PUT api/useradmin/(Id)
+        /// <summary>
+        /// Put Customer
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="putCust">The <see cref="CustomerModel"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> PutUser(int id, CustomerModel putCust)
         {
@@ -110,6 +138,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // DELETE api/useradmin/5
+        /// <summary>
+        /// Delete Customer
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         public async Task<IHttpActionResult> DeleteRole(int id)
         {

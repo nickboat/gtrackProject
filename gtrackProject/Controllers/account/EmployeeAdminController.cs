@@ -11,11 +11,19 @@ using gtrackProject.Repositories.account.IRepos;
 
 namespace gtrackProject.Controllers.account
 {
-    //[Authorize(Roles = "admin")]
+    /// <summary>
+    /// RoleAdminController - CRUD Employee User By Admin Only.
+    /// </summary>
+    [Authorize(Roles = "admin")]
     public class EmployeeAdminController : ApiController
     {
         private readonly IEmployeeAdminRepository _repository;
-        
+
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IEmployeeAdminRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public EmployeeAdminController(IEmployeeAdminRepository repository)
         {
             if (repository == null)
@@ -26,12 +34,21 @@ namespace gtrackProject.Controllers.account
         }
 
         // GET api/useradmin
+        /// <summary>
+        /// Gets Employee
+        /// </summary>
+        /// <returns>EmployeeAdminModel</returns>
         public IEnumerable<EmployeeAdminModel> GetUsers()
         {
             return _repository.GetAll();
         }
 
         // GET api/useradmin/(Id)
+        /// <summary>
+        /// Get Employee
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>EmployeeAdminModel</returns>
         [HttpGet]
         [ResponseType(typeof(EmployeeAdminModel))]
         public async Task<IHttpActionResult> GetUser(int id)
@@ -48,6 +65,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // POST api/useradmin
+        /// <summary>
+        /// Post Employee
+        /// </summary>
+        /// <param name="postEmp">The <see cref="EmployeeAdminModel"/>.</param>
+        /// <returns>EmployeeAdminModel</returns>
         [HttpPost]
         [ResponseType(typeof(EmployeeAdminModel))]
         public async Task<IHttpActionResult> PostUser(EmployeeAdminModel postEmp)
@@ -87,6 +109,12 @@ namespace gtrackProject.Controllers.account
         }
 
         // PUT api/useradmin/(Id)
+        /// <summary>
+        /// Put Employee
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="putEmp">The <see cref="EmployeeAdminModel"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> PutUser(int id, EmployeeAdminModel putEmp)
         {
@@ -125,6 +153,11 @@ namespace gtrackProject.Controllers.account
         }
 
         // DELETE api/useradmin/5
+        /// <summary>
+        /// Delete Employee
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         public async Task<IHttpActionResult> DeleteRole(int id)
         {
