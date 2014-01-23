@@ -12,7 +12,7 @@ using gtrackProject.Repositories.product.IRepos;
 namespace gtrackProject.Controllers.product
 {
     /// <summary>
-    /// RoleAdminController - CRUD Product GPS By admin, manu, cs, install, qc
+    /// RoleAdminController - CRUD Product GPS By admin, manu, cs, install, qc.
     /// </summary>
     [Authorize(Roles = "admin, manu, cs, install, qc")]
     public class ProductGpsController : ApiController

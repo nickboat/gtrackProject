@@ -1234,5 +1234,415 @@
             <param name="id">id *byte*</param>
             <returns>HTTP Status</returns>
         </member>
+        <member name="T:gtrackProject.Controllers.universe.UnCmBattController">
+            <summary>
+            UnCmBattController - CRUD CmBatt's Status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmBattController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmBattRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnCmBattRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmBattController.Get">
+            <summary>
+            Gets All UnCmBatts
+            </summary>
+            <returns>UnCmBatts</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmBattController.Get(System.String)">
+            <summary>
+            Get a UnCmBatt
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>UnCmBatt</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmBattController.Post(gtrackProject.Models.universe.UnCmBatt)">
+            <summary>
+            Post a UnCmBatt
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmBatt"/>.</param>
+            <returns>UnCmBatt</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmBattController.Put(System.String,gtrackProject.Models.universe.UnCmBatt)">
+            <summary>
+            Put a UnCmBatt
+            </summary>
+            <param name="id">id *char*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmBatt"/>.</param>
+            <returns>UnCmBatt</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmBattController.Delete(System.String)">
+            <summary>
+            Delete a UnCmBatt
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UnCmCommController">
+            <summary>
+            UnCmCommController - CRUD CmComm's Status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmCommController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmCommRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnCmCommRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmCommController.Get">
+            <summary>
+            Gets All UnCmComms
+            </summary>
+            <returns>UnCmComms</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmCommController.Get(System.String)">
+            <summary>
+            Get a UnCmComm
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>UnCmComm</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmCommController.Post(gtrackProject.Models.universe.UnCmComm)">
+            <summary>
+            Post a UnCmComm
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmComm"/>.</param>
+            <returns>UnCmComm</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmCommController.Put(System.String,gtrackProject.Models.universe.UnCmComm)">
+            <summary>
+            Put a UnCmComm
+            </summary>
+            <param name="id">id *char*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmComm"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmCommController.Delete(System.String)">
+            <summary>
+            Delete a UnCmComm
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UnCmEngineController">
+            <summary>
+            UnCmEngineController - CRUD CmEngine's Status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmEngineController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmEngineRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnCmEngineRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmEngineController.Get">
+            <summary>
+            Gets All UnCmEngine
+            </summary>
+            <returns>UnCmEngine</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmEngineController.Get(System.String)">
+            <summary>
+            Get a UnCmEngine
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>UnCmEngine</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmEngineController.Post(gtrackProject.Models.universe.UnCmEngine)">
+            <summary>
+            Post a UnCmEngine
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmEngine"/>.</param>
+            <returns>UnCmEngine</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmEngineController.Put(System.String,gtrackProject.Models.universe.UnCmEngine)">
+            <summary>
+            Put a UnCmEngine
+            </summary>
+            <param name="id">id *char*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmEngine"/>.</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmEngineController.Delete(System.String)">
+            <summary>
+            Delete a UnCmEngine
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UnCmGpsController">
+            <summary>
+            UnCmGpsController - CRUD CmGps's Status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmGpsController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmGpsRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnCmGpsRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmGpsController.Get">
+            <summary>
+            Gets All UnCmGps
+            </summary>
+            <returns>UnCmGps</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmGpsController.Get(System.String)">
+            <summary>
+            Get a UnCmGps
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>UnCmGps</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmGpsController.Post(gtrackProject.Models.universe.UnCmGps)">
+            <summary>
+            Post a UnCmGps
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmGps"/>.</param>
+            <returns>UnCmGps</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmGpsController.Put(System.String,gtrackProject.Models.universe.UnCmGps)">
+            <summary>
+            Put a UnCmGps
+            </summary>
+            <param name="id">id *char*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmGps"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmGpsController.Delete(System.String)">
+            <summary>
+            Delete a UnCmGps
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UnCmMeterController">
+            <summary>
+            UnCmMeterController - CRUD CmMeter's Status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmMeterController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmMeterRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnCmMeterRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmMeterController.Get">
+            <summary>
+            Gets All UnCmMeter
+            </summary>
+            <returns>UnCmMeter</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmMeterController.Get(System.String)">
+            <summary>
+            Get a UnCmMeter
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>UnCmMeter</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmMeterController.Post(gtrackProject.Models.universe.UnCmMeter)">
+            <summary>
+            Post a UnCmMeter
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmMeter"/>.</param>
+            <returns>UnCmMeter</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmMeterController.Put(System.String,gtrackProject.Models.universe.UnCmMeter)">
+            <summary>
+            Put a UnCmMeter
+            </summary>
+            <param name="id">id *char*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmMeter"/>.</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmMeterController.Delete(System.String)">
+            <summary>
+            Delete a UnCmMeter
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UnCmSignalController">
+            <summary>
+            UnCmSignalController - CRUD CmSignal's Status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmSignalController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmSignalRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnCmSignalRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmSignalController.Get">
+            <summary>
+            Gets All UnCmSignal
+            </summary>
+            <returns>UnCmSignal</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmSignalController.Get(System.String)">
+            <summary>
+            Get a UnCmSignal
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>UnCmSignal</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmSignalController.Post(gtrackProject.Models.universe.UnCmSignal)">
+            <summary>
+            Post a UnCmSignal
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmSignal"/>.</param>
+            <returns>UnCmSignal</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmSignalController.Put(System.String,gtrackProject.Models.universe.UnCmSignal)">
+            <summary>
+            Put a UnCmSignal
+            </summary>
+            <param name="id">id *char*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmSignal"/>.</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmSignalController.Delete(System.String)">
+            <summary>
+            Delete a UnCmSignal
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>HTTP Stauts</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UnCmTempController">
+            <summary>
+            UnCmTempController - CRUD CmTemp's Status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmTempController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmTempRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnCmTempRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmTempController.Get">
+            <summary>
+            Gets All UnCmTemps
+            </summary>
+            <returns>UnCmTemps</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmTempController.Get(System.String)">
+            <summary>
+            Get a UnCmTemp
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>UnCmTemp</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmTempController.Post(gtrackProject.Models.universe.UnCmTemp)">
+            <summary>
+            Post a UnCmTemp
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmTemp"/>.</param>
+            <returns>UnCmTemp</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmTempController.Put(System.String,gtrackProject.Models.universe.UnCmTemp)">
+            <summary>
+            Put a UnCmTemp
+            </summary>
+            <param name="id">id *char*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnCmTemp"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnCmTempController.Delete(System.String)">
+            <summary>
+            Delete a UnCmTemp
+            </summary>
+            <param name="id">id *char*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UnDisplayController">
+            <summary>
+            UnDisplayController - CRUD Universe's DisplayStatus By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnDisplayController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnDisplayRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUnDisplayRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnDisplayController.Get">
+            <summary>
+            Gets All UnDisplayStatus
+            </summary>
+            <returns>UnDisplayStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnDisplayController.Get(System.Byte)">
+            <summary>
+            Get a UnDisplayStatus
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>UnDisplayStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnDisplayController.Post(gtrackProject.Models.universe.UnDisplayStatus)">
+            <summary>
+            Post a UnDisplayStatus
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnDisplayStatus"/>.</param>
+            <returns>UnDisplayStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnDisplayController.Put(System.Byte,gtrackProject.Models.universe.UnDisplayStatus)">
+            <summary>
+            Put a UnDisplayStatus
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.UnDisplayStatus"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UnDisplayController.Delete(System.Byte)">
+            <summary>
+            Delete a UnDisplayStatus
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.universe.UniverseController">
+            <summary>
+            UniverseController - RU Universe.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UniverseController.#ctor(gtrackProject.Repositories.universe.IRepos.IUniverseRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.universe.IRepos.IUniverseRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UniverseController.Get">
+            <summary>
+            Gets All Universes
+            </summary>
+            <returns>Universes</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UniverseController.Get(System.Int32)">
+            <summary>
+            Get a Universe
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>Universe</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.universe.UniverseController.Put(System.Int32,gtrackProject.Models.universe.Universe)">
+            <summary>
+            Put a Universe
+            </summary>
+            <param name="id">id *int*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.universe.Universe"/>.</param>
+            <returns></returns>
+            todo put universe fromurl - possible???
+        </member>
     </members>
 </doc>

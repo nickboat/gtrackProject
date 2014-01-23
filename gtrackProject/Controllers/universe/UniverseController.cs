@@ -11,10 +11,19 @@ using gtrackProject.Repositories.universe.IRepos;
 
 namespace gtrackProject.Controllers.universe
 {
+    /// <summary>
+    /// UniverseController - RU Universe.
+    /// </summary>
+    [Authorize]
     public class UniverseController : ApiController
     {
         private readonly IUniverseRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IUniverseRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public UniverseController(IUniverseRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.universe
         }
 
         // GET api/Universe
+        /// <summary>
+        /// Gets All Universes
+        /// </summary>
+        /// <returns>Universes</returns>
         public IQueryable<Universe> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/Universe/5
+        /// <summary>
+        /// Get a Universe
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>Universe</returns>
         [HttpGet]
         [ResponseType(typeof(Universe))]
         public async Task<IHttpActionResult> Get(int id)
@@ -72,6 +90,14 @@ namespace gtrackProject.Controllers.universe
         }*/
 
         // PUT api/Universe/5
+        /// <summary>
+        /// Put a Universe
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="value">The <see cref="Universe"/>.</param>
+        /// <returns></returns>
+        /// todo put universe fromurl - possible???
+        [Authorize(Roles = "admin, cs, install, server")]
         [HttpPut]
         public async Task<IHttpActionResult> Put(int id, [FromBody]Universe value)
         {

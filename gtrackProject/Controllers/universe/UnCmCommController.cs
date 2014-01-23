@@ -11,10 +11,19 @@ using gtrackProject.Repositories.universe.IRepos;
 
 namespace gtrackProject.Controllers.universe
 {
+    /// <summary>
+    /// UnCmCommController - CRUD CmComm's Status By admin Only.
+    /// </summary>
+    [Authorize(Roles = "admin")]
     public class UnCmCommController : ApiController
     {
         private readonly IUnCmCommRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IUnCmCommRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public UnCmCommController(IUnCmCommRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.universe
         }
 
         // GET api/UnCmComm
+        /// <summary>
+        /// Gets All UnCmComms
+        /// </summary>
+        /// <returns>UnCmComms</returns>
         public IQueryable<UnCmComm> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/UnCmComm/5
+        /// <summary>
+        /// Get a UnCmComm
+        /// </summary>
+        /// <param name="id">id *char*</param>
+        /// <returns>UnCmComm</returns>
         [HttpGet]
         [ResponseType(typeof(UnCmComm))]
         public async Task<IHttpActionResult> Get(string id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.universe
         }
 
         // POST api/UnCmComm
+        /// <summary>
+        /// Post a UnCmComm
+        /// </summary>
+        /// <param name="value">The <see cref="UnCmComm"/>.</param>
+        /// <returns>UnCmComm</returns>
         [HttpPost]
         [ResponseType(typeof(UnCmComm))]
         public async Task<IHttpActionResult> Post([FromBody]UnCmComm value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.universe
         }
 
         // PUT api/UnCmComm/5
+        /// <summary>
+        /// Put a UnCmComm
+        /// </summary>
+        /// <param name="id">id *char*</param>
+        /// <param name="value">The <see cref="UnCmComm"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(string id, [FromBody]UnCmComm value)
         {
@@ -106,6 +135,11 @@ namespace gtrackProject.Controllers.universe
         }
 
         // DELETE api/UnCmComm/5
+        /// <summary>
+        /// Delete a UnCmComm
+        /// </summary>
+        /// <param name="id">id *char*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(UnCmComm))]
         public async Task<IHttpActionResult> Delete(string id)

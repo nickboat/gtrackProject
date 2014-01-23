@@ -11,10 +11,19 @@ using gtrackProject.Repositories.universe.IRepos;
 
 namespace gtrackProject.Controllers.universe
 {
+    /// <summary>
+    /// UnCmGpsController - CRUD CmGps's Status By admin Only.
+    /// </summary>
+    [Authorize(Roles = "admin")]
     public class UnCmGpsController : ApiController
     {
         private readonly IUnCmGpsRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IUnCmGpsRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public UnCmGpsController(IUnCmGpsRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.universe
         }
 
         // GET api/UnCmGps
+        /// <summary>
+        /// Gets All UnCmGps
+        /// </summary>
+        /// <returns>UnCmGps</returns>
         public IQueryable<UnCmGps> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/UnCmGps/5
+        /// <summary>
+        /// Get a UnCmGps
+        /// </summary>
+        /// <param name="id">id *char*</param>
+        /// <returns>UnCmGps</returns>
         [HttpGet]
         [ResponseType(typeof(UnCmGps))]
         public async Task<IHttpActionResult> Get(string id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.universe
         }
 
         // POST api/UnCmGps
+        /// <summary>
+        /// Post a UnCmGps
+        /// </summary>
+        /// <param name="value">The <see cref="UnCmGps"/>.</param>
+        /// <returns>UnCmGps</returns>
         [HttpPost]
         [ResponseType(typeof(UnCmGps))]
         public async Task<IHttpActionResult> Post([FromBody]UnCmGps value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.universe
         }
 
         // PUT api/UnCmGps/5
+        /// <summary>
+        /// Put a UnCmGps
+        /// </summary>
+        /// <param name="id">id *char*</param>
+        /// <param name="value">The <see cref="UnCmGps"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(string id, [FromBody]UnCmGps value)
         {
@@ -106,8 +135,12 @@ namespace gtrackProject.Controllers.universe
         }
 
         // DELETE api/UnCmGps/5
+        /// <summary>
+        /// Delete a UnCmGps
+        /// </summary>
+        /// <param name="id">id *char*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
-        [ResponseType(typeof(UnCmGps))]
         public async Task<IHttpActionResult> Delete(string id)
         {
             try
