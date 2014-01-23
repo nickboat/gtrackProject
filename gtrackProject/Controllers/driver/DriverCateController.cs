@@ -11,10 +11,20 @@ using gtrackProject.Repositories.driver.IRepos;
 
 namespace gtrackProject.Controllers.driver
 {
+
+    /// <summary>
+    /// DriverCateController - CRUD Driver's category By Admin Only.
+    /// </summary>
+    [Authorize(Roles = "admin")]
     public class DriverCateController : ApiController
     {
         private readonly IDriverCateRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IDriverCateRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public DriverCateController(IDriverCateRepository repository)
         {
             if (repository == null)
@@ -25,12 +35,21 @@ namespace gtrackProject.Controllers.driver
         }
 
         // GET api/DriverCate
+        /// <summary>
+        /// Gets All categories. *Queryable*
+        /// </summary>
+        /// <returns>DriverCategory</returns>
         public IQueryable<DriverCategory> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/DriverCate/5
+        /// <summary>
+        /// Get a category.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>DriverCategory</returns>
         [HttpGet]
         [ResponseType(typeof(DriverCategory))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -47,6 +66,11 @@ namespace gtrackProject.Controllers.driver
         }
 
         // POST api/DriverCate
+        /// <summary>
+        /// Post a category.
+        /// </summary>
+        /// <param name="value">The <see cref="DriverCategory"/>.</param>
+        /// <returns>DriverCategory</returns>
         [HttpPost]
         [ResponseType(typeof(DriverCategory))]
         public async Task<IHttpActionResult> Post([FromBody]DriverCategory value)
@@ -72,6 +96,12 @@ namespace gtrackProject.Controllers.driver
         }
 
         // PUT api/DriverCate/5
+        /// <summary>
+        /// Put a category.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="DriverCategory"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]DriverCategory value)
         {
@@ -106,6 +136,11 @@ namespace gtrackProject.Controllers.driver
         }
 
         // DELETE api/DriverCate/5
+        /// <summary>
+        /// Delete a category.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(DriverCategory))]
         public async Task<IHttpActionResult> Delete(byte id)

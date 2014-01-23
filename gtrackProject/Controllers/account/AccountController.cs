@@ -352,7 +352,7 @@ namespace gtrackProject.Controllers.account
         /// </summary>
         /// <param name="model">The <see cref="RegisterBindingModel"/>.</param>
         /// <returns>IdentityUser</returns>
-        [Authorize(Roles = "cs", Roles = "admin")]
+        [Authorize(Roles = "cs, admin")]
         //todo maybe wait i think about that
         //[AllowAnonymous]
         [Route("Register")]

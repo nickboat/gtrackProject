@@ -13,7 +13,7 @@ namespace gtrackProject.Controllers.account
     /// <summary>
     /// CustomerController - CRUD Customer User By cs,admin.
     /// </summary>
-    [Authorize(Roles = "cs", Roles = "admin")]
+    [Authorize(Roles = "cs, admin")]
     public class CustomerController : ApiController
     {
         private readonly ICustomerRepository _repository;

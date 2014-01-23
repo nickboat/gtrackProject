@@ -14,7 +14,7 @@ namespace gtrackProject.Controllers.account
     /// <summary>
     /// HdController - CRUD Header By cs,admin.
     /// </summary>
-    [Authorize(Roles = "cs", Roles = "admin")]
+    [Authorize(Roles = "cs, admin")]
     public class HdController : ApiController
     {
         private readonly IHdRepository _repository;

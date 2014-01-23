@@ -11,10 +11,19 @@ using gtrackProject.Repositories.driver.IRepos;
 
 namespace gtrackProject.Controllers.driver
 {
+    /// <summary>
+    /// RoleAdminController - CRUD Driver User.
+    /// </summary>
+    [Authorize]
     public class DriverController : ApiController
     {
         private readonly IDriverRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IDriverRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public DriverController(IDriverRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.driver
         }
 
         // GET api/Driver
+        /// <summary>
+        /// Gets All Drivers. *Queryable*
+        /// </summary>
+        /// <returns>Driver</returns>
         public IQueryable<Driver> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/Driver/5
+        /// <summary>
+        /// Gets a Driver.
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>Driver</returns>
         [HttpGet]
         [ResponseType(typeof(Driver))]
         public async Task<IHttpActionResult> Get(int id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.driver
         }
 
         // POST api/Driver
+        /// <summary>
+        /// Post a Driver
+        /// </summary>
+        /// <param name="value">The <see cref="Driver"/>.</param>
+        /// <returns>Driver</returns>
         [HttpPost]
         [ResponseType(typeof(Driver))]
         public async Task<IHttpActionResult> Post([FromBody]Driver value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.driver
         }
 
         // PUT api/Driver/5
+        /// <summary>
+        /// Put a Driver
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="value">The <see cref="Driver"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(int id, [FromBody]Driver value)
         {
@@ -106,6 +135,12 @@ namespace gtrackProject.Controllers.driver
         }
 
         // DELETE api/Driver/5
+        /// <summary>
+        /// Delete a Driver *by cs,admin and customer*
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
+        [Authorize(Roles = "cs, admin, customer")]
         [HttpDelete]
         [ResponseType(typeof(Driver))]
         public async Task<IHttpActionResult> Delete(int id)
