@@ -11,10 +11,20 @@ using gtrackProject.Repositories.order.IRepos;
 
 namespace gtrackProject.Controllers.order
 {
+
+    /// <summary>
+    /// ExtendTypeController - CRUD Order Extend Type By cs,admin.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class ExtendTypeController : ApiController
     {
         private readonly IOdExtendTypeRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IOdExtendTypeRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public ExtendTypeController(IOdExtendTypeRepository repository)
         {
             if (repository == null)
@@ -25,12 +35,21 @@ namespace gtrackProject.Controllers.order
         }
 
         // GET api/ExtendType
+        /// <summary>
+        /// Gets All extendTypes. *Queryable*
+        /// </summary>
+        /// <returns>OrderExtendType</returns>
         public IQueryable<OrderExtendType> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/ExtendType/5
+        /// <summary>
+        /// Get a extendType.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>OrderExtendType</returns>
         [HttpGet]
         [ResponseType(typeof(OrderExtendType))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -47,6 +66,11 @@ namespace gtrackProject.Controllers.order
         }
 
         // POST api/ExtendType
+        /// <summary>
+        /// Post a extendType.
+        /// </summary>
+        /// <param name="value">The <see cref="OrderExtendType"/>.</param>
+        /// <returns>OrderExtendType</returns>
         [HttpPost]
         [ResponseType(typeof(OrderExtendType))]
         public async Task<IHttpActionResult> Post([FromBody]OrderExtendType value)
@@ -72,6 +96,12 @@ namespace gtrackProject.Controllers.order
         }
 
         // PUT api/ExtendType/5
+        /// <summary>
+        /// Put a extendType.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="OrderExtendType"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]OrderExtendType value)
         {
@@ -106,6 +136,11 @@ namespace gtrackProject.Controllers.order
         }
 
         // DELETE api/ExtendType/5
+        /// <summary>
+        /// Delete a extendType.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(OrderExtendType))]
         public async Task<IHttpActionResult> Delete(byte id)

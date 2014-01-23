@@ -531,7 +531,7 @@
         </member>
         <member name="T:gtrackProject.Controllers.account.RoleAdminController">
             <summary>
-            RoleAdminController - CRUD User's role By Admin Only.
+            RoleAdminController - CRUD User's role By admin Only.
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.account.RoleAdminController.#ctor(gtrackProject.Repositories.account.IRepos.IRoleAdminRepository)">
@@ -762,6 +762,194 @@
             Delete Employee
             </summary>
             <param name="id">id *int*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.order.ExtendTypeController">
+            <summary>
+            ExtendTypeController - CRUD Order Extend Type By cs,admin.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.#ctor(gtrackProject.Repositories.order.IRepos.IOdExtendTypeRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.order.IRepos.IOdExtendTypeRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Get">
+            <summary>
+            Gets All extendTypes. *Queryable*
+            </summary>
+            <returns>OrderExtendType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Get(System.Byte)">
+            <summary>
+            Get a extendType.
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>OrderExtendType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Post(gtrackProject.Models.order.OrderExtendType)">
+            <summary>
+            Post a extendType.
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderExtendType"/>.</param>
+            <returns>OrderExtendType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Put(System.Byte,gtrackProject.Models.order.OrderExtendType)">
+            <summary>
+            Put a extendType.
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderExtendType"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Delete(System.Byte)">
+            <summary>
+            Delete a extendType.
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.order.FixOrderController">
+            <summary>
+            FixOrderController - CRUD Fix Order By admin, cs, install and qc.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.#ctor(gtrackProject.Repositories.order.IRepos.IFixOrderRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.order.IRepos.IFixOrderRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.Get">
+            <summary>
+            Gets All FixOrders. *Queryable*
+            </summary>
+            <returns>FixOrders</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.Get(System.Int32)">
+            <summary>
+            Get a FixOrder
+            </summary>
+            <param name="id">id int**</param>
+            <returns>FixOrder</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.Post(gtrackProject.Models.order.FixOrders)">
+            <summary>
+            Post a FixOrder
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.FixOrders"/>.</param>
+            <returns>FixOrder</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.Put(System.Int32,gtrackProject.Models.order.FixOrders)">
+            <summary>
+            Put a FixOrder
+            </summary>
+            <param name="id">id *int*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.FixOrders"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.Delete(System.Int32)">
+            <summary>
+            Delete a FixOrder
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.order.OrderController">
+            <summary>
+            OrderController - CRUD Order By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderController.#ctor(gtrackProject.Repositories.order.IRepos.IOrderRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.order.IRepos.IOrderRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderController.Get">
+            <summary>
+            Gets All Orders.
+            </summary>
+            <returns>Orders</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderController.Get(System.Int32)">
+            <summary>
+            Get a Order.
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>Order</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderController.Post(gtrackProject.Models.order.Order)">
+            <summary>
+            Post a Order
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.Order"/>.</param>
+            <returns>Order</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderController.Put(System.Int32,gtrackProject.Models.order.Order)">
+            <summary>
+            Put a Order
+            </summary>
+            <param name="id">id *int*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.Order"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderController.Delete(System.Int32)">
+            <summary>
+            Delete a Order
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.order.OrderStatusController">
+            <summary>
+            OrderStatusController - CRUD Order's status By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderStatusController.#ctor(gtrackProject.Repositories.order.IRepos.IOdStatusRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.order.IRepos.IOdStatusRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Get">
+            <summary>
+            Gets All OrderStatus
+            </summary>
+            <returns>OrderStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Get(System.Byte)">
+            <summary>
+            Get a OrderStatus
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>OrderStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Post(gtrackProject.Models.order.OrderStatus)">
+            <summary>
+            Post a OrderStatus
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderStatus"/>.</param>
+            <returns>OrderStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Put(System.Byte,gtrackProject.Models.order.OrderStatus)">
+            <summary>
+            Put a OrderStatus.
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderStatus"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Delete(System.Byte)">
+            <summary>
+            Delete a OrderStatus
+            </summary>
+            <param name="id">id *byte*</param>
             <returns>HTTP Status</returns>
         </member>
     </members>

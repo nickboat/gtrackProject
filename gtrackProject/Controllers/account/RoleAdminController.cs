@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace gtrackProject.Controllers.account
 {
     /// <summary>
-    /// RoleAdminController - CRUD User's role By Admin Only.
+    /// RoleAdminController - CRUD User's role By admin Only.
     /// </summary>
     [Authorize(Roles = "admin")]
     public class RoleAdminController : ApiController

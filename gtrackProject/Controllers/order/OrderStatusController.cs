@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -12,10 +11,19 @@ using gtrackProject.Repositories.order.IRepos;
 
 namespace gtrackProject.Controllers.order
 {
+    /// <summary>
+    /// OrderStatusController - CRUD Order's status By admin Only.
+    /// </summary>
+    [Authorize(Roles = "admin")]
     public class OrderStatusController : ApiController
     {
         private readonly IOdStatusRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IOdStatusRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public OrderStatusController(IOdStatusRepository repository)
         {
             if (repository == null)
@@ -26,12 +34,21 @@ namespace gtrackProject.Controllers.order
         }
 
         // GET api/OrderStatus
+        /// <summary>
+        /// Gets All OrderStatus
+        /// </summary>
+        /// <returns>OrderStatus</returns>
         public IQueryable<OrderStatus> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/OrderStatus/5
+        /// <summary>
+        /// Get a OrderStatus
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>OrderStatus</returns>
         [HttpGet]
         [ResponseType(typeof(OrderStatus))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -48,6 +65,11 @@ namespace gtrackProject.Controllers.order
         }
 
         // POST api/OrderStatus
+        /// <summary>
+        /// Post a OrderStatus
+        /// </summary>
+        /// <param name="value">The <see cref="OrderStatus"/>.</param>
+        /// <returns>OrderStatus</returns>
         [HttpPost]
         [ResponseType(typeof(OrderStatus))]
         public async Task<IHttpActionResult> Post([FromBody]OrderStatus value)
@@ -73,6 +95,12 @@ namespace gtrackProject.Controllers.order
         }
 
         // PUT api/OrderStatus/5
+        /// <summary>
+        /// Put a OrderStatus.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="OrderStatus"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]OrderStatus value)
         {
@@ -107,6 +135,11 @@ namespace gtrackProject.Controllers.order
         }
 
         // DELETE api/OrderStatus/5
+        /// <summary>
+        /// Delete a OrderStatus
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(OrderStatus))]
         public async Task<IHttpActionResult> Delete(byte id)

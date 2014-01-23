@@ -11,10 +11,19 @@ using gtrackProject.Repositories.order.IRepos;
 
 namespace gtrackProject.Controllers.order
 {
+    /// <summary>
+    /// FixOrderController - CRUD Fix Order By admin, cs, install and qc.
+    /// </summary>
+    [Authorize(Roles = "admin, cs, install, qc")]
     public class FixOrderController : ApiController
     {
         private readonly IFixOrderRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IFixOrderRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public FixOrderController(IFixOrderRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.order
         }
 
         // GET api/FixOrder
+        /// <summary>
+        /// Gets All FixOrders. *Queryable*
+        /// </summary>
+        /// <returns>FixOrders</returns>
         public IQueryable<FixOrders> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/FixOrder/5
+        /// <summary>
+        /// Get a FixOrder
+        /// </summary>
+        /// <param name="id">id int**</param>
+        /// <returns>FixOrder</returns>
         [HttpGet]
         [ResponseType(typeof(FixOrders))]
         public async Task<IHttpActionResult> Get(int id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.order
         }
 
         // POST api/FixOrder
+        /// <summary>
+        /// Post a FixOrder
+        /// </summary>
+        /// <param name="value">The <see cref="FixOrders"/>.</param>
+        /// <returns>FixOrder</returns>
         [HttpPost]
         [ResponseType(typeof(FixOrders))]
         public async Task<IHttpActionResult> Post([FromBody]FixOrders value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.order
         }
 
         // PUT api/FixOrder/5
+        /// <summary>
+        /// Put a FixOrder
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="value">The <see cref="FixOrders"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(int id, [FromBody]FixOrders value)
         {
@@ -106,6 +135,11 @@ namespace gtrackProject.Controllers.order
         }
 
         // DELETE api/FixOrder/5
+        /// <summary>
+        /// Delete a FixOrder
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(FixOrders))]
         public async Task<IHttpActionResult> Delete(int id)
