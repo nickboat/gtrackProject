@@ -11,10 +11,19 @@ using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Controllers.product
 {
+    /// <summary>
+    /// SimBrandController - CRUD Sim's Brand By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class SimBrandController : ApiController
     {
         private readonly ISimBrandRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="ISimBrandRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public SimBrandController(ISimBrandRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.product
         }
 
         // GET api/simbrand
+        /// <summary>
+        /// Gets All SimBrands
+        /// </summary>
+        /// <returns>SimBrands</returns>
         public IQueryable<SimBrand> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/simbrand/5
+        /// <summary>
+        /// Get a SimBrand
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>SimBrand</returns>
         [HttpGet]
         [ResponseType(typeof(SimBrand))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.product
         }
 
         // POST api/simbrand
+        /// <summary>
+        /// Post a SimBrand
+        /// </summary>
+        /// <param name="value">The <see cref="SimBrand"/>.</param>
+        /// <returns>SimBrand</returns>
         [HttpPost]
         [ResponseType(typeof(SimBrand))]
         public async Task<IHttpActionResult> Post([FromBody]SimBrand value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.product
         }
 
         // PUT api/simbrand/5
+        /// <summary>
+        /// Put a SimBrand
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="SimBrand"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]SimBrand value)
         {
@@ -106,6 +135,11 @@ namespace gtrackProject.Controllers.product
         }
 
         // DELETE api/simbrand/5
+        /// <summary>
+        /// Delete a SimBrand
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(SimBrand))]
         public async Task<IHttpActionResult> Delete(byte id)

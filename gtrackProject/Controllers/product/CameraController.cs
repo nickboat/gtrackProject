@@ -11,10 +11,19 @@ using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Controllers.product
 {
+    /// <summary>
+    /// RoleAdminController - CRUD Product GPS By admin, manu, cs, qc.
+    /// </summary>
+    [Authorize(Roles = "admin, manu, cs, qc")]
     public class CameraController : ApiController
     {
         private readonly ICameraRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="ICameraRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public CameraController(ICameraRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.product
         }
 
         // GET api/Camera
+        /// <summary>
+        /// Gets All Cameras
+        /// </summary>
+        /// <returns>ProductCamera</returns>
         public IQueryable<ProductCamera> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/Camera/5
+        /// <summary>
+        /// Get a Camera
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>ProductCamera</returns>
         [HttpGet]
         [ResponseType(typeof(ProductCamera))]
         public async Task<IHttpActionResult> Get(int id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.product
         }
 
         // POST api/Camera
+        /// <summary>
+        /// Post a Camera
+        /// </summary>
+        /// <param name="value">The <see cref="ProductCamera"/>.</param>
+        /// <returns>ProductCamera</returns>
         [HttpPost]
         [ResponseType(typeof(ProductCamera))]
         public async Task<IHttpActionResult> Post([FromBody]ProductCamera value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.product
         }
 
         // PUT api/Camera/5
+        /// <summary>
+        /// Put a Camera
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="value">The <see cref="ProductCamera"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(int id, [FromBody]ProductCamera value)
         {
@@ -106,7 +135,13 @@ namespace gtrackProject.Controllers.product
         }
 
         // DELETE api/Camera/5
+        /// <summary>
+        /// Delete a Camera
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
+        [Authorize(Roles = "admin, manu")]
         [ResponseType(typeof(ProductCamera))]
         public async Task<IHttpActionResult> Delete(byte id)
         {

@@ -7,15 +7,23 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Models.product;
-using gtrackProject.Repositories.product;
 using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Controllers.product
 {
+    /// <summary>
+    /// SimPaymentController - CRUD Sim's Payment By admin, cs.
+    /// </summary>
+    [Authorize(Roles = "admin, cs")]
     public class SimPaymentController : ApiController
     {
         private readonly ISimPaymentRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="ISimPaymentRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public SimPaymentController(ISimPaymentRepository repository)
         {
             if (repository == null)
@@ -26,12 +34,21 @@ namespace gtrackProject.Controllers.product
         }
 
         // GET api/simpayment
+        /// <summary>
+        /// Gets All PaymentTypes
+        /// </summary>
+        /// <returns>SimPaymentType</returns>
         public IQueryable<SimPaymentType> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/simpayment/5
+        /// <summary>
+        /// Get a PaymentType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>SimPaymentType</returns>
         [HttpGet]
         [ResponseType(typeof(SimPaymentType))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -48,6 +65,11 @@ namespace gtrackProject.Controllers.product
         }
 
         // POST api/simpayment
+        /// <summary>
+        /// Post a PaymentType
+        /// </summary>
+        /// <param name="value">The <see cref="SimPaymentType"/>.</param>
+        /// <returns>SimPaymentType</returns>
         [HttpPost]
         [ResponseType(typeof(SimPaymentType))]
         public async Task<IHttpActionResult> Post([FromBody]SimPaymentType value)
@@ -73,6 +95,12 @@ namespace gtrackProject.Controllers.product
         }
 
         // PUT api/simpayment/5
+        /// <summary>
+        /// Put a PaymentType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="SimPaymentType"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]SimPaymentType value)
         {
@@ -107,6 +135,11 @@ namespace gtrackProject.Controllers.product
         }
 
         // DELETE api/simpayment/5
+        /// <summary>
+        /// Delete a PaymentType
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
         [ResponseType(typeof(SimPaymentType))]
         public async Task<IHttpActionResult> Delete(byte id)

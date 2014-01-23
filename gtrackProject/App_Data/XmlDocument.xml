@@ -952,5 +952,287 @@
             <param name="id">id *byte*</param>
             <returns>HTTP Status</returns>
         </member>
+        <member name="T:gtrackProject.Controllers.product.CameraController">
+            <summary>
+            RoleAdminController - CRUD Product GPS By admin, manu, cs, qc.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraController.#ctor(gtrackProject.Repositories.product.IRepos.ICameraRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.ICameraRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraController.Get">
+            <summary>
+            Gets All Cameras
+            </summary>
+            <returns>ProductCamera</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraController.Get(System.Int32)">
+            <summary>
+            Get a Camera
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>ProductCamera</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraController.Post(gtrackProject.Models.product.ProductCamera)">
+            <summary>
+            Post a Camera
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductCamera"/>.</param>
+            <returns>ProductCamera</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraController.Put(System.Int32,gtrackProject.Models.product.ProductCamera)">
+            <summary>
+            Put a Camera
+            </summary>
+            <param name="id">id *int*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductCamera"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraController.Delete(System.Byte)">
+            <summary>
+            Delete a Camera
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.product.GpsTypeController">
+            <summary>
+            GpsTypeController - CRUD GPS's StatusType role By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsTypeController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsTypeRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IGpsTypeRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Get">
+            <summary>
+            Gets All StatusTypes
+            </summary>
+            <returns>ProductGpsType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Get(System.Byte)">
+            <summary>
+            Get a StatusType.
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>ProductGpsType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Post(gtrackProject.Models.product.ProductGpsType)">
+            <summary>
+            Post a StatusType.
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsType"/>.</param>
+            <returns>ProductGpsType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Put(System.Byte,gtrackProject.Models.product.ProductGpsType)">
+            <summary>
+            Put a StatusType0
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsType"/>.</param>
+            <returns>ProductGpsType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Delete(System.Byte)">
+            <summary>
+            Delete a StatusType.
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>ProductGpsType</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.product.GpsVersionController">
+            <summary>
+            GpsVersionController - CRUD GPS's Version By admin, manu, cs, qc.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsVersionController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsVersionRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IGpsVersionRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsVersionController.Get">
+            <summary>
+            Gets All Versions
+            </summary>
+            <returns>ProductGpsVersion</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsVersionController.Get(System.Byte)">
+            <summary>
+            Get a Version
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>ProductGpsVersion</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsVersionController.Post(gtrackProject.Models.product.ProductGpsVersion)">
+            <summary>
+            Post a Version
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsVersion"/>.</param>
+            <returns>ProductGpsVersion</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsVersionController.Put(System.Byte,gtrackProject.Models.product.ProductGpsVersion)">
+            <summary>
+            Put a Version
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsVersion"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsVersionController.Delete(System.Byte)">
+            <summary>
+            Delete a Version
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.product.ProductGpsController">
+            <summary>
+            RoleAdminController - CRUD Product GPS By admin, manu, cs, install, qc.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.ProductGpsController.#ctor(gtrackProject.Repositories.product.IRepos.IProductGpsRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IProductGpsRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.ProductGpsController.Get">
+            <summary>
+            Gets All ProductGps
+            </summary>
+            <returns>ProductGps</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.ProductGpsController.Get(System.Int32)">
+            <summary>
+            Get a ProductGps
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>ProductGps</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.ProductGpsController.Post(gtrackProject.Models.product.ProductGps)">
+            <summary>
+            Post a ProductGps
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGps"/>.</param>
+            <returns>ProductGps</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.ProductGpsController.Put(System.Int32,gtrackProject.Models.product.ProductGps)">
+            <summary>
+            Put a ProductGps
+            </summary>
+            <param name="id">id *int*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGps"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.ProductGpsController.Delete(System.Int32)">
+            <summary>
+            Delete a ProductGps
+            </summary>
+            <param name="id">id *int*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.product.SimBrandController">
+            <summary>
+            SimBrandController - CRUD Sim's Brand By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimBrandController.#ctor(gtrackProject.Repositories.product.IRepos.ISimBrandRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.ISimBrandRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimBrandController.Get">
+            <summary>
+            Gets All SimBrands
+            </summary>
+            <returns>SimBrands</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimBrandController.Get(System.Byte)">
+            <summary>
+            Get a SimBrand
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>SimBrand</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimBrandController.Post(gtrackProject.Models.product.SimBrand)">
+            <summary>
+            Post a SimBrand
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.SimBrand"/>.</param>
+            <returns>SimBrand</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimBrandController.Put(System.Byte,gtrackProject.Models.product.SimBrand)">
+            <summary>
+            Put a SimBrand
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.SimBrand"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimBrandController.Delete(System.Byte)">
+            <summary>
+            Delete a SimBrand
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Controllers.product.SimPaymentController">
+            <summary>
+            SimPaymentController - CRUD Sim's Payment By admin, cs.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimPaymentController.#ctor(gtrackProject.Repositories.product.IRepos.ISimPaymentRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.ISimPaymentRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimPaymentController.Get">
+            <summary>
+            Gets All PaymentTypes
+            </summary>
+            <returns>SimPaymentType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimPaymentController.Get(System.Byte)">
+            <summary>
+            Get a PaymentType
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>SimPaymentType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimPaymentController.Post(gtrackProject.Models.product.SimPaymentType)">
+            <summary>
+            Post a PaymentType
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.SimPaymentType"/>.</param>
+            <returns>SimPaymentType</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimPaymentController.Put(System.Byte,gtrackProject.Models.product.SimPaymentType)">
+            <summary>
+            Put a PaymentType
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.SimPaymentType"/>.</param>
+            <returns>HTTP Status</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.SimPaymentController.Delete(System.Byte)">
+            <summary>
+            Delete a PaymentType
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP Status</returns>
+        </member>
     </members>
 </doc>

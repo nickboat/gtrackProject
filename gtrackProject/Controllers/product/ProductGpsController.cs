@@ -11,10 +11,19 @@ using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Controllers.product
 {
+    /// <summary>
+    /// RoleAdminController - CRUD Product GPS By admin, manu, cs, install, qc
+    /// </summary>
+    [Authorize(Roles = "admin, manu, cs, install, qc")]
     public class ProductGpsController : ApiController
     {
         private readonly IProductGpsRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IProductGpsRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public ProductGpsController(IProductGpsRepository repository)
         {
             if (repository == null)
@@ -25,12 +34,21 @@ namespace gtrackProject.Controllers.product
         }
 
         // GET api/productgps
+        /// <summary>
+        /// Gets All ProductGps
+        /// </summary>
+        /// <returns>ProductGps</returns>
         public IQueryable<ProductGps> Get()
         {
             return _repository.GetAll();
         }
 
         // GET api/productgps/5
+        /// <summary>
+        /// Get a ProductGps
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>ProductGps</returns>
         [HttpGet]
         [ResponseType(typeof(ProductGps))]
         public async Task<IHttpActionResult> Get(int id)
@@ -47,6 +65,11 @@ namespace gtrackProject.Controllers.product
         }
 
         // POST api/productgps
+        /// <summary>
+        /// Post a ProductGps
+        /// </summary>
+        /// <param name="value">The <see cref="ProductGps"/>.</param>
+        /// <returns>ProductGps</returns>
         [HttpPost]
         [ResponseType(typeof(ProductGps))]
         public async Task<IHttpActionResult> Post([FromBody]ProductGps value)
@@ -72,6 +95,12 @@ namespace gtrackProject.Controllers.product
         }
 
         // PUT api/productgps/5
+        /// <summary>
+        /// Put a ProductGps
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <param name="value">The <see cref="ProductGps"/>.</param>
+        /// <returns>HTTP Status</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(int id, [FromBody]ProductGps value)
         {
@@ -106,9 +135,15 @@ namespace gtrackProject.Controllers.product
         }
 
         // DELETE api/productgps/5
+        /// <summary>
+        /// Delete a ProductGps
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
         [HttpDelete]
+        [Authorize(Roles = "admin, manu")]
         [ResponseType(typeof(ProductGps))]
-        public async Task<IHttpActionResult> Delete(byte id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             try
             {

@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Models.product;
-using gtrackProject.Repositories.product;
 using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Controllers.product
 {
+    /// <summary>
+    /// GpsTypeController - CRUD GPS's StatusType role By admin Only.
+    /// </summary>
+    [Authorize(Roles = "admin")]
     public class GpsTypeController : ApiController
     {
         private readonly IGpsTypeRepository _repository;
 
+        /// <summary>
+        /// Call repository
+        /// </summary>
+        /// <param name="repository"> The <see cref="IGpsTypeRepository"/>.</param>
+        /// <exception cref="ArgumentNullException">repository isNull</exception>
         public GpsTypeController(IGpsTypeRepository repository)
         {
             if (repository == null)
@@ -26,13 +33,22 @@ namespace gtrackProject.Controllers.product
             _repository = repository;
         }
 
-        // GET api/simpayment
+        // GET api/GpsType
+        /// <summary>
+        /// Gets All StatusTypes
+        /// </summary>
+        /// <returns>ProductGpsType</returns>
         public IQueryable<ProductGpsType> Get()
         {
             return _repository.GetAll();
         }
 
-        // GET api/simpayment/5
+        // GET api/GpsType/5
+        /// <summary>
+        /// Get a StatusType.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>ProductGpsType</returns>
         [HttpGet]
         [ResponseType(typeof(ProductGpsType))]
         public async Task<IHttpActionResult> Get(byte id)
@@ -48,7 +64,12 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // POST api/simpayment
+        // POST api/GpsType
+        /// <summary>
+        /// Post a StatusType.
+        /// </summary>
+        /// <param name="value">The <see cref="ProductGpsType"/>.</param>
+        /// <returns>ProductGpsType</returns>
         [HttpPost]
         [ResponseType(typeof(ProductGpsType))]
         public async Task<IHttpActionResult> Post([FromBody]ProductGpsType value)
@@ -73,7 +94,13 @@ namespace gtrackProject.Controllers.product
             }
         }
 
-        // PUT api/simpayment/5
+        // PUT api/GpsType/5
+        /// <summary>
+        /// Put a StatusType0
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <param name="value">The <see cref="ProductGpsType"/>.</param>
+        /// <returns>ProductGpsType</returns>
         [HttpPut]
         public async Task<IHttpActionResult> Put(byte id, [FromBody]ProductGpsType value)
         {
@@ -107,7 +134,12 @@ namespace gtrackProject.Controllers.product
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/simpayment/5
+        // DELETE api/GpsType/5
+        /// <summary>
+        /// Delete a StatusType.
+        /// </summary>
+        /// <param name="id">id *byte*</param>
+        /// <returns>ProductGpsType</returns>
         [HttpDelete]
         [ResponseType(typeof(ProductGpsType))]
         public async Task<IHttpActionResult> Delete(byte id)
