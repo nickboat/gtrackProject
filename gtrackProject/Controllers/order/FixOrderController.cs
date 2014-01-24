@@ -38,6 +38,7 @@ namespace gtrackProject.Controllers.order
         /// Gets All FixOrders. *Queryable*
         /// </summary>
         /// <returns>FixOrders</returns>
+        [Authorize]
         public IQueryable<FixOrders> Get()
         {
             return _repository.GetAll();
@@ -49,6 +50,7 @@ namespace gtrackProject.Controllers.order
         /// </summary>
         /// <param name="id">id int**</param>
         /// <returns>FixOrder</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(FixOrders))]
         public async Task<IHttpActionResult> Get(int id)

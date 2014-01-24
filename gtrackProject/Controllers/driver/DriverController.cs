@@ -14,7 +14,7 @@ namespace gtrackProject.Controllers.driver
     /// <summary>
     /// RoleAdminController - CRUD Driver User.
     /// </summary>
-    [Authorize]
+    [Authorize(Roles = "cs, admin, customer")]
     public class DriverController : ApiController
     {
         private readonly IDriverRepository _repository;
@@ -38,6 +38,7 @@ namespace gtrackProject.Controllers.driver
         /// Gets All Drivers. *Queryable*
         /// </summary>
         /// <returns>Driver</returns>
+        [Authorize]
         public IQueryable<Driver> Get()
         {
             return _repository.GetAll();
@@ -49,6 +50,7 @@ namespace gtrackProject.Controllers.driver
         /// </summary>
         /// <param name="id">id *int*</param>
         /// <returns>Driver</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(Driver))]
         public async Task<IHttpActionResult> Get(int id)
@@ -140,7 +142,6 @@ namespace gtrackProject.Controllers.driver
         /// </summary>
         /// <param name="id">id *int*</param>
         /// <returns>HTTP Status</returns>
-        [Authorize(Roles = "cs, admin, customer")]
         [HttpDelete]
         [ResponseType(typeof(Driver))]
         public async Task<IHttpActionResult> Delete(int id)

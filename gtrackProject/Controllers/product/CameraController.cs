@@ -38,6 +38,7 @@ namespace gtrackProject.Controllers.product
         /// Gets All Cameras
         /// </summary>
         /// <returns>ProductCamera</returns>
+        [Authorize]
         public IQueryable<ProductCamera> Get()
         {
             return _repository.GetAll();
@@ -49,6 +50,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <param name="id">id *int*</param>
         /// <returns>ProductCamera</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(ProductCamera))]
         public async Task<IHttpActionResult> Get(int id)

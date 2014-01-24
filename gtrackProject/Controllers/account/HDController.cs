@@ -38,6 +38,7 @@ namespace gtrackProject.Controllers.account
         /// Gets All headers. *Queryable*
         /// </summary>
         /// <returns>Hd</returns>
+        [Authorize]
         public IQueryable<Hd> Gethds()
         {
             return _repository.GetAll();
@@ -49,6 +50,8 @@ namespace gtrackProject.Controllers.account
         /// </summary>
         /// <param name="id">id *short*</param>
         /// <returns>Hd</returns>
+        [Authorize]
+        [HttpGet]
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Gethd(short id)
         {
@@ -70,6 +73,7 @@ namespace gtrackProject.Controllers.account
         /// <param name="id">id *short*</param>
         /// <param name="hd">The <see cref="Hd"/>.</param>
         /// <returns>HTTP Status</returns>
+        [HttpPut]
         public async Task<IHttpActionResult> Puthd(short id, Hd hd)
         {
             if (!ModelState.IsValid)
@@ -104,6 +108,7 @@ namespace gtrackProject.Controllers.account
         /// </summary>
         /// <param name="hd">The <see cref="Hd"/>.</param>
         /// <returns>Hd</returns>
+        [HttpPost]
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Posthd(Hd hd)
         {
@@ -129,6 +134,7 @@ namespace gtrackProject.Controllers.account
         /// </summary>
         /// <param name="id">id *short*</param>
         /// <returns>HTTP Status</returns>
+        [HttpDelete]
         [ResponseType(typeof(Hd))]
         public async Task<IHttpActionResult> Deletehd(short id)
         {

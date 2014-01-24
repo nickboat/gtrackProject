@@ -38,6 +38,7 @@ namespace gtrackProject.Controllers.product
         /// Gets All ProductGps
         /// </summary>
         /// <returns>ProductGps</returns>
+        [Authorize]
         public IQueryable<ProductGps> Get()
         {
             return _repository.GetAll();
@@ -49,6 +50,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <param name="id">id *int*</param>
         /// <returns>ProductGps</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(ProductGps))]
         public async Task<IHttpActionResult> Get(int id)

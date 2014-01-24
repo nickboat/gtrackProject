@@ -36,9 +36,10 @@ namespace gtrackProject.Controllers.vehicle
 
         // GET api/Vehicle
         /// <summary>
-        /// Gets All Vehicles
+        /// Gets All Vehicles *for all user
         /// </summary>
         /// <returns>Vehicles</returns>
+        [Authorize]
         public IQueryable<Vehicle> Get()
         {
             return _repository.GetAll();
@@ -46,10 +47,11 @@ namespace gtrackProject.Controllers.vehicle
 
         // GET api/Vehicle/5
         /// <summary>
-        /// Get a Vehicle
+        /// Get a Vehicle *for all user
         /// </summary>
         /// <param name="id">Vehicle</param>
         /// <returns>Vehicle</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(Vehicle))]
         public async Task<IHttpActionResult> Get(int id)

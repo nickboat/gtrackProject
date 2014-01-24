@@ -38,6 +38,7 @@ namespace gtrackProject.Controllers.product
         /// Gets All Versions
         /// </summary>
         /// <returns>ProductGpsVersion</returns>
+        [Authorize]
         public IQueryable<ProductGpsVersion> Get()
         {
             return _repository.GetAll();
@@ -49,6 +50,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <param name="id">id *byte*</param>
         /// <returns>ProductGpsVersion</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(ProductGpsVersion))]
         public async Task<IHttpActionResult> Get(byte id)

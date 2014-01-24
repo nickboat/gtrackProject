@@ -47,10 +47,11 @@ namespace gtrackProject.Controllers.account
 
         // GET api/useradmin/(Id)
         /// <summary>
-        /// Get Customer
+        /// Get Customer *for all user*
         /// </summary>
         /// <param name="id">id *int*</param>
         /// <returns>CustomerModel</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(CustomerModel))]
         public async Task<IHttpActionResult> GetUser(int id)

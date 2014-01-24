@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.order
         /// Gets All Orders.
         /// </summary>
         /// <returns>Orders</returns>
+        [Authorize]
         public IQueryable<Order> Get()
         {
             return _repository.GetAll();
@@ -50,6 +51,7 @@ namespace gtrackProject.Controllers.order
         /// </summary>
         /// <param name="id">id *int*</param>
         /// <returns>Order</returns>
+        [Authorize]
         [HttpGet]
         [ResponseType(typeof(Order))]
         public async Task<IHttpActionResult> Get(int id)
