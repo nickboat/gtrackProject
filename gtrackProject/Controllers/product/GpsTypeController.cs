@@ -12,7 +12,7 @@ using gtrackProject.Repositories.product.IRepos;
 namespace gtrackProject.Controllers.product
 {
     /// <summary>
-    /// GpsTypeController - CRUD GPS's StatusType role By admin Only.
+    /// GpsTypeController - CRUD GPS's StatusType By admin Only.
     /// </summary>
     [Authorize(Roles = "admin")]
     public class GpsTypeController : ApiController
@@ -96,7 +96,7 @@ namespace gtrackProject.Controllers.product
 
         // PUT api/GpsType/5
         /// <summary>
-        /// Put a StatusType0
+        /// Put a StatusType.
         /// </summary>
         /// <param name="id">id *byte*</param>
         /// <param name="value">The <see cref="ProductGpsType"/>.</param>

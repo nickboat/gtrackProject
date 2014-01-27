@@ -15,17 +15,25 @@ namespace gtrackProject.Models.Mapping.product
                 .IsRequired()
                 .HasMaxLength(20);
 
+            Property(t => t.Status)
+                .IsFixedLength()
+                .HasMaxLength(1);
+
             // Table & Column Mappings
             ToTable("product_camera");
             Property(t => t.Id).HasColumnName("Id");
             Property(t => t.Serial).HasColumnName("Serial");
             Property(t => t.ProductId).HasColumnName("Product_Id");
+            Property(t => t.Status).HasColumnName("Status");
 
             // Relationships
             HasRequired(t => t.ProductGps)
                 .WithMany(t => t.Cameras)
                 .HasForeignKey(d => d.ProductId);
 
+            HasRequired(t => t.CameraStatus)
+                .WithMany(t => t.Cameras)
+                .HasForeignKey(d => d.Status);
         }
     }
 }

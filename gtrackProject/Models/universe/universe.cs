@@ -7,7 +7,10 @@ using gtrackProject.Models.vehicle;
 
 namespace gtrackProject.Models.universe
 {
-    public class Universe
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class Universe
     {
         [Required]
         public int VehicleId { get; set; }
@@ -40,18 +43,18 @@ namespace gtrackProject.Models.universe
         public int? OrderId { get; set; }
         public int? FixOrderId { get; set; }
         public int Id { get; set; }
-        public virtual Driver Driver { get; set; }
-        public virtual FixOrders FixOrders { get; set; }
-        public virtual Order Order { get; set; }
-        public virtual ProductGps ProductGps { get; set; }
-        public virtual UnCmBatt UnCmBatt { get; set; }
-        public virtual UnCmComm UnCmComm { get; set; }
-        public virtual UnCmEngine UnCmEngine { get; set; }
-        public virtual UnCmGps UnCmGps { get; set; }
-        public virtual UnCmMeter UnCmMeter { get; set; }
-        public virtual UnCmSignal UnCmSignal { get; set; }
-        public virtual UnCmTemp UnCmTemp { get; set; }
-        public virtual UnDisplayStatus UnDisplayStatus { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
+        public Driver Driver { get; set; }
+        public FixOrders FixOrders { get; set; }
+        public Order Order { get; set; }
+        public ProductGps ProductGps { get; set; }
+        public UnCmBatt UnCmBatt { get; set; }
+        public UnCmComm UnCmComm { get; set; }
+        public UnCmEngine UnCmEngine { get; set; }
+        public UnCmGps UnCmGps { get; set; }
+        public UnCmMeter UnCmMeter { get; set; }
+        public UnCmSignal UnCmSignal { get; set; }
+        public UnCmTemp UnCmTemp { get; set; }
+        public UnDisplayStatus UnDisplayStatus { get; set; }
+        public Vehicle Vehicle { get; set; }
     }
 }

@@ -502,7 +502,7 @@
         </member>
         <member name="M:gtrackProject.Controllers.account.CustomerController.GetUser(System.Int32)">
             <summary>
-            Get Customer
+            Get Customer *for all user*
             </summary>
             <param name="id">id *int*</param>
             <returns>CustomerModel</returns>
@@ -999,9 +999,56 @@
             <param name="id">id *int*</param>
             <returns>HTTP Status</returns>
         </member>
+        <member name="T:gtrackProject.Controllers.product.CameraStatusController">
+            <summary>
+            CameraStatusController - CRUD Camera StatusType By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.#ctor(gtrackProject.Repositories.product.IRepos.ICameraStatusRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.ICameraStatusRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Get">
+            <summary>
+            Gets All StatusTypes
+            </summary>
+            <returns>ProductCameraStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Get(System.String)">
+            <summary>
+            Get a StatusType.
+            </summary>
+            <param name="id">id *string*</param>
+            <returns>ProductCameraStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Post(gtrackProject.Models.product.ProductCameraStatus)">
+            <summary>
+            Post a StatusType.
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductCameraStatus"/>.</param>
+            <returns>ProductCameraStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Put(System.String,gtrackProject.Models.product.ProductCameraStatus)">
+            <summary>
+            Put a StatusType
+            </summary>
+            <param name="id">id *string*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductCameraStatus"/>.</param>
+            <returns>ProductCameraStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Delete(System.String)">
+            <summary>
+            Delete a StatusType.
+            </summary>
+            <param name="id">id *string*</param>
+            <returns>ProductCameraStatus</returns>
+        </member>
         <member name="T:gtrackProject.Controllers.product.GpsTypeController">
             <summary>
-            GpsTypeController - CRUD GPS's StatusType role By admin Only.
+            GpsTypeController - CRUD GPS's StatusType By admin Only.
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.product.GpsTypeController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsTypeRepository)">
@@ -1033,7 +1080,7 @@
         </member>
         <member name="M:gtrackProject.Controllers.product.GpsTypeController.Put(System.Byte,gtrackProject.Models.product.ProductGpsType)">
             <summary>
-            Put a StatusType0
+            Put a StatusType.
             </summary>
             <param name="id">id *byte*</param>
             <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsType"/>.</param>
@@ -1817,13 +1864,13 @@
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Get">
             <summary>
-            Gets All Vehicles
+            Gets All Vehicles *for all user
             </summary>
             <returns>Vehicles</returns>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleController.Get(System.Int32)">
             <summary>
-            Get a Vehicle
+            Get a Vehicle *for all user
             </summary>
             <param name="id">Vehicle</param>
             <returns>Vehicle</returns>
@@ -2032,6 +2079,21 @@
             <param name="id">id *byte*</param>
             <param name="value">the <see cref="T:gtrackProject.Models.vehicle.VehicleType"/>.</param>
             <returns>HTTP Status</returns>
+        </member>
+        <member name="T:gtrackProject.Models.Mapping.product.ProductCameraStatusMap">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:gtrackProject.Models.product.ProductCameraStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:gtrackProject.Models.universe.Universe">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>

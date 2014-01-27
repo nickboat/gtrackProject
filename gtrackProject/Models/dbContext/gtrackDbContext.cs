@@ -38,6 +38,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<OrderStatus> OrderStatuss { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductCamera> ProductCameras { get; set; }
+        public DbSet<ProductCameraStatus> ProductCameraStatuss { get; set; }
         public DbSet<ProductGps> ProductGpss { get; set; }
         public DbSet<ProductGpsType> ProductGpsTypes { get; set; }
         public DbSet<ProductGpsVersion> ProductGpsVersions { get; set; }
@@ -74,6 +75,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new OrderStatusMap());
             modelBuilder.Configurations.Add(new OrderMap());
             modelBuilder.Configurations.Add(new ProductCameraMap());
+            modelBuilder.Configurations.Add(new ProductCameraStatusMap());
             modelBuilder.Configurations.Add(new ProductGpsMap());
             modelBuilder.Configurations.Add(new ProductGpsTypeMap());
             modelBuilder.Configurations.Add(new ProductGpsVersionMap());

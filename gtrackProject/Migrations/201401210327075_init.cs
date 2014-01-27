@@ -261,11 +261,23 @@ namespace gtrackProject.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Serial = c.String(nullable: false, maxLength: 20),
                         Product_Id = c.Int(),
+                        Status = c.String(maxLength: 1, fixedLength: true),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.product_gps", t => t.Product_Id)
-                .Index(t => t.Product_Id);
-            
+                .ForeignKey("dbo.product_camera_status", t => t.Status)
+                .Index(t => t.Product_Id)
+                .Index(t => t.Status);
+
+            CreateTable(
+                "dbo.product_camera_status",
+                c => new
+                {
+                    Id = c.String(nullable: false, maxLength: 1, fixedLength: true),
+                    Name = c.String(nullable: false, maxLength: 255),
+                })
+                .PrimaryKey(t => t.Id);
+
             CreateTable(
                 "dbo.product_gps_type",
                 c => new

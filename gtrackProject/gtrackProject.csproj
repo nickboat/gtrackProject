@@ -204,6 +204,7 @@
     <Compile Include="Controllers\order\OrderController.cs" />
     <Compile Include="Controllers\order\OrderStatusController.cs" />
     <Compile Include="Controllers\product\CameraController.cs" />
+    <Compile Include="Controllers\product\CameraStatusController.cs" />
     <Compile Include="Controllers\product\GpsTypeController.cs" />
     <Compile Include="Controllers\product\GpsVersionController.cs" />
     <Compile Include="Controllers\product\ProductGpsController.cs" />
@@ -243,9 +244,11 @@
     <Compile Include="Models\driver\driver.cs" />
     <Compile Include="Models\driver\driver_category.cs" />
     <Compile Include="Models\account\employee.cs" />
+    <Compile Include="Models\Mapping\product\product_camera_statusMap.cs" />
     <Compile Include="Models\order\fix_orders.cs" />
     <Compile Include="Models\dbContext\gtrackDbContext.cs" />
     <Compile Include="Models\account\hd.cs" />
+    <Compile Include="Models\product\product_camera_status.cs" />
     <Compile Include="Models\vehicle\lp_type.cs" />
     <Compile Include="Models\Mapping\account\customerMap.cs" />
     <Compile Include="Models\Mapping\driver\driverMap.cs" />
@@ -329,9 +332,11 @@
     <Compile Include="Repositories\order\OdStatusRepository.cs" />
     <Compile Include="Repositories\order\OrderRepository.cs" />
     <Compile Include="Repositories\product\CameraRepository.cs" />
+    <Compile Include="Repositories\product\CameraStatusRepository.cs" />
     <Compile Include="Repositories\product\GpsTypeRepository.cs" />
     <Compile Include="Repositories\product\GpsVersionRepository.cs" />
     <Compile Include="Repositories\product\IRepos\ICameraRepository.cs" />
+    <Compile Include="Repositories\product\IRepos\ICameraStatusRepository.cs" />
     <Compile Include="Repositories\product\IRepos\IGpsTypeRepository.cs" />
     <Compile Include="Repositories\product\IRepos\IGpsVersionRepository.cs" />
     <Compile Include="Repositories\product\IRepos\IProductGpsRepository.cs" />
