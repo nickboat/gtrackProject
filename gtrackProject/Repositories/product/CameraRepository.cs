@@ -33,28 +33,21 @@ namespace gtrackProject.Repositories.product
         public async Task<ProductCamera> Add(ProductCamera item)
         {
             var newCam = new ProductCamera();
+
             if (item.ProductId != null)
             {
-                if (await ProductExist(item.ProductId.Value))
-                {
-                    newCam.ProductId = item.ProductId;
-                }
-            }
-            else
-            {
-                throw new ArgumentNullException("ProductId");
+                newCam.ProductId = await ProductExist(item.ProductId.Value);
             }
 
-            if (!String.IsNullOrEmpty(item.Serial))
-            {
-                if (!(await SerialExist(item.Serial)))
-                {
-                    newCam.Serial = item.Serial;
-                }
-            }
-            else
+            if (String.IsNullOrEmpty(item.Serial))
             {
                 throw new ArgumentNullException("Serial");
+            }
+            newCam.Serial = await SerialExist(item.Serial);
+
+            if (item.Status != null)
+            {
+                newCam.Status = await StatusExist(item.Status.Value);
             }
 
             newCam = _db.ProductCameras.Add(newCam);
@@ -75,10 +68,7 @@ namespace gtrackProject.Repositories.product
 
             if (item.ProductId != null)
             {
-                if (await ProductExist(item.ProductId.Value))
-                {
-                    cam.ProductId = item.ProductId;
-                }
+                cam.ProductId = await ProductExist(item.ProductId.Value);
             }
             else
             {
@@ -87,14 +77,20 @@ namespace gtrackProject.Repositories.product
 
             if (!String.IsNullOrEmpty(item.Serial))
             {
-                if (!(await SerialExist(item.Serial)))
-                {
-                    cam.Serial = item.Serial;
-                }
+                cam.Serial = await SerialExist(item.Serial);
             }
             else
             {
                 throw new ArgumentNullException("Serial");
+            }
+
+            if (item.Status != null)
+            {
+                cam.Status = await StatusExist(item.Status.Value);
+            }
+            else
+            {
+                cam.Status = null;
             }
 
             _db.Entry(cam).State = EntityState.Modified;
@@ -133,16 +129,22 @@ namespace gtrackProject.Repositories.product
             if (cam != null) return cam;
             throw new KeyNotFoundException("id");
         }
-        private async Task<bool> SerialExist(string serial)
+        private async Task<string> SerialExist(string serial)
         {
             var cam = await _db.ProductCameras.FirstOrDefaultAsync(c => c.Serial == serial);
-            if (cam == null) return false;
+            if (cam == null) return serial;
             throw new ArgumentException("This Serial ( " + serial + " ) is already taken");
         }
-        private async Task<bool> ProductExist(int id)
+        private async Task<int> ProductExist(int id)
         {
             var product = await _db.ProductGpss.FirstOrDefaultAsync(p => p.Id == id);
-            if (product != null) return true;
+            if (product != null) return id;
+            throw new ArgumentException("ProductId Not Found");
+        }
+        private async Task<byte> StatusExist(byte id)
+        {
+            var status = await _db.ProductCameraStatuss.FirstOrDefaultAsync(p => p.Id == id);
+            if (status != null) return id;
             throw new ArgumentException("ProductId Not Found");
         }
     }

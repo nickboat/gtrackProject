@@ -14,11 +14,7 @@ namespace gtrackProject.Models.Mapping.product
             Property(t => t.Serial)
                 .IsRequired()
                 .HasMaxLength(20);
-
-            Property(t => t.Status)
-                .IsFixedLength()
-                .HasMaxLength(1);
-
+            
             // Table & Column Mappings
             ToTable("product_camera");
             Property(t => t.Id).HasColumnName("Id");
