@@ -13,10 +13,11 @@ namespace gtrackProject.Models.product
             Cameras = new List<ProductCamera>();
         }
 
-        [Required, StringLength(1)]
-        public string Id { get; set; }
+        public byte Id { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
+        public string Val { get; set; }
         public ICollection<ProductCamera> Cameras { get; set; }
 
     }

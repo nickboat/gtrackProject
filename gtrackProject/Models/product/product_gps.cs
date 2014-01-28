@@ -37,6 +37,7 @@ namespace gtrackProject.Models.product
         public DateTime? ExpireDate { get; set; }
         public DateTime? LastExtendDate { get; set; }
         public byte? StatusId { get; set; }
+        public byte? MemoryId { get; set; }
         public Employee CreateByEmployee { get; set; }
         public Employee StockByEmployee { get; set; }
         public Employee QcByEmployee { get; set; }
@@ -49,5 +50,6 @@ namespace gtrackProject.Models.product
         public ProductGpsType ProductGpsType { get; set; }
         public ProductGpsVersion ProductGpsVersion { get; set; }
         public ICollection<Universe> Universes { get; set; }
+        public ProductGpsMemoryStatus MemoryStatus { get; set; }
     }
 }

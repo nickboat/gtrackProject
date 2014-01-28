@@ -1017,11 +1017,11 @@
             </summary>
             <returns>ProductCameraStatus</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Get(System.String)">
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Get(System.Byte)">
             <summary>
             Get a StatusType.
             </summary>
-            <param name="id">id *string*</param>
+            <param name="id">id *byte*</param>
             <returns>ProductCameraStatus</returns>
         </member>
         <member name="M:gtrackProject.Controllers.product.CameraStatusController.Post(gtrackProject.Models.product.ProductCameraStatus)">
@@ -1031,19 +1031,19 @@
             <param name="value">The <see cref="T:gtrackProject.Models.product.ProductCameraStatus"/>.</param>
             <returns>ProductCameraStatus</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Put(System.String,gtrackProject.Models.product.ProductCameraStatus)">
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Put(System.Byte,gtrackProject.Models.product.ProductCameraStatus)">
             <summary>
             Put a StatusType
             </summary>
-            <param name="id">id *string*</param>
+            <param name="id">id *byte*</param>
             <param name="value">The <see cref="T:gtrackProject.Models.product.ProductCameraStatus"/>.</param>
             <returns>ProductCameraStatus</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Delete(System.String)">
+        <member name="M:gtrackProject.Controllers.product.CameraStatusController.Delete(System.Byte)">
             <summary>
             Delete a StatusType.
             </summary>
-            <param name="id">id *string*</param>
+            <param name="id">id *byte*</param>
             <returns>ProductCameraStatus</returns>
         </member>
         <member name="T:gtrackProject.Controllers.product.GpsTypeController">
@@ -2085,7 +2085,17 @@
             
             </summary>
         </member>
+        <member name="T:gtrackProject.Models.Mapping.product.ProductGpsMemoryStatusMap">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:gtrackProject.Models.product.ProductCameraStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:gtrackProject.Models.product.ProductGpsMemoryStatus">
             <summary>
             
             </summary>

@@ -22,7 +22,7 @@ namespace gtrackProject.Repositories.product
             return _db.ProductCameraStatuss;
         }
 
-        public async Task<ProductCameraStatus> Get(string id)
+        public async Task<ProductCameraStatus> Get(byte id)
         {
             return await IdExist(id);
         }
@@ -31,7 +31,8 @@ namespace gtrackProject.Repositories.product
         {
             var newStatus = new ProductCameraStatus()
             {
-                Name = item.Name
+                Name = item.Name,
+                Val = item.Val
             };
 
             newStatus = _db.ProductCameraStatuss.Add(newStatus);
@@ -50,6 +51,7 @@ namespace gtrackProject.Repositories.product
         {
             var status = await IdExist(item.Id);
             status.Name = item.Name;
+            status.Val = item.Val;
 
             _db.Entry(status).State = EntityState.Modified;
             try
@@ -64,7 +66,7 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        public async Task<bool> Remove(string id)
+        public async Task<bool> Remove(byte id)
         {
             var status = await IdExist(id);
 
@@ -81,7 +83,7 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<ProductCameraStatus> IdExist(string id)
+        private async Task<ProductCameraStatus> IdExist(byte id)
         {
             var status = await _db.ProductCameraStatuss.FirstOrDefaultAsync(t => t.Id == id);
             if (status != null) return status;

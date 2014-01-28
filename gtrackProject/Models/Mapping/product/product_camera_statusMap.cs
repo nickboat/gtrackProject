@@ -14,9 +14,8 @@ namespace gtrackProject.Models.Mapping.product
             HasKey(t => t.Id);
 
             // Properties
-            Property(t => t.Id)
+            Property(t => t.Val)
                 .IsRequired()
-                .IsFixedLength()
                 .HasMaxLength(1);
 
             Property(t => t.Name)
@@ -27,6 +26,7 @@ namespace gtrackProject.Models.Mapping.product
             ToTable("product_camera_status");
             Property(t => t.Id).HasColumnName("Id");
             Property(t => t.Name).HasColumnName("Name");
+            Property(t => t.Val).HasColumnName("Val");
         }
     }
 }

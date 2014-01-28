@@ -1,21 +1,23 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using gtrackProject.Models.order;
 
 namespace gtrackProject.Models.product
 {
-    public sealed class ProductGpsVersion
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class ProductGpsMemoryStatus
     {
-        public ProductGpsVersion()
+        public ProductGpsMemoryStatus()
         {
-            Orders = new List<Order>();
             ProductGpss = new List<ProductGps>();
         }
 
         public byte Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        [Required]
+        public string Val { get; set; }
         public ICollection<ProductGps> ProductGpss { get; set; }
     }
 }

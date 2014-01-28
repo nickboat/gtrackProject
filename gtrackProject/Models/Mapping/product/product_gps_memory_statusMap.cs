@@ -1,11 +1,14 @@
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.product;
 
 namespace gtrackProject.Models.Mapping.product
 {
-    public class ProductGpsVersionMap : EntityTypeConfiguration<ProductGpsVersion>
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ProductGpsMemoryStatusMap : EntityTypeConfiguration<ProductGpsMemoryStatus>
     {
-        public ProductGpsVersionMap()
+        public ProductGpsMemoryStatusMap()
         {
             // Primary Key
             HasKey(t => t.Id);
@@ -15,10 +18,15 @@ namespace gtrackProject.Models.Mapping.product
                 .IsRequired()
                 .HasMaxLength(20);
 
+            Property(t => t.Val)
+                .IsRequired()
+                .HasMaxLength(1);
+
             // Table & Column Mappings
-            ToTable("product_gps_version");
+            ToTable("product_gps_memory_status");
             Property(t => t.Id).HasColumnName("Id");
             Property(t => t.Name).HasColumnName("Name");
+            Property(t => t.Val).HasColumnName("Val");
         }
     }
 }

@@ -47,11 +47,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Get a StatusType.
         /// </summary>
-        /// <param name="id">id *string*</param>
+        /// <param name="id">id *byte*</param>
         /// <returns>ProductCameraStatus</returns>
         [HttpGet]
         [ResponseType(typeof(ProductCameraStatus))]
-        public async Task<IHttpActionResult> Get(string id)
+        public async Task<IHttpActionResult> Get(byte id)
         {
             try
             {
@@ -98,11 +98,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Put a StatusType
         /// </summary>
-        /// <param name="id">id *string*</param>
+        /// <param name="id">id *byte*</param>
         /// <param name="value">The <see cref="ProductCameraStatus"/>.</param>
         /// <returns>ProductCameraStatus</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(string id, [FromBody]ProductCameraStatus value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]ProductCameraStatus value)
         {
             if (!ModelState.IsValid)
             {
@@ -138,11 +138,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Delete a StatusType.
         /// </summary>
-        /// <param name="id">id *string*</param>
+        /// <param name="id">id *byte*</param>
         /// <returns>ProductCameraStatus</returns>
         [HttpDelete]
         [ResponseType(typeof(ProductCameraStatus))]
-        public async Task<IHttpActionResult> Delete(string id)
+        public async Task<IHttpActionResult> Delete(byte id)
         {
             try
             {

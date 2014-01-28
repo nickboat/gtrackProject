@@ -55,6 +55,7 @@ namespace gtrackProject.Models.Mapping.product
             Property(t => t.ExpireDate).HasColumnName("ExpireDate");
             Property(t => t.LastExtendDate).HasColumnName("LastExtendDate");
             Property(t => t.StatusId).HasColumnName("Status_Id");
+            Property(t => t.MemoryId).HasColumnName("Memory_Id");
 
             // Relationships
             HasOptional(t => t.CreateByEmployee)
@@ -87,7 +88,9 @@ namespace gtrackProject.Models.Mapping.product
             HasRequired(t => t.ProductGpsVersion)
                 .WithMany(t => t.ProductGpss)
                 .HasForeignKey(d => d.Version);
-
+            HasOptional(t => t.MemoryStatus)
+                .WithMany(t => t.ProductGpss)
+                .HasForeignKey(d => d.MemoryId);
         }
     }
 }
