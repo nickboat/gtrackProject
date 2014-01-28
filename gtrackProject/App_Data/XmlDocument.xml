@@ -1046,6 +1046,53 @@
             <param name="id">id *byte*</param>
             <returns>ProductCameraStatus</returns>
         </member>
+        <member name="T:gtrackProject.Controllers.product.GpsMemoryController">
+            <summary>
+            GpsMemoryController - CRUD GPS Memory store By admin Only.
+            </summary>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsMemoryController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsMemoryRepository)">
+            <summary>
+            Call repository
+            </summary>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IGpsMemoryRepository"/>.</param>
+            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsMemoryController.Get">
+            <summary>
+            Gets All StatusTypes
+            </summary>
+            <returns>ProductGpsMemoryStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsMemoryController.Get(System.Byte)">
+            <summary>
+            Get a StatusType.
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>ProductGpsMemoryStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsMemoryController.Post(gtrackProject.Models.product.ProductGpsMemoryStatus)">
+            <summary>
+            Post a StatusType.
+            </summary>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsMemoryStatus"/>.</param>
+            <returns>ProductGpsMemoryStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsMemoryController.Put(System.Byte,gtrackProject.Models.product.ProductGpsMemoryStatus)">
+            <summary>
+            Put a StatusType
+            </summary>
+            <param name="id">id *byte*</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsMemoryStatus"/>.</param>
+            <returns>ProductGpsMemoryStatus</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.product.GpsMemoryController.Delete(System.Byte)">
+            <summary>
+            Delete a StatusType.
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>ProductGpsMemoryStatus</returns>
+        </member>
         <member name="T:gtrackProject.Controllers.product.GpsTypeController">
             <summary>
             GpsTypeController - CRUD GPS's StatusType By admin Only.
