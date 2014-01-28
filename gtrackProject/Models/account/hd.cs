@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using gtrackProject.Models.order;
 using gtrackProject.Models.vehicle;
+using Newtonsoft.Json;
 
 namespace gtrackProject.Models.account
 {
@@ -20,10 +22,20 @@ namespace gtrackProject.Models.account
         public string TableName { get; set; }
         public short Id { get; set; }
         public short? HdIdUpline { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Hd> HdDownLines { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public Hd ThisHd { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Order> Orders { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Vehicle> Vehicles { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Customer> Customers { get; set; }
 
     }

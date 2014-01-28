@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace gtrackProject.Models.product
 {
@@ -18,6 +20,8 @@ namespace gtrackProject.Models.product
         public string Name { get; set; }
         [Required]
         public string Val { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<ProductGps> ProductGpss { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using gtrackProject.Models.account;
 using gtrackProject.Models.universe;
+using Newtonsoft.Json;
 
 namespace gtrackProject.Models.product
 {
@@ -44,11 +46,15 @@ namespace gtrackProject.Models.product
         public Employee InstallByEmployee { get; set; }
         public Employee BadByEmployee { get; set; }
         public Employee UnuseableByEmployee { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<ProductCamera> Cameras { get; set; }
         public SimBrand SimBrand { get; set; }
         public SimPaymentType SimPaymentType { get; set; }
         public ProductGpsType ProductGpsType { get; set; }
         public ProductGpsVersion ProductGpsVersion { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
         public ProductGpsMemoryStatus MemoryStatus { get; set; }
     }

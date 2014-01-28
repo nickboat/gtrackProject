@@ -283,7 +283,8 @@ namespace gtrackProject.Areas.HelpPage
                     "An exception has occurred while using the formatter '{0}' to generate sample for media type '{1}'. Exception message: {2}",
                     formatter.GetType().Name,
                     mediaType.MediaType,
-                    e.Message));
+                    //e.Message));
+                    UnwrapException(e).Message));
             }
             finally
             {
@@ -299,6 +300,17 @@ namespace gtrackProject.Areas.HelpPage
 
             return sample;
         }
+
+        internal static Exception UnwrapException(Exception exception)   
+           {   
+               AggregateException aggregateException = exception as AggregateException;   
+               if (aggregateException != null)   
+               {   
+                   return aggregateException.Flatten().InnerException;   
+               }   
+               return exception;   
+           } 
+
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Handling the failure by returning the original string.")]
         private static string TryFormatJson(string str)

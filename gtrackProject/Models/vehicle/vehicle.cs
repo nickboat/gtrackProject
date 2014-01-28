@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using gtrackProject.Models.account;
 using gtrackProject.Models.universe;
+using Newtonsoft.Json;
 
 namespace gtrackProject.Models.vehicle
 {
@@ -27,6 +29,8 @@ namespace gtrackProject.Models.vehicle
         public Hd Hd { get; set; }
         public LpType LpType { get; set; }
         public Province Province { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
         public VehicleColor VehicleColor { get; set; }
         public VehicleModel VehicleModel { get; set; }

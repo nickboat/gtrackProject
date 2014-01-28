@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using gtrackProject.Models.account;
 using gtrackProject.Models.universe;
+using Newtonsoft.Json;
 
 namespace gtrackProject.Models.order
 {
@@ -22,6 +24,8 @@ namespace gtrackProject.Models.order
         public Employee CreateByEmployee { get; set; }
         public Employee CurrentUsermployee { get; set; }
         public OrderStatus OrderStatus { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
     }
 }

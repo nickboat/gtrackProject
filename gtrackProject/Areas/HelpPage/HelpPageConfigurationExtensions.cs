@@ -229,7 +229,9 @@ namespace gtrackProject.Areas.HelpPage
             }
             catch (Exception e)
             {
-                apiModel.ErrorMessages.Add(String.Format(CultureInfo.CurrentCulture, "An exception has occurred while generating the sample. Exception Message: {0}", e.Message));
+                //apiModel.ErrorMessages.Add(String.Format(CultureInfo.CurrentCulture, "An exception has occurred while generating the sample. Exception Message: {0}", e.Message));
+                apiModel.ErrorMessages.Add(String.Format(CultureInfo.CurrentCulture,"An exception has occurred while generating the sample. Exception message: {0}",HelpPageSampleGenerator.UnwrapException(e).Message));
+
             }
 
             return apiModel;
