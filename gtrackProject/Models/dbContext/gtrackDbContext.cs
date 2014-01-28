@@ -42,6 +42,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<ProductGps> ProductGpss { get; set; }
         public DbSet<ProductGpsType> ProductGpsTypes { get; set; }
         public DbSet<ProductGpsVersion> ProductGpsVersions { get; set; }
+        public DbSet<ProductGpsMemoryStatus> ProductGpsMemorys { get; set; }
         public DbSet<Province> Provincess { get; set; }
         public DbSet<SimBrand> SimBrands { get; set; }
         public DbSet<SimPaymentType> SimPaymentTypes { get; set; }
@@ -79,6 +80,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new ProductGpsMap());
             modelBuilder.Configurations.Add(new ProductGpsTypeMap());
             modelBuilder.Configurations.Add(new ProductGpsVersionMap());
+            modelBuilder.Configurations.Add(new ProductGpsMemoryStatusMap());
             modelBuilder.Configurations.Add(new ProvinceMap());
             modelBuilder.Configurations.Add(new SimBrandMap());
             modelBuilder.Configurations.Add(new SimPaymentTypeMap());
