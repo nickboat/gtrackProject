@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.driver
         /// Gets All categories. *Queryable*
         /// </summary>
         /// <returns>DriverCategory</returns>
+        [Queryable]
         public IQueryable<DriverCategory> Get()
         {
             return _repository.GetAll();

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.product;
 
@@ -17,7 +18,7 @@ namespace gtrackProject.Models.Mapping.product
             
             // Table & Column Mappings
             ToTable("product_camera");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Serial).HasColumnName("Serial");
             Property(t => t.ProductId).HasColumnName("Product_Id");
             Property(t => t.Status).HasColumnName("Status");

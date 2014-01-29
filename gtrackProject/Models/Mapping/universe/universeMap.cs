@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.universe;
 
@@ -69,7 +70,7 @@ namespace gtrackProject.Models.Mapping.universe
             Property(t => t.DriverId).HasColumnName("Driver_Id");
             Property(t => t.OrderId).HasColumnName("Order_Id");
             Property(t => t.FixOrderId).HasColumnName("FixOrder_Id");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             // Relationships
             HasOptional(t => t.Driver)

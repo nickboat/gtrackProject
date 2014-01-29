@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.order;
 
@@ -17,7 +18,7 @@ namespace gtrackProject.Models.Mapping.order
 
             // Table & Column Mappings
             ToTable("order_extend_type");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.TypeName).HasColumnName("TypeName");
             Property(t => t.Value).HasColumnName("Value");
         }

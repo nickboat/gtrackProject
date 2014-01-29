@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.vehicle;
 
@@ -24,7 +25,7 @@ namespace gtrackProject.Models.Mapping.vehicle
 
             // Table & Column Mappings
             ToTable("vehicles");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.IdCar).HasColumnName("IdCar");
             Property(t => t.LicensePlate).HasColumnName("LicensePlate");
             Property(t => t.LicensePlateType).HasColumnName("LicensePlate_Type");

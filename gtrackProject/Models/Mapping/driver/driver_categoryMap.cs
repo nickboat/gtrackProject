@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.driver;
 
@@ -17,7 +18,7 @@ namespace gtrackProject.Models.Mapping.driver
 
             // Table & Column Mappings
             ToTable("driver_category");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Value).HasColumnName("Value");
             Property(t => t.Name).HasColumnName("Name");
         }

@@ -9,35 +9,35 @@ namespace gtrackProject.Models.Mapping
         public HdMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.Value)
+            Property(t => t.Value)
                 .IsRequired()
                 .HasMaxLength(3);
 
-            this.Property(t => t.Code)
+            Property(t => t.Code)
                 .IsRequired()
                 .IsFixedLength()
                 .HasMaxLength(6);
 
-            this.Property(t => t.Name)
+            Property(t => t.Name)
                 .HasMaxLength(50);
 
-            this.Property(t => t.TableName)
+            Property(t => t.TableName)
                 .HasMaxLength(20);
 
             // Table & Column Mappings
-            this.ToTable("hds");
-            this.Property(t => t.Value).HasColumnName("Value");
-            this.Property(t => t.Code).HasColumnName("Code");
-            this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.TableName).HasColumnName("TableName");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.HdIdUpline).HasColumnName("HD_Id_upline");
+            ToTable("hds");
+            Property(t => t.Value).HasColumnName("Value");
+            Property(t => t.Code).HasColumnName("Code");
+            Property(t => t.Name).HasColumnName("Name");
+            Property(t => t.TableName).HasColumnName("TableName");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(t => t.HdIdUpline).HasColumnName("HD_Id_upline");
 
             // Relationships
-            this.HasOptional(t => t.ThisHd)
+            HasOptional(t => t.ThisHd)
                 .WithMany(t => t.HdDownLines)
                 .HasForeignKey(d => d.HdIdUpline);
 

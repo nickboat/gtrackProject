@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.order;
 
@@ -16,7 +17,7 @@ namespace gtrackProject.Models.Mapping.order
 
             // Table & Column Mappings
             ToTable("orders");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.CreateBy).HasColumnName("CreateBy");
             Property(t => t.CreateDate).HasColumnName("CreateDate");
             Property(t => t.CurrentUser).HasColumnName("CurrentUser");

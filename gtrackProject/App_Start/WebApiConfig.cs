@@ -23,6 +23,8 @@ namespace gtrackProject
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            config.EnableQuerySupport();
+
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional }
             );
         }

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.account;
 
@@ -31,7 +32,7 @@ namespace gtrackProject.Models.Mapping.account
 
             // Table & Column Mappings
             ToTable("customer");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Asp_Id).HasColumnName("Asp_Id");
             Property(t => t.Hd_Id).HasColumnName("Hd_Id");
             Property(t => t.FullName).HasColumnName("FullName");
@@ -40,7 +41,7 @@ namespace gtrackProject.Models.Mapping.account
             Property(t => t.CompanyName).HasColumnName("CompanyName");
 
             // Relationships
-            this.HasRequired(t => t.Hd)
+            HasRequired(t => t.Hd)
                 .WithMany(t => t.Customers)
                 .HasForeignKey(d => d.Hd_Id);
         }
