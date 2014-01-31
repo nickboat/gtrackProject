@@ -40,7 +40,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<ProductCamera> ProductCameras { get; set; }
         public DbSet<ProductCameraStatus> ProductCameraStatuss { get; set; }
         public DbSet<ProductGps> ProductGpss { get; set; }
-        public DbSet<ProductGpsProcessState> ProductGpsTypes { get; set; }
+        public DbSet<ProductGpsProcessState> ProductGpsProcessStates { get; set; }
         public DbSet<ProductGpsVersion> ProductGpsVersions { get; set; }
         public DbSet<ProductGpsMemoryStatus> ProductGpsMemorys { get; set; }
         public DbSet<Province> Provincess { get; set; }

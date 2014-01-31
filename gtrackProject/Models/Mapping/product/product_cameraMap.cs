@@ -22,6 +22,7 @@ namespace gtrackProject.Models.Mapping.product
             Property(t => t.Serial).HasColumnName("Serial");
             Property(t => t.ProductId).HasColumnName("Product_Id");
             Property(t => t.Status).HasColumnName("Status");
+            Property(t => t.State).HasColumnName("State");
 
             // Relationships
             HasRequired(t => t.ProductGps)
@@ -31,6 +32,10 @@ namespace gtrackProject.Models.Mapping.product
             HasRequired(t => t.CameraStatus)
                 .WithMany(t => t.Cameras)
                 .HasForeignKey(d => d.Status);
+
+            HasRequired(t => t.CameraState)
+                .WithMany(t => t.Cameras)
+                .HasForeignKey(d => d.State);
         }
     }
 }

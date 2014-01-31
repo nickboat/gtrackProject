@@ -34,21 +34,18 @@ namespace gtrackProject.Repositories.product
         {
             var newCam = new ProductCamera();
 
-            if (item.ProductId != null)
-            {
-                newCam.ProductId = await ProductExist(item.ProductId.Value);
-            }
+            if (item.State != null)
+                newCam.State = await StateExist(item.State.Value);
+            else
+                throw new ArgumentNullException("State");
 
-            if (String.IsNullOrEmpty(item.Serial))
-            {
-                throw new ArgumentNullException("Serial");
-            }
+            if (item.ProductId != null)
+                newCam.ProductId = await ProductExist(item.ProductId.Value);
+
             newCam.Serial = await SerialExist(item.Serial);
 
             if (item.Status != null)
-            {
                 newCam.Status = await StatusExist(item.Status.Value);
-            }
 
             newCam = _db.ProductCameras.Add(newCam);
             try
@@ -66,6 +63,11 @@ namespace gtrackProject.Repositories.product
         {
             var cam = await IdExist(item.Id);
 
+            if (item.State != null)
+                cam.State = await StateExist(item.State.Value);
+            else
+                throw new ArgumentNullException("State");
+
             if (item.ProductId != null)
             {
                 cam.ProductId = await ProductExist(item.ProductId.Value);
@@ -75,14 +77,7 @@ namespace gtrackProject.Repositories.product
                 cam.ProductId = null;
             }
 
-            if (!String.IsNullOrEmpty(item.Serial))
-            {
-                cam.Serial = await SerialExist(item.Serial);
-            }
-            else
-            {
-                throw new ArgumentNullException("Serial");
-            }
+            cam.Serial = await SerialExist(item.Serial);
 
             if (item.Status != null)
             {
@@ -145,6 +140,12 @@ namespace gtrackProject.Repositories.product
         {
             var status = await _db.ProductCameraStatuss.FirstOrDefaultAsync(p => p.Id == id);
             if (status != null) return id;
+            throw new ArgumentException("ProductId Not Found");
+        }
+        private async Task<byte> StateExist(byte id)
+        {
+            var state = await _db.ProductCameraStatuss.FirstOrDefaultAsync(p => p.Id == id);
+            if (state != null) return id;
             throw new ArgumentException("ProductId Not Found");
         }
     }

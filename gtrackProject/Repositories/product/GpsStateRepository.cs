@@ -20,7 +20,7 @@ namespace gtrackProject.Repositories.product
 
         public IQueryable<ProductGpsProcessState> GetAll()
         {
-            return _db.ProductGpsTypes;
+            return _db.ProductGpsProcessStates;
         }
 
         public async Task<ProductGpsProcessState> Get(byte id)
@@ -38,7 +38,7 @@ namespace gtrackProject.Repositories.product
                 StatusNameEn = item.StatusNameEn
             };
 
-            newType = _db.ProductGpsTypes.Add(newType);
+            newType = _db.ProductGpsProcessStates.Add(newType);
             try
             {
                 await _db.SaveChangesAsync();
@@ -76,7 +76,7 @@ namespace gtrackProject.Repositories.product
         {
             var payment = await IdExist(id);
 
-            _db.ProductGpsTypes.Remove(payment);
+            _db.ProductGpsProcessStates.Remove(payment);
             try
             {
                 await _db.SaveChangesAsync();
@@ -91,14 +91,14 @@ namespace gtrackProject.Repositories.product
 
         private async Task<ProductGpsProcessState> IdExist(byte id)
         {
-            var type = await _db.ProductGpsTypes.FirstOrDefaultAsync(t => t.Id == id);
+            var type = await _db.ProductGpsProcessStates.FirstOrDefaultAsync(t => t.Id == id);
             if (type != null) return type;
             throw new KeyNotFoundException("id");
         }
 
         private async Task<bool> NameExist(string th,string en)
         {
-            var type = await _db.ProductGpsTypes.FirstOrDefaultAsync(p => p.StatusNameTh == th || p.StatusNameEn == en);
+            var type = await _db.ProductGpsProcessStates.FirstOrDefaultAsync(p => p.StatusNameTh == th || p.StatusNameEn == en);
             if (type == null) return false;
             throw new ArgumentException("This name is already taken");
         }
