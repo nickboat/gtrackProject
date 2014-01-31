@@ -38,7 +38,7 @@ namespace gtrackProject.Models.product
         public string UnuseableComment { get; set; }
         public DateTime? ExpireDate { get; set; }
         public DateTime? LastExtendDate { get; set; }
-        public byte? StatusId { get; set; }
+        public byte? State { get; set; }
         public byte? MemoryId { get; set; }
         public Employee CreateByEmployee { get; set; }
         public Employee StockByEmployee { get; set; }
@@ -51,7 +51,7 @@ namespace gtrackProject.Models.product
         public ICollection<ProductCamera> Cameras { get; set; }
         public SimBrand SimBrand { get; set; }
         public SimPaymentType SimPaymentType { get; set; }
-        public ProductGpsType ProductGpsType { get; set; }
+        public ProductGpsProcessState ProductGpsType { get; set; }
         public ProductGpsVersion ProductGpsVersion { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]

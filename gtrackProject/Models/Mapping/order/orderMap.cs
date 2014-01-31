@@ -28,7 +28,7 @@ namespace gtrackProject.Models.Mapping.order
             Property(t => t.PricePerUnit).HasColumnName("PricePerUnit");
             Property(t => t.FeePerYear).HasColumnName("FeePerYear");
             Property(t => t.Comment).HasColumnName("Comment");
-            Property(t => t.State).HasColumnName("Status");
+            Property(t => t.State).HasColumnName("State");
             Property(t => t.Deadline).HasColumnName("Deadline");
             Property(t => t.ExtendTypeId).HasColumnName("ExtendType_Id");
 

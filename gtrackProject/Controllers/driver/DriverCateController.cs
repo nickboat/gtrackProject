@@ -14,6 +14,7 @@ namespace gtrackProject.Controllers.driver
 
     /// <summary>
     /// DriverCateController - CRUD Driver's category By Admin Only.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin")]
     public class DriverCateController : ApiController

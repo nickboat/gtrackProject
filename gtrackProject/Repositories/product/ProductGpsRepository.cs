@@ -56,7 +56,7 @@ namespace gtrackProject.Repositories.product
             //status
             newProduct.CreateDate = item.CreateDate;
             newProduct.CreateBy = await empExist(item.CreateBy.Value);
-            newProduct.StatusId = 1;
+            newProduct.State = 1;
 
             newProduct = _db.ProductGpss.Add(newProduct);
             try
@@ -100,19 +100,19 @@ namespace gtrackProject.Repositories.product
             {
                 product.StockBy = await empExist(item.StockBy.Value);
                 product.StockDate = item.StockDate;
-                product.StatusId = 2;
+                product.State = 2;
             }
             else if (item.QcBy != null)
             {
                 product.QcBy = await empExist(item.QcBy.Value);
                 product.QcDate = item.QcDate;
-                product.StatusId = 3;
+                product.State = 3;
             }
             else if (item.InstallBy != null)
             {
                 product.InstallBy = await empExist(item.InstallBy.Value);
                 product.InstallDate = item.InstallDate;
-                product.StatusId = 4;
+                product.State = 4;
                 product.ErrProductComment = item.ErrProductComment;
             }
             else if (item.BadBy != null)
@@ -120,18 +120,18 @@ namespace gtrackProject.Repositories.product
                 product.BadBy = await empExist(item.BadBy.Value);
                 product.BadDate = item.BadDate;
                 product.BadComment = item.BadComment;
-                product.StatusId = 5;
+                product.State = 5;
             }
             else if (item.UnuseableBy != null)
             {
                 product.UnuseableBy = await empExist(item.UnuseableBy.Value);
                 product.UnuseableDate = item.UnuseableDate;
                 product.UnuseableComment = item.UnuseableComment;
-                product.StatusId = 6;
+                product.State = 6;
             }
-            else if (item.StatusId == 8)
+            else if (item.State == 8)
             {
-                product.StatusId = 8;
+                product.State = 8;
             }
 
             _db.Entry(product).State = EntityState.Modified;

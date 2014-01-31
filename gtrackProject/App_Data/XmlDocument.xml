@@ -626,6 +626,7 @@
         <member name="T:gtrackProject.Controllers.driver.DriverCateController">
             <summary>
             DriverCateController - CRUD Driver's category By Admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.driver.DriverCateController.#ctor(gtrackProject.Repositories.driver.IRepos.IDriverCateRepository)">
@@ -1093,52 +1094,52 @@
             <param name="id">id *byte*</param>
             <returns>ProductGpsMemoryStatus</returns>
         </member>
-        <member name="T:gtrackProject.Controllers.product.GpsTypeController">
+        <member name="T:gtrackProject.Controllers.product.GpsStateController">
             <summary>
-            GpsTypeController - CRUD GPS's StatusType By admin Only.
+            GpsStateController - CRUD GPS's StatusType By admin Only.
             </summary>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsTypeController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsTypeRepository)">
+        <member name="M:gtrackProject.Controllers.product.GpsStateController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsStateRepository)">
             <summary>
             Call repository
             </summary>
-            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IGpsTypeRepository"/>.</param>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IGpsStateRepository"/>.</param>
             <exception cref="T:System.ArgumentNullException">repository isNull</exception>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Get">
+        <member name="M:gtrackProject.Controllers.product.GpsStateController.Get">
             <summary>
             Gets All StatusTypes
             </summary>
-            <returns>ProductGpsType</returns>
+            <returns>ProductGpsState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Get(System.Byte)">
+        <member name="M:gtrackProject.Controllers.product.GpsStateController.Get(System.Byte)">
             <summary>
             Get a StatusType.
             </summary>
             <param name="id">id *byte*</param>
-            <returns>ProductGpsType</returns>
+            <returns>ProductGpsState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Post(gtrackProject.Models.product.ProductGpsType)">
+        <member name="M:gtrackProject.Controllers.product.GpsStateController.Post(gtrackProject.Models.product.ProductGpsProcessState)">
             <summary>
             Post a StatusType.
             </summary>
-            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsType"/>.</param>
-            <returns>ProductGpsType</returns>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsProcessState"/>.</param>
+            <returns>ProductGpsState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Put(System.Byte,gtrackProject.Models.product.ProductGpsType)">
+        <member name="M:gtrackProject.Controllers.product.GpsStateController.Put(System.Byte,gtrackProject.Models.product.ProductGpsProcessState)">
             <summary>
             Put a StatusType.
             </summary>
             <param name="id">id *byte*</param>
-            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsType"/>.</param>
-            <returns>ProductGpsType</returns>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsProcessState"/>.</param>
+            <returns>ProductGpsState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsTypeController.Delete(System.Byte)">
+        <member name="M:gtrackProject.Controllers.product.GpsStateController.Delete(System.Byte)">
             <summary>
             Delete a StatusType.
             </summary>
             <param name="id">id *byte*</param>
-            <returns>ProductGpsType</returns>
+            <returns>ProductGpsState</returns>
         </member>
         <member name="T:gtrackProject.Controllers.product.GpsVersionController">
             <summary>

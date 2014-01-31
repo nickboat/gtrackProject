@@ -55,7 +55,7 @@ namespace gtrackProject.Models.Mapping.product
             Property(t => t.UnuseableComment).HasColumnName("UnuseableComment");
             Property(t => t.ExpireDate).HasColumnName("ExpireDate");
             Property(t => t.LastExtendDate).HasColumnName("LastExtendDate");
-            Property(t => t.StatusId).HasColumnName("Status_Id");
+            Property(t => t.State).HasColumnName("State");
             Property(t => t.MemoryId).HasColumnName("Memory_Id");
 
             // Relationships
@@ -85,7 +85,7 @@ namespace gtrackProject.Models.Mapping.product
                 .HasForeignKey(d => d.SimPaymentTypeId);
             HasOptional(t => t.ProductGpsType)
                 .WithMany(t => t.ProductGpss)
-                .HasForeignKey(d => d.StatusId);
+                .HasForeignKey(d => d.State);
             HasRequired(t => t.ProductGpsVersion)
                 .WithMany(t => t.ProductGpss)
                 .HasForeignKey(d => d.Version);

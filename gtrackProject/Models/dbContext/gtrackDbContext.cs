@@ -40,7 +40,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<ProductCamera> ProductCameras { get; set; }
         public DbSet<ProductCameraStatus> ProductCameraStatuss { get; set; }
         public DbSet<ProductGps> ProductGpss { get; set; }
-        public DbSet<ProductGpsType> ProductGpsTypes { get; set; }
+        public DbSet<ProductGpsProcessState> ProductGpsTypes { get; set; }
         public DbSet<ProductGpsVersion> ProductGpsVersions { get; set; }
         public DbSet<ProductGpsMemoryStatus> ProductGpsMemorys { get; set; }
         public DbSet<Province> Provincess { get; set; }
@@ -78,7 +78,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new ProductCameraMap());
             modelBuilder.Configurations.Add(new ProductCameraStatusMap());
             modelBuilder.Configurations.Add(new ProductGpsMap());
-            modelBuilder.Configurations.Add(new ProductGpsTypeMap());
+            modelBuilder.Configurations.Add(new ProductGpsProcessStateMap());
             modelBuilder.Configurations.Add(new ProductGpsVersionMap());
             modelBuilder.Configurations.Add(new ProductGpsMemoryStatusMap());
             modelBuilder.Configurations.Add(new ProvinceMap());
