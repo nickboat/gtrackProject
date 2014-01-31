@@ -221,7 +221,7 @@
     <Compile Include="Controllers\product\CameraController.cs" />
     <Compile Include="Controllers\product\CameraStatusController.cs" />
     <Compile Include="Controllers\product\GpsMemoryController.cs" />
-    <Compile Include="Controllers\product\GpsStateController.cs" />
+    <Compile Include="Controllers\product\ProductStateController.cs" />
     <Compile Include="Controllers\product\GpsVersionController.cs" />
     <Compile Include="Controllers\product\ProductGpsController.cs" />
     <Compile Include="Controllers\product\SimBrandController.cs" />
@@ -280,7 +280,7 @@
     <Compile Include="Models\Mapping\order\OrderProcessStateMap.cs" />
     <Compile Include="Models\Mapping\product\product_cameraMap.cs" />
     <Compile Include="Models\Mapping\product\product_gpsMap.cs" />
-    <Compile Include="Models\Mapping\product\ProductGpsProcessStateMap.cs" />
+    <Compile Include="Models\Mapping\product\ProductProcessStateMap.cs" />
     <Compile Include="Models\Mapping\product\product_gps_versionMap.cs" />
     <Compile Include="Models\Mapping\vehicle\provinceMap.cs" />
     <Compile Include="Models\Mapping\product\sim_brandMap.cs" />
@@ -306,7 +306,7 @@
     <Compile Include="Models\order\OrderProcessState.cs" />
     <Compile Include="Models\product\product_camera.cs" />
     <Compile Include="Models\product\product_gps.cs" />
-    <Compile Include="Models\product\ProductGpsProcessState.cs" />
+    <Compile Include="Models\product\ProductProcessState.cs" />
     <Compile Include="Models\product\product_gps_version.cs" />
     <Compile Include="Models\vehicle\province.cs" />
     <Compile Include="Models\product\sim_brand.cs" />
@@ -352,12 +352,12 @@
     <Compile Include="Repositories\product\CameraRepository.cs" />
     <Compile Include="Repositories\product\CameraStatusRepository.cs" />
     <Compile Include="Repositories\product\GpsMemoryRepository.cs" />
-    <Compile Include="Repositories\product\GpsStateRepository.cs" />
+    <Compile Include="Repositories\product\ProductStateRepository.cs" />
     <Compile Include="Repositories\product\GpsVersionRepository.cs" />
     <Compile Include="Repositories\product\IRepos\ICameraRepository.cs" />
     <Compile Include="Repositories\product\IRepos\ICameraStatusRepository.cs" />
     <Compile Include="Repositories\product\IRepos\IGpsMemoryRepository.cs" />
-    <Compile Include="Repositories\product\IRepos\IGpsStateRepository.cs" />
+    <Compile Include="Repositories\product\IRepos\IProductStateRepository.cs" />
     <Compile Include="Repositories\product\IRepos\IGpsVersionRepository.cs" />
     <Compile Include="Repositories\product\IRepos\IProductGpsRepository.cs" />
     <Compile Include="Repositories\product\IRepos\ISimBrandRepository.cs" />

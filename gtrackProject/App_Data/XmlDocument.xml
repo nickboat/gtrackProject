@@ -1094,52 +1094,52 @@
             <param name="id">id *byte*</param>
             <returns>ProductGpsMemoryStatus</returns>
         </member>
-        <member name="T:gtrackProject.Controllers.product.GpsStateController">
+        <member name="T:gtrackProject.Controllers.product.ProductStateController">
             <summary>
-            GpsStateController - CRUD GPS's StatusType By admin Only.
+            ProductStateController - CRUD GPS's StatusType By admin Only.
             </summary>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsStateController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsStateRepository)">
+        <member name="M:gtrackProject.Controllers.product.ProductStateController.#ctor(gtrackProject.Repositories.product.IRepos.IProductStateRepository)">
             <summary>
             Call repository
             </summary>
-            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IGpsStateRepository"/>.</param>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.product.IRepos.IProductStateRepository"/>.</param>
             <exception cref="T:System.ArgumentNullException">repository isNull</exception>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsStateController.Get">
+        <member name="M:gtrackProject.Controllers.product.ProductStateController.Get">
             <summary>
             Gets All StatusTypes
             </summary>
-            <returns>ProductGpsState</returns>
+            <returns>ProductProductState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsStateController.Get(System.Byte)">
+        <member name="M:gtrackProject.Controllers.product.ProductStateController.Get(System.Byte)">
             <summary>
             Get a StatusType.
             </summary>
             <param name="id">id *byte*</param>
-            <returns>ProductGpsState</returns>
+            <returns>ProductProductState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsStateController.Post(gtrackProject.Models.product.ProductGpsProcessState)">
+        <member name="M:gtrackProject.Controllers.product.ProductStateController.Post(gtrackProject.Models.product.ProductProcessState)">
             <summary>
             Post a StatusType.
             </summary>
-            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsProcessState"/>.</param>
-            <returns>ProductGpsState</returns>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductProcessState"/>.</param>
+            <returns>ProductProductState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsStateController.Put(System.Byte,gtrackProject.Models.product.ProductGpsProcessState)">
+        <member name="M:gtrackProject.Controllers.product.ProductStateController.Put(System.Byte,gtrackProject.Models.product.ProductProcessState)">
             <summary>
             Put a StatusType.
             </summary>
             <param name="id">id *byte*</param>
-            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductGpsProcessState"/>.</param>
-            <returns>ProductGpsState</returns>
+            <param name="value">The <see cref="T:gtrackProject.Models.product.ProductProcessState"/>.</param>
+            <returns>ProductProductState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.product.GpsStateController.Delete(System.Byte)">
+        <member name="M:gtrackProject.Controllers.product.ProductStateController.Delete(System.Byte)">
             <summary>
             Delete a StatusType.
             </summary>
             <param name="id">id *byte*</param>
-            <returns>ProductGpsState</returns>
+            <returns>ProductProductState</returns>
         </member>
         <member name="T:gtrackProject.Controllers.product.GpsVersionController">
             <summary>

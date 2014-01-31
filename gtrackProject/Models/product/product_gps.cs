@@ -51,7 +51,7 @@ namespace gtrackProject.Models.product
         public ICollection<ProductCamera> Cameras { get; set; }
         public SimBrand SimBrand { get; set; }
         public SimPaymentType SimPaymentType { get; set; }
-        public ProductGpsProcessState ProductGpsType { get; set; }
+        public ProductProcessState ProductGpsType { get; set; }
         public ProductGpsVersion ProductGpsVersion { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]

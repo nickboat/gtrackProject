@@ -12,6 +12,6 @@ namespace gtrackProject.Models.product
         public byte? State { get; set; }
         public ProductGps ProductGps { get; set; }
         public ProductCameraStatus CameraStatus { get; set; }
-        public ProductGpsProcessState CameraState { get; set; }
+        public ProductProcessState CameraState { get; set; }
     }
 }
