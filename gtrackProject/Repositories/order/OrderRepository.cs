@@ -51,7 +51,7 @@ namespace gtrackProject.Repositories.order
                 Quantity = item.Quantity,
                 PricePerUnit = item.PricePerUnit,
                 FeePerYear = item.FeePerYear,
-                Status = 1,
+                State = 1,
                 Deadline = item.Deadline
             };
 
@@ -85,7 +85,7 @@ namespace gtrackProject.Repositories.order
             {
                 throw new ArgumentNullException("Version", "Version is Required");
             }
-            if (!item.Status.HasValue)
+            if (!item.State.HasValue)
             {
                 throw new ArgumentNullException("Status", "Status is Required");
             }
@@ -104,7 +104,7 @@ namespace gtrackProject.Repositories.order
             order.Quantity = item.Quantity;
             order.PricePerUnit = item.PricePerUnit;
             order.FeePerYear = item.FeePerYear;
-            order.Status = await StatusExist(item.Status.Value);
+            order.State = await StatusExist(item.State.Value);
             order.Deadline = item.Deadline;            
 
             if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
@@ -178,7 +178,7 @@ namespace gtrackProject.Repositories.order
         }
         private async Task<byte> StatusExist(byte id)
         {
-            var status = await _db.OrderStatuss.FirstOrDefaultAsync(o => o.Id == id);
+            var status = await _db.OrderProcessStates.FirstOrDefaultAsync(o => o.Id == id);
             if (status != null) return id;
             throw new ArgumentException("OrderStatus Not Found");
         }

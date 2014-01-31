@@ -20,10 +20,10 @@ namespace gtrackProject.Models.order
         public int? CurrentUser { get; set; }
         public int? HeadInstall { get; set; }
         public string Comment { get; set; }
-        public byte? Status { get; set; }
+        public byte? State { get; set; }
         public Employee CreateByEmployee { get; set; }
         public Employee CurrentUsermployee { get; set; }
-        public OrderStatus OrderStatus { get; set; }
+        public OrderProcessState OrderProcessState { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }

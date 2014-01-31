@@ -905,52 +905,52 @@
             <param name="id">id *int*</param>
             <returns>HTTP Status</returns>
         </member>
-        <member name="T:gtrackProject.Controllers.order.OrderStatusController">
+        <member name="T:gtrackProject.Controllers.order.OrderStateController">
             <summary>
-            OrderStatusController - CRUD Order's status By admin Only.
+            OrderStateController - CRUD Order's State By admin Only.
             </summary>
         </member>
-        <member name="M:gtrackProject.Controllers.order.OrderStatusController.#ctor(gtrackProject.Repositories.order.IRepos.IOdStatusRepository)">
+        <member name="M:gtrackProject.Controllers.order.OrderStateController.#ctor(gtrackProject.Repositories.order.IRepos.IOdStateRepository)">
             <summary>
             Call repository
             </summary>
-            <param name="repository"> The <see cref="T:gtrackProject.Repositories.order.IRepos.IOdStatusRepository"/>.</param>
+            <param name="repository"> The <see cref="T:gtrackProject.Repositories.order.IRepos.IOdStateRepository"/>.</param>
             <exception cref="T:System.ArgumentNullException">repository isNull</exception>
         </member>
-        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Get">
+        <member name="M:gtrackProject.Controllers.order.OrderStateController.Get">
             <summary>
-            Gets All OrderStatus
+            Gets All OrderState
             </summary>
-            <returns>OrderStatus</returns>
+            <returns>OrderState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Get(System.Byte)">
+        <member name="M:gtrackProject.Controllers.order.OrderStateController.Get(System.Byte)">
             <summary>
-            Get a OrderStatus
+            Get a OrderState
             </summary>
             <param name="id">id *byte*</param>
-            <returns>OrderStatus</returns>
+            <returns>OrderState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Post(gtrackProject.Models.order.OrderStatus)">
+        <member name="M:gtrackProject.Controllers.order.OrderStateController.Post(gtrackProject.Models.order.OrderProcessState)">
             <summary>
-            Post a OrderStatus
+            Post a OrderState
             </summary>
-            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderStatus"/>.</param>
-            <returns>OrderStatus</returns>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderProcessState"/>.</param>
+            <returns>OrderState</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Put(System.Byte,gtrackProject.Models.order.OrderStatus)">
+        <member name="M:gtrackProject.Controllers.order.OrderStateController.Put(System.Byte,gtrackProject.Models.order.OrderProcessState)">
             <summary>
-            Put a OrderStatus.
-            </summary>
-            <param name="id">id *byte*</param>
-            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderStatus"/>.</param>
-            <returns>HTTP Status</returns>
-        </member>
-        <member name="M:gtrackProject.Controllers.order.OrderStatusController.Delete(System.Byte)">
-            <summary>
-            Delete a OrderStatus
+            Put a OrderState.
             </summary>
             <param name="id">id *byte*</param>
-            <returns>HTTP Status</returns>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderProcessState"/>.</param>
+            <returns>HTTP State</returns>
+        </member>
+        <member name="M:gtrackProject.Controllers.order.OrderStateController.Delete(System.Byte)">
+            <summary>
+            Delete a OrderState
+            </summary>
+            <param name="id">id *byte*</param>
+            <returns>HTTP State</returns>
         </member>
         <member name="T:gtrackProject.Controllers.product.CameraController">
             <summary>
@@ -2143,6 +2143,16 @@
             </summary>
         </member>
         <member name="T:gtrackProject.Models.product.ProductGpsMemoryStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:gtrackProject.Models.Mapping.order.OrderProcessStateMap">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:gtrackProject.Models.order.OrderProcessState">
             <summary>
             
             </summary>

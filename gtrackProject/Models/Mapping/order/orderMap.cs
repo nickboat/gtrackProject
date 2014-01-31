@@ -28,7 +28,7 @@ namespace gtrackProject.Models.Mapping.order
             Property(t => t.PricePerUnit).HasColumnName("PricePerUnit");
             Property(t => t.FeePerYear).HasColumnName("FeePerYear");
             Property(t => t.Comment).HasColumnName("Comment");
-            Property(t => t.Status).HasColumnName("Status");
+            Property(t => t.State).HasColumnName("Status");
             Property(t => t.Deadline).HasColumnName("Deadline");
             Property(t => t.ExtendTypeId).HasColumnName("ExtendType_Id");
 
@@ -45,9 +45,9 @@ namespace gtrackProject.Models.Mapping.order
             HasOptional(t => t.OrderExtendType)
                 .WithMany(t => t.Orders)
                 .HasForeignKey(d => d.ExtendTypeId);
-            HasOptional(t => t.OrderStatus)
+            HasOptional(t => t.OrderProcessState)
                 .WithMany(t => t.Orders)
-                .HasForeignKey(d => d.Status);
+                .HasForeignKey(d => d.State);
             HasOptional(t => t.ProductGpsVersion)
                 .WithMany(t => t.Orders)
                 .HasForeignKey(d => d.Version);

@@ -26,14 +26,14 @@ namespace gtrackProject.Models.order
         [Required] public decimal PricePerUnit { get; set; }
         [Required] public decimal FeePerYear { get; set; }
         public string Comment { get; set; }
-        public byte? Status { get; set; }
+        public byte? State { get; set; }
         [Required] public System.DateTime Deadline { get; set; }
         public byte? ExtendTypeId { get; set; }
         public Employee CreateByEmployee { get; set; }
         public Employee CurrentUserEmployee { get; set; }
         public Hd Hd { get; set; }
         public OrderExtendType OrderExtendType { get; set; }
-        public OrderStatus OrderStatus { get; set; }
+        public OrderProcessState OrderProcessState { get; set; }
         public ProductGpsVersion ProductGpsVersion { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]

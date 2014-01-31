@@ -35,7 +35,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<Hd> Hds { get; set; }
         public DbSet<LpType> LpTypes { get; set; }
         public DbSet<OrderExtendType> OrderExtendTypes { get; set; }
-        public DbSet<OrderStatus> OrderStatuss { get; set; }
+        public DbSet<OrderProcessState> OrderProcessStates { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductCamera> ProductCameras { get; set; }
         public DbSet<ProductCameraStatus> ProductCameraStatuss { get; set; }
@@ -73,7 +73,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new HdMap());
             modelBuilder.Configurations.Add(new LpTypeMap());
             modelBuilder.Configurations.Add(new OrderExtendTypeMap());
-            modelBuilder.Configurations.Add(new OrderStatusMap());
+            modelBuilder.Configurations.Add(new OrderProcessStateMap());
             modelBuilder.Configurations.Add(new OrderMap());
             modelBuilder.Configurations.Add(new ProductCameraMap());
             modelBuilder.Configurations.Add(new ProductCameraStatusMap());

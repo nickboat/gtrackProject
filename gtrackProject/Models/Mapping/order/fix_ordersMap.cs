@@ -23,7 +23,7 @@ namespace gtrackProject.Models.Mapping.order
             Property(t => t.CurrentUser).HasColumnName("CurrentUser");
             Property(t => t.HeadInstall).HasColumnName("HeadInstall");
             Property(t => t.Comment).HasColumnName("Comment");
-            Property(t => t.Status).HasColumnName("Status");
+            Property(t => t.State).HasColumnName("Status");
 
             // Relationships
             HasOptional(t => t.CreateByEmployee)
@@ -32,9 +32,9 @@ namespace gtrackProject.Models.Mapping.order
             HasRequired(t => t.CurrentUsermployee)
                 .WithMany(t => t.FixCurrents)
                 .HasForeignKey(d => d.HeadInstall);
-            HasOptional(t => t.OrderStatus)
+            HasOptional(t => t.OrderProcessState)
                 .WithMany(t => t.FixOrders)
-                .HasForeignKey(d => d.Status);
+                .HasForeignKey(d => d.State);
                         
         }
     }

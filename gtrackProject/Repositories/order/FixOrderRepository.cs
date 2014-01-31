@@ -35,7 +35,7 @@ namespace gtrackProject.Repositories.order
             {
                 throw new ArgumentNullException("CreateBy", "CreateBy is Required");
             }
-            if (!item.Status.HasValue)
+            if (!item.State.HasValue)
             {
                 throw new ArgumentNullException("Status", "Status is Required");
             }
@@ -44,7 +44,7 @@ namespace gtrackProject.Repositories.order
             {
                 CreateBy = await EmpExist(item.CreateBy.Value),
                 CreateDate = item.CreateDate,
-                Status = 1
+                State = 1
             };
 
             if (item.CurrentUser != null) fix.CurrentUser = await EmpExist(item.CurrentUser.Value);
@@ -70,13 +70,13 @@ namespace gtrackProject.Repositories.order
                 throw new ArgumentNullException("CreateBy", "CreateBy is Required");
             }
 
-            if (!item.Status.HasValue)
+            if (!item.State.HasValue)
             {
                 throw new ArgumentNullException("Status", "Status is Required");
             }
 
             var fix = await IdExist(item.Id);
-            fix.Status = await StatusExist(item.Status.Value);
+            fix.State = await StateExist(item.State.Value);
 
             if (item.CurrentUser != null) fix.CurrentUser = await EmpExist(item.CurrentUser.Value);
             if (item.HeadInstall != null) fix.HeadInstall = await EmpExist(item.HeadInstall.Value);
@@ -124,10 +124,10 @@ namespace gtrackProject.Repositories.order
             if (emp != null) return id;
             throw new ArgumentException("Employee Not Found");
         }
-        private async Task<byte> StatusExist(byte id)
+        private async Task<byte> StateExist(byte id)
         {
-            var status = await _db.OrderStatuss.FirstOrDefaultAsync(o => o.Id == id);
-            if (status != null) return id;
+            var state = await _db.OrderProcessStates.FirstOrDefaultAsync(o => o.Id == id);
+            if (state != null) return id;
             throw new ArgumentException("OrderStatus Not Found");
         }
     }

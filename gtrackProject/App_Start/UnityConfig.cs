@@ -67,7 +67,7 @@ namespace gtrackProject
 
             //Repositories.order
             container.RegisterType<IOdExtendTypeRepository, OdExtendTypeRepository>();
-            container.RegisterType<IOdStatusRepository, OdStatusRepository>();
+            container.RegisterType<IOdStateRepository, OdStateRepository>();
             container.RegisterType<IFixOrderRepository, FixOrderRepository>();
             container.RegisterType<IOrderRepository, OrderRepository>();
 
