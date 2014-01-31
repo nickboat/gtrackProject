@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using gtrackProject.Models.universe;
 
@@ -16,7 +17,7 @@ namespace gtrackProject.Models.Mapping.universe
 
             // Table & Column Mappings
             ToTable("un_display_status");
-            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Name).HasColumnName("Name");
         }
     }

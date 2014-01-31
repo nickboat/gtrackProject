@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -33,10 +34,11 @@ namespace gtrackProject.Repositories.universe
             var engine = new UnCmEngine
             {
                 Name = item.Name,
+                Id = await UsedIdName(item.Id)
             };
 
             if (!string.IsNullOrEmpty(item.MsgEn)) engine.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) engine.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) engine.MsgTh = item.MsgTh;
 
             engine = _db.UnCmEngines.Add(engine);
             try
@@ -56,7 +58,7 @@ namespace gtrackProject.Repositories.universe
 
             engine.Name = item.Name;
             if (!string.IsNullOrEmpty(item.MsgEn)) engine.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) engine.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) engine.MsgTh = item.MsgTh;
 
             _db.Entry(engine).State = EntityState.Modified;
             try
@@ -93,6 +95,12 @@ namespace gtrackProject.Repositories.universe
             var engine = await _db.UnCmEngines.FirstOrDefaultAsync(o => o.Id == id);
             if (engine != null) return engine;
             throw new KeyNotFoundException("id");
+        }
+        private async Task<string> UsedIdName(string id)
+        {
+            var engine = await _db.UnCmEngines.FirstOrDefaultAsync(o => o.Id == id);
+            if (engine == null) return id;
+            throw new ArgumentException("( " + id + " ) used", "id");
         }
     }
 }

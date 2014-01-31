@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -33,10 +34,11 @@ namespace gtrackProject.Repositories.universe
             var temp = new UnCmTemp
             {
                 Name = item.Name,
+                Id = await UsedIdName(item.Id)
             };
 
             if (!string.IsNullOrEmpty(item.MsgEn)) temp.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) temp.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) temp.MsgTh = item.MsgTh;
 
             temp = _db.UnCmTemps.Add(temp);
             try
@@ -56,7 +58,7 @@ namespace gtrackProject.Repositories.universe
 
             temp.Name = item.Name;
             if (!string.IsNullOrEmpty(item.MsgEn)) temp.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) temp.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) temp.MsgTh = item.MsgTh;
 
             _db.Entry(temp).State = EntityState.Modified;
             try
@@ -93,6 +95,12 @@ namespace gtrackProject.Repositories.universe
             var temp = await _db.UnCmTemps.FirstOrDefaultAsync(o => o.Id == id);
             if (temp != null) return temp;
             throw new KeyNotFoundException("id");
+        }
+        private async Task<string> UsedIdName(string id)
+        {
+            var temp = await _db.UnCmTemps.FirstOrDefaultAsync(o => o.Id == id);
+            if (temp == null) return id;
+            throw new ArgumentException("( " + id + " ) used", "id");
         }
     }
 }

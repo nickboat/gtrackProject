@@ -14,6 +14,7 @@ namespace gtrackProject.Controllers.order
 
     /// <summary>
     /// ExtendTypeController - CRUD Order Extend Type By cs,admin.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin, cs")]
     public class ExtendTypeController : ApiController

@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.product
 {
     /// <summary>
     /// GpsVersionController - CRUD GPS's Version By admin, manu, cs, qc.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin, manu, cs, qc")]
     public class GpsVersionController : ApiController

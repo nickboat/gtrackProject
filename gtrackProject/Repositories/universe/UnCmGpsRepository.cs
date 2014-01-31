@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -33,10 +34,11 @@ namespace gtrackProject.Repositories.universe
             var gps = new UnCmGps
             {
                 Name = item.Name,
+                Id = await UsedIdName(item.Id)
             };
 
             if (!string.IsNullOrEmpty(item.MsgEn)) gps.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) gps.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) gps.MsgTh = item.MsgTh;
 
             gps = _db.UnCmGpss.Add(gps);
             try
@@ -56,7 +58,7 @@ namespace gtrackProject.Repositories.universe
 
             gps.Name = item.Name;
             if (!string.IsNullOrEmpty(item.MsgEn)) gps.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) gps.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) gps.MsgTh = item.MsgTh;
 
             _db.Entry(gps).State = EntityState.Modified;
             try
@@ -93,6 +95,12 @@ namespace gtrackProject.Repositories.universe
             var gps = await _db.UnCmGpss.FirstOrDefaultAsync(o => o.Id == id);
             if (gps != null) return gps;
             throw new KeyNotFoundException("id");
+        }
+        private async Task<string> UsedIdName(string id)
+        {
+            var gps = await _db.UnCmGpss.FirstOrDefaultAsync(o => o.Id == id);
+            if (gps == null) return id;
+            throw new ArgumentException("( " + id + " ) used", "id");
         }
     }
 }

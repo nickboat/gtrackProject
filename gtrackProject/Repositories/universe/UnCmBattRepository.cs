@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -33,10 +34,11 @@ namespace gtrackProject.Repositories.universe
             var batt = new UnCmBatt
             {
                 Name = item.Name,
+                Id = await UsedIdName(item.Id)
             };
 
             if (!string.IsNullOrEmpty(item.MsgEn)) batt.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) batt.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) batt.MsgTh = item.MsgTh;
 
             batt = _db.UnCmBatts.Add(batt);
             try
@@ -56,7 +58,7 @@ namespace gtrackProject.Repositories.universe
 
             batt.Name = item.Name;
             if (!string.IsNullOrEmpty(item.MsgEn)) batt.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) batt.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) batt.MsgTh = item.MsgTh;
 
             _db.Entry(batt).State = EntityState.Modified;
             try
@@ -93,6 +95,12 @@ namespace gtrackProject.Repositories.universe
             var batt = await _db.UnCmBatts.FirstOrDefaultAsync(o => o.Id == id);
             if (batt != null) return batt;
             throw new KeyNotFoundException("id");
+        }
+        private async Task<string> UsedIdName(string id)
+        {
+            var batt = await _db.UnCmBatts.FirstOrDefaultAsync(o => o.Id == id);
+            if (batt == null) return id;
+            throw new ArgumentException("( " + id + " ) used", "id");
         }
     }
 }

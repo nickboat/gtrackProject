@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.product
 {
     /// <summary>
     /// CameraStatusController - CRUD Camera StatusType By admin Only.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin")]
     public class CameraStatusController : ApiController

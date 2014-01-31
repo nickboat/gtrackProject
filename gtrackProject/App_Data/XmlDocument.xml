@@ -768,6 +768,7 @@
         <member name="T:gtrackProject.Controllers.order.ExtendTypeController">
             <summary>
             ExtendTypeController - CRUD Order Extend Type By cs,admin.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.order.ExtendTypeController.#ctor(gtrackProject.Repositories.order.IRepos.IOdExtendTypeRepository)">
@@ -909,6 +910,7 @@
         <member name="T:gtrackProject.Controllers.order.OrderStateController">
             <summary>
             OrderStateController - CRUD Order's State By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.order.OrderStateController.#ctor(gtrackProject.Repositories.order.IRepos.IOdStateRepository)">
@@ -1003,6 +1005,7 @@
         <member name="T:gtrackProject.Controllers.product.CameraStatusController">
             <summary>
             CameraStatusController - CRUD Camera StatusType By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.product.CameraStatusController.#ctor(gtrackProject.Repositories.product.IRepos.ICameraStatusRepository)">
@@ -1050,6 +1053,7 @@
         <member name="T:gtrackProject.Controllers.product.GpsMemoryController">
             <summary>
             GpsMemoryController - CRUD GPS Memory store By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.product.GpsMemoryController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsMemoryRepository)">
@@ -1097,6 +1101,7 @@
         <member name="T:gtrackProject.Controllers.product.ProductStateController">
             <summary>
             ProductStateController - CRUD GPS's StatusType By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.product.ProductStateController.#ctor(gtrackProject.Repositories.product.IRepos.IProductStateRepository)">
@@ -1144,6 +1149,7 @@
         <member name="T:gtrackProject.Controllers.product.GpsVersionController">
             <summary>
             GpsVersionController - CRUD GPS's Version By admin, manu, cs, qc.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.product.GpsVersionController.#ctor(gtrackProject.Repositories.product.IRepos.IGpsVersionRepository)">
@@ -1238,6 +1244,7 @@
         <member name="T:gtrackProject.Controllers.product.SimBrandController">
             <summary>
             SimBrandController - CRUD Sim's Brand By admin, cs.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.product.SimBrandController.#ctor(gtrackProject.Repositories.product.IRepos.ISimBrandRepository)">
@@ -1285,6 +1292,7 @@
         <member name="T:gtrackProject.Controllers.product.SimPaymentController">
             <summary>
             SimPaymentController - CRUD Sim's Payment By admin, cs.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.product.SimPaymentController.#ctor(gtrackProject.Repositories.product.IRepos.ISimPaymentRepository)">

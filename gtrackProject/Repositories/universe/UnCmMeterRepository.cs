@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -33,10 +34,11 @@ namespace gtrackProject.Repositories.universe
             var meter = new UnCmMeter
             {
                 Name = item.Name,
+                Id = await UsedIdName(item.Id)
             };
 
             if (!string.IsNullOrEmpty(item.MsgEn)) meter.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) meter.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) meter.MsgTh = item.MsgTh;
 
             meter = _db.UnCmMeters.Add(meter);
             try
@@ -56,7 +58,7 @@ namespace gtrackProject.Repositories.universe
 
             meter.Name = item.Name;
             if (!string.IsNullOrEmpty(item.MsgEn)) meter.MsgEn = item.MsgEn;
-            if (!string.IsNullOrEmpty(item.MsgTh)) meter.MsgEn = item.MsgTh;
+            if (!string.IsNullOrEmpty(item.MsgTh)) meter.MsgTh = item.MsgTh;
 
             _db.Entry(meter).State = EntityState.Modified;
             try
@@ -94,5 +96,12 @@ namespace gtrackProject.Repositories.universe
             if (meter != null) return meter;
             throw new KeyNotFoundException("id");
         }
+        private async Task<string> UsedIdName(string id)
+        {
+            var meter = await _db.UnCmMeters.FirstOrDefaultAsync(o => o.Id == id);
+            if (meter == null) return id;
+            throw new ArgumentException("( " + id + " ) used", "id");
+        }
+
     }
 }

@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.product
 {
     /// <summary>
     /// ProductStateController - CRUD GPS's StatusType By admin Only.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin")]
     public class ProductStateController : ApiController

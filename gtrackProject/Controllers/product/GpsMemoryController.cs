@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.product
 {
     /// <summary>
     /// GpsMemoryController - CRUD GPS Memory store By admin Only.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin")]
     public class GpsMemoryController : ApiController
