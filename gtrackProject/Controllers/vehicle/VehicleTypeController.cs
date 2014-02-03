@@ -135,7 +135,7 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // DELETE api/Vehicletype/5
-        /*[HttpDelete]
+        [HttpDelete]
         [ResponseType(typeof(VehicleType))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
@@ -153,6 +153,6 @@ namespace gtrackProject.Controllers.vehicle
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }*/
+        }
     }
 }

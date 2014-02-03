@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.vehicle
 {
     /// <summary>
     /// VehicleColorController - CRU Vehicle's Color By admin, cs.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin, cs")]
     public class VehicleColorController : ApiController
@@ -135,24 +136,24 @@ namespace gtrackProject.Controllers.vehicle
         }
 
         // DELETE api/VehicleColor/5
-        //[HttpDelete]
-        //[ResponseType(typeof(VehicleColor))]
-        //public async Task<IHttpActionResult> Delete(byte id)
-        //{
-        //    try
-        //    {
-        //        await _repository.Remove(id);
-        //    }
-        //    catch (DbUpdateConcurrencyException msgDbUpdateConcurrencyException)
-        //    {
-        //        return InternalServerError(msgDbUpdateConcurrencyException);
-        //    }
-        //    catch (KeyNotFoundException)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpDelete]
+        [ResponseType(typeof(VehicleColor))]
+        public async Task<IHttpActionResult> Delete(byte id)
+        {
+            try
+            {
+                await _repository.Remove(id);
+            }
+            catch (DbUpdateConcurrencyException msgDbUpdateConcurrencyException)
+            {
+                return InternalServerError(msgDbUpdateConcurrencyException);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            return StatusCode(HttpStatusCode.NoContent);
+        }
     }
 }

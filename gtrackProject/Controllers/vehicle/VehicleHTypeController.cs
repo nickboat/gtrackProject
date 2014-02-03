@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.vehicle
 {
     /// <summary>
     /// VehicleHTypeController - CRU Vehicle's HeadType By admin, cs.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin, cs")]
     public class VehicleHTypeController : ApiController

@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.vehicle
 {
     /// <summary>
     /// LpTypeController - CRUD Vehicle's LicensePlate By admin, cs.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin, cs")]
     public class LpTypeController : ApiController

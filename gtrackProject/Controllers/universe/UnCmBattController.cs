@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.universe
 {
     /// <summary>
     /// UnCmBattController - CRUD CmBatt's Status By admin Only.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin")]
     public class UnCmBattController : ApiController

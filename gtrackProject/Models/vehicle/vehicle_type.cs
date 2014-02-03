@@ -15,8 +15,7 @@ namespace gtrackProject.Models.vehicle
         public byte Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
-        public byte HeadId { get; set; }
+        public byte? HeadId { get; set; }
         public VehicleHeadType VehicleHeadType { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]

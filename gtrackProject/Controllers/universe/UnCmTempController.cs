@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.universe
 {
     /// <summary>
     /// UnCmTempController - CRUD CmTemp's Status By admin Only.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin")]
     public class UnCmTempController : ApiController

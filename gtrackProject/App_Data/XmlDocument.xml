@@ -1340,6 +1340,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnCmBattController">
             <summary>
             UnCmBattController - CRUD CmBatt's Status By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnCmBattController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmBattRepository)">
@@ -1387,6 +1388,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnCmCommController">
             <summary>
             UnCmCommController - CRUD CmComm's Status By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnCmCommController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmCommRepository)">
@@ -1434,6 +1436,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnCmEngineController">
             <summary>
             UnCmEngineController - CRUD CmEngine's Status By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnCmEngineController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmEngineRepository)">
@@ -1481,6 +1484,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnCmGpsController">
             <summary>
             UnCmGpsController - CRUD CmGps's Status By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnCmGpsController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmGpsRepository)">
@@ -1528,6 +1532,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnCmMeterController">
             <summary>
             UnCmMeterController - CRUD CmMeter's Status By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnCmMeterController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmMeterRepository)">
@@ -1575,6 +1580,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnCmSignalController">
             <summary>
             UnCmSignalController - CRUD CmSignal's Status By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnCmSignalController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmSignalRepository)">
@@ -1622,6 +1628,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnCmTempController">
             <summary>
             UnCmTempController - CRUD CmTemp's Status By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnCmTempController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnCmTempRepository)">
@@ -1669,6 +1676,7 @@
         <member name="T:gtrackProject.Controllers.universe.UnDisplayController">
             <summary>
             UnDisplayController - CRUD Universe's DisplayStatus By admin Only.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.universe.UnDisplayController.#ctor(gtrackProject.Repositories.universe.IRepos.IUnDisplayRepository)">

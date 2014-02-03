@@ -31,10 +31,13 @@ namespace gtrackProject.Repositories.vehicle
 
         public async Task<VehicleType> Add(VehicleType item)
         {
+            if (item.HeadId == null)
+                throw new ArgumentNullException("HeadId");
+
             var type = new VehicleType
             {
                 Name = item.Name,
-                HeadId = await HeadExist(item.HeadId)
+                HeadId = await HeadExist(item.HeadId.Value)
             };
 
             type = _db.VehicleTypes.Add(type);
@@ -51,10 +54,13 @@ namespace gtrackProject.Repositories.vehicle
 
         public async Task<bool> Update(VehicleType item)
         {
+            if (item.HeadId == null)
+                throw new ArgumentNullException("HeadId");
+
             var type = await IdExist(item.Id);
 
             type.Name = item.Name;
-            type.HeadId = await HeadExist(item.HeadId);
+            type.HeadId = await HeadExist(item.HeadId.Value);
 
             _db.Entry(type).State = EntityState.Modified;
             try
