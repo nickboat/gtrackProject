@@ -38,6 +38,9 @@ namespace gtrackProject.Models.Mapping.order
                 .HasForeignKey(d => d.CreateBy);
             HasRequired(t => t.CurrentUserEmployee)
                 .WithMany(t => t.OrderCurrents)
+                .HasForeignKey(d => d.CurrentUser);
+            HasRequired(t => t.InstallByEmployee)
+                .WithMany(t => t.OrderInstalls)
                 .HasForeignKey(d => d.HeadInstall);
             HasRequired(t => t.Hd)
                 .WithMany(t => t.Orders)

@@ -10,12 +10,12 @@ namespace gtrackProject.Models.vehicle
         {
             VehicleTypes = new List<VehicleType>();
         }
-
+        [Key]
         public byte Id { get; set; }
         [Required]
         public string Name { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember] //show relation object when query on url
-        public virtual ICollection<VehicleType> VehicleTypes { get; set; }
+        public ICollection<VehicleType> VehicleTypes { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using gtrackProject.Models.driver;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
@@ -10,24 +11,33 @@ namespace gtrackProject.Models.universe
     /// <summary>
     /// 
     /// </summary>
-    public sealed class Universe
+    public class Universe
     {
         [Required]
+        [ForeignKey("Vehicle")]
         public int VehicleId { get; set; }
+        [ForeignKey("ProductGps")]
         public int? GpsProductId { get; set; }
         public DateTime? CurrentDataDatetime { get; set; }
         public int? CorrectDataId { get; set; }//id in backup
         public DateTime? CorrectDataDatetime { get; set; }
+        [ForeignKey("UnCmComm")]
         public string CmCommand { get; set; }
+        [ForeignKey("UnCmEngine")]
         public string CmEngine { get; set; }
+        [ForeignKey("UnCmMeter")]
         public string CmMeter { get; set; }
+        [ForeignKey("UnCmBatt")]
         public string CmBatt { get; set; }
         [Range(0,100)]
         public decimal? FuelLevel { get; set; }
+        [ForeignKey("UnCmTemp")]
         public string CmTemp { get; set; }
         [Range(0, 140)]
         public byte? TempLevel { get; set; }
+        [ForeignKey("UnCmGps")]
         public string CmGps { get; set; }
+        [ForeignKey("UnCmSignal")]
         public string CmSignalStatus { get; set; }
         [Range(0, 300)]
         public short? Speed { get; set; }
@@ -38,23 +48,32 @@ namespace gtrackProject.Models.universe
         public decimal? LaGoogle { get; set; }
         public decimal? LongGoogle { get; set; }
         [Required]
+        [ForeignKey("UnDisplayStatus")]
         public byte DisplayStatus { get; set; }
+        [ForeignKey("Driver")]
         public int? DriverId { get; set; }
+        [ForeignKey("Order")]
         public int? OrderId { get; set; }
+        [ForeignKey("FixOrder")]
         public int? FixOrderId { get; set; }
+        [Key]
         public int Id { get; set; }
-        public Driver Driver { get; set; }
-        public FixOrders FixOrders { get; set; }
-        public Order Order { get; set; }
-        public ProductGps ProductGps { get; set; }
-        public UnCmBatt UnCmBatt { get; set; }
-        public UnCmComm UnCmComm { get; set; }
-        public UnCmEngine UnCmEngine { get; set; }
-        public UnCmGps UnCmGps { get; set; }
-        public UnCmMeter UnCmMeter { get; set; }
-        public UnCmSignal UnCmSignal { get; set; }
-        public UnCmTemp UnCmTemp { get; set; }
-        public UnDisplayStatus UnDisplayStatus { get; set; }
-        public Vehicle Vehicle { get; set; }
+
+
+
+
+        public virtual Driver Driver { get; set; }
+        public virtual FixOrders FixOrder { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual ProductGps ProductGps { get; set; }
+        public virtual UnCmBatt UnCmBatt { get; set; }
+        public virtual UnCmComm UnCmComm { get; set; }
+        public virtual UnCmEngine UnCmEngine { get; set; }
+        public virtual UnCmGps UnCmGps { get; set; }
+        public virtual UnCmMeter UnCmMeter { get; set; }
+        public virtual UnCmSignal UnCmSignal { get; set; }
+        public virtual UnCmTemp UnCmTemp { get; set; }
+        public virtual UnDisplayStatus UnDisplayStatus { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
     }
 }

@@ -76,7 +76,7 @@ namespace gtrackProject.Models.Mapping.universe
             HasOptional(t => t.Driver)
                 .WithMany(t => t.Universes)
                 .HasForeignKey(d => d.DriverId);
-            HasOptional(t => t.FixOrders)
+            HasOptional(t => t.FixOrder)
                 .WithMany(t => t.Universes)
                 .HasForeignKey(d => d.FixOrderId);
             HasOptional(t => t.Order)

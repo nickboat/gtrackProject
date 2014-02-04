@@ -2114,7 +2114,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.VehicleTypeController">
             <summary>
             VehicleTypeController - CRU Vehicle's Type By admin, cs.
-            test lazy loading
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleTypeController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleTypeRepository)">

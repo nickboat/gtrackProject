@@ -11,7 +11,7 @@ namespace gtrackProject.Models.vehicle
         {
             Vehicles = new List<Vehicle>();
         }
-
+        [Key]
         public short Id { get; set; }
         [Required]
         [ForeignKey("VehicleBrand")]

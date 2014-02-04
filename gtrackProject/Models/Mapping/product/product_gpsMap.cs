@@ -83,7 +83,7 @@ namespace gtrackProject.Models.Mapping.product
             HasOptional(t => t.SimPaymentType)
                 .WithMany(t => t.ProductGpss)
                 .HasForeignKey(d => d.SimPaymentTypeId);
-            HasOptional(t => t.ProductGpsType)
+            HasOptional(t => t.ProductGpsState)
                 .WithMany(t => t.ProductGpss)
                 .HasForeignKey(d => d.State);
             HasRequired(t => t.ProductGpsVersion)

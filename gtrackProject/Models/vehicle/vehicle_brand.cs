@@ -4,13 +4,13 @@ using Newtonsoft.Json;
 
 namespace gtrackProject.Models.vehicle
 {
-    public sealed class VehicleBrand
+    public class VehicleBrand
     {
         public VehicleBrand()
         {
             VehicleModels = new List<VehicleModel>();
         }
-
+        [Key]
         public byte Id { get; set; }
         [Required]
         public string Name { get; set; }
