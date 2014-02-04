@@ -16,23 +16,24 @@ namespace gtrackProject.Models.account
             Vehicles = new List<Vehicle>();
             Customers = new List<Customer>();
         }
-        [Required]
+
         public string Value { get; set; }
         [Required]
+        [RegularExpression("^([0-9]{6})$", ErrorMessage = "Code must be 6 digi")]
         public string Code { get; set; }
         [Required]
         public string Name { get; set; }
         public string TableName { get; set; }
         [Key]
         public short Id { get; set; }
-        [ForeignKey("ThisHd")]
+        [ForeignKey("Upline")]
         public short? HdIdUpline { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Hd> HdDownLines { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public virtual Hd ThisHd { get; set; }
+        public virtual Hd Upline { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Order> Orders { get; set; }

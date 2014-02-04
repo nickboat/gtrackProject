@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using gtrackProject.Models.account;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Repositories.account.IRepos;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace gtrackProject.Repositories.account
@@ -38,6 +39,11 @@ namespace gtrackProject.Repositories.account
                 "Code":"??",
                 "HdIdUpline" : "??"
             }*/
+            if (item.HdIdUpline != null && item.HdIdUpline != 0)
+            {
+                var up = await IdExist(item.HdIdUpline.Value);
+            }
+
             var randResult = await RandHd();//random hd.value 3 char before add
             var newHd = new Hd
             {
@@ -71,6 +77,7 @@ namespace gtrackProject.Repositories.account
                 "Code":"??",
                 "HdIdUpline" : "??"
             }*/
+
             //check IdExists
             var header = await IdExist(item.Id);
             
@@ -102,21 +109,24 @@ namespace gtrackProject.Repositories.account
             var header = await IdExist(id);
             var customers = _db.Customers.Where(c => c.Hd_Id == id);
 
-            //delete this hd's customers
-            foreach (var customer in customers)
+            if (customers.Count() != 0)
             {
-                var c = customer;
-                var usr = await AspContext.Users.FirstAsync(u => u.Id == c.Asp_Id);
-                AspContext.Users.Remove(usr);
-            }
+                //delete this hd's customers
+                foreach (var customer in customers)
+                {
+                    var c = customer;
+                    var usr = await AspContext.Users.FirstAsync(u => u.Id == c.Asp_Id);
+                    AspContext.Users.Remove(usr);
+                }
 
-            try
-            {
-                await AspContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new DbUpdateConcurrencyException(ex.Message);
+                try
+                {
+                    await AspContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new DbUpdateConcurrencyException(ex.Message);
+                }
             }
 
             //delete this hd

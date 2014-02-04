@@ -37,7 +37,7 @@ namespace gtrackProject.Models.Mapping
             Property(t => t.HdIdUpline).HasColumnName("HD_Id_upline");
 
             // Relationships
-            HasOptional(t => t.ThisHd)
+            HasOptional(t => t.Upline)
                 .WithMany(t => t.HdDownLines)
                 .HasForeignKey(d => d.HdIdUpline);
 
