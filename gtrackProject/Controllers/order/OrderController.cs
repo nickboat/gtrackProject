@@ -40,6 +40,7 @@ namespace gtrackProject.Controllers.order
         /// </summary>
         /// <returns>Orders</returns>
         [Authorize]
+        [Queryable]
         public IQueryable<Order> Get()
         {
             return _repository.GetAll();

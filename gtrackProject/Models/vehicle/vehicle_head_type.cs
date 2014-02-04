@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace gtrackProject.Models.vehicle
 {
-    public sealed class VehicleHeadType
+    public class VehicleHeadType
     {
         public VehicleHeadType()
         {
@@ -16,7 +15,7 @@ namespace gtrackProject.Models.vehicle
         [Required]
         public string Name { get; set; }
         [JsonIgnore]
-        [IgnoreDataMember]
-        public ICollection<VehicleType> VehicleTypes { get; set; }
+        //[IgnoreDataMember] //show relation object when query on url
+        public virtual ICollection<VehicleType> VehicleTypes { get; set; }
     }
 }

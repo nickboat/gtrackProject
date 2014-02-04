@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All VehicleHeadTypes
         /// </summary>
         /// <returns>VehicleHeadTypes</returns>
+        [Queryable]
         public IQueryable<VehicleHeadType> Get()
         {
             return _repository.GetAll();

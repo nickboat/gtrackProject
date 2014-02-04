@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All VehicleColors
         /// </summary>
         /// <returns>VehicleColors</returns>
+        [Queryable]
         public IQueryable<VehicleColor> Get()
         {
             return _repository.GetAll();

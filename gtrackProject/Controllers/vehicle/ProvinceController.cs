@@ -37,6 +37,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All Provinces
         /// </summary>
         /// <returns>Provinces</returns>
+        [Queryable]
         public IQueryable<Province> Get()
         {
             return _repository.GetAll();

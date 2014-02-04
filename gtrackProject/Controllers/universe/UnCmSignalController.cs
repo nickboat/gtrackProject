@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.universe
         /// Gets All UnCmSignal
         /// </summary>
         /// <returns>UnCmSignal</returns>
+        [Queryable]
         public IQueryable<UnCmSignal> Get()
         {
             return _repository.GetAll();

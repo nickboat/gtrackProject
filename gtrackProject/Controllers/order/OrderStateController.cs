@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.order
         /// Gets All OrderState
         /// </summary>
         /// <returns>OrderState</returns>
+        [Queryable]
         public IQueryable<OrderProcessState> Get()
         {
             return _repository.GetAll();

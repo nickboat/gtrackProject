@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.vehicle
 {
     /// <summary>
     /// VehicleModelController - CRUD Vehicle's Model By admin, cs.
+    /// test eager loading
     /// </summary>
     [Authorize(Roles = "admin, cs")]
     public class VehicleModelController : ApiController
@@ -38,6 +39,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All VehicleModels
         /// </summary>
         /// <returns>VehicleModels</returns>
+        [Queryable]
         public IQueryable<VehicleModel> Get()
         {
             return _repository.GetAll();

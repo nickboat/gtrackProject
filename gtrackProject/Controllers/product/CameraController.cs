@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <returns>ProductCamera</returns>
         [Authorize]
+        [Queryable]
         public IQueryable<ProductCamera> Get()
         {
             return _repository.GetAll();

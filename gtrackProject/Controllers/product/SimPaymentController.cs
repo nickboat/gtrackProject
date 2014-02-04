@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.product
         /// Gets All PaymentTypes
         /// </summary>
         /// <returns>SimPaymentType</returns>
+        [Queryable]
         public IQueryable<SimPaymentType> Get()
         {
             return _repository.GetAll();

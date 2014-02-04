@@ -40,6 +40,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <returns>ProductGpsVersion</returns>
         [Authorize]
+        [Queryable]
         public IQueryable<ProductGpsVersion> Get()
         {
             return _repository.GetAll();

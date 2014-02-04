@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.product
         /// Gets All StatusTypes
         /// </summary>
         /// <returns>ProductCameraStatus</returns>
+        [Queryable]
         public IQueryable<ProductCameraStatus> Get()
         {
             return _repository.GetAll();

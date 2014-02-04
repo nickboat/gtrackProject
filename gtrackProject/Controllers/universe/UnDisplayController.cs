@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.universe
         /// Gets All UnDisplayStatus
         /// </summary>
         /// <returns>UnDisplayStatus</returns>
+        [Queryable]
         public IQueryable<UnDisplayStatus> Get()
         {
             return _repository.GetAll();

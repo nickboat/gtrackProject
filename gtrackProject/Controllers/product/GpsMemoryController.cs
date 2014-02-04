@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.product
         /// Gets All StatusTypes
         /// </summary>
         /// <returns>ProductGpsMemoryStatus</returns>
+        [Queryable]
         public IQueryable<ProductGpsMemoryStatus> Get()
         {
             return _repository.GetAll();

@@ -40,6 +40,7 @@ namespace gtrackProject.Controllers.order
         /// Gets All extendTypes. *Queryable*
         /// </summary>
         /// <returns>OrderExtendType</returns>
+        [Queryable]
         public IQueryable<OrderExtendType> Get()
         {
             return _repository.GetAll();

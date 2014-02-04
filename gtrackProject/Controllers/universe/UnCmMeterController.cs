@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.universe
         /// Gets All UnCmMeter
         /// </summary>
         /// <returns>UnCmMeter</returns>
+        [Queryable]
         public IQueryable<UnCmMeter> Get()
         {
             return _repository.GetAll();

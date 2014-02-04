@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All VehicleBrands
         /// </summary>
         /// <returns>VehicleBrands</returns>
+        [Queryable]
         public IQueryable<VehicleBrand> Get()
         {
             return _repository.GetAll();

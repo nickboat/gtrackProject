@@ -40,6 +40,7 @@ namespace gtrackProject.Controllers.vehicle
         /// </summary>
         /// <returns>Vehicles</returns>
         [Authorize]
+        [Queryable]
         public IQueryable<Vehicle> Get()
         {
             return _repository.GetAll();

@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All VehicleOganizes
         /// </summary>
         /// <returns>VehicleOganize</returns>
+        [Queryable]
         public IQueryable<VehicleOganize> Get()
         {
             return _repository.GetAll();

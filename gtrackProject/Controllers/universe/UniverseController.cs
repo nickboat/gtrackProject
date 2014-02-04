@@ -38,6 +38,7 @@ namespace gtrackProject.Controllers.universe
         /// Gets All Universes
         /// </summary>
         /// <returns>Universes</returns>
+        [Queryable]
         public IQueryable<Universe> Get()
         {
             return _repository.GetAll();

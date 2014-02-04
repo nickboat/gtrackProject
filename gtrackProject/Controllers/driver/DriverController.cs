@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.driver
         /// </summary>
         /// <returns>Driver</returns>
         [Authorize]
+        [Queryable]
         public IQueryable<Driver> Get()
         {
             return _repository.GetAll();

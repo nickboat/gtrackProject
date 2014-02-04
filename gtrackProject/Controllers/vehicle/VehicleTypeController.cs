@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.vehicle
 {
     /// <summary>
     /// VehicleTypeController - CRU Vehicle's Type By admin, cs.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "admin, cs")]
     public class VehicleTypeController : ApiController
@@ -38,6 +39,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All VehicleTypes
         /// </summary>
         /// <returns>VehicleTypes</returns>
+        [Queryable]
         public IQueryable<VehicleType> Get()
         {
             return _repository.GetAll();

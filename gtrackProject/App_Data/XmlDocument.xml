@@ -1758,6 +1758,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.LpTypeController">
             <summary>
             LpTypeController - CRUD Vehicle's LicensePlate By admin, cs.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.LpTypeController.#ctor(gtrackProject.Repositories.vehicle.IRepos.ILpTypeRepository)">
@@ -1805,6 +1806,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.ProvinceController">
             <summary>
             ProvinceController - Read only Provinces.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.ProvinceController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IProvinceRepository)">
@@ -1830,6 +1832,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.VehicleBrandController">
             <summary>
             VehicleBrandController - CRUD Vehicle's Brand By admin, cs.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleBrandController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleBrandRepository)">
@@ -1877,6 +1880,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.VehicleColorController">
             <summary>
             VehicleColorController - CRU Vehicle's Color By admin, cs.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleColorController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleColorRepository)">
@@ -1973,6 +1977,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.VehicleHTypeController">
             <summary>
             VehicleHTypeController - CRU Vehicle's HeadType By admin, cs.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleHTypeController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleHeadTypeRepository)">
@@ -2013,6 +2018,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.VehicleModelController">
             <summary>
             VehicleModelController - CRUD Vehicle's Model By admin, cs.
+            test eager loading
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleModelController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleModelRepository)">
@@ -2060,6 +2066,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.VehicleOgnController">
             <summary>
             VehicleOgnController - CRUD Vehicle's Oganize By admin, cs.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleOgnController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleOganizeRepository)">
@@ -2107,6 +2114,7 @@
         <member name="T:gtrackProject.Controllers.vehicle.VehicleTypeController">
             <summary>
             VehicleTypeController - CRU Vehicle's Type By admin, cs.
+            test lazy loading
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.vehicle.VehicleTypeController.#ctor(gtrackProject.Repositories.vehicle.IRepos.IVehicleTypeRepository)">

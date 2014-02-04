@@ -25,6 +25,7 @@ namespace gtrackProject.Models.dbContext
         public GtrackDbContext()
             : base("Name=gtrackDbContext")
         {
+            Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Customer> Customers { get; set; }

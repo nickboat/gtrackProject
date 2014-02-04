@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.universe
         /// Gets All UnCmGps
         /// </summary>
         /// <returns>UnCmGps</returns>
+        [Queryable]
         public IQueryable<UnCmGps> Get()
         {
             return _repository.GetAll();

@@ -40,6 +40,7 @@ namespace gtrackProject.Controllers.vehicle
         /// Gets All LpTypes
         /// </summary>
         /// <returns>LpTypes</returns>
+        [Queryable]
         public IQueryable<LpType> Get()
         {
             return _repository.GetAll();

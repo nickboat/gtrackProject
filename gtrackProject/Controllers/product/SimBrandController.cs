@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.product
         /// Gets All SimBrands
         /// </summary>
         /// <returns>SimBrands</returns>
+        [Queryable]
         public IQueryable<SimBrand> Get()
         {
             return _repository.GetAll();

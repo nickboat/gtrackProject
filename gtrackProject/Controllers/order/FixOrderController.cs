@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.order
         /// </summary>
         /// <returns>FixOrders</returns>
         [Authorize]
+        [Queryable]
         public IQueryable<FixOrders> Get()
         {
             return _repository.GetAll();

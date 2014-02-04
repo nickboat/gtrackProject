@@ -39,6 +39,7 @@ namespace gtrackProject.Controllers.account
         /// </summary>
         /// <returns>Hd</returns>
         [Authorize]
+        [Queryable]
         public IQueryable<Hd> Gethds()
         {
             return _repository.GetAll();

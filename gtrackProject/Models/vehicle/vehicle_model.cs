@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
 namespace gtrackProject.Models.vehicle
 {
-    public sealed class VehicleModel
+    public class VehicleModel
     {
         public VehicleModel()
         {
@@ -14,16 +14,20 @@ namespace gtrackProject.Models.vehicle
 
         public short Id { get; set; }
         [Required]
+        [ForeignKey("VehicleBrand")]
         public byte BrandId { get; set; }
         [Required]
         public string Name { get; set; }
         public short? Year { get; set; }
         [Required]
+        [ForeignKey("VehicleType")]
         public byte TypeId { get; set; }
-        public VehicleBrand VehicleBrand { get; set; }
-        public VehicleType VehicleType { get; set; }
         [JsonIgnore]
-        [IgnoreDataMember]
+        public virtual VehicleBrand VehicleBrand { get; set; }
+        [JsonIgnore]
+        public virtual VehicleType VehicleType { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
         public ICollection<Vehicle> Vehicles { get; set; }
     }
 }
