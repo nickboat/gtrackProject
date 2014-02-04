@@ -16,6 +16,6 @@ namespace gtrackProject.Models.vehicle
         public string Name { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember] //show relation object when query on url
-        public ICollection<VehicleType> VehicleTypes { get; set; }
+        public virtual ICollection<VehicleType> VehicleTypes { get; set; }
     }
 }

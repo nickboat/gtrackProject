@@ -13,6 +13,7 @@ namespace gtrackProject.Models.account
         {
             FixCreates = new List<FixOrders>();
             FixCurrents = new List<FixOrders>();
+            FixInstalls = new List<FixOrders>();
             OrderCreates = new List<Order>();
             OrderCurrents = new List<Order>();
             OrderInstalls = new List<Order>();
@@ -37,6 +38,9 @@ namespace gtrackProject.Models.account
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<FixOrders> FixCurrents { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<FixOrders> FixInstalls { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Order> OrderCreates { get; set; }

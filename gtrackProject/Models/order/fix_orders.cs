@@ -31,7 +31,7 @@ namespace gtrackProject.Models.order
         [JsonIgnore]
         public virtual Employee CreateByEmployee { get; set; }
         [JsonIgnore]
-        public virtual Employee CurrentUsermployee { get; set; }
+        public virtual Employee CurrentUserEmployee { get; set; }
         [JsonIgnore]
         public virtual Employee InstallByEmployee { get; set; }
         [JsonIgnore]
