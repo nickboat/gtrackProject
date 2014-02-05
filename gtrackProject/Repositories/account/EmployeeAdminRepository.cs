@@ -14,7 +14,6 @@ namespace gtrackProject.Repositories.account
 {
     public class EmployeeAdminRepository : IEmployeeAdminRepository
     {
-
         private UserManager<IdentityUser> UserManager { get; set; }
         private RoleManager<IdentityRole> RoleManager { get; set; }
         private IdentityDbContext AspContext { get; set; }
@@ -107,7 +106,7 @@ namespace gtrackProject.Repositories.account
                 throw new ArgumentException("Invalid Role!!!");
             }
 
-            if (roleAdminModels.Any(role => role == "admin" || role == "customer"))
+            if (roleAdminModels.Any(role => role == "admin" || role == "customer" || role == "driver"))
             {
                 throw new ArgumentException("This Role Not Allow To Use!!!");
             }
@@ -181,7 +180,7 @@ namespace gtrackProject.Repositories.account
                 throw new ArgumentException("Invalid Role!!!");
             }
 
-            if (roleAdminModels.Any(role => role == "admin" || role == "customer"))
+            if (roleAdminModels.Any(role => role == "admin" || role == "customer" || role == "driver"))
             {
                 throw new ArgumentException("This Role Not Allow To Use!!!");
             }

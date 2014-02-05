@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
 using Newtonsoft.Json;
@@ -32,6 +33,8 @@ namespace gtrackProject.Models.account
         [Required]
         [RegularExpression(@"(?(^02)^02\d{7}|^0\d{9})$", ErrorMessage = "Invalid Phone Number")]
         public string Phone { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public string AspId { get; set; }
         [RegularExpression(@"^(m|f)$", ErrorMessage = "Please use 'm' = male, 'f' = female")]
         public string Gender { get; set; }

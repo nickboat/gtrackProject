@@ -484,6 +484,7 @@
         <member name="T:gtrackProject.Controllers.account.CustomerController">
             <summary>
             CustomerController - CRUD Customer User By cs,admin.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.account.CustomerController.#ctor(gtrackProject.Repositories.account.IRepos.ICustomerRepository)">
