@@ -104,8 +104,19 @@ namespace gtrackProject.Repositories.account
             {
                 //remove asp.net identity user
                 var usr = AspContext.Users.First(u => u.Id == usrIden.Id);
+                //AspContext.Users.Remove(usr);
+                //AspContext.SaveChanges();
+                if (usr == null) throw new DbUpdateConcurrencyException(ex.Message);
                 AspContext.Users.Remove(usr);
-                AspContext.SaveChanges();
+
+                try
+                {
+                    AspContext.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException aspEx)
+                {
+                    throw new DbUpdateConcurrencyException(aspEx.Message);
+                }
 
                 throw new DbUpdateConcurrencyException(ex.Message);
             }
@@ -155,15 +166,18 @@ namespace gtrackProject.Repositories.account
 
             //remove asp.net identity user
             var usr = await AspContext.Users.FirstAsync(u => u.Id == cust.Asp_Id);
-            AspContext.Users.Remove(usr);
+            if (usr != null)
+            {
+                AspContext.Users.Remove(usr);
 
-            try
-            {
-                await AspContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new DbUpdateConcurrencyException(ex.Message);
+                try
+                {
+                    await AspContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new DbUpdateConcurrencyException(ex.Message);
+                }
             }
 
             _db.Customers.Remove(cust);

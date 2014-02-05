@@ -27,9 +27,13 @@ namespace gtrackProject.Models.account
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "FullName must be atleast 4 characters")]
         public string FullName { get; set; }
+        [Required]
+        [RegularExpression(@"(?(^02)^02\d{7}|^0\d{9})$", ErrorMessage = "Invalid Phone Number")]
         public string Phone { get; set; }
         public string AspId { get; set; }
+        [RegularExpression(@"^(m|f)$", ErrorMessage = "Please use 'm' = male, 'f' = female")]
         public string Gender { get; set; }
         public DateTime BirthDate { get; set; }
         [JsonIgnore]

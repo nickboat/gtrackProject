@@ -19,7 +19,7 @@ namespace gtrackProject.Models.account
 
         public string Value { get; set; }
         [Required]
-        [RegularExpression("^([0-9]{6})$", ErrorMessage = "Code must be 6 digi")]
+        [RegularExpression(@"^\d{6}$", ErrorMessage = "Code must be 6 digi")]
         public string Code { get; set; }
         [Required]
         public string Name { get; set; }

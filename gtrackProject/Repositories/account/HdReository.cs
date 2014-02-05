@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using gtrackProject.Models.account;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Repositories.account.IRepos;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace gtrackProject.Repositories.account

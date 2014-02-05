@@ -58,7 +58,7 @@ namespace gtrackProject.Controllers.account
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             return new UserInfoViewModel
             {
@@ -348,14 +348,14 @@ namespace gtrackProject.Controllers.account
 
         // POST api/Account/Register
         /// <summary>
-        /// Register User *by "customer service","admin"* Not AllowAnonymous
+        /// Register Admin User by admin
         /// </summary>
         /// <param name="model">The <see cref="RegisterBindingModel"/>.</param>
         /// <returns>IdentityUser</returns>
-        [Authorize(Roles = "cs, admin")]
-        //todo maybe wait i think about that
         //[AllowAnonymous]
-        [Route("Register")]
+        //[Route("Register")]
+        [Authorize(Roles = "admin")]
+        [Route("RegisterAdmin")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -376,7 +376,7 @@ namespace gtrackProject.Controllers.account
                 return errorResult;
             }
 
-            var roleResult = await UserManager.AddToRoleAsync(user.Id, "customer");
+            var roleResult = await UserManager.AddToRoleAsync(user.Id, "admin");
             var roleErrorResult = GetErrorResult(roleResult);
 
             return roleErrorResult ?? Ok(user);
