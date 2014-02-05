@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -12,6 +13,7 @@ namespace gtrackProject.Controllers.account
 {
     /// <summary>
     /// CustomerController - CRUD Customer User By cs,admin.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "cs, admin")]
     public class CustomerController : ApiController
@@ -39,10 +41,15 @@ namespace gtrackProject.Controllers.account
         /// <returns>CustomerModel</returns>
         [Route("api/CustomerByHd/{hdId:int}")]
         [HttpGet]
-        [ResponseType(typeof(CustomerModel))]
-        public IEnumerable<CustomerModel> GetByHd(int hdId)
+        [ResponseType(typeof (CustomerModel))]
+        public IEnumerable<CustomerModel> GetByHd(short hdId)
         {
-            return _repository.GetByHd(hdId);
+            var custs = _repository.GetByHd(hdId);
+            if (custs == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+            return custs;
         }
 
         // GET api/useradmin/(Id)
@@ -79,13 +86,13 @@ namespace gtrackProject.Controllers.account
         {
             if (!ModelState.IsValid)
             {
-                /*{
-                UserName = userIden.UserName,
-                FullName = cust.FullName,
-                Phone = cust.Phone,
-                CompanyName = cust.CompanyName,
-                Email = cust.Email
-                }*/
+                /*{"UserName":"userIden.UserName",
+                 "FullName":"cust.FullName",
+                 "Phone":"cust.Phone",
+                 "CompanyName":"cust.CompanyName",
+                 "Email":"cust.Email",
+                 "Hd_Id":?
+                 }*/
 
                 return BadRequest(ModelState);
             }

@@ -26,10 +26,11 @@ namespace gtrackProject.Repositories.account
             RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
         }
 
-        public IEnumerable<CustomerModel> GetByHd(int hdId)
+        public IEnumerable<CustomerModel> GetByHd(short hdId)
         {
             var list = new List<CustomerModel>();
-            var custs = _db.Customers;
+            var custs = _db.Customers.Where(c => c.Hd_Id == hdId);
+            if (!custs.Any()) return null;
 
             foreach (var cust in custs)
             {
@@ -42,7 +43,8 @@ namespace gtrackProject.Repositories.account
                     FullName = cust.FullName,
                     Phone = cust.Phone,
                     CompanyName = cust.CompanyName,
-                    Email = cust.Email
+                    Email = cust.Email,
+                    Hd_Id = cust.Hd_Id
                 };
                 list.Add(custModel);
             }
@@ -64,7 +66,8 @@ namespace gtrackProject.Repositories.account
                 FullName = cust.FullName,
                 Phone = cust.Phone,
                 CompanyName = cust.CompanyName,
-                Email = cust.Email
+                Email = cust.Email,
+                Hd_Id = cust.Hd_Id
             };
 
             return custModel;

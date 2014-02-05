@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace gtrackProject.Models.account
@@ -8,6 +9,8 @@ namespace gtrackProject.Models.account
     {
         [Key]
         public int Id { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public string Asp_Id { get; set; }
         [Required]
         [ForeignKey("Hd")]

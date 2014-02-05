@@ -6,7 +6,7 @@ namespace gtrackProject.Repositories.account.IRepos
 {
     public interface ICustomerRepository
     {
-        IEnumerable<CustomerModel> GetByHd(int hdId);
+        IEnumerable<CustomerModel> GetByHd(short hdId);
         Task<CustomerModel> Get(int id);
         Task<CustomerModel> Add(CustomerModel item);
         Task<bool> Update(CustomerModel item);

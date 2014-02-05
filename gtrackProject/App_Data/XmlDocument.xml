@@ -493,7 +493,7 @@
             <param name="repository"><see cref="T:gtrackProject.Repositories.account.IRepos.ICustomerRepository"/></param>
             <exception cref="T:System.ArgumentNullException">repository isNull</exception>
         </member>
-        <member name="M:gtrackProject.Controllers.account.CustomerController.GetByHd(System.Int32)">
+        <member name="M:gtrackProject.Controllers.account.CustomerController.GetByHd(System.Int16)">
             <summary>
             Gets All Customer by header
             </summary>
