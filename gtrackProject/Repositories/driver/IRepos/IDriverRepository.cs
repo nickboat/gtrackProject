@@ -8,7 +8,7 @@ namespace gtrackProject.Repositories.driver.IRepos
     {
         IQueryable<Driver> GetAll();
         Task<Driver> Get(int id);
-        Task<Driver> Add(Driver item);
+        Task<Driver> Add(DriverModel item);
         Task<bool> Update(Driver item);
         Task<bool> Remove(int id);
     }

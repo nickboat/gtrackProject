@@ -676,6 +676,7 @@
         <member name="T:gtrackProject.Controllers.driver.DriverController">
             <summary>
             RoleAdminController - CRUD Driver User.
+            ** test complete **
             </summary>
         </member>
         <member name="M:gtrackProject.Controllers.driver.DriverController.#ctor(gtrackProject.Repositories.driver.IRepos.IDriverRepository)">
@@ -698,11 +699,11 @@
             <param name="id">id *int*</param>
             <returns>Driver</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.driver.DriverController.Post(gtrackProject.Models.driver.Driver)">
+        <member name="M:gtrackProject.Controllers.driver.DriverController.Post(gtrackProject.Models.driver.DriverModel)">
             <summary>
             Post a Driver
             </summary>
-            <param name="value">The <see cref="T:gtrackProject.Models.driver.Driver"/>.</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.driver.DriverModel"/>.</param>
             <returns>Driver</returns>
         </member>
         <member name="M:gtrackProject.Controllers.driver.DriverController.Put(System.Int32,gtrackProject.Models.driver.Driver)">
@@ -760,7 +761,7 @@
             <param name="putEmp">The <see cref="T:gtrackProject.Models.account.EmployeeAdminModel"/>.</param>
             <returns>HTTP Status</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.account.EmployeeAdminController.DeleteRole(System.Int32)">
+        <member name="M:gtrackProject.Controllers.account.EmployeeAdminController.DeleteUser(System.Int32)">
             <summary>
             Delete Employee
             </summary>

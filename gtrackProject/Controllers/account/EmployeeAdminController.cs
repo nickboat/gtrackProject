@@ -158,7 +158,7 @@ namespace gtrackProject.Controllers.account
         /// <param name="id">id *int*</param>
         /// <returns>HTTP Status</returns>
         [HttpDelete]
-        public async Task<IHttpActionResult> DeleteRole(int id)
+        public async Task<IHttpActionResult> DeleteUser(int id)
         {
             try
             {

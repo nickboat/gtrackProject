@@ -34,8 +34,22 @@ namespace gtrackProject.Repositories.driver
             return await IdExist(id);
         }
 
-        public async Task<Driver> Add(Driver item)
+        public async Task<Driver> Add(DriverModel item)
         {
+                //add to asp.net Identity
+            var usrIden = new IdentityUser(item.UserName);
+            var usrResult = await UserManager.CreateAsync(usrIden, item.UserName);//pass is same username **by default**
+            if (!usrResult.Succeeded)
+            {
+                throw new DbUpdateException(usrResult.Errors.First());
+            }
+
+            var roleResult = await UserManager.AddToRoleAsync(usrIden.Id, "driver");
+            if (!roleResult.Succeeded)
+            {
+                throw new DbUpdateException(roleResult.Errors.First());
+            }
+
             var driver = new Driver
             {
                 IdCard = item.IdCard,
@@ -45,12 +59,12 @@ namespace gtrackProject.Repositories.driver
                 Gender = item.Gender,
                 DriverIdCard = item.DriverIdCard,
                 ZipCode = item.ZipCode,
-                CategoryId = await CateExist(item.CategoryId)
+                CategoryId = await CateExist(item.CategoryId),
+                AspId = usrIden.Id
             };
 
             if (item.ExpireCard != null) driver.ExpireCard = item.ExpireCard.Value;
             if (item.TitleName != null) driver.TitleName = item.TitleName;
-            if (item.AspId != null) driver.AspId = await AspExist(item.AspId);
 
             driver = _db.Drivers.Add(driver);
             try
@@ -78,7 +92,6 @@ namespace gtrackProject.Repositories.driver
 
             if (item.ExpireCard != null) driver.ExpireCard = item.ExpireCard.Value;
             if (item.TitleName != null) driver.TitleName = item.TitleName;
-            if (item.AspId != null) driver.AspId = await AspExist(item.AspId);
 
             _db.Entry(driver).State = EntityState.Modified;
             try
@@ -96,16 +109,21 @@ namespace gtrackProject.Repositories.driver
         public async Task<bool> Remove(int id)
         {
             var driver = await IdExist(id);
-            var usr = await AspContext.Users.FirstAsync(u => u.Id == driver.AspId);
-            AspContext.Users.Remove(usr);
 
-            try
+            //remove asp.net identity user
+            var usr = await AspContext.Users.FirstAsync(u => u.Id == driver.AspId);
+            if (usr != null)
             {
-                await AspContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new DbUpdateConcurrencyException(ex.Message);
+                AspContext.Users.Remove(usr);
+
+                try
+                {
+                    await AspContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new DbUpdateConcurrencyException(ex.Message);
+                }
             }
 
             _db.Drivers.Remove(driver);
@@ -131,13 +149,7 @@ namespace gtrackProject.Repositories.driver
         {
             var cate = await _db.DriverCategory.FirstOrDefaultAsync(o => o.Id == id);
             if (cate != null) return id;
-            throw new ArgumentException("Employee Not Found");
-        }
-        private async Task<string> AspExist(string id)
-        {
-            var userIden = await UserManager.FindByIdAsync(id);
-            if (userIden != null) return id;
-            throw new ArgumentException("UserId Not Found");
+            throw new ArgumentException("Category Not Found");
         }
     }
 }

@@ -258,6 +258,7 @@
     <Compile Include="Models\account\EmployeeAdminModel.cs" />
     <Compile Include="Models\account\customer.cs" />
     <Compile Include="Models\driver\driver.cs" />
+    <Compile Include="Models\driver\DriverModel.cs" />
     <Compile Include="Models\driver\driver_category.cs" />
     <Compile Include="Models\account\employee.cs" />
     <Compile Include="Models\Mapping\product\product_camera_statusMap.cs" />

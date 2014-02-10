@@ -13,6 +13,7 @@ namespace gtrackProject.Controllers.driver
 {
     /// <summary>
     /// RoleAdminController - CRUD Driver User.
+    /// ** test complete **
     /// </summary>
     [Authorize(Roles = "cs, admin, customer")]
     public class DriverController : ApiController
@@ -71,11 +72,11 @@ namespace gtrackProject.Controllers.driver
         /// <summary>
         /// Post a Driver
         /// </summary>
-        /// <param name="value">The <see cref="Driver"/>.</param>
+        /// <param name="value">The <see cref="DriverModel"/>.</param>
         /// <returns>Driver</returns>
         [HttpPost]
         [ResponseType(typeof(Driver))]
-        public async Task<IHttpActionResult> Post([FromBody]Driver value)
+        public async Task<IHttpActionResult> Post([FromBody]DriverModel value)
         {
             if (!ModelState.IsValid)
             {

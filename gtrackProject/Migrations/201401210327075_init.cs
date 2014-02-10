@@ -177,7 +177,7 @@ namespace gtrackProject.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        IDCard = c.Int(nullable: false),
+                        IDCard = c.Long(nullable: false),
                         ExpireCard = c.Short(),
                         TitleName = c.String(maxLength: 6),
                         FirstName = c.String(nullable: false, maxLength: 30),
