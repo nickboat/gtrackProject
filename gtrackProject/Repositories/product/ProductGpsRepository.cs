@@ -38,23 +38,13 @@ namespace gtrackProject.Repositories.product
 
             var newProduct = new ProductGps();
 
-            //config
-            newProduct.SimNum = await PhoneNumExist(item.SimNum);
+            var ver = await VersionExist(item.Version);
+            newProduct.Version = ver.Id;
 
-            if (item.SimBrandId != null) 
-                newProduct.SimBrandId = await SimBrandExist(item.SimBrandId.Value);
-
-            if (item.SimPaymentTypeId != null)
-                newProduct.SimPaymentTypeId = await SimPaymentExist(item.SimPaymentTypeId.Value);
-
-            if (item.MemoryId != null)
-                newProduct.MemoryId = await MemoryExist(item.MemoryId.Value);
-
-            newProduct.Serial = await SerialExist(item.Serial);
-            newProduct.Version = await VersionExist(item.Version);
+            newProduct.Serial = await createSerial(ver.Name);
 
             //status
-            newProduct.CreateDate = item.CreateDate;
+            newProduct.CreateDate = DateTime.UtcNow;
             newProduct.CreateBy = await empExist(item.CreateBy.Value);
             newProduct.State = 1;
 
@@ -75,7 +65,8 @@ namespace gtrackProject.Repositories.product
             var product = await IdExist(item.Id);
 
             //config
-            product.SimNum = await PhoneNumExist(item.SimNum);
+            if (item.SimNum != null)
+                product.SimNum = await PhoneNumExist(item.SimNum);
 
             if (item.SimBrandId != null)
                 product.SimBrandId = await SimBrandExist(item.SimBrandId.Value);
@@ -87,45 +78,46 @@ namespace gtrackProject.Repositories.product
                 product.MemoryId = await MemoryExist(item.MemoryId.Value);
 
             product.Serial = await SerialExist(item.Serial);
-            product.Version = await VersionExist(item.Version);
+            var ver = await VersionExist(item.Version);
+            product.Version = ver.Id;
 
-            if (item.ExpireDate != null)
+            if (item.ExpireDate != null)//client use datetime UTC format
                 product.ExpireDate = item.ExpireDate.Value;
 
-            if (item.LastExtendDate != null)
+            if (item.LastExtendDate != null)//client use datetime UTC format
                 product.LastExtendDate = item.LastExtendDate.Value;
 
             //status
             if (item.StockBy != null)
             {
                 product.StockBy = await empExist(item.StockBy.Value);
-                product.StockDate = item.StockDate;
+                product.StockDate = DateTime.UtcNow;
                 product.State = 2;
             }
             else if (item.QcBy != null)
             {
                 product.QcBy = await empExist(item.QcBy.Value);
-                product.QcDate = item.QcDate;
+                product.QcDate = DateTime.UtcNow;
                 product.State = 3;
             }
             else if (item.InstallBy != null)
             {
                 product.InstallBy = await empExist(item.InstallBy.Value);
-                product.InstallDate = item.InstallDate;
+                product.InstallDate = DateTime.UtcNow;
                 product.State = 4;
                 product.ErrProductComment = item.ErrProductComment;
             }
             else if (item.BadBy != null)
             {
                 product.BadBy = await empExist(item.BadBy.Value);
-                product.BadDate = item.BadDate;
+                product.BadDate = DateTime.UtcNow;
                 product.BadComment = item.BadComment;
                 product.State = 5;
             }
             else if (item.UnuseableBy != null)
             {
                 product.UnuseableBy = await empExist(item.UnuseableBy.Value);
-                product.UnuseableDate = item.UnuseableDate;
+                product.UnuseableDate = DateTime.UtcNow;
                 product.UnuseableComment = item.UnuseableComment;
                 product.State = 6;
             }
@@ -195,10 +187,10 @@ namespace gtrackProject.Repositories.product
             if (product == null) return serial;
             throw new ArgumentException("This Serial ( " + serial + " ) is already taken");
         }
-        private async Task<byte> VersionExist(byte id)
+        private async Task<ProductGpsVersion> VersionExist(byte id)
         {
             var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(v => v.Id == id);
-            if (ver != null) return id;
+            if (ver != null) return ver;
             throw new ArgumentException("GpsVersionsId Not Found");
         }
         private async Task<int> empExist(int id)
@@ -212,6 +204,18 @@ namespace gtrackProject.Repositories.product
             var status = await _db.ProductGpsMemorys.FirstOrDefaultAsync(s => s.Id == id);
             if (status != null) return id;
             throw new ArgumentException("ProductGpsMemoryId Not Found");
+        }
+
+        private async Task<string> createSerial(string verName)
+        {
+            while (true)
+            {
+                var r = new Random();
+                var n = r.Next(1000000);
+                var sr = verName + DateTime.Now.ToString("yy") + n.ToString("D6");
+                if (await SerialExist(sr) == null)
+                    return sr;
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace gtrackProject.Models.product
         }
         [Key]
         public int Id { get; set; }
-        [Required]
+        [RegularExpression(@"^0\d{9}$", ErrorMessage = "Invalid SIM Number")]
         public string SimNum { get; set; }
         [ForeignKey("SimBrand")]
         public byte? SimBrandId { get; set; }
