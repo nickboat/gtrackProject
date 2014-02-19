@@ -39,11 +39,23 @@ namespace gtrackProject.Models.Mapping.account
             Property(t => t.Phone).HasColumnName("Phone");
             Property(t => t.Email).HasColumnName("Email");
             Property(t => t.CompanyName).HasColumnName("CompanyName");
+            Property(t => t.CreateDate).HasColumnName("CreateDate");
+            Property(t => t.CreateBy).HasColumnName("CreateBy");
+            Property(t => t.Leader).HasColumnName("Leader");
+            Property(t => t.IdCard).HasColumnName("IDCard");
 
             // Relationships
             HasRequired(t => t.Hd)
                 .WithMany(t => t.Customers)
                 .HasForeignKey(d => d.Hd_Id);
+
+            HasOptional(t => t.LeaderCustomer)
+                .WithMany(t => t.ThisLeaders)
+                .HasForeignKey(d => d.Leader);
+
+            HasOptional(t => t.CreateByEmployee)
+                .WithMany(t => t.CustCreates)
+                .HasForeignKey(d => d.CreateBy);
         }
     }
 }

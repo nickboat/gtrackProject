@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -7,6 +9,11 @@ namespace gtrackProject.Models.account
 {
     public class Customer
     {
+        public Customer()
+        {
+            ThisLeaders = new List<Customer>();
+        }
+
         [Key]
         public int Id { get; set; }
         [JsonIgnore]
@@ -24,7 +31,26 @@ namespace gtrackProject.Models.account
         public string Email { get; set; }
         [StringLength(100, MinimumLength = 4, ErrorMessage = "CompanyName must be atleast 4 characters")]
         public string CompanyName { get; set; }
+        public DateTime CreateDate { get; set; }
+        [ForeignKey("CreateByEmployee")]
+        public int? CreateBy { get; set; }
+        [ForeignKey("LeaderCustomer")]
+        public int? Leader { get; set; }
+        [Required]
+        [Range(1000000000000, 9999999999999)]
+        public long IdCard { get; set; }
+
+
         [JsonIgnore]
         public virtual Hd Hd { get; set; }
+        [JsonIgnore]
+        public virtual Employee CreateByEmployee { get; set; }
+        [JsonIgnore]
+        public virtual Customer LeaderCustomer { get; set; }
+
+
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<Customer> ThisLeaders { get; set; }
     }
 }

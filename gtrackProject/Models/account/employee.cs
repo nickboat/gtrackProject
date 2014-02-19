@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
@@ -24,6 +25,9 @@ namespace gtrackProject.Models.account
             GpsInstalls = new List<ProductGps>();
             GpsBads = new List<ProductGps>();
             GpsUnuses = new List<ProductGps>();
+            CustCreates = new List<Customer>();
+            ThisEmpCreates = new List<Employee>();
+            ThisEmpLeaders = new List<Employee>();
         }
         [Key]
         public int Id { get; set; }
@@ -39,6 +43,22 @@ namespace gtrackProject.Models.account
         [RegularExpression(@"^(m|f)$", ErrorMessage = "Please use 'm' = male, 'f' = female")]
         public string Gender { get; set; }
         public DateTime BirthDate { get; set; }
+        public DateTime? GetInDate { get; set; }
+        public DateTime? GetOutDate { get; set; }
+        public DateTime CreateDate { get; set; }
+        [ForeignKey("CreateByEmployee")]
+        public int? CreateBy { get; set; }
+        [ForeignKey("LeaderEmployee")]
+        public int? Leader { get; set; }
+        [Required]
+        [Range(1000000000000, 9999999999999)]
+        public long IdCard { get; set; }
+
+        [JsonIgnore]
+        public virtual Employee CreateByEmployee { get; set; }
+        [JsonIgnore]
+        public virtual Employee LeaderEmployee { get; set; }
+
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<FixOrders> FixCreates { get; set; }
@@ -75,5 +95,14 @@ namespace gtrackProject.Models.account
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<ProductGps> GpsUnuses { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<Customer> CustCreates { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<Employee> ThisEmpCreates { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<Employee> ThisEmpLeaders { get; set; }
     }
 }

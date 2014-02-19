@@ -37,6 +37,21 @@ namespace gtrackProject.Models.Mapping
             Property(t => t.AspId).HasColumnName("AspId");
             Property(t => t.Gender).HasColumnName("Gender");
             Property(t => t.BirthDate).HasColumnName("BirthDate");
+            Property(t => t.GetInDate).HasColumnName("GetInDate");
+            Property(t => t.GetOutDate).HasColumnName("GetOutDate");
+            Property(t => t.CreateDate).HasColumnName("CreateDate");
+            Property(t => t.CreateBy).HasColumnName("CreateBy");
+            Property(t => t.Leader).HasColumnName("Leader");
+            Property(t => t.IdCard).HasColumnName("IDCard");
+
+            // Relationships
+            HasOptional(t => t.CreateByEmployee)
+                .WithMany(t => t.ThisEmpCreates)
+                .HasForeignKey(d => d.CreateBy);
+
+            HasOptional(t => t.LeaderEmployee)
+                .WithMany(t => t.ThisEmpLeaders)
+                .HasForeignKey(d => d.Leader);
         }
     }
 }
