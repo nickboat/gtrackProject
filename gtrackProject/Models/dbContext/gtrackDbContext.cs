@@ -63,6 +63,8 @@ namespace gtrackProject.Models.dbContext
         public DbSet<VehicleOganize> VehicleOganizes { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<UserConfig> UserConfigs { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -101,6 +103,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new VehicleOganizeMap());
             modelBuilder.Configurations.Add(new VehicleTypeMap());
             modelBuilder.Configurations.Add(new VehicleMap());
+            modelBuilder.Configurations.Add(new UserConfigMap());
         }
     }
 }
