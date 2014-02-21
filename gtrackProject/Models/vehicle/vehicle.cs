@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using gtrackProject.Models.account;
+using gtrackProject.Models.driver;
 using gtrackProject.Models.universe;
 using Newtonsoft.Json;
 
@@ -42,8 +43,14 @@ namespace gtrackProject.Models.vehicle
         public virtual VehicleColor VehicleColor { get; set; }
         public virtual VehicleModel VehicleModel { get; set; }
         public virtual VehicleOganize VehicleOganize { get; set; }
+
+
+
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogCardReader> LogCardReaders { get; set; }
     }
 }

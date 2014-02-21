@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using gtrackProject.Models.account;
+using gtrackProject.Models.driver;
 using gtrackProject.Models.universe;
 using Newtonsoft.Json;
 
@@ -80,11 +81,17 @@ namespace gtrackProject.Models.product
         public virtual ProductGpsVersion ProductGpsVersion { get; set; }
         [JsonIgnore]
         public virtual ProductGpsMemoryStatus MemoryStatus { get; set; }
+
+
+
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<ProductCamera> Cameras { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogCardReader> LogCardReaders { get; set; }
     }
 }

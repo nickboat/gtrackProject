@@ -12,6 +12,7 @@ namespace gtrackProject.Models.driver
         public Driver()
         {
             Universes = new List<Universe>();
+            LogCardReaders = new List<LogCardReader>();
         }
         [Key]
         public int Id { get; set; }
@@ -44,11 +45,18 @@ namespace gtrackProject.Models.driver
         [JsonIgnore]
         [IgnoreDataMember]
         public string AspId { get; set; }//Asp_Id
+
+
         [JsonIgnore]
         //[IgnoreDataMember]
         public virtual DriverCategory DriverCategory { get; set; }
+
+
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogCardReader> LogCardReaders { get; set; }
     }
 }
