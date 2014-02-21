@@ -4,9 +4,9 @@ using gtrackProject.Models.order;
 
 namespace gtrackProject.Models.Mapping.order
 {
-    public class FixOrdersMap : EntityTypeConfiguration<FixOrders>
+    public class FixOrderMap : EntityTypeConfiguration<FixOrder>
     {
-        public FixOrdersMap()
+        public FixOrderMap()
         {
             // Primary Key
             HasKey(t => t.Id);
@@ -24,6 +24,10 @@ namespace gtrackProject.Models.Mapping.order
             Property(t => t.HeadInstall).HasColumnName("HeadInstall");
             Property(t => t.Comment).HasColumnName("Comment");
             Property(t => t.State).HasColumnName("Status");
+            Property(t => t.FromOrderId).HasColumnName("FromOrderId");
+            Property(t => t.FromFixOrderId).HasColumnName("FromFixOrderId");
+            Property(t => t.ProblemProduct).HasColumnName("ProblemProduct");
+            Property(t => t.SolvedProduct).HasColumnName("SolvedProduct");
 
             // Relationships
             HasOptional(t => t.CreateByEmployee)
@@ -38,6 +42,18 @@ namespace gtrackProject.Models.Mapping.order
             HasOptional(t => t.OrderProcessState)
                 .WithMany(t => t.FixOrders)
                 .HasForeignKey(d => d.State);
+            HasOptional(t => t.FromOrder)
+                .WithMany(t => t.FixOrders)
+                .HasForeignKey(d => d.FromOrderId);
+            HasOptional(t => t.FromFixOrder)
+                .WithMany(t => t.FixOrders)
+                .HasForeignKey(d => d.FromFixOrderId);
+            HasRequired(t => t.ProblemGps)
+                .WithMany(t => t.ProblemProductFixOrders)
+                .HasForeignKey(d => d.ProblemProduct);
+            HasRequired(t => t.SolvedGps)
+                .WithMany(t => t.SolvedProductFixOrders)
+                .HasForeignKey(d => d.SolvedProduct);
                         
         }
     }

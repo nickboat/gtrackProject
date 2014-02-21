@@ -19,17 +19,17 @@ namespace gtrackProject.Repositories.order
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<FixOrders> GetAll()
+        public IQueryable<FixOrder> GetAll()
         {
             return _db.FixOrders;
         }
 
-        public async Task<FixOrders> Get(int id)
+        public async Task<FixOrder> Get(int id)
         {
             return await IdExist(id);
         }
 
-        public async Task<FixOrders> Add(FixOrders item)
+        public async Task<FixOrder> Add(FixOrder item)
         {
             if (!item.CreateBy.HasValue)
             {
@@ -40,7 +40,7 @@ namespace gtrackProject.Repositories.order
                 throw new ArgumentNullException("Status", "Status is Required");
             }
 
-            var fix = new FixOrders
+            var fix = new FixOrder
             {
                 CreateBy = await EmpExist(item.CreateBy.Value),
                 CreateDate = item.CreateDate,
@@ -63,7 +63,7 @@ namespace gtrackProject.Repositories.order
             }
         }
 
-        public async Task<bool> Update(FixOrders item)
+        public async Task<bool> Update(FixOrder item)
         {
             if (!item.CreateBy.HasValue)
             {
@@ -112,7 +112,7 @@ namespace gtrackProject.Repositories.order
             return true;
         }
 
-        private async Task<FixOrders> IdExist(int id)
+        private async Task<FixOrder> IdExist(int id)
         {
             var fix = await _db.FixOrders.FirstOrDefaultAsync(o => o.Id == id);
             if (fix != null) return fix;

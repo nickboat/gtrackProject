@@ -49,8 +49,6 @@ namespace gtrackProject.Repositories.order
                 HdId = await HdExist(item.HdId),
                 Version = await VersionExist(item.Version.Value),
                 Quantity = item.Quantity,
-                PricePerUnit = item.PricePerUnit,
-                FeePerYear = item.FeePerYear,
                 State = 1,
                 Deadline = item.Deadline
             };
@@ -58,7 +56,6 @@ namespace gtrackProject.Repositories.order
             if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
             if (item.HeadInstall != null) order.HeadInstall = await EmpExist(item.HeadInstall.Value);
             if (item.Comment != null) order.Comment = item.Comment;
-            if (item.ExtendTypeId != null) order.ExtendTypeId = await ExtendExist(item.ExtendTypeId.Value);
             
             order = _db.Orders.Add(order);
             try
@@ -102,15 +99,12 @@ namespace gtrackProject.Repositories.order
             order.HdId = await HdExist(item.HdId);
             order.Version = await VersionExist(item.Version.Value);
             order.Quantity = item.Quantity;
-            order.PricePerUnit = item.PricePerUnit;
-            order.FeePerYear = item.FeePerYear;
             order.State = await StatusExist(item.State.Value);
             order.Deadline = item.Deadline;            
 
             if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
             if (item.HeadInstall != null) order.HeadInstall = await EmpExist(item.HeadInstall.Value);
             if (item.Comment != null) order.Comment = item.Comment;
-            if (item.ExtendTypeId != null) order.ExtendTypeId = await ExtendExist(item.ExtendTypeId.Value);
 
             if (changeHd || changeQuantity) await changeOrder(changeHd, changeQuantity, order.HdId, item.HdId, order.Quantity, order.Id);
 
@@ -169,12 +163,6 @@ namespace gtrackProject.Repositories.order
             var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(o => o.Id == id);
             if (ver != null) return id;
             throw new ArgumentException("ProductGpsVersion Not Found");
-        }
-        private async Task<byte> ExtendExist(byte id)
-        {
-            var ext = await _db.OrderExtendTypes.FirstOrDefaultAsync(o => o.Id == id);
-            if (ext != null) return id;
-            throw new ArgumentException("OrderExtendType Not Found");
         }
         private async Task<byte> StatusExist(byte id)
         {

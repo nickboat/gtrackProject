@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using gtrackProject.Models.account;
 using gtrackProject.Models.driver;
+using gtrackProject.Models.order;
 using gtrackProject.Models.universe;
 using Newtonsoft.Json;
 
@@ -15,6 +16,8 @@ namespace gtrackProject.Models.product
         {
             Cameras = new List<ProductCamera>();
             Universes = new List<Universe>();
+            ProblemProductFixOrders = new List<FixOrder>();
+            SolvedProductFixOrders = new List<FixOrder>();
         }
         [Key]
         public int Id { get; set; }
@@ -93,5 +96,11 @@ namespace gtrackProject.Models.product
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogCardReader> LogCardReaders { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<FixOrder> ProblemProductFixOrders { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<FixOrder> SolvedProductFixOrders { get; set; }
     }
 }

@@ -2,16 +2,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using gtrackProject.Models.account;
+using gtrackProject.Models.product;
 using gtrackProject.Models.universe;
 using Newtonsoft.Json;
 
 namespace gtrackProject.Models.order
 {
-    public class FixOrders
+    public class FixOrder
     {
-        public FixOrders()
+        public FixOrder()
         {
             Universes = new List<Universe>();
+            FixOrders = new List<FixOrder>();
         }
         [Key]
         public int Id { get; set; }
@@ -26,6 +28,14 @@ namespace gtrackProject.Models.order
         public string Comment { get; set; }
         [ForeignKey("OrderProcessState")]
         public byte? State { get; set; }
+        [ForeignKey("FromOrder")]
+        public int? FromOrderId { get; set; }
+        [ForeignKey("FromFixOrder")]
+        public int? FromFixOrderId { get; set; }
+        [ForeignKey("ProblemGps")]
+        public int ProblemProduct { get; set; }
+        [ForeignKey("SolvedGps")]
+        public int SolvedProduct { get; set; }
 
 
         [JsonIgnore]
@@ -37,7 +47,21 @@ namespace gtrackProject.Models.order
         [JsonIgnore]
         public virtual OrderProcessState OrderProcessState { get; set; }
         [JsonIgnore]
+        public virtual Order FromOrder { get; set; }
+        [JsonIgnore]
+        public virtual FixOrder FromFixOrder { get; set; }
+        [JsonIgnore]
+        public virtual ProductGps ProblemGps { get; set; }
+        [JsonIgnore]
+        public virtual ProductGps SolvedGps { get; set; }
+        
+
+
+        [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<FixOrder> FixOrders { get; set; }
     }
 }

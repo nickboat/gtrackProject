@@ -768,54 +768,6 @@
             <param name="id">id *int*</param>
             <returns>HTTP Status</returns>
         </member>
-        <member name="T:gtrackProject.Controllers.order.ExtendTypeController">
-            <summary>
-            ExtendTypeController - CRUD Order Extend Type By cs,admin.
-            ** test complete **
-            </summary>
-        </member>
-        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.#ctor(gtrackProject.Repositories.order.IRepos.IOdExtendTypeRepository)">
-            <summary>
-            Call repository
-            </summary>
-            <param name="repository"> The <see cref="T:gtrackProject.Repositories.order.IRepos.IOdExtendTypeRepository"/>.</param>
-            <exception cref="T:System.ArgumentNullException">repository isNull</exception>
-        </member>
-        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Get">
-            <summary>
-            Gets All extendTypes. *Queryable*
-            </summary>
-            <returns>OrderExtendType</returns>
-        </member>
-        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Get(System.Byte)">
-            <summary>
-            Get a extendType.
-            </summary>
-            <param name="id">id *byte*</param>
-            <returns>OrderExtendType</returns>
-        </member>
-        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Post(gtrackProject.Models.order.OrderExtendType)">
-            <summary>
-            Post a extendType.
-            </summary>
-            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderExtendType"/>.</param>
-            <returns>OrderExtendType</returns>
-        </member>
-        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Put(System.Byte,gtrackProject.Models.order.OrderExtendType)">
-            <summary>
-            Put a extendType.
-            </summary>
-            <param name="id">id *byte*</param>
-            <param name="value">The <see cref="T:gtrackProject.Models.order.OrderExtendType"/>.</param>
-            <returns>HTTP Status</returns>
-        </member>
-        <member name="M:gtrackProject.Controllers.order.ExtendTypeController.Delete(System.Byte)">
-            <summary>
-            Delete a extendType.
-            </summary>
-            <param name="id">id *byte*</param>
-            <returns>HTTP Status</returns>
-        </member>
         <member name="T:gtrackProject.Controllers.order.FixOrderController">
             <summary>
             FixOrderController - CRUD Fix Order By admin, cs, install and qc.
@@ -841,19 +793,19 @@
             <param name="id">id int**</param>
             <returns>FixOrder</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.order.FixOrderController.Post(gtrackProject.Models.order.FixOrders)">
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.Post(gtrackProject.Models.order.FixOrder)">
             <summary>
             Post a FixOrder
             </summary>
-            <param name="value">The <see cref="T:gtrackProject.Models.order.FixOrders"/>.</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.FixOrder"/>.</param>
             <returns>FixOrder</returns>
         </member>
-        <member name="M:gtrackProject.Controllers.order.FixOrderController.Put(System.Int32,gtrackProject.Models.order.FixOrders)">
+        <member name="M:gtrackProject.Controllers.order.FixOrderController.Put(System.Int32,gtrackProject.Models.order.FixOrder)">
             <summary>
             Put a FixOrder
             </summary>
             <param name="id">id *int*</param>
-            <param name="value">The <see cref="T:gtrackProject.Models.order.FixOrders"/>.</param>
+            <param name="value">The <see cref="T:gtrackProject.Models.order.FixOrder"/>.</param>
             <returns>HTTP Status</returns>
         </member>
         <member name="M:gtrackProject.Controllers.order.FixOrderController.Delete(System.Int32)">

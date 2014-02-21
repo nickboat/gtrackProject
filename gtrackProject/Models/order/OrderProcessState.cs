@@ -11,7 +11,7 @@ namespace gtrackProject.Models.order
     {
         public OrderProcessState()
         {
-            FixOrders = new List<FixOrders>();
+            FixOrders = new List<FixOrder>();
             Orders = new List<Order>();
         }
         [Key]
@@ -22,7 +22,7 @@ namespace gtrackProject.Models.order
         public string StatusEn { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<FixOrders> FixOrders { get; set; }
+        public ICollection<FixOrder> FixOrders { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Order> Orders { get; set; }

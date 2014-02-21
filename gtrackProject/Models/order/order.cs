@@ -13,6 +13,7 @@ namespace gtrackProject.Models.order
         public Order()
         {
             Universes = new List<Universe>();
+            FixOrders = new List<FixOrder>();
         }
         [Key]
         public int Id { get; set; }
@@ -29,14 +30,10 @@ namespace gtrackProject.Models.order
         [ForeignKey("ProductGpsVersion")]
         public byte? Version { get; set; }
         [Required] public int Quantity { get; set; }
-        [Required] public decimal PricePerUnit { get; set; }
-        [Required] public decimal FeePerYear { get; set; }
         public string Comment { get; set; }
         [ForeignKey("OrderProcessState")]
         public byte? State { get; set; }
         [Required] public System.DateTime Deadline { get; set; }
-        [ForeignKey("OrderExtendType")]
-        public byte? ExtendTypeId { get; set; }
 
 
 
@@ -49,13 +46,17 @@ namespace gtrackProject.Models.order
         [JsonIgnore]
         public virtual Hd Hd { get; set; }
         [JsonIgnore]
-        public virtual OrderExtendType OrderExtendType { get; set; }
-        [JsonIgnore]
         public virtual OrderProcessState OrderProcessState { get; set; }
         [JsonIgnore]
         public virtual ProductGpsVersion ProductGpsVersion { get; set; }
+
+
+
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<FixOrder> FixOrders { get; set; }
     }
 }

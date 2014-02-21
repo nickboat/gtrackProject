@@ -40,7 +40,7 @@ namespace gtrackProject.Controllers.order
         /// <returns>FixOrders</returns>
         [Authorize]
         [Queryable]
-        public IQueryable<FixOrders> Get()
+        public IQueryable<FixOrder> Get()
         {
             return _repository.GetAll();
         }
@@ -53,7 +53,7 @@ namespace gtrackProject.Controllers.order
         /// <returns>FixOrder</returns>
         [Authorize]
         [HttpGet]
-        [ResponseType(typeof(FixOrders))]
+        [ResponseType(typeof(FixOrder))]
         public async Task<IHttpActionResult> Get(int id)
         {
             try
@@ -71,11 +71,11 @@ namespace gtrackProject.Controllers.order
         /// <summary>
         /// Post a FixOrder
         /// </summary>
-        /// <param name="value">The <see cref="FixOrders"/>.</param>
+        /// <param name="value">The <see cref="FixOrder"/>.</param>
         /// <returns>FixOrder</returns>
         [HttpPost]
-        [ResponseType(typeof(FixOrders))]
-        public async Task<IHttpActionResult> Post([FromBody]FixOrders value)
+        [ResponseType(typeof(FixOrder))]
+        public async Task<IHttpActionResult> Post([FromBody]FixOrder value)
         {
             if (!ModelState.IsValid)
             {
@@ -102,10 +102,10 @@ namespace gtrackProject.Controllers.order
         /// Put a FixOrder
         /// </summary>
         /// <param name="id">id *int*</param>
-        /// <param name="value">The <see cref="FixOrders"/>.</param>
+        /// <param name="value">The <see cref="FixOrder"/>.</param>
         /// <returns>HTTP Status</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]FixOrders value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]FixOrder value)
         {
             if (!ModelState.IsValid)
             {
@@ -144,7 +144,7 @@ namespace gtrackProject.Controllers.order
         /// <param name="id">id *int*</param>
         /// <returns>HTTP Status</returns>
         [HttpDelete]
-        [ResponseType(typeof(FixOrders))]
+        [ResponseType(typeof(FixOrder))]
         public async Task<IHttpActionResult> Delete(int id)
         {
             try

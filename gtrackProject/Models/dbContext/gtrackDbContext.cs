@@ -32,10 +32,9 @@ namespace gtrackProject.Models.dbContext
         public DbSet<DriverCategory> DriverCategory { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<FixOrders> FixOrders { get; set; }
+        public DbSet<FixOrder> FixOrders { get; set; }
         public DbSet<Hd> Hds { get; set; }
         public DbSet<LpType> LpTypes { get; set; }
-        public DbSet<OrderExtendType> OrderExtendTypes { get; set; }
         public DbSet<OrderProcessState> OrderProcessStates { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductCamera> ProductCameras { get; set; }
@@ -72,10 +71,9 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new DriverCategoryMap());
             modelBuilder.Configurations.Add(new DriverMap());
             modelBuilder.Configurations.Add(new EmployeeMap());
-            modelBuilder.Configurations.Add(new FixOrdersMap());
+            modelBuilder.Configurations.Add(new FixOrderMap());
             modelBuilder.Configurations.Add(new HdMap());
             modelBuilder.Configurations.Add(new LpTypeMap());
-            modelBuilder.Configurations.Add(new OrderExtendTypeMap());
             modelBuilder.Configurations.Add(new OrderProcessStateMap());
             modelBuilder.Configurations.Add(new OrderMap());
             modelBuilder.Configurations.Add(new ProductCameraMap());

@@ -6,10 +6,10 @@ namespace gtrackProject.Repositories.order.IRepos
 {
     public interface IFixOrderRepository
     {
-        IQueryable<FixOrders> GetAll();
-        Task<FixOrders> Get(int id);
-        Task<FixOrders> Add(FixOrders item);
-        Task<bool> Update(FixOrders item);
+        IQueryable<FixOrder> GetAll();
+        Task<FixOrder> Get(int id);
+        Task<FixOrder> Add(FixOrder item);
+        Task<bool> Update(FixOrder item);
         Task<bool> Remove(int id);
     }
 }
