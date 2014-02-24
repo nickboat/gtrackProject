@@ -51,9 +51,9 @@ namespace gtrackProject.Models.order
         [JsonIgnore]
         public virtual FixOrder FromFixOrder { get; set; }
         [JsonIgnore]
-        public virtual ProductGps ProblemGps { get; set; }
+        public virtual Gps ProblemGps { get; set; }
         [JsonIgnore]
-        public virtual ProductGps SolvedGps { get; set; }
+        public virtual Gps SolvedGps { get; set; }
         
 
 

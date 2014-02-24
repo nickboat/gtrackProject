@@ -6,10 +6,10 @@ namespace gtrackProject.Repositories.product.IRepos
 {
     public interface IProductGpsRepository
     {
-        IQueryable<ProductGps> GetAll();
-        Task<ProductGps> Get(int id);
-        Task<ProductGps> Add(ProductGps item);
-        Task<bool> Update(ProductGps item);
+        IQueryable<Gps> GetAll();
+        Task<Gps> Get(int id);
+        Task<Gps> Add(Gps item);
+        Task<bool> Update(Gps item);
         Task<bool> Remove(int id);
     }
 }

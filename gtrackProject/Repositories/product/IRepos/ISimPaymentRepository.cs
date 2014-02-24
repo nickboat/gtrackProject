@@ -6,10 +6,10 @@ namespace gtrackProject.Repositories.product.IRepos
 {
     public interface ISimPaymentRepository
     {
-        IQueryable<SimPaymentType> GetAll();
-        Task<SimPaymentType> Get(byte id);
-        Task<SimPaymentType> Add(SimPaymentType item);
-        Task<bool> Update(SimPaymentType item);
+        IQueryable<SimFeeType> GetAll();
+        Task<SimFeeType> Get(byte id);
+        Task<SimFeeType> Add(SimFeeType item);
+        Task<bool> Update(SimFeeType item);
         Task<bool> Remove(byte id);
     }
 }

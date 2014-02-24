@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using gtrackProject.Models.account;
 using gtrackProject.Models.driver;
+using gtrackProject.Models.product;
 using gtrackProject.Models.universe;
 using Newtonsoft.Json;
 
@@ -13,6 +14,11 @@ namespace gtrackProject.Models.vehicle
         public Vehicle()
         {
             Universes = new List<Universe>();
+            LogDeletes=new List<LogDelete>();
+            FirstLogMoves=new List<LogMove>();
+            MoveLogMoves=new List<LogMove>();
+            LogASwaps=new List<LogSwap>();
+            LogBSwaps=new List<LogSwap>();
         }
         [Key]
         public int Id { get; set; }
@@ -52,5 +58,20 @@ namespace gtrackProject.Models.vehicle
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogCardReader> LogCardReaders { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogDelete> LogDeletes { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogMove> FirstLogMoves { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogMove> MoveLogMoves { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogSwap> LogASwaps { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogSwap> LogBSwaps { get; set; }
     }
 }

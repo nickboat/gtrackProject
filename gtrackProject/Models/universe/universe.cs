@@ -65,7 +65,7 @@ namespace gtrackProject.Models.universe
         public virtual Driver Driver { get; set; }
         public virtual FixOrder FixOrder { get; set; }
         public virtual Order Order { get; set; }
-        public virtual ProductGps ProductGps { get; set; }
+        public virtual Gps ProductGps { get; set; }
         public virtual UnCmBatt UnCmBatt { get; set; }
         public virtual UnCmComm UnCmComm { get; set; }
         public virtual UnCmEngine UnCmEngine { get; set; }

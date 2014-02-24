@@ -19,21 +19,21 @@ namespace gtrackProject.Repositories.product
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<SimBrand> GetAll()
+        public IQueryable<SimNetwork> GetAll()
         {
             return _db.SimBrands;
         }
 
-        public async Task<SimBrand> Get(byte id)
+        public async Task<SimNetwork> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<SimBrand> Add(SimBrand item)
+        public async Task<SimNetwork> Add(SimNetwork item)
         {
             if (await NameExist(item.BrandName)) return null;
 
-            var newBrand = new SimBrand
+            var newBrand = new SimNetwork
             {
                 BrandName = item.BrandName
             };
@@ -50,7 +50,7 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(SimBrand item)
+        public async Task<bool> Update(SimNetwork item)
         {
             var brand = await IdExist(item.Id);
 
@@ -88,7 +88,7 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<SimBrand> IdExist(byte id)
+        private async Task<SimNetwork> IdExist(byte id)
         {
             var brand = await _db.SimBrands.FirstOrDefaultAsync(b => b.Id == id);
             if (brand != null) return brand;

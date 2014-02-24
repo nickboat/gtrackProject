@@ -19,24 +19,24 @@ namespace gtrackProject.Repositories.product
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<ProductGps> GetAll()
+        public IQueryable<Gps> GetAll()
         {
             return _db.ProductGpss;
         }
 
-        public async Task<ProductGps> Get(int id)
+        public async Task<Gps> Get(int id)
         {
             return await IdExist(id);
         }
 
-        public async Task<ProductGps> Add(ProductGps item)
+        public async Task<Gps> Add(Gps item)
         {
             if (!item.CreateBy.HasValue)
             {
                 throw new ArgumentNullException("CreateBy", "CreateBy is Required");
             }
 
-            var newProduct = new ProductGps();
+            var newProduct = new Gps();
 
             var ver = await VersionExist(item.Version);
             newProduct.Version = ver.Id;
@@ -60,7 +60,7 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(ProductGps item)
+        public async Task<bool> Update(Gps item)
         {
             var product = await IdExist(item.Id);
 
@@ -154,7 +154,7 @@ namespace gtrackProject.Repositories.product
         }
 
 
-        private async Task<ProductGps> IdExist(int id)
+        private async Task<Gps> IdExist(int id)
         {
             var product = await _db.ProductGpss.FirstOrDefaultAsync(p => p.Id == id);
             if (product != null) return product;
@@ -184,7 +184,7 @@ namespace gtrackProject.Repositories.product
             if (product == null) return serial;
             throw new ArgumentException("This Serial ( " + serial + " ) is already taken");
         }
-        private async Task<ProductGpsVersion> VersionExist(byte id)
+        private async Task<GpsVersion> VersionExist(byte id)
         {
             var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(v => v.Id == id);
             if (ver != null) return ver;

@@ -40,7 +40,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <returns>ProductProductState</returns>
         [Queryable]
-        public IQueryable<ProductProcessState> Get()
+        public IQueryable<GpsState> Get()
         {
             return _repository.GetAll();
         }
@@ -52,7 +52,7 @@ namespace gtrackProject.Controllers.product
         /// <param name="id">id *byte*</param>
         /// <returns>ProductProductState</returns>
         [HttpGet]
-        [ResponseType(typeof(ProductProcessState))]
+        [ResponseType(typeof(GpsState))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
@@ -70,11 +70,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Post a StatusType.
         /// </summary>
-        /// <param name="value">The <see cref="ProductProcessState"/>.</param>
+        /// <param name="value">The <see cref="GpsState"/>.</param>
         /// <returns>ProductProductState</returns>
         [HttpPost]
-        [ResponseType(typeof(ProductProcessState))]
-        public async Task<IHttpActionResult> Post([FromBody]ProductProcessState value)
+        [ResponseType(typeof(GpsState))]
+        public async Task<IHttpActionResult> Post([FromBody]GpsState value)
         {
             if (!ModelState.IsValid)
             {
@@ -101,10 +101,10 @@ namespace gtrackProject.Controllers.product
         /// Put a StatusType.
         /// </summary>
         /// <param name="id">id *byte*</param>
-        /// <param name="value">The <see cref="ProductProcessState"/>.</param>
+        /// <param name="value">The <see cref="GpsState"/>.</param>
         /// <returns>ProductProductState</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]ProductProcessState value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]GpsState value)
         {
             if (!ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace gtrackProject.Controllers.product
         /// <param name="id">id *byte*</param>
         /// <returns>ProductProductState</returns>
         [HttpDelete]
-        [ResponseType(typeof(ProductProcessState))]
+        [ResponseType(typeof(GpsState))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try

@@ -19,15 +19,20 @@ namespace gtrackProject.Models.account
             OrderCreates = new List<Order>();
             OrderCurrents = new List<Order>();
             OrderInstalls = new List<Order>();
-            GpsCreates = new List<ProductGps>();
-            GpsStocks = new List<ProductGps>();
-            GpsQcs = new List<ProductGps>();
-            GpsInstalls = new List<ProductGps>();
-            GpsBads = new List<ProductGps>();
-            GpsUnuses = new List<ProductGps>();
+            GpsCreates = new List<Gps>();
+            GpsStocks = new List<Gps>();
+            GpsQcs = new List<Gps>();
+            GpsInstalls = new List<Gps>();
+            GpsBads = new List<Gps>();
+            GpsUnuses = new List<Gps>();
             CustCreates = new List<Customer>();
             ThisEmpCreates = new List<Employee>();
             ThisEmpLeaders = new List<Employee>();
+            LogFees = new List<LogFee>();
+            LogSims = new List<LogSim>();
+            LogDeletes=new List<LogDelete>();
+            LogMoves=new List<LogMove>();
+            LogSwaps=new List<LogSwap>();
         }
         [Key]
         public int Id { get; set; }
@@ -79,22 +84,22 @@ namespace gtrackProject.Models.account
         public ICollection<Order> OrderInstalls { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<ProductGps> GpsCreates { get; set; }
+        public ICollection<Gps> GpsCreates { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<ProductGps> GpsStocks { get; set; }
+        public ICollection<Gps> GpsStocks { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<ProductGps> GpsQcs { get; set; }
+        public ICollection<Gps> GpsQcs { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<ProductGps> GpsInstalls { get; set; }
+        public ICollection<Gps> GpsInstalls { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<ProductGps> GpsBads { get; set; }
+        public ICollection<Gps> GpsBads { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<ProductGps> GpsUnuses { get; set; }
+        public ICollection<Gps> GpsUnuses { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Customer> CustCreates { get; set; }
@@ -104,5 +109,20 @@ namespace gtrackProject.Models.account
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Employee> ThisEmpLeaders { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogFee> LogFees { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogSim> LogSims { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogDelete> LogDeletes { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogMove> LogMoves { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogSwap> LogSwaps { get; set; }
     }
 }

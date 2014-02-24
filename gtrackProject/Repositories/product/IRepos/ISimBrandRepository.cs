@@ -6,10 +6,10 @@ namespace gtrackProject.Repositories.product.IRepos
 {
     public interface ISimBrandRepository
     {
-        IQueryable<SimBrand> GetAll();
-        Task<SimBrand> Get(byte id);
-        Task<SimBrand> Add(SimBrand item);
-        Task<bool> Update(SimBrand item);
+        IQueryable<SimNetwork> GetAll();
+        Task<SimNetwork> Get(byte id);
+        Task<SimNetwork> Add(SimNetwork item);
+        Task<bool> Update(SimNetwork item);
         Task<bool> Remove(byte id);
     }
 }

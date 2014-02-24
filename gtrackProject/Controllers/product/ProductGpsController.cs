@@ -40,7 +40,7 @@ namespace gtrackProject.Controllers.product
         /// <returns>ProductGps</returns>
         [Authorize]
         [Queryable]
-        public IQueryable<ProductGps> Get()
+        public IQueryable<Gps> Get()
         {
             return _repository.GetAll();
         }
@@ -53,7 +53,7 @@ namespace gtrackProject.Controllers.product
         /// <returns>ProductGps</returns>
         [Authorize]
         [HttpGet]
-        [ResponseType(typeof(ProductGps))]
+        [ResponseType(typeof(Gps))]
         public async Task<IHttpActionResult> Get(int id)
         {
             try
@@ -71,11 +71,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Post a ProductGps
         /// </summary>
-        /// <param name="value">The <see cref="ProductGps"/>.</param>
+        /// <param name="value">The <see cref="Gps"/>.</param>
         /// <returns>ProductGps</returns>
         [HttpPost]
-        [ResponseType(typeof(ProductGps))]
-        public async Task<IHttpActionResult> Post([FromBody]ProductGps value)
+        [ResponseType(typeof(Gps))]
+        public async Task<IHttpActionResult> Post([FromBody]Gps value)
         {
             if (!ModelState.IsValid)
             {
@@ -102,10 +102,10 @@ namespace gtrackProject.Controllers.product
         /// Put a ProductGps
         /// </summary>
         /// <param name="id">id *int*</param>
-        /// <param name="value">The <see cref="ProductGps"/>.</param>
+        /// <param name="value">The <see cref="Gps"/>.</param>
         /// <returns>HTTP Status</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]ProductGps value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]Gps value)
         {
             if (!ModelState.IsValid)
             {
@@ -145,7 +145,7 @@ namespace gtrackProject.Controllers.product
         /// <returns>HTTP Status</returns>
         [HttpDelete]
         [Authorize(Roles = "admin, manu")]
-        [ResponseType(typeof(ProductGps))]
+        [ResponseType(typeof(Gps))]
         public async Task<IHttpActionResult> Delete(int id)
         {
             try

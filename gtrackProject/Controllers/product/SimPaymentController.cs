@@ -40,7 +40,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <returns>SimPaymentType</returns>
         [Queryable]
-        public IQueryable<SimPaymentType> Get()
+        public IQueryable<SimFeeType> Get()
         {
             return _repository.GetAll();
         }
@@ -52,7 +52,7 @@ namespace gtrackProject.Controllers.product
         /// <param name="id">id *byte*</param>
         /// <returns>SimPaymentType</returns>
         [HttpGet]
-        [ResponseType(typeof(SimPaymentType))]
+        [ResponseType(typeof(SimFeeType))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
@@ -70,11 +70,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Post a PaymentType
         /// </summary>
-        /// <param name="value">The <see cref="SimPaymentType"/>.</param>
+        /// <param name="value">The <see cref="SimFeeType"/>.</param>
         /// <returns>SimPaymentType</returns>
         [HttpPost]
-        [ResponseType(typeof(SimPaymentType))]
-        public async Task<IHttpActionResult> Post([FromBody]SimPaymentType value)
+        [ResponseType(typeof(SimFeeType))]
+        public async Task<IHttpActionResult> Post([FromBody]SimFeeType value)
         {
             if (!ModelState.IsValid)
             {
@@ -101,10 +101,10 @@ namespace gtrackProject.Controllers.product
         /// Put a PaymentType
         /// </summary>
         /// <param name="id">id *byte*</param>
-        /// <param name="value">The <see cref="SimPaymentType"/>.</param>
+        /// <param name="value">The <see cref="SimFeeType"/>.</param>
         /// <returns>HTTP Status</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]SimPaymentType value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]SimFeeType value)
         {
             if (!ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace gtrackProject.Controllers.product
         /// <param name="id">id *byte*</param>
         /// <returns>HTTP Status</returns>
         [HttpDelete]
-        [ResponseType(typeof(SimPaymentType))]
+        [ResponseType(typeof(SimFeeType))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try

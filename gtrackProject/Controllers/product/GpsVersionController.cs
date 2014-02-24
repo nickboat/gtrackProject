@@ -41,7 +41,7 @@ namespace gtrackProject.Controllers.product
         /// <returns>ProductGpsVersion</returns>
         [Authorize]
         [Queryable]
-        public IQueryable<ProductGpsVersion> Get()
+        public IQueryable<GpsVersion> Get()
         {
             return _repository.GetAll();
         }
@@ -54,7 +54,7 @@ namespace gtrackProject.Controllers.product
         /// <returns>ProductGpsVersion</returns>
         [Authorize]
         [HttpGet]
-        [ResponseType(typeof(ProductGpsVersion))]
+        [ResponseType(typeof(GpsVersion))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
@@ -72,11 +72,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Post a Version
         /// </summary>
-        /// <param name="value">The <see cref="ProductGpsVersion"/>.</param>
+        /// <param name="value">The <see cref="GpsVersion"/>.</param>
         /// <returns>ProductGpsVersion</returns>
         [HttpPost]
-        [ResponseType(typeof(ProductGpsVersion))]
-        public async Task<IHttpActionResult> Post([FromBody]ProductGpsVersion value)
+        [ResponseType(typeof(GpsVersion))]
+        public async Task<IHttpActionResult> Post([FromBody]GpsVersion value)
         {
             if (!ModelState.IsValid)
             {
@@ -103,10 +103,10 @@ namespace gtrackProject.Controllers.product
         /// Put a Version
         /// </summary>
         /// <param name="id">id *byte*</param>
-        /// <param name="value">The <see cref="ProductGpsVersion"/>.</param>
+        /// <param name="value">The <see cref="GpsVersion"/>.</param>
         /// <returns>HTTP Status</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]ProductGpsVersion value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]GpsVersion value)
         {
             if (!ModelState.IsValid)
             {
@@ -146,7 +146,7 @@ namespace gtrackProject.Controllers.product
         /// <returns>HTTP Status</returns>
         [HttpDelete]
         [Authorize(Roles = "admin, manu")]
-        [ResponseType(typeof(ProductGpsVersion))]
+        [ResponseType(typeof(GpsVersion))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try

@@ -18,21 +18,21 @@ namespace gtrackProject.Repositories.product
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<SimPaymentType> GetAll()
+        public IQueryable<SimFeeType> GetAll()
         {
             return _db.SimPaymentTypes;
         }
 
-        public async Task<SimPaymentType> Get(byte id)
+        public async Task<SimFeeType> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<SimPaymentType> Add(SimPaymentType item)
+        public async Task<SimFeeType> Add(SimFeeType item)
         {
             if (await NameExist(item.PaymentName)) return null;
 
-            var newPayment = new SimPaymentType()
+            var newPayment = new SimFeeType()
             {
                 PaymentName = item.PaymentName
             };
@@ -49,7 +49,7 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(SimPaymentType item)
+        public async Task<bool> Update(SimFeeType item)
         {
             var payment = await IdExist(item.Id);
 
@@ -87,7 +87,7 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<SimPaymentType> IdExist(byte id)
+        private async Task<SimFeeType> IdExist(byte id)
         {
             var brand = await _db.SimPaymentTypes.FirstOrDefaultAsync(p => p.Id == id);
             if (brand != null) return brand;

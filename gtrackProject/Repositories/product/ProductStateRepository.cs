@@ -18,21 +18,21 @@ namespace gtrackProject.Repositories.product
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<ProductProcessState> GetAll()
+        public IQueryable<GpsState> GetAll()
         {
             return _db.ProductProcessStates;
         }
 
-        public async Task<ProductProcessState> Get(byte id)
+        public async Task<GpsState> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<ProductProcessState> Add(ProductProcessState item)
+        public async Task<GpsState> Add(GpsState item)
         {
             if (await NameExist(item.StatusNameTh,item.StatusNameEn)) return null;
 
-            var newType = new ProductProcessState()
+            var newType = new GpsState()
             {
                 StatusNameTh = item.StatusNameTh,
                 StatusNameEn = item.StatusNameEn
@@ -50,7 +50,7 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(ProductProcessState item)
+        public async Task<bool> Update(GpsState item)
         {
             var type = await IdExist(item.Id);
 
@@ -89,7 +89,7 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<ProductProcessState> IdExist(byte id)
+        private async Task<GpsState> IdExist(byte id)
         {
             var type = await _db.ProductProcessStates.FirstOrDefaultAsync(t => t.Id == id);
             if (type != null) return type;

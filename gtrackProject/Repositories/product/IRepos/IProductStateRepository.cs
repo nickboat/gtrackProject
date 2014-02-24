@@ -6,10 +6,10 @@ namespace gtrackProject.Repositories.product.IRepos
 {
     public interface IProductStateRepository
     {
-        IQueryable<ProductProcessState> GetAll();
-        Task<ProductProcessState> Get(byte id);
-        Task<ProductProcessState> Add(ProductProcessState item);
-        Task<bool> Update(ProductProcessState item);
+        IQueryable<GpsState> GetAll();
+        Task<GpsState> Get(byte id);
+        Task<GpsState> Add(GpsState item);
+        Task<bool> Update(GpsState item);
         Task<bool> Remove(byte id);
     }
 }

@@ -14,6 +14,7 @@ namespace gtrackProject.Models.order
         {
             Universes = new List<Universe>();
             FixOrders = new List<FixOrder>();
+            Gpses = new List<Gps>();
         }
         [Key]
         public int Id { get; set; }
@@ -48,7 +49,7 @@ namespace gtrackProject.Models.order
         [JsonIgnore]
         public virtual OrderProcessState OrderProcessState { get; set; }
         [JsonIgnore]
-        public virtual ProductGpsVersion ProductGpsVersion { get; set; }
+        public virtual GpsVersion ProductGpsVersion { get; set; }
 
 
 
@@ -58,5 +59,8 @@ namespace gtrackProject.Models.order
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<FixOrder> FixOrders { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<Gps> Gpses { get; set; }
     }
 }

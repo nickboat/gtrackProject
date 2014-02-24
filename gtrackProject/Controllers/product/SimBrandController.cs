@@ -40,7 +40,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <returns>SimBrands</returns>
         [Queryable]
-        public IQueryable<SimBrand> Get()
+        public IQueryable<SimNetwork> Get()
         {
             return _repository.GetAll();
         }
@@ -52,7 +52,7 @@ namespace gtrackProject.Controllers.product
         /// <param name="id">id *byte*</param>
         /// <returns>SimBrand</returns>
         [HttpGet]
-        [ResponseType(typeof(SimBrand))]
+        [ResponseType(typeof(SimNetwork))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
@@ -70,11 +70,11 @@ namespace gtrackProject.Controllers.product
         /// <summary>
         /// Post a SimBrand
         /// </summary>
-        /// <param name="value">The <see cref="SimBrand"/>.</param>
+        /// <param name="value">The <see cref="SimNetwork"/>.</param>
         /// <returns>SimBrand</returns>
         [HttpPost]
-        [ResponseType(typeof(SimBrand))]
-        public async Task<IHttpActionResult> Post([FromBody]SimBrand value)
+        [ResponseType(typeof(SimNetwork))]
+        public async Task<IHttpActionResult> Post([FromBody]SimNetwork value)
         {
             if (!ModelState.IsValid)
             {
@@ -101,10 +101,10 @@ namespace gtrackProject.Controllers.product
         /// Put a SimBrand
         /// </summary>
         /// <param name="id">id *byte*</param>
-        /// <param name="value">The <see cref="SimBrand"/>.</param>
+        /// <param name="value">The <see cref="SimNetwork"/>.</param>
         /// <returns>HTTP Status</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]SimBrand value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]SimNetwork value)
         {
             if (!ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace gtrackProject.Controllers.product
         /// <param name="id">id *byte*</param>
         /// <returns>HTTP Status</returns>
         [HttpDelete]
-        [ResponseType(typeof(SimBrand))]
+        [ResponseType(typeof(SimNetwork))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try

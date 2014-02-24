@@ -19,21 +19,21 @@ namespace gtrackProject.Repositories.product
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<ProductGpsVersion> GetAll()
+        public IQueryable<GpsVersion> GetAll()
         {
             return _db.ProductGpsVersions;
         }
 
-        public async Task<ProductGpsVersion> Get(byte id)
+        public async Task<GpsVersion> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<ProductGpsVersion> Add(ProductGpsVersion item)
+        public async Task<GpsVersion> Add(GpsVersion item)
         {
             if (await NameExist(item.Name)) return null;
 
-            var newVer = new ProductGpsVersion()
+            var newVer = new GpsVersion()
             {
                 Name = item.Name
             };
@@ -50,7 +50,7 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(ProductGpsVersion item)
+        public async Task<bool> Update(GpsVersion item)
         {
             var ver = await IdExist(item.Id);
 
@@ -88,7 +88,7 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<ProductGpsVersion> IdExist(byte id)
+        private async Task<GpsVersion> IdExist(byte id)
         {
             var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(v => v.Id == id);
             if (ver != null) return ver;

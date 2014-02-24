@@ -23,7 +23,7 @@ namespace gtrackProject.Models.driver
         [JsonIgnore]
         public virtual Driver Driver { get; set; }
         [JsonIgnore]
-        public virtual ProductGps ProductGps { get; set; }
+        public virtual Gps ProductGps { get; set; }
         [JsonIgnore]
         public virtual Vehicle Vehicle { get; set; }
     }

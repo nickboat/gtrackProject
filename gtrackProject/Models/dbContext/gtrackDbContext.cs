@@ -37,12 +37,12 @@ namespace gtrackProject.Models.dbContext
         public DbSet<LpType> LpTypes { get; set; }
         public DbSet<OrderProcessState> OrderProcessStates { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<ProductGps> ProductGpss { get; set; }
-        public DbSet<ProductProcessState> ProductProcessStates { get; set; }
-        public DbSet<ProductGpsVersion> ProductGpsVersions { get; set; }
+        public DbSet<Gps> ProductGpss { get; set; }
+        public DbSet<GpsState> ProductProcessStates { get; set; }
+        public DbSet<GpsVersion> ProductGpsVersions { get; set; }
         public DbSet<Province> Provincess { get; set; }
-        public DbSet<SimBrand> SimBrands { get; set; }
-        public DbSet<SimPaymentType> SimPaymentTypes { get; set; }
+        public DbSet<SimNetwork> SimBrands { get; set; }
+        public DbSet<SimFeeType> SimPaymentTypes { get; set; }
         public DbSet<UnCmBatt> UnCmBatts { get; set; }
         public DbSet<UnCmComm> UnCmComms { get; set; }
         public DbSet<UnCmEngine> UnCmEngines { get; set; }
@@ -73,12 +73,12 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new LpTypeMap());
             modelBuilder.Configurations.Add(new OrderProcessStateMap());
             modelBuilder.Configurations.Add(new OrderMap());
-            modelBuilder.Configurations.Add(new ProductGpsMap());
-            modelBuilder.Configurations.Add(new ProductProcessStateMap());
-            modelBuilder.Configurations.Add(new ProductGpsVersionMap());
+            modelBuilder.Configurations.Add(new GpsMap());
+            modelBuilder.Configurations.Add(new GpsStateMap());
+            modelBuilder.Configurations.Add(new GpsVersionMap());
             modelBuilder.Configurations.Add(new ProvinceMap());
-            modelBuilder.Configurations.Add(new SimBrandMap());
-            modelBuilder.Configurations.Add(new SimPaymentTypeMap());
+            modelBuilder.Configurations.Add(new SimNetworkMap());
+            modelBuilder.Configurations.Add(new SimFeeTypeMap());
             modelBuilder.Configurations.Add(new UnCmBattMap());
             modelBuilder.Configurations.Add(new UnCmCommMap());
             modelBuilder.Configurations.Add(new UnCmEngineMap());
