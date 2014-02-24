@@ -40,7 +40,7 @@ namespace gtrackProject.Controllers.order
         /// </summary>
         /// <returns>OrderState</returns>
         [Queryable]
-        public IQueryable<OrderProcessState> Get()
+        public IQueryable<OrderState> Get()
         {
             return _repository.GetAll();
         }
@@ -52,7 +52,7 @@ namespace gtrackProject.Controllers.order
         /// <param name="id">id *byte*</param>
         /// <returns>OrderState</returns>
         [HttpGet]
-        [ResponseType(typeof(OrderProcessState))]
+        [ResponseType(typeof(OrderState))]
         public async Task<IHttpActionResult> Get(byte id)
         {
             try
@@ -70,11 +70,11 @@ namespace gtrackProject.Controllers.order
         /// <summary>
         /// Post a OrderState
         /// </summary>
-        /// <param name="value">The <see cref="OrderProcessState"/>.</param>
+        /// <param name="value">The <see cref="OrderState"/>.</param>
         /// <returns>OrderState</returns>
         [HttpPost]
-        [ResponseType(typeof(OrderProcessState))]
-        public async Task<IHttpActionResult> Post([FromBody]OrderProcessState value)
+        [ResponseType(typeof(OrderState))]
+        public async Task<IHttpActionResult> Post([FromBody]OrderState value)
         {
             if (!ModelState.IsValid)
             {
@@ -101,10 +101,10 @@ namespace gtrackProject.Controllers.order
         /// Put a OrderState.
         /// </summary>
         /// <param name="id">id *byte*</param>
-        /// <param name="value">The <see cref="OrderProcessState"/>.</param>
+        /// <param name="value">The <see cref="OrderState"/>.</param>
         /// <returns>HTTP State</returns>
         [HttpPut]
-        public async Task<IHttpActionResult> Put(byte id, [FromBody]OrderProcessState value)
+        public async Task<IHttpActionResult> Put(byte id, [FromBody]OrderState value)
         {
             if (!ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace gtrackProject.Controllers.order
         /// <param name="id">id *byte*</param>
         /// <returns>HTTP State</returns>
         [HttpDelete]
-        [ResponseType(typeof(OrderProcessState))]
+        [ResponseType(typeof(OrderState))]
         public async Task<IHttpActionResult> Delete(byte id)
         {
             try

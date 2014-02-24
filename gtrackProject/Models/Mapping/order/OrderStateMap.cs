@@ -7,9 +7,9 @@ namespace gtrackProject.Models.Mapping.order
     /// <summary>
     /// 
     /// </summary>
-    public class OrderProcessStateMap : EntityTypeConfiguration<OrderProcessState>
+    public class OrderStateMap : EntityTypeConfiguration<OrderState>
     {
-        public OrderProcessStateMap()
+        public OrderStateMap()
         {
             // Primary Key
             HasKey(t => t.Id);

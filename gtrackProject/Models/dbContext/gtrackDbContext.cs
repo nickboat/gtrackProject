@@ -35,7 +35,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<FixOrder> FixOrders { get; set; }
         public DbSet<Hd> Hds { get; set; }
         public DbSet<LpType> LpTypes { get; set; }
-        public DbSet<OrderProcessState> OrderProcessStates { get; set; }
+        public DbSet<OrderState> OrderProcessStates { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Gps> ProductGpss { get; set; }
         public DbSet<GpsState> ProductProcessStates { get; set; }
@@ -71,7 +71,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new FixOrderMap());
             modelBuilder.Configurations.Add(new HdMap());
             modelBuilder.Configurations.Add(new LpTypeMap());
-            modelBuilder.Configurations.Add(new OrderProcessStateMap());
+            modelBuilder.Configurations.Add(new OrderStateMap());
             modelBuilder.Configurations.Add(new OrderMap());
             modelBuilder.Configurations.Add(new GpsMap());
             modelBuilder.Configurations.Add(new GpsStateMap());

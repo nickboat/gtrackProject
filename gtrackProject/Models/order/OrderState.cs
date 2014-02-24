@@ -7,9 +7,9 @@ namespace gtrackProject.Models.order
     /// <summary>
     /// 
     /// </summary>
-    public class OrderProcessState
+    public class OrderState
     {
-        public OrderProcessState()
+        public OrderState()
         {
             FixOrders = new List<FixOrder>();
             Orders = new List<Order>();

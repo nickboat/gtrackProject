@@ -18,19 +18,19 @@ namespace gtrackProject.Repositories.order
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<OrderProcessState> GetAll()
+        public IQueryable<OrderState> GetAll()
         {
             return _db.OrderProcessStates;
         }
 
-        public async Task<OrderProcessState> Get(byte id)
+        public async Task<OrderState> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<OrderProcessState> Add(OrderProcessState item)
+        public async Task<OrderState> Add(OrderState item)
         {
-            var state = new OrderProcessState
+            var state = new OrderState
             {
                 StatusEn = item.StatusEn,
                 StatusTh = item.StatusTh
@@ -48,7 +48,7 @@ namespace gtrackProject.Repositories.order
             }
         }
 
-        public async Task<bool> Update(OrderProcessState item)
+        public async Task<bool> Update(OrderState item)
         {
             var state = await IdExist(item.Id);
             state.StatusTh = item.StatusTh;
@@ -84,7 +84,7 @@ namespace gtrackProject.Repositories.order
             return true;
         }
 
-        private async Task<OrderProcessState> IdExist(byte id)
+        private async Task<OrderState> IdExist(byte id)
         {
             var state = await _db.OrderProcessStates.FirstOrDefaultAsync(o => o.Id == id);
             if (state != null) return state;

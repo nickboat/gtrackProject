@@ -45,7 +45,7 @@ namespace gtrackProject.Models.order
         [JsonIgnore]
         public virtual Employee InstallByEmployee { get; set; }
         [JsonIgnore]
-        public virtual OrderProcessState OrderProcessState { get; set; }
+        public virtual OrderState OrderProcessState { get; set; }
         [JsonIgnore]
         public virtual Order FromOrder { get; set; }
         [JsonIgnore]
