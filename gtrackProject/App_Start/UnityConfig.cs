@@ -38,10 +38,7 @@ namespace gtrackProject
             container.RegisterType<ISimPaymentRepository, SimPaymentRepository>();
             container.RegisterType<IGpsVersionRepository, GpsVersionRepository>();
             container.RegisterType<IProductStateRepository, ProductStateRepository>();
-            container.RegisterType<ICameraRepository, CameraRepository>();
-            container.RegisterType<ICameraStatusRepository, CameraStatusRepository>();
             container.RegisterType<IProductGpsRepository, ProductGpsRepository>();
-            container.RegisterType<IGpsMemoryRepository, GpsMemoryRepository>();
 
             //Repositories.vehicle
             container.RegisterType<ILpTypeRepository, LpTypeRepository>();

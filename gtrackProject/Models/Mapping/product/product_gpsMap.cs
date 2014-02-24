@@ -89,9 +89,6 @@ namespace gtrackProject.Models.Mapping.product
             HasRequired(t => t.ProductGpsVersion)
                 .WithMany(t => t.ProductGpss)
                 .HasForeignKey(d => d.Version);
-            HasOptional(t => t.MemoryStatus)
-                .WithMany(t => t.ProductGpss)
-                .HasForeignKey(d => d.MemoryId);
         }
     }
 }

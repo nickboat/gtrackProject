@@ -73,10 +73,7 @@ namespace gtrackProject.Repositories.product
 
             if (item.SimPaymentTypeId != null)
                 product.SimPaymentTypeId = await SimPaymentExist(item.SimPaymentTypeId.Value);
-
-            if (item.MemoryId != null)
-                product.MemoryId = await MemoryExist(item.MemoryId.Value);
-
+            
             product.Serial = await SerialExist(item.Serial);
             var ver = await VersionExist(item.Version);
             product.Version = ver.Id;
@@ -198,12 +195,6 @@ namespace gtrackProject.Repositories.product
             var emp = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
             if (emp != null) return id;
             throw new ArgumentException("EmployeeId Not Found");
-        }
-        private async Task<byte> MemoryExist(byte id)
-        {
-            var status = await _db.ProductGpsMemorys.FirstOrDefaultAsync(s => s.Id == id);
-            if (status != null) return id;
-            throw new ArgumentException("ProductGpsMemoryId Not Found");
         }
 
         private async Task<string> createSerial(string verName)

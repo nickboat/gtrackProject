@@ -37,12 +37,9 @@ namespace gtrackProject.Models.dbContext
         public DbSet<LpType> LpTypes { get; set; }
         public DbSet<OrderProcessState> OrderProcessStates { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<ProductCamera> ProductCameras { get; set; }
-        public DbSet<ProductCameraStatus> ProductCameraStatuss { get; set; }
         public DbSet<ProductGps> ProductGpss { get; set; }
         public DbSet<ProductProcessState> ProductProcessStates { get; set; }
         public DbSet<ProductGpsVersion> ProductGpsVersions { get; set; }
-        public DbSet<ProductGpsMemoryStatus> ProductGpsMemorys { get; set; }
         public DbSet<Province> Provincess { get; set; }
         public DbSet<SimBrand> SimBrands { get; set; }
         public DbSet<SimPaymentType> SimPaymentTypes { get; set; }
@@ -76,12 +73,9 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new LpTypeMap());
             modelBuilder.Configurations.Add(new OrderProcessStateMap());
             modelBuilder.Configurations.Add(new OrderMap());
-            modelBuilder.Configurations.Add(new ProductCameraMap());
-            modelBuilder.Configurations.Add(new ProductCameraStatusMap());
             modelBuilder.Configurations.Add(new ProductGpsMap());
             modelBuilder.Configurations.Add(new ProductProcessStateMap());
             modelBuilder.Configurations.Add(new ProductGpsVersionMap());
-            modelBuilder.Configurations.Add(new ProductGpsMemoryStatusMap());
             modelBuilder.Configurations.Add(new ProvinceMap());
             modelBuilder.Configurations.Add(new SimBrandMap());
             modelBuilder.Configurations.Add(new SimPaymentTypeMap());

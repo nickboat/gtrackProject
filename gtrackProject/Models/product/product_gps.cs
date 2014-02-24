@@ -14,7 +14,6 @@ namespace gtrackProject.Models.product
     {
         public ProductGps()
         {
-            Cameras = new List<ProductCamera>();
             Universes = new List<Universe>();
             ProblemProductFixOrders = new List<FixOrder>();
             SolvedProductFixOrders = new List<FixOrder>();
@@ -82,17 +81,12 @@ namespace gtrackProject.Models.product
         public virtual ProductProcessState ProductGpsState { get; set; }
         [JsonIgnore]
         public virtual ProductGpsVersion ProductGpsVersion { get; set; }
-        [JsonIgnore]
-        public virtual ProductGpsMemoryStatus MemoryStatus { get; set; }
 
 
 
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Universe> Universes { get; set; }
-        [JsonIgnore]
-        //[IgnoreDataMember]
-        public ICollection<ProductCamera> Cameras { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogCardReader> LogCardReaders { get; set; }
