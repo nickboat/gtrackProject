@@ -254,9 +254,9 @@
     <Compile Include="Models\account\EmployeeAdminModel.cs" />
     <Compile Include="Models\account\customer.cs" />
     <Compile Include="Models\account\UserConfig.cs" />
-    <Compile Include="Models\driver\driver.cs" />
+    <Compile Include="Models\driver\Driver.cs" />
     <Compile Include="Models\driver\DriverModel.cs" />
-    <Compile Include="Models\driver\driver_category.cs" />
+    <Compile Include="Models\driver\DriverCategory.cs" />
     <Compile Include="Models\account\employee.cs" />
     <Compile Include="Models\driver\LogCardReader.cs" />
     <Compile Include="Models\Mapping\account\UserConfigMap.cs" />
@@ -282,8 +282,8 @@
     <Compile Include="Models\product\SimStatus.cs" />
     <Compile Include="Models\vehicle\lp_type.cs" />
     <Compile Include="Models\Mapping\account\customerMap.cs" />
-    <Compile Include="Models\Mapping\driver\driverMap.cs" />
-    <Compile Include="Models\Mapping\driver\driver_categoryMap.cs" />
+    <Compile Include="Models\Mapping\driver\DriverMap.cs" />
+    <Compile Include="Models\Mapping\driver\DriverCategoryMap.cs" />
     <Compile Include="Models\Mapping\account\employeeMap.cs" />
     <Compile Include="Models\Mapping\order\FixOrderMap.cs" />
     <Compile Include="Models\Mapping\account\hdMap.cs" />

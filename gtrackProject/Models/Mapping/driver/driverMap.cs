@@ -8,6 +8,7 @@ namespace gtrackProject.Models.Mapping.driver
     {
         public DriverMap()
         {
+
             // Primary Key
             HasKey(t => t.Id);
 

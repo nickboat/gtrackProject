@@ -14,6 +14,7 @@ namespace gtrackProject.Models.driver
             Universes = new List<Universe>();
             LogCardReaders = new List<LogCardReader>();
         }
+
         [Key]
         public int Id { get; set; }
         [Required]
