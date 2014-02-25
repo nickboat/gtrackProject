@@ -12,7 +12,7 @@ namespace gtrackProject.Models.Mapping.product
             HasKey(t => t.Id);
 
             // Table & Column Mappings
-            ToTable("log_fee");
+            ToTable("log_swap");
             Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Comment).HasColumnName("Comment");
             Property(t => t.Status).HasColumnName("Status");
