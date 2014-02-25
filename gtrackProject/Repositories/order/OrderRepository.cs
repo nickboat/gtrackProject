@@ -37,19 +37,15 @@ namespace gtrackProject.Repositories.order
             {
                 throw new ArgumentNullException("CreateBy", "CreateBy is Required");
             }
-            if (!item.Version.HasValue)
-            {
-                throw new ArgumentNullException("Version", "Version is Required");
-            }
 
             var order = new Order
             {
                 CreateBy = await EmpExist(item.CreateBy.Value),
-                CreateDate = item.CreateDate,
+                CreateDate = DateTime.UtcNow,
                 HdId = await HdExist(item.HdId),
-                Version = await VersionExist(item.Version.Value),
+                Version = await VersionExist(item.Version),
                 Quantity = item.Quantity,
-                State = 1,
+                State = 1,//create
                 Deadline = item.Deadline
             };
 
@@ -61,7 +57,7 @@ namespace gtrackProject.Repositories.order
             try
             {
                 await _db.SaveChangesAsync();
-                await addVehicle(order.Quantity, order.HdId, order.Id);
+                await AddVehicle(order.Quantity, order.HdId, order.Id);
 
                 return order;
             }
@@ -74,40 +70,53 @@ namespace gtrackProject.Repositories.order
 
         public async Task<bool> Update(Order item)
         {
-            if (!item.CreateBy.HasValue)
-            {
-                throw new ArgumentNullException("CreateBy", "CreateBy is Required");
-            }
-            if (!item.Version.HasValue)
-            {
-                throw new ArgumentNullException("Version", "Version is Required");
-            }
             if (!item.State.HasValue)
             {
                 throw new ArgumentNullException("Status", "Status is Required");
             }
 
             var order = await IdExist(item.Id);
+            if (item.State.Value == 4)
+            {
+                //order.state = QCcomplete , when all productGPS in this Order active on universe
+                var uni = _db.Universes.Where(u => u.OrderId == order.Id && u.GpsProductId == null);
+                if (uni.Any())
+                    throw new ArgumentNullException("GpsProductId", "one or more ProductGPS in this Order incomplete!!!");
+            }
+
+            if (item.State.Value == 6)
+            {
+                //order.state = Complete , when all productGPS in this Order is complete or fixing in FixOrder
+                var uni = _db.Universes.Where(u => u.OrderId == order.Id && u.DisplayStatus != 3);
+                foreach (var u in uni)
+                {
+                    var fix = _db.FixOrders.FirstOrDefault(f => f.FromOrderId.Value == order.Id && f.ProblemProduct == u.GpsProductId.Value);
+                    if (fix == null)
+                    {throw new ArgumentNullException("GpsProductId",
+                            "one or more ProductGPS in this Order incomplete!!!");}
+                }
+            }
+            
             var changeHd = false;
             var changeQuantity = false;
 
             if (order.HdId != item.HdId) changeHd = true;
             if (order.Quantity != item.Quantity) changeQuantity = true;            
 
-            order.CreateBy = await EmpExist(item.CreateBy.Value);
-            order.CreateDate = item.CreateDate;
             order.HdId = await HdExist(item.HdId);
-            order.Version = await VersionExist(item.Version.Value);
+            order.Version = await VersionExist(item.Version);
             order.Quantity = item.Quantity;
             order.State = await StatusExist(item.State.Value);
-            order.Deadline = item.Deadline;            
+            order.Deadline = item.Deadline;
 
             if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
             if (item.HeadInstall != null) order.HeadInstall = await EmpExist(item.HeadInstall.Value);
             if (item.Comment != null) order.Comment = item.Comment;
 
-            if (changeHd || changeQuantity) await changeOrder(changeHd, changeQuantity, order.HdId, item.HdId, order.Quantity, order.Id);
-
+            //changeHD ... move vehicle from ole hd to new hd
+            //changeQuantity ... add or delete vehicle to eq New Order Quantity
+            if (changeHd || changeQuantity) await ChangeOrder(changeHd, order.HdId, item.HdId, order.Quantity, order.Id);
+            
             _db.Entry(order).State = EntityState.Modified;
             try
             {
@@ -124,10 +133,15 @@ namespace gtrackProject.Repositories.order
         public async Task<bool> Remove(int id)
         {
             var order = await IdExist(id);
-
-            await removeVehicle(id);
-
             _db.Orders.Remove(order);
+
+            //delete all vehicle in this order
+            var unOrders = await _db.Universes.Where(u => u.OrderId == order.Id).OrderByDescending(u => u.VehicleId).ToListAsync();
+            foreach (var veh in unOrders.Select(un => _db.Vehicles.FirstOrDefault(v => v.Id == un.VehicleId)))
+            {
+                _db.Vehicles.Remove(veh);
+            }
+
             try
             {
                 await _db.SaveChangesAsync();
@@ -171,14 +185,20 @@ namespace gtrackProject.Repositories.order
             throw new ArgumentException("OrderStatus Not Found");
         }
 
-        private async Task<bool> addVehicle(int quantity,short hdId,int orderId)
+        private async Task<bool> AddVehicle(int quantity,short hdId,int orderId)
         {
-            var maxIdCar = _db.Vehicles.Where(c => c.HdId == hdId).Max(c => c.IdCar);
-            if (maxIdCar == null) throw new ArgumentNullException("maxIdCar");
+            var car = _db.Vehicles.Where(c => c.HdId == hdId);//.Max(c => c.IdCar);
 
-            for (int i = 0; i < quantity; i++)
+            //New HD and New Vehicle ... start at "000001"
+            var maxIdCar = "0";
+            //add New vehicle to current hd ... start at max idcar + 1
+            if (car.Any()) maxIdCar = car.Max(c => c.IdCar);
+
+            var max = Convert.ToInt32(maxIdCar);
+
+            for (var i = 0; i < quantity; i++)
             {
-                var max = Convert.ToInt32(maxIdCar) + 1;
+                max = max + 1;
 
                 var newVeh = new Vehicle
                 {
@@ -196,7 +216,7 @@ namespace gtrackProject.Repositories.order
                     {
                         VehicleId = newVeh.Id,
                         OrderId = orderId,
-                        DisplayStatus = 2
+                        DisplayStatus = 2//test
                     };
                     _db.Universes.Add(newUn);
                     try
@@ -217,7 +237,7 @@ namespace gtrackProject.Repositories.order
             return true;
         }
 
-        private async Task<bool> changeOrder(bool changeHd, bool changeQ, short hdOld, short hdNew, int q, int orderId)
+        private async Task<bool> ChangeOrder(bool changeHd, short hdOld, short hdNew, int q, int orderId)
         {
             if (changeHd)
             {
@@ -232,59 +252,26 @@ namespace gtrackProject.Repositories.order
                     catch (DbUpdateConcurrencyException exception)
                     {
                         throw new DbUpdateConcurrencyException(exception.Message);
-                    }                    
+                    }
                 }
-                await addVehicle(q, hdNew, orderId);
+                await AddVehicle(q, hdNew, orderId);
                 return true;
             }
-            else // changeHd = false , changeQ = true
-            {
-                var unOrders = await _db.Universes.Where(u => u.OrderId == orderId).OrderByDescending(u => u.VehicleId).ToListAsync();
-                
-                if (unOrders != null)
-                {
-                    int sub = 0;
-                    if (unOrders.Count() > q)
-                    {
-                        sub = unOrders.Count() - q;
-                        for (int i = 0; i < sub; i++)
-                        {
-                            var veh = _db.Vehicles.FirstOrDefault(v => v.Id == unOrders[i].VehicleId);
 
-                            _db.Vehicles.Remove(veh);
-                            try
-                            {
-                                await _db.SaveChangesAsync();
-                            }
-                            catch (DbUpdateConcurrencyException exception)
-                            {
-                                throw new DbUpdateConcurrencyException(exception.Message);
-                            }
-                        }
-                        return true;
-                    }
-                    else
-                    {
-                        sub = q - unOrders.Count();
-                        await addVehicle(sub, hdOld, orderId);
-                        return true;
-                    }                    
-                }
-                else
-                {
-                    throw new KeyNotFoundException("orderId");
-                }
-            }
-        }
-
-        private async Task<bool> removeVehicle(int orderId)
-        {
+            // changeHd = false
             var unOrders = await _db.Universes.Where(u => u.OrderId == orderId).OrderByDescending(u => u.VehicleId).ToListAsync();
-            foreach (var un in unOrders)
-            {
-                var veh = _db.Vehicles.FirstOrDefault(v => v.Id == un.VehicleId);
+            if (unOrders == null) throw new KeyNotFoundException("orderId");
 
-                _db.Vehicles.Remove(veh);
+            var sub = 0;
+            if (unOrders.Count() > q)
+            {
+                sub = unOrders.Count() - q;
+                for (var i = 0; i < sub; i++)
+                {
+                    var veh = _db.Vehicles.FirstOrDefault(v => v.Id == unOrders[i].VehicleId);
+                    _db.Vehicles.Remove(veh);
+                }
+
                 try
                 {
                     await _db.SaveChangesAsync();
@@ -293,7 +280,12 @@ namespace gtrackProject.Repositories.order
                 {
                     throw new DbUpdateConcurrencyException(exception.Message);
                 }
+                return true;
             }
+
+            //unOrders.Count() < q
+            sub = q - unOrders.Count();
+            await AddVehicle(sub, hdOld, orderId);
             return true;
         }
     }

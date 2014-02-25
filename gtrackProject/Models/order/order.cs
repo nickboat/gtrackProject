@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +21,7 @@ namespace gtrackProject.Models.order
         public int Id { get; set; }
         [ForeignKey("CreateByEmployee")]
         public int? CreateBy { get; set; }
-        [Required] public System.DateTime CreateDate { get; set; }
+        [Required] public DateTime CreateDate { get; set; }
         [ForeignKey("CurrentUserEmployee")]
         public int? CurrentUser { get; set; }
         [ForeignKey("InstallByEmployee")]
@@ -28,13 +29,14 @@ namespace gtrackProject.Models.order
         [Required]
         [ForeignKey("Hd")]
         public short HdId { get; set; }
+        [Required]
         [ForeignKey("ProductGpsVersion")]
-        public byte? Version { get; set; }
+        public byte Version { get; set; }
         [Required] public int Quantity { get; set; }
         public string Comment { get; set; }
         [ForeignKey("OrderProcessState")]
         public byte? State { get; set; }
-        [Required] public System.DateTime Deadline { get; set; }
+        [Required] public DateTime Deadline { get; set; }
 
 
 
