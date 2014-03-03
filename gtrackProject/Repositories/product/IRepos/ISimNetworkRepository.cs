@@ -4,7 +4,7 @@ using gtrackProject.Models.product;
 
 namespace gtrackProject.Repositories.product.IRepos
 {
-    public interface ISimBrandRepository
+    public interface ISimNetworkRepository
     {
         IQueryable<SimNetwork> GetAll();
         Task<SimNetwork> Get(byte id);

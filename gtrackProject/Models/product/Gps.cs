@@ -30,7 +30,6 @@ namespace gtrackProject.Models.product
         public int? SimId { get; set; }
         [ForeignKey("Order")]
         public int? OrderId { get; set; }
-        [Required]
         public string Serial { get; set; }
         [Required]
         [ForeignKey("ProductGpsVersion")]
@@ -47,7 +46,6 @@ namespace gtrackProject.Models.product
         [ForeignKey("InstallByEmployee")]
         public int? InstallBy { get; set; }
         public DateTime? InstallDate { get; set; }
-        public string ErrProductComment { get; set; }
         [ForeignKey("BadByEmployee")]
         public int? BadBy { get; set; }
         public DateTime? BadDate { get; set; }
@@ -56,6 +54,11 @@ namespace gtrackProject.Models.product
         public int? UnuseableBy { get; set; }
         public DateTime? UnuseableDate { get; set; }
         public string UnuseableComment { get; set; }
+        [ForeignKey("ProblemByEmployee")]
+        public int? ProblemBy { get; set; }
+        public DateTime? ProblemDate { get; set; }
+        public string ProblemComment { get; set; }
+        [Required]
         [ForeignKey("ProductGpsState")]
         public byte State { get; set; }
         public bool? HasMem { get; set; }
@@ -78,6 +81,8 @@ namespace gtrackProject.Models.product
         public virtual Employee BadByEmployee { get; set; }
         [JsonIgnore]
         public virtual Employee UnuseableByEmployee { get; set; }
+        [JsonIgnore]
+        public virtual Employee ProblemByEmployee { get; set; }
         [JsonIgnore]
         public virtual GpsState ProductGpsState { get; set; }
         [JsonIgnore]

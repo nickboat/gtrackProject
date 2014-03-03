@@ -10,17 +10,17 @@ using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Repositories.product
 {
-    public class SimPaymentRepository :ISimPaymentRepository
+    public class SimFeeTypeRepository :ISimFeeTypeRepository
     {
         private GtrackDbContext _db { get; set; }
-        public SimPaymentRepository()
+        public SimFeeTypeRepository()
         {
             _db = new GtrackDbContext();
         }
 
         public IQueryable<SimFeeType> GetAll()
         {
-            return _db.SimPaymentTypes;
+            return _db.SimFeeTypes;
         }
 
         public async Task<SimFeeType> Get(byte id)
@@ -37,7 +37,7 @@ namespace gtrackProject.Repositories.product
                 PaymentName = item.PaymentName
             };
 
-            newPayment = _db.SimPaymentTypes.Add(newPayment);
+            newPayment = _db.SimFeeTypes.Add(newPayment);
             try
             {
                 await _db.SaveChangesAsync();
@@ -74,7 +74,7 @@ namespace gtrackProject.Repositories.product
         {
             var payment = await IdExist(id);
 
-            _db.SimPaymentTypes.Remove(payment);
+            _db.SimFeeTypes.Remove(payment);
             try
             {
                 await _db.SaveChangesAsync();
@@ -89,14 +89,14 @@ namespace gtrackProject.Repositories.product
 
         private async Task<SimFeeType> IdExist(byte id)
         {
-            var brand = await _db.SimPaymentTypes.FirstOrDefaultAsync(p => p.Id == id);
+            var brand = await _db.SimFeeTypes.FirstOrDefaultAsync(p => p.Id == id);
             if (brand != null) return brand;
             throw new KeyNotFoundException("id");
         }
 
         private async Task<bool> NameExist(string name)
         {
-            var checkName = await _db.SimPaymentTypes.FirstOrDefaultAsync(p => p.PaymentName == name);
+            var checkName = await _db.SimFeeTypes.FirstOrDefaultAsync(p => p.PaymentName == name);
             if (checkName == null) return false;
             throw new ArgumentException("This name ( " + name + " ) is already taken");
         }

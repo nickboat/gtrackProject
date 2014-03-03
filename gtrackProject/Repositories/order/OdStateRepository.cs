@@ -20,7 +20,7 @@ namespace gtrackProject.Repositories.order
 
         public IQueryable<OrderState> GetAll()
         {
-            return _db.OrderProcessStates;
+            return _db.OrderStates;
         }
 
         public async Task<OrderState> Get(byte id)
@@ -36,7 +36,7 @@ namespace gtrackProject.Repositories.order
                 StatusTh = item.StatusTh
             };
             
-            state = _db.OrderProcessStates.Add(state);
+            state = _db.OrderStates.Add(state);
             try
             {
                 await _db.SaveChangesAsync();
@@ -71,7 +71,7 @@ namespace gtrackProject.Repositories.order
         {
             var state = await IdExist(id);
 
-            _db.OrderProcessStates.Remove(state);
+            _db.OrderStates.Remove(state);
             try
             {
                 await _db.SaveChangesAsync();
@@ -86,7 +86,7 @@ namespace gtrackProject.Repositories.order
 
         private async Task<OrderState> IdExist(byte id)
         {
-            var state = await _db.OrderProcessStates.FirstOrDefaultAsync(o => o.Id == id);
+            var state = await _db.OrderStates.FirstOrDefaultAsync(o => o.Id == id);
             if (state != null) return state;
             throw new KeyNotFoundException("id");
         }

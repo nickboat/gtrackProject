@@ -4,7 +4,7 @@ using gtrackProject.Models.product;
 
 namespace gtrackProject.Repositories.product.IRepos
 {
-    public interface IProductStateRepository
+    public interface IGpsStateRepository
     {
         IQueryable<GpsState> GetAll();
         Task<GpsState> Get(byte id);

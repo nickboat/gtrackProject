@@ -25,6 +25,7 @@ namespace gtrackProject.Models.account
             GpsInstalls = new List<Gps>();
             GpsBads = new List<Gps>();
             GpsUnuses = new List<Gps>();
+            GpsProblems = new List<Gps>();
             CustCreates = new List<Customer>();
             ThisEmpCreates = new List<Employee>();
             ThisEmpLeaders = new List<Employee>();
@@ -33,6 +34,7 @@ namespace gtrackProject.Models.account
             LogDeletes=new List<LogDelete>();
             LogMoves=new List<LogMove>();
             LogSwaps=new List<LogSwap>();
+
         }
         [Key]
         public int Id { get; set; }
@@ -100,6 +102,9 @@ namespace gtrackProject.Models.account
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Gps> GpsUnuses { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<Gps> GpsProblems { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Customer> CustCreates { get; set; }

@@ -156,13 +156,13 @@ namespace gtrackProject.Repositories.order
         }
         private async Task<byte> StateExist(byte id)
         {
-            var state = await _db.OrderProcessStates.FirstOrDefaultAsync(o => o.Id == id);
+            var state = await _db.OrderStates.FirstOrDefaultAsync(o => o.Id == id);
             if (state != null) return id;
             throw new ArgumentException("OrderStatus Not Found");
         }
         private async Task<Gps> GpsExist(int id)
         {
-            var gps = await _db.ProductGpss.FirstOrDefaultAsync(o => o.Id == id);
+            var gps = await _db.Gpss.FirstOrDefaultAsync(o => o.Id == id);
             if (gps != null) return gps;
             throw new ArgumentException("Product_Id Not Found");
         }

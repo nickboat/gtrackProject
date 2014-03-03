@@ -16,7 +16,7 @@ namespace gtrackProject.Models.Mapping.product
                 .IsRequired()
                 .HasMaxLength(10);
 
-            Property(t => t.ErrProductComment)
+            Property(t => t.ProblemComment)
                 .HasMaxLength(150);
 
             Property(t => t.BadComment)
@@ -40,13 +40,15 @@ namespace gtrackProject.Models.Mapping.product
             Property(t => t.QcDate).HasColumnName("QCDate");
             Property(t => t.InstallBy).HasColumnName("InstallBy");
             Property(t => t.InstallDate).HasColumnName("InstallDate");
-            Property(t => t.ErrProductComment).HasColumnName("ErrProductComment");
             Property(t => t.BadBy).HasColumnName("BadBy");
             Property(t => t.BadDate).HasColumnName("BadDate");
             Property(t => t.BadComment).HasColumnName("BadComment");
             Property(t => t.UnuseableBy).HasColumnName("UnuseableBy");
             Property(t => t.UnuseableDate).HasColumnName("UnuseableDate");
             Property(t => t.UnuseableComment).HasColumnName("UnuseableComment");
+            Property(t => t.ProblemBy).HasColumnName("ProblemBy");
+            Property(t => t.ProblemDate).HasColumnName("ProblemDate");
+            Property(t => t.ProblemComment).HasColumnName("ProblemComment");
             Property(t => t.State).HasColumnName("State");
             Property(t => t.HasCam).HasColumnName("HasCam");
             Property(t => t.HasCard).HasColumnName("HasCard");
@@ -73,6 +75,9 @@ namespace gtrackProject.Models.Mapping.product
             HasOptional(t => t.UnuseableByEmployee)
                 .WithMany(t => t.GpsUnuses)
                 .HasForeignKey(d => d.UnuseableBy);
+            HasOptional(t => t.ProblemByEmployee)
+                .WithMany(t => t.GpsProblems)
+                .HasForeignKey(d => d.ProblemBy);
             HasRequired(t => t.ProductGpsState)
                 .WithMany(t => t.Gpses)
                 .HasForeignKey(d => d.State);

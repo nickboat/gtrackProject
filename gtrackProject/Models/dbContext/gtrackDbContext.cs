@@ -27,22 +27,34 @@ namespace gtrackProject.Models.dbContext
         {
             Configuration.LazyLoadingEnabled = false;
         }
-
+        //account
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Hd> Hds { get; set; }
+        public DbSet<UserConfig> UserConfigs { get; set; }
+        //driver
         public DbSet<DriverCategory> DriverCategory { get; set; }
         public DbSet<Driver> Drivers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<LogCardReader> LogCardReaders { get; set; }
+        //order
         public DbSet<FixOrder> FixOrders { get; set; }
-        public DbSet<Hd> Hds { get; set; }
-        public DbSet<LpType> LpTypes { get; set; }
-        public DbSet<OrderState> OrderProcessStates { get; set; }
+        public DbSet<OrderState> OrderStates { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Gps> ProductGpss { get; set; }
-        public DbSet<GpsState> ProductProcessStates { get; set; }
-        public DbSet<GpsVersion> ProductGpsVersions { get; set; }
-        public DbSet<Province> Provincess { get; set; }
-        public DbSet<SimNetwork> SimBrands { get; set; }
-        public DbSet<SimFeeType> SimPaymentTypes { get; set; }
+        //product
+        public DbSet<Gps> Gpss { get; set; }
+        public DbSet<GpsState> GpsStates { get; set; }
+        public DbSet<GpsVersion> GpsVersions { get; set; }
+        public DbSet<LogDelete> LogDeletes { get; set; }
+        public DbSet<LogFee> LogFees { get; set; }
+        public DbSet<LogMove> LogMoves { get; set; }
+        public DbSet<LogSim> LogSims { get; set; }
+        public DbSet<LogStatus> LogStatuses { get; set; }
+        public DbSet<LogSwap> LogSwaps { get; set; }
+        public DbSet<Sim> Sims { get; set; }
+        public DbSet<SimStatus> SimStatuses { get; set; }
+        public DbSet<SimNetwork> SimNetworks { get; set; }
+        public DbSet<SimFeeType> SimFeeTypes { get; set; }
+        //universe
         public DbSet<UnCmBatt> UnCmBatts { get; set; }
         public DbSet<UnCmComm> UnCmComms { get; set; }
         public DbSet<UnCmEngine> UnCmEngines { get; set; }
@@ -52,6 +64,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<UnCmTemp> UnCmTemps { get; set; }
         public DbSet<UnDisplayStatus> UnDisplayStatuss { get; set; }
         public DbSet<Universe> Universes { get; set; }
+        //vehicle
         public DbSet<VehicleBrand> VehicleBrands { get; set; }
         public DbSet<VehicleColor> VehicleColors { get; set; }
         public DbSet<VehicleHeadType> VehicleHeadTypes { get; set; }
@@ -59,26 +72,40 @@ namespace gtrackProject.Models.dbContext
         public DbSet<VehicleOganize> VehicleOganizes { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<UserConfig> UserConfigs { get; set; }
+        public DbSet<Province> Provincess { get; set; }
+        public DbSet<LpType> LpTypes { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //account
             modelBuilder.Configurations.Add(new CustomerMap());
+            modelBuilder.Configurations.Add(new UserConfigMap());
+            modelBuilder.Configurations.Add(new HdMap());
+            modelBuilder.Configurations.Add(new EmployeeMap());
+            //driver
             modelBuilder.Configurations.Add(new DriverCategoryMap());
             modelBuilder.Configurations.Add(new DriverMap());
-            modelBuilder.Configurations.Add(new EmployeeMap());
+            modelBuilder.Configurations.Add(new LogCardReaderMap());
+            //order
             modelBuilder.Configurations.Add(new FixOrderMap());
-            modelBuilder.Configurations.Add(new HdMap());
-            modelBuilder.Configurations.Add(new LpTypeMap());
             modelBuilder.Configurations.Add(new OrderStateMap());
             modelBuilder.Configurations.Add(new OrderMap());
+            //product
             modelBuilder.Configurations.Add(new GpsMap());
             modelBuilder.Configurations.Add(new GpsStateMap());
             modelBuilder.Configurations.Add(new GpsVersionMap());
-            modelBuilder.Configurations.Add(new ProvinceMap());
+            modelBuilder.Configurations.Add(new LogDeleteMap());
+            modelBuilder.Configurations.Add(new LogFeeMap());
+            modelBuilder.Configurations.Add(new LogMoveMap());
+            modelBuilder.Configurations.Add(new LogSimMap());
+            modelBuilder.Configurations.Add(new LogStatusMap());
+            modelBuilder.Configurations.Add(new LogSwapMap());
+            modelBuilder.Configurations.Add(new SimMap());
+            modelBuilder.Configurations.Add(new SimStatusMap());
             modelBuilder.Configurations.Add(new SimNetworkMap());
             modelBuilder.Configurations.Add(new SimFeeTypeMap());
+            //universe
             modelBuilder.Configurations.Add(new UnCmBattMap());
             modelBuilder.Configurations.Add(new UnCmCommMap());
             modelBuilder.Configurations.Add(new UnCmEngineMap());
@@ -88,6 +115,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new UnCmTempMap());
             modelBuilder.Configurations.Add(new UnDisplayStatusMap());
             modelBuilder.Configurations.Add(new UniverseMap());
+            //vehicle
             modelBuilder.Configurations.Add(new VehicleBrandMap());
             modelBuilder.Configurations.Add(new VehicleColorMap());
             modelBuilder.Configurations.Add(new VehicleHeadTypeMap());
@@ -95,7 +123,8 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new VehicleOganizeMap());
             modelBuilder.Configurations.Add(new VehicleTypeMap());
             modelBuilder.Configurations.Add(new VehicleMap());
-            modelBuilder.Configurations.Add(new UserConfigMap());
+            modelBuilder.Configurations.Add(new LpTypeMap());
+            modelBuilder.Configurations.Add(new ProvinceMap());
         }
     }
 }

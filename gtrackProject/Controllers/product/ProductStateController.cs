@@ -18,14 +18,14 @@ namespace gtrackProject.Controllers.product
     [Authorize(Roles = "admin")]
     public class ProductStateController : ApiController
     {
-        private readonly IProductStateRepository _repository;
+        private readonly IGpsStateRepository _repository;
 
         /// <summary>
         /// Call repository
         /// </summary>
-        /// <param name="repository"> The <see cref="IProductStateRepository"/>.</param>
+        /// <param name="repository"> The <see cref="IGpsStateRepository"/>.</param>
         /// <exception cref="ArgumentNullException">repository isNull</exception>
-        public ProductStateController(IProductStateRepository repository)
+        public ProductStateController(IGpsStateRepository repository)
         {
             if (repository == null)
             {

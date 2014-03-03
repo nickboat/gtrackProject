@@ -18,14 +18,14 @@ namespace gtrackProject.Controllers.product
     [Authorize(Roles = "admin, cs")]
     public class SimPaymentController : ApiController
     {
-        private readonly ISimPaymentRepository _repository;
+        private readonly ISimFeeTypeRepository _repository;
 
         /// <summary>
         /// Call repository
         /// </summary>
-        /// <param name="repository"> The <see cref="ISimPaymentRepository"/>.</param>
+        /// <param name="repository"> The <see cref="ISimFeeTypeRepository"/>.</param>
         /// <exception cref="ArgumentNullException">repository isNull</exception>
-        public SimPaymentController(ISimPaymentRepository repository)
+        public SimPaymentController(ISimFeeTypeRepository repository)
         {
             if (repository == null)
             {

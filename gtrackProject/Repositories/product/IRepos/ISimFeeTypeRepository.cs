@@ -4,7 +4,7 @@ using gtrackProject.Models.product;
 
 namespace gtrackProject.Repositories.product.IRepos
 {
-    public interface ISimPaymentRepository
+    public interface ISimFeeTypeRepository
     {
         IQueryable<SimFeeType> GetAll();
         Task<SimFeeType> Get(byte id);

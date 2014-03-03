@@ -34,10 +34,10 @@ namespace gtrackProject
             container.RegisterType<ICustomerRepository, CustomerRepository>();
 
             //Repositories.product
-            container.RegisterType<ISimBrandRepository, SimBrandRepository>();
-            container.RegisterType<ISimPaymentRepository, SimPaymentRepository>();
+            container.RegisterType<ISimNetworkRepository, SimNetworkRepository>();
+            container.RegisterType<ISimFeeTypeRepository, SimFeeTypeRepository>();
             container.RegisterType<IGpsVersionRepository, GpsVersionRepository>();
-            container.RegisterType<IProductStateRepository, ProductStateRepository>();
+            container.RegisterType<IGpsStateRepository, ProdGpsStateRepository
             container.RegisterType<IProductGpsRepository, ProductGpsRepository>();
 
             //Repositories.vehicle

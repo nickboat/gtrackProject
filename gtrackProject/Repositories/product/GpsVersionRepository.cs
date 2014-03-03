@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Models.product;
 using gtrackProject.Repositories.product.IRepos;
@@ -21,7 +20,7 @@ namespace gtrackProject.Repositories.product
 
         public IQueryable<GpsVersion> GetAll()
         {
-            return _db.ProductGpsVersions;
+            return _db.GpsVersions;
         }
 
         public async Task<GpsVersion> Get(byte id)
@@ -38,7 +37,7 @@ namespace gtrackProject.Repositories.product
                 Name = item.Name
             };
 
-            newVer = _db.ProductGpsVersions.Add(newVer);
+            newVer = _db.GpsVersions.Add(newVer);
             try
             {
                 await _db.SaveChangesAsync();
@@ -75,7 +74,7 @@ namespace gtrackProject.Repositories.product
         {
             var ver = await IdExist(id);
 
-            _db.ProductGpsVersions.Remove(ver);
+            _db.GpsVersions.Remove(ver);
             try
             {
                 await _db.SaveChangesAsync();
@@ -90,14 +89,14 @@ namespace gtrackProject.Repositories.product
 
         private async Task<GpsVersion> IdExist(byte id)
         {
-            var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(v => v.Id == id);
+            var ver = await _db.GpsVersions.FirstOrDefaultAsync(v => v.Id == id);
             if (ver != null) return ver;
             throw new KeyNotFoundException("id");
         }
 
         private async Task<bool> NameExist(string name)
         {
-            var ver = await _db.ProductGpsVersions.FirstOrDefaultAsync(v => v.Name == name);
+            var ver = await _db.GpsVersions.FirstOrDefaultAsync(v => v.Name == name);
             if (ver == null) return false;
             throw new ArgumentException("This name ( " + name + " ) is already taken");
         }

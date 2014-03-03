@@ -189,7 +189,7 @@ namespace gtrackProject.Repositories.universe
         }
         private async Task<int> ProductExist(int id)
         {
-            var product = await _db.ProductGpss.FirstOrDefaultAsync(p => p.Id == id);
+            var product = await _db.Gpss.FirstOrDefaultAsync(p => p.Id == id);
             if (product != null) return id;
             throw new ArgumentException("ProductId Not Found");
         }

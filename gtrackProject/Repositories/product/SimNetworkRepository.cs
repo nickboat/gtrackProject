@@ -10,39 +10,39 @@ using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Repositories.product
 {
-    public class ProductStateRepository : IProductStateRepository
+    public class SimNetworkRepository : ISimNetworkRepository
     {
         private GtrackDbContext _db { get; set; }
-        public ProductStateRepository()
+
+        public SimNetworkRepository()
         {
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<GpsState> GetAll()
+        public IQueryable<SimNetwork> GetAll()
         {
-            return _db.ProductProcessStates;
+            return _db.SimStatuses;
         }
 
-        public async Task<GpsState> Get(byte id)
+        public async Task<SimNetwork> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<GpsState> Add(GpsState item)
+        public async Task<SimNetwork> Add(SimNetwork item)
         {
-            if (await NameExist(item.StatusNameTh,item.StatusNameEn)) return null;
+            if (await NameExist(item.BrandName)) return null;
 
-            var newType = new GpsState()
+            var newBrand = new SimNetwork
             {
-                StatusNameTh = item.StatusNameTh,
-                StatusNameEn = item.StatusNameEn
+                BrandName = item.BrandName
             };
 
-            newType = _db.ProductProcessStates.Add(newType);
+            newBrand = _db.SimStatuses.Add(newBrand);
             try
             {
                 await _db.SaveChangesAsync();
-                return newType;
+                return newBrand;
             }
             catch (DbUpdateConcurrencyException exception)
             {
@@ -50,16 +50,15 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(GpsState item)
+        public async Task<bool> Update(SimNetwork item)
         {
-            var type = await IdExist(item.Id);
+            var brand = await IdExist(item.Id);
 
-            if (await NameExist(item.StatusNameTh,item.StatusNameEn)) return false;
+            if (await NameExist(item.BrandName)) return false;
 
-            type.StatusNameTh = item.StatusNameTh;
-            type.StatusNameEn = item.StatusNameEn;
+            brand.BrandName = item.BrandName;
 
-            _db.Entry(type).State = EntityState.Modified;
+            _db.Entry(brand).State = EntityState.Modified;
             try
             {
                 await _db.SaveChangesAsync();
@@ -74,9 +73,9 @@ namespace gtrackProject.Repositories.product
 
         public async Task<bool> Remove(byte id)
         {
-            var payment = await IdExist(id);
+            var brand = await IdExist(id);
 
-            _db.ProductProcessStates.Remove(payment);
+            _db.SimStatuses.Remove(brand);
             try
             {
                 await _db.SaveChangesAsync();
@@ -89,18 +88,18 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<GpsState> IdExist(byte id)
+        private async Task<SimNetwork> IdExist(byte id)
         {
-            var type = await _db.ProductProcessStates.FirstOrDefaultAsync(t => t.Id == id);
-            if (type != null) return type;
+            var brand = await _db.SimStatuses.FirstOrDefaultAsync(b => b.Id == id);
+            if (brand != null) return brand;
             throw new KeyNotFoundException("id");
         }
 
-        private async Task<bool> NameExist(string th,string en)
+        private async Task<bool> NameExist(string name)
         {
-            var type = await _db.ProductProcessStates.FirstOrDefaultAsync(p => p.StatusNameTh == th || p.StatusNameEn == en);
-            if (type == null) return false;
-            throw new ArgumentException("This name is already taken");
+            var checkName = await _db.SimStatuses.FirstOrDefaultAsync(b => b.BrandName == name);
+            if (checkName == null) return false;
+            throw new ArgumentException("This name ( " + name + " ) is already taken");
         }
     }
 }
