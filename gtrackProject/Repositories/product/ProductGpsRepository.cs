@@ -31,6 +31,7 @@ namespace gtrackProject.Repositories.product
 
         public async Task<Gps> Add(Gps item)
         {
+            //todo: Manu role only ... check on ctrl
             if (item.State != 1) throw new ArgumentException("Incorrect State", "State");
 
             if (!item.CreateBy.HasValue)
@@ -64,32 +65,32 @@ namespace gtrackProject.Repositories.product
 
         public async Task<bool> Update(Gps item)
         {
-            if (item.State == 1) throw new ArgumentException("Incorrect State", "State");
-
             var product = await IdExist(item.Id);
 
-            //status
             switch (item.State)
             {
-                case 2://stock
+                case 2: //stock (Manu)
                     if (item.StockBy == null)
                         throw new ArgumentNullException("StockBy", "StockBy is Required for this state");
                     product.StockBy = await EmpExist(item.StockBy.Value);
                     product.StockDate = DateTime.UtcNow;
                     product.State = 2;
                     break;
-                case 3://QC
+                case 3: //QC (Qc)
                     if (item.QcBy == null)
                         throw new ArgumentNullException("QcBy", "QcBy is Required for this state");
 
                     if (item.SimId == null)
                         throw new ArgumentNullException("SimId", "SimId is Required for this state");
 
+                    if (item.OrderId == null)
+                        throw new ArgumentNullException("OrderId", "OrderId is Required for this state");
+
                     var by = await EmpExist(item.QcBy.Value);
                     var d = DateTime.UtcNow;
                     var newSim = await SimExist(item.SimId.Value);
 
-                    if (product.SimId != null)//changeSim
+                    if (product.SimId != null) //changeSim
                     {
                         var log = new LogSim
                         {
@@ -114,17 +115,15 @@ namespace gtrackProject.Repositories.product
                     product.QcBy = by;
                     product.QcDate = d;
                     product.State = 3;
-
-                    //todo: check all product in this order ... update order status = 4 (QCcomplete)
+                    product.OrderId = item.OrderId.Value;
                     break;
-                case 4://Install
+                /*case 4: //Install (installation) ... update in order process
                     if (item.InstallBy == null)
                         throw new ArgumentNullException("InstallBy", "InstallBy is Required for this state");
                     product.InstallBy = await EmpExist(item.InstallBy.Value);
-                    product.InstallDate = DateTime.UtcNow;
                     product.State = 4;
-                    break;
-                case 5://Bad
+                    break;*/
+                case 5: //Bad (Qc)
                     if (item.BadBy == null)
                         throw new ArgumentNullException("BadBy", "BadBy is Required for this state");
                     product.BadBy = await EmpExist(item.BadBy.Value);
@@ -132,7 +131,7 @@ namespace gtrackProject.Repositories.product
                     product.BadComment = item.BadComment;
                     product.State = 5;
                     break;
-                case 6://Unuseable
+                case 6: //Unuseable (Manu)
                     if (item.UnuseableBy == null)
                         throw new ArgumentNullException("UnuseableBy", "UnuseableBy is Required for this state");
                     product.UnuseableBy = await EmpExist(item.UnuseableBy.Value);
@@ -140,29 +139,83 @@ namespace gtrackProject.Repositories.product
                     product.UnuseableComment = item.UnuseableComment;
                     product.State = 6;
                     break;
-                case 8://Complete
+                case 8: //Complete (installation)
+                    if (item.OrderId == null)
+                        throw new ArgumentNullException("OrderId", "OrderId is Required for this state");
+
+                    //update universe.Display = 3
+                    var uni = await _db.Universes.FirstOrDefaultAsync(u => u.GpsProductId == item.Id);
+                    if (uni == null) throw new ArgumentNullException("Universes", "ProductId is NotFound in Universe");
+                    uni.DisplayStatus = 3;
+                    _db.Entry(uni).State = EntityState.Modified;
+
+                    //check this product == SolvedProduct in FixOrder
+                    var fix =
+                        await _db.FixOrders.Where(f => f.SolvedProduct == item.Id)
+                            .OrderByDescending(f => f.CreateDate).FirstOrDefaultAsync();
+                    //if found -> update FixOrder status = 6 (Complete) and check fixorder of fixorder of ... of order and update all order status
+                    if (fix != null)
+                    {
+                        fix.State = 6;
+                        var loop = fix.FromFixOrderId.HasValue;
+                        if (loop)
+                        {
+                            var fromFix = fix.FromFixOrder;
+                            while (loop)
+                            {
+                                fromFix.State = 6;
+                                _db.Entry(fromFix).State = EntityState.Modified;
+
+                                if (fromFix.FromFixOrderId.HasValue)
+                                    fromFix = fromFix.FromFixOrder;
+                                else
+                                {
+                                    //call fn() check all product in order
+                                    await updateOrder(item.OrderId.Value, item.Id);
+                                    loop = false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //call fn() check all product in order
+                            await updateOrder(item.OrderId.Value, item.Id);
+                        }
+                    }
+                    else
+                    {
+                        //update logFee startDate&expireDate
+                        var fee =
+                            await _db.LogFees.OrderByDescending(f => f.CreateDate)
+                                .FirstOrDefaultAsync(f => f.GpsId == item.Id);
+                        fee.StartDate = DateTime.UtcNow;
+                        fee.ExpireDate = DateTime.UtcNow.AddYears(1);
+                        _db.Entry(fee).State = EntityState.Modified;
+
+                        //call fn() check all product in order
+                        await updateOrder(item.OrderId.Value, item.Id);
+                    }
+
                     product.InstallDate = DateTime.UtcNow;
                     product.State = 8;
-
-                    //todo: check all product in this order ... update order status = 6 (Complete)
-                    //todo: check fixorder of fixorder of ... of order and update all order status
-                    //todo: if logfee notfound ... insert startDate & expireDate 
                     break;
-                case 10://Fixed
+                case 10: //Fixed (Manu,Qc)
                     if (item.StockBy == null)
                         throw new ArgumentNullException("StockBy", "StockBy is Required for this state");
                     product.StockBy = await EmpExist(item.StockBy.Value);
                     product.StockDate = DateTime.UtcNow;
                     product.State = 2;
                     break;
-                case 11://Problem
+                    /*case 11://Problem state ... create when FixOrder created
                     if (item.ProblemBy == null)
                         throw new ArgumentNullException("ProblemBy", "ProblemBy is Required for this state");
                     product.ProblemBy = await EmpExist(item.ProblemBy.Value);
                     product.ProblemDate = DateTime.UtcNow;
                     product.ProblemComment = item.ProblemComment;
                     product.State = 11;
-                    break;
+                    break;*/
+                default:
+                    throw new ArgumentException("Incorrect State", "State");
             }
 
             _db.Entry(product).State = EntityState.Modified;
@@ -232,6 +285,26 @@ namespace gtrackProject.Repositories.product
                 var product = await _db.Gpss.FirstOrDefaultAsync(p => p.Serial == sr);
                 if (product == null) return sr;
             }
+        }
+
+        private async Task<bool> updateOrder(int orderId, int itemId)
+        {
+            var pd = _db.Gpss.Where(g => g.OrderId == orderId && g.State != 8);
+            //has One and eq this product
+            if (pd.Count() != 1) return false;
+
+            var yes = await pd.FirstOrDefaultAsync(p => p.Id == itemId);
+            //if yes -> update Order status = 6 (Complete)
+            if (yes != null)
+            {
+                var order = yes.Order;
+                order.State = 6;
+                _db.Entry(order).State = EntityState.Modified;
+            }
+            else
+                throw new ArgumentNullException("Order", "ProductId is NotFound in This Order");
+
+            return true;
         }
     }
 }

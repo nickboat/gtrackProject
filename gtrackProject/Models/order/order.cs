@@ -34,8 +34,9 @@ namespace gtrackProject.Models.order
         public byte Version { get; set; }
         [Required] public int Quantity { get; set; }
         public string Comment { get; set; }
+        [Required]
         [ForeignKey("OrderProcessState")]
-        public byte? State { get; set; }
+        public byte State { get; set; }
         [Required] public DateTime Deadline { get; set; }
 
 

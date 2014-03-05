@@ -10,13 +10,9 @@ namespace gtrackProject.Models.product
     {
         [Key]
         public int Id { get; set; }
-        [Required]
         public decimal FeePerYear { get; set; }
-        [Required]
         public byte Year { get; set; }
-        [Required]
         public DateTime StartDate { get; set; }
-        [Required]
         public DateTime ExpireDate { get; set; }
         [Required]
         [ForeignKey("Gps")]

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Models.order;
+using gtrackProject.Models.product;
 using gtrackProject.Models.universe;
 using gtrackProject.Models.vehicle;
 using gtrackProject.Repositories.order.IRepos;
@@ -48,9 +49,7 @@ namespace gtrackProject.Repositories.order
                 State = 1,//create
                 Deadline = item.Deadline
             };
-
-            if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
-            if (item.HeadInstall != null) order.HeadInstall = await EmpExist(item.HeadInstall.Value);
+            
             if (item.Comment != null) order.Comment = item.Comment;
             
             order = _db.Orders.Add(order);
@@ -70,52 +69,85 @@ namespace gtrackProject.Repositories.order
 
         public async Task<bool> Update(Order item)
         {
-            if (!item.State.HasValue)
-            {
-                throw new ArgumentNullException("Status", "Status is Required");
-            }
-
             var order = await IdExist(item.Id);
-            if (item.State.Value == 4)
+
+            switch (item.State)
             {
-                //order.state = QCcomplete , when all productGPS in this Order active on universe
-                var uni = _db.Universes.Where(u => u.OrderId == order.Id && u.GpsProductId == null);
-                if (uni.Any())
-                    throw new ArgumentNullException("GpsProductId", "one or more ProductGPS in this Order incomplete!!!");
+                case 2: //checked (cs)
+                    var changeHd = false;
+                    var changeQuantity = false;
+                    if (order.HdId != item.HdId) changeHd = true;
+                    if (order.Quantity != item.Quantity) changeQuantity = true;
+
+                    order.HdId = await HdExist(item.HdId);
+                    order.Version = await VersionExist(item.Version);
+                    order.Quantity = item.Quantity;
+                    order.State = 2;
+                    order.Deadline = item.Deadline;
+
+                    //clear currentUser
+                    order.CurrentUser = null;
+
+                    //if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
+                    
+                    if (item.Comment != null) order.Comment = item.Comment;
+
+                    //changeHD ... move vehicle from ole hd to new hd
+                    //changeQuantity ... add or delete vehicle to eq New Order Quantity
+                    if (changeHd || changeQuantity)
+                        await ChangeOrder(changeHd, order.HdId, item.HdId, order.Quantity, order.Id);
+                    break;
+                /*case 3: //QCworking (Qc) ... update in updateCurrentUser
+                    break;*/
+                case 4: //QCcomplete (Qc)
+                    //order.state = QCcomplete , when all productGPS in this Order active on universe
+                    var uni = _db.Universes.Where(u => u.OrderId == order.Id && u.GpsProductId == null);
+                    if (uni.Any())
+                        throw new ArgumentNullException("GpsProductId", "one or more ProductGPS in this Order incomplete!!!");
+
+                    order.State = 4;
+
+                    //clear currentUser
+                    order.CurrentUser = null;
+                    break;
+                case 5: //Installation (cs)
+                    if (item.HeadInstall == null)
+                        throw new ArgumentNullException("HeadInstall", "HeadInstall is Required for this state");
+                    var head = await EmpExist(item.HeadInstall.Value);
+
+                    //check logFee all product in this order
+                    var pd = _db.Gpss.Where(g => g.OrderId == order.Id);
+                    if (pd.Any())
+                    {
+                        var logFee = _db.LogFees.OrderByDescending(f => f.CreateDate);
+                        foreach (var gps in pd)
+                        {
+                            var fee = await logFee.FirstOrDefaultAsync(f => f.GpsId == gps.Id);
+                            if (fee == null)
+                                throw new ArgumentNullException("GpsProductId",
+                                    "one or more ProductGPS in LogFee incomplete!!!");
+                            
+                            //update all product.state = 4 and product.installBy = HeadInstall
+                            gps.State = 4;
+                            gps.InstallBy = head;
+                            _db.Entry(gps).State = EntityState.Modified;
+                        }
+                    }
+                    else
+                        throw new ArgumentNullException("GpsProductId", "Notfound ProductGPS in this Order!!!");
+
+                    order.HeadInstall = head;
+                    order.State = 5;
+                    //clear currentUser
+                    order.CurrentUser = null;
+                    break;
+                /*case 6: //Complete (install) ... update in product process
+                    break;*/
+                /*case 8: //Incomplete (install) ... when create fixOrder from this Order
+                    break;*/
+                default:
+                    throw new ArgumentException("Incorrect State", "State");
             }
-
-            if (item.State.Value == 6)
-            {
-                //order.state = Complete , when all productGPS in this Order is complete or fixing in FixOrder
-                var uni = _db.Universes.Where(u => u.OrderId == order.Id && u.DisplayStatus != 3);
-                foreach (var u in uni)
-                {
-                    var fix = _db.FixOrders.FirstOrDefault(f => f.FromOrderId.Value == order.Id && f.ProblemProduct == u.GpsProductId.Value);
-                    if (fix == null)
-                    {throw new ArgumentNullException("GpsProductId",
-                            "one or more ProductGPS in this Order incomplete!!!");}
-                }
-            }
-            
-            var changeHd = false;
-            var changeQuantity = false;
-
-            if (order.HdId != item.HdId) changeHd = true;
-            if (order.Quantity != item.Quantity) changeQuantity = true;            
-
-            order.HdId = await HdExist(item.HdId);
-            order.Version = await VersionExist(item.Version);
-            order.Quantity = item.Quantity;
-            order.State = await StatusExist(item.State.Value);
-            order.Deadline = item.Deadline;
-
-            if (item.CurrentUser != null) order.CurrentUser = await EmpExist(item.CurrentUser.Value);
-            if (item.HeadInstall != null) order.HeadInstall = await EmpExist(item.HeadInstall.Value);
-            if (item.Comment != null) order.Comment = item.Comment;
-
-            //changeHD ... move vehicle from ole hd to new hd
-            //changeQuantity ... add or delete vehicle to eq New Order Quantity
-            if (changeHd || changeQuantity) await ChangeOrder(changeHd, order.HdId, item.HdId, order.Quantity, order.Id);
             
             _db.Entry(order).State = EntityState.Modified;
             try

@@ -96,6 +96,11 @@ namespace gtrackProject.Repositories.universe
 
         public async Task<bool> Update(Universe item)
         {
+            //after update product in QCcomplete Process
+            //todo: update product_id in universe 
+            //todo: check all product.state = 3 in this order
+            //todo: update order status = 4 (QCcomplete)
+
             var un = await IdExist(item.Id);
             un.VehicleId = await VehicleExist(item.VehicleId);
             un.DisplayStatus = await DisplayExist(item.DisplayStatus);

@@ -73,6 +73,7 @@ namespace gtrackProject.Controllers.product
         /// </summary>
         /// <param name="value">The <see cref="Gps"/>.</param>
         /// <returns>ProductGps</returns>
+        [Authorize(Roles = "admin, manu")]
         [HttpPost]
         [ResponseType(typeof(Gps))]
         public async Task<IHttpActionResult> Post([FromBody]Gps value)

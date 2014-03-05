@@ -37,36 +37,37 @@ namespace gtrackProject.Repositories.order
                 throw new ArgumentNullException("CreateBy", "CreateBy is Required");
             }
 
+            var gps = await GpsExist(item.ProblemProduct);
+            var uni = await _db.Universes.FirstOrDefaultAsync(u => u.GpsProductId == gps.Id);
+            var usrCreate = await EmpExist(item.CreateBy.Value);
+            var d = DateTime.UtcNow;
+
             var fix = new FixOrder
             {
-                CreateBy = await EmpExist(item.CreateBy.Value),
-                CreateDate = DateTime.UtcNow,
-                State = 1
+                CreateBy = usrCreate,
+                CreateDate = d,
+                State = 1,
+                ProblemProduct = gps.Id
             };
 
             //update product.State = bad & universe.DisplayStatus = test
-            var gps = await GpsExist(item.ProblemProduct);
-            var uni = await _db.Universes.FirstOrDefaultAsync(u => u.GpsProductId == gps.Id);
             uni.DisplayStatus = 2;//test
             gps.State = 5;//bad
-
-            fix.ProblemProduct = gps.Id;
-            if (item.CurrentUser != null)
-            {
-                var usr = await EmpExist(item.CurrentUser.Value);
-                fix.CurrentUser = usr;
-                gps.BadBy = usr;
-            }
-            if (item.HeadInstall != null)
-                fix.HeadInstall = await EmpExist(item.HeadInstall.Value);
+            gps.BadBy = usrCreate;
+            gps.BadDate = d;
+            
             if (item.Comment != null)
             {
                 fix.Comment = item.Comment;
                 gps.BadComment = item.Comment;
             }
+
             if (item.FromFixOrderId != null) fix.FromFixOrderId = await FixExist(item.FromFixOrderId.Value);
             if (item.FromOrderId != null) fix.FromOrderId = await OrderExist(item.FromOrderId.Value);
-            
+
+            //clear currentUser
+            fix.CurrentUser = null;
+
             fix = _db.FixOrders.Add(fix);
             _db.Entry(gps).State = EntityState.Modified;
             _db.Entry(uni).State = EntityState.Modified;
@@ -84,33 +85,77 @@ namespace gtrackProject.Repositories.order
         public async Task<bool> Update(FixOrder item)
         {
             var fix = await IdExist(item.Id);
-            fix.State = await StateExist(item.State);
-            if (item.State == 4)
-            {
-                if (item.SolvedProduct != null)
-                {
-                    var gps = await GpsExist(item.ProblemProduct);
-                    fix.SolvedProduct = gps.Id;
-                }
-                else
-                    throw new ArgumentNullException("SolvedProduct", "SolvedProduct is Required");
-            }
 
-            if (item.State == 5)
+            switch (item.State)
             {
-                if (item.HeadInstall != null) 
+                case 2: //checked (cs)
+                    if (fix.ProblemProduct != item.ProblemProduct)
+                    {
+                        var uniOld = await _db.Universes.FirstOrDefaultAsync(u => u.GpsProductId == fix.ProblemProduct);
+                        var gpsOld = fix.ProblemGps;
+                        var uniNew = await _db.Universes.FirstOrDefaultAsync(u => u.GpsProductId == item.ProblemProduct);
+                        var gpsNew = await GpsExist(item.ProblemProduct);
+
+                        uniNew.DisplayStatus = 2;//test
+                        gpsNew.State = 5;//bad
+                        gpsNew.BadBy = gpsOld.BadBy;
+                        gpsNew.BadDate = gpsOld.BadDate;
+                        _db.Entry(uniNew).State = EntityState.Modified;
+                        _db.Entry(gpsNew).State = EntityState.Modified;
+
+                        uniOld.DisplayStatus = 3;//normal
+                        gpsOld.State = 4;//install
+                        gpsOld.BadBy = null;
+                        gpsOld.BadDate = null;
+                        _db.Entry(uniOld).State = EntityState.Modified;
+                        _db.Entry(gpsOld).State = EntityState.Modified;
+                    }
+
+                    fix.FromFixOrderId = item.FromFixOrderId;
+                    fix.FromOrderId = item.FromOrderId;
+                    fix.Comment = item.Comment;
+                    fix.CurrentUser = null;
+                    fix.State = 2;
+                    break;
+                /*case 3: //QCworking (Qc) ... update in updateCurrentUser
+                        //add SolvedProduct to fixOrder
+                    break;*/
+                case 4: //QCcomplete (Qc)
+                    if (!fix.SolvedProduct.HasValue)
+                        throw new ArgumentNullException("SolvedProduct", "SolvedProduct in this FixOrder incomplete!!!");
+
+                    if (fix.ProblemProduct != fix.SolvedProduct)
+                    {
+                        //update logFee.GpsId from problem_id to solved_id
+                        var fee =
+                            await _db.LogFees.OrderByDescending(f => f.CreateDate)
+                                .FirstOrDefaultAsync(f => f.GpsId == fix.ProblemProduct);
+
+                        if (fee == null)
+                            throw new ArgumentNullException("ProblemProduct", "Notfound ProblemProduct in LogFees!!!");
+
+                        fee.GpsId = fix.SolvedProduct.Value;
+                        _db.Entry(fee).State = EntityState.Modified;
+                    }
+
+                    fix.State = 4;
+                    fix.CurrentUser = null;
+                    break;
+                case 5: //Installation (cs)
+                    if (item.HeadInstall == null)
+                        throw new ArgumentNullException("HeadInstall", "HeadInstall is Required for this state");
+                    
                     fix.HeadInstall = await EmpExist(item.HeadInstall.Value);
-                else
-                    throw new ArgumentNullException("HeadInstall", "HeadInstall is Required");
+                    fix.State = 5;
+                    fix.CurrentUser = null;
+                    break;
+                /*case 6: //Complete (install) ... update in product process
+                break;*/
+                /*case 8: //Incomplete (install) ... when create fixOrder from this Order
+                    break;*/
+                default:
+                    throw new ArgumentException("Incorrect State", "State");
             }
-
-            if (item.CurrentUser != null) fix.CurrentUser = await EmpExist(item.CurrentUser.Value);
-            if (item.Comment != null) fix.Comment = item.Comment;
-            if (item.FromFixOrderId != null) fix.FromFixOrderId = await FixExist(item.FromFixOrderId.Value);
-            if (item.FromOrderId != null) fix.FromOrderId = await OrderExist(item.FromOrderId.Value);
-
-            if (item.State == 6)
-                fix.CurrentUser = null;
 
             _db.Entry(fix).State = EntityState.Modified;
             try
@@ -153,12 +198,6 @@ namespace gtrackProject.Repositories.order
             var emp = await _db.Employees.FirstOrDefaultAsync(o => o.Id == id);
             if (emp != null) return id;
             throw new ArgumentException("Employee Not Found");
-        }
-        private async Task<byte> StateExist(byte id)
-        {
-            var state = await _db.OrderStates.FirstOrDefaultAsync(o => o.Id == id);
-            if (state != null) return id;
-            throw new ArgumentException("OrderStatus Not Found");
         }
         private async Task<Gps> GpsExist(int id)
         {
