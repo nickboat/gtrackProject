@@ -363,9 +363,13 @@
     <Compile Include="Repositories\product\IRepos\IProductGpsRepository.cs" />
     <Compile Include="Repositories\product\IRepos\ISimNetworkRepository.cs" />
     <Compile Include="Repositories\product\IRepos\ISimFeeTypeRepository.cs" />
+    <Compile Include="Repositories\product\IRepos\ISimRepository.cs" />
+    <Compile Include="Repositories\product\IRepos\ISimStatusRepository.cs" />
     <Compile Include="Repositories\product\ProductGpsRepository.cs" />
     <Compile Include="Repositories\product\SimNetworkRepository.cs" />
     <Compile Include="Repositories\product\SimFeeTypeRepository.cs" />
+    <Compile Include="Repositories\product\SimRepository.cs" />
+    <Compile Include="Repositories\product\SimStatusRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmBattRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnCmCommRepository.cs" />
     <Compile Include="Repositories\universe\IRepos\IUnDisplayRepository.cs" />

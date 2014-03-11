@@ -10,39 +10,39 @@ using gtrackProject.Repositories.product.IRepos;
 
 namespace gtrackProject.Repositories.product
 {
-    public class SimNetworkRepository : ISimNetworkRepository
+    public class SimStatusRepository : ISimStatusRepository
     {
         private GtrackDbContext _db { get; set; }
 
-        public SimNetworkRepository()
+        public SimStatusRepository()
         {
             _db = new GtrackDbContext();
         }
 
-        public IQueryable<SimNetwork> GetAll()
+        public IQueryable<SimStatus> GetAll()
         {
-            return _db.SimNetworks;
+            return _db.SimStatuses;
         }
 
-        public async Task<SimNetwork> Get(byte id)
+        public async Task<SimStatus> Get(byte id)
         {
             return await IdExist(id);
         }
 
-        public async Task<SimNetwork> Add(SimNetwork item)
+        public async Task<SimStatus> Add(SimStatus item)
         {
-            if (await NameExist(item.BrandName)) return null;
+            if (await NameExist(item.Name)) return null;
 
-            var newBrand = new SimNetwork
+            var newstatus = new SimStatus
             {
-                BrandName = item.BrandName
+                Name = item.Name
             };
 
-            newBrand = _db.SimNetworks.Add(newBrand);
+            newstatus = _db.SimStatuses.Add(newstatus);
             try
             {
                 await _db.SaveChangesAsync();
-                return newBrand;
+                return newstatus;
             }
             catch (DbUpdateConcurrencyException exception)
             {
@@ -50,15 +50,15 @@ namespace gtrackProject.Repositories.product
             }
         }
 
-        public async Task<bool> Update(SimNetwork item)
+        public async Task<bool> Update(SimStatus item)
         {
-            var brand = await IdExist(item.Id);
+            var status = await IdExist(item.Id);
 
-            if (await NameExist(item.BrandName)) return false;
+            if (await NameExist(item.Name)) return false;
 
-            brand.BrandName = item.BrandName;
+            status.Name = item.Name;
 
-            _db.Entry(brand).State = EntityState.Modified;
+            _db.Entry(status).State = EntityState.Modified;
             try
             {
                 await _db.SaveChangesAsync();
@@ -73,9 +73,9 @@ namespace gtrackProject.Repositories.product
 
         public async Task<bool> Remove(byte id)
         {
-            var brand = await IdExist(id);
+            var status = await IdExist(id);
 
-            _db.SimNetworks.Remove(brand);
+            _db.SimStatuses.Remove(status);
             try
             {
                 await _db.SaveChangesAsync();
@@ -88,16 +88,16 @@ namespace gtrackProject.Repositories.product
             return true;
         }
 
-        private async Task<SimNetwork> IdExist(byte id)
+        private async Task<SimStatus> IdExist(byte id)
         {
-            var brand = await _db.SimNetworks.FirstOrDefaultAsync(b => b.Id == id);
-            if (brand != null) return brand;
+            var status = await _db.SimStatuses.FirstOrDefaultAsync(b => b.Id == id);
+            if (status != null) return status;
             throw new KeyNotFoundException("id");
         }
 
         private async Task<bool> NameExist(string name)
         {
-            var checkName = await _db.SimNetworks.FirstOrDefaultAsync(b => b.BrandName == name);
+            var checkName = await _db.SimStatuses.FirstOrDefaultAsync(b => b.Name == name);
             if (checkName == null) return false;
             throw new ArgumentException("This name ( " + name + " ) is already taken");
         }
