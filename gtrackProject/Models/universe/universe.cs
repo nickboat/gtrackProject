@@ -13,9 +13,8 @@ namespace gtrackProject.Models.universe
     /// </summary>
     public class Universe
     {
-        [Required]
         [ForeignKey("Vehicle")]
-        public int VehicleId { get; set; }
+        public int? VehicleId { get; set; }
         [ForeignKey("ProductGps")]
         public int? GpsProductId { get; set; }
         public DateTime? CurrentDataDatetime { get; set; }
@@ -47,9 +46,8 @@ namespace gtrackProject.Models.universe
         public short? Port { get; set; }
         public decimal? LaGoogle { get; set; }
         public decimal? LongGoogle { get; set; }
-        [Required]
         [ForeignKey("UnDisplayStatus")]
-        public byte DisplayStatus { get; set; }
+        public byte? DisplayStatus { get; set; }
         [ForeignKey("Driver")]
         public int? DriverId { get; set; }
         [ForeignKey("Order")]

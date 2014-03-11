@@ -8,8 +8,11 @@ namespace gtrackProject.Repositories.universe.IRepos
     {
         IQueryable<Universe> GetAll();
         Task<Universe> Get(int id);
-        Task<Universe> Add(Universe item);
-        Task<bool> Update(Universe item);
-        Task<bool> Remove(int id);
+        //Task<Universe> Add(Universe item);
+        Task<bool> UpdateGps(Universe item);
+        Task<bool> UpdateData(Universe item);
+        //Task<bool> UpdateDataString(string item);
+        Task<bool> GetOffGps(int id);
+        //Task<bool> Remove(int id);
     }
 }

@@ -187,6 +187,32 @@ namespace gtrackProject.Repositories.order
             return true;
         }
 
+        public async Task<bool> UserActive(int fixId, string aspId, bool isQC)
+        {
+            var usr = await _db.Employees.FirstOrDefaultAsync(e => e.AspId == aspId);
+            if (usr == null) throw new ArgumentException("Invalid User Access!!!");
+
+            var fix = await _db.FixOrders.FirstOrDefaultAsync(f => f.Id == fixId);
+            if (fix == null) throw new ArgumentException("FixOrderId Not Found");
+
+            if (fix.CurrentUser != null) throw new ArgumentException("Another User is currently use this fixorder");
+
+            fix.CurrentUser = usr.Id;
+            if (isQC) fix.State = 3;
+
+            _db.Entry(fix).State = EntityState.Modified;
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException exception)
+            {
+                throw new DbUpdateConcurrencyException(exception.Message);
+            }
+
+            return true;
+        }
+
         private async Task<FixOrder> IdExist(int id)
         {
             var fix = await _db.FixOrders.FirstOrDefaultAsync(o => o.Id == id);

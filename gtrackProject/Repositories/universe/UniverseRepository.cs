@@ -28,127 +28,15 @@ namespace gtrackProject.Repositories.universe
         {
             return await IdExist(id);
         }
-
-        public async Task<Universe> Add(Universe item)
+        
+        public async Task<bool> UpdateGps(Universe item)
         {
-            var newUn = new Universe
-            {
-                VehicleId = await VehicleExist(item.VehicleId),
-                DisplayStatus = await DisplayExist(item.DisplayStatus)
-            };
-
-            if (item.GpsProductId != null) 
-                newUn.GpsProductId = await ProductExist(item.GpsProductId.Value);
-            if (item.CurrentDataDatetime != null)
-                newUn.CurrentDataDatetime = item.CurrentDataDatetime.Value;
-            if (item.CorrectDataDatetime != null)
-                newUn.CorrectDataDatetime = item.CorrectDataDatetime.Value;
-            if (item.CorrectDataId != null)
-                newUn.CorrectDataId = item.CorrectDataId.Value;
-            if (item.CmCommand != null) 
-                newUn.CmCommand = await CommExist(item.CmCommand);
-            if (item.CmEngine != null)
-                newUn.CmEngine = await EngineExist(item.CmEngine);
-            if (item.CmMeter != null)
-                newUn.CmMeter = await MeterExist(item.CmMeter);
-            if (item.CmBatt != null)
-                newUn.CmBatt = await BattExist(item.CmBatt);
-            if (item.CmTemp != null)
-                newUn.CmTemp = await TempExist(item.CmTemp);
-            if (item.CmGps != null)
-                newUn.CmGps = await GpsExist(item.CmGps);
-            if (item.CmSignalStatus != null)
-                newUn.CmSignalStatus = await SignalExist(item.CmSignalStatus);
-            if (item.FuelLevel != null)
-                newUn.FuelLevel = item.FuelLevel.Value;
-            if (item.TempLevel != null)
-                newUn.TempLevel = item.TempLevel.Value;
-            if (item.Speed != null)
-                newUn.Speed = item.Speed.Value;
-            if (item.Direction != null)
-                newUn.Direction = item.Direction.Value;
-            if (item.IpGps != null)
-                newUn.IpGps = item.IpGps;
-            if (item.Port != null)
-                newUn.Port = item.Port.Value;
-            if (item.LaGoogle != null)
-                newUn.LaGoogle = item.LaGoogle.Value;
-            if (item.LongGoogle != null)
-                newUn.LongGoogle = item.LongGoogle.Value;
-            if (item.DriverId != null) 
-                newUn.DriverId = await DriverExist(item.DriverId.Value);
-            if (item.OrderId != null) 
-                newUn.OrderId = await OrderExist(item.OrderId.Value);
-            if (item.FixOrderId != null) 
-                newUn.FixOrderId = await FixExist(item.FixOrderId.Value);
-
-            newUn = _db.Universes.Add(newUn);
-            try
-            {
-                await _db.SaveChangesAsync();
-                return newUn;
-            }
-            catch (DbUpdateConcurrencyException exception)
-            {
-                throw new DbUpdateConcurrencyException(exception.Message);
-            }
-        }
-
-        public async Task<bool> Update(Universe item)
-        {
-            //after update product in QCcomplete Process
-            //todo: update product_id in universe 
-            //todo: check all product.state = 3 in this order
-            //todo: update order status = 4 (QCcomplete)
+            if (item.GpsProductId == null) throw new ArgumentNullException("GpsProductId", "GpsProductId is Required for this state");
 
             var un = await IdExist(item.Id);
-            un.VehicleId = await VehicleExist(item.VehicleId);
-            un.DisplayStatus = await DisplayExist(item.DisplayStatus);
-
-            if (item.GpsProductId != null)
-                un.GpsProductId = await ProductExist(item.GpsProductId.Value);
-            if (item.CurrentDataDatetime != null)
-                un.CurrentDataDatetime = item.CurrentDataDatetime.Value;
-            if (item.CorrectDataDatetime != null)
-                un.CorrectDataDatetime = item.CorrectDataDatetime.Value;
-            if (item.CorrectDataId != null)
-                un.CorrectDataId = item.CorrectDataId.Value;
-            if (item.CmCommand != null)
-                un.CmCommand = await CommExist(item.CmCommand);
-            if (item.CmEngine != null)
-                un.CmEngine = await EngineExist(item.CmEngine);
-            if (item.CmMeter != null)
-                un.CmMeter = await MeterExist(item.CmMeter);
-            if (item.CmBatt != null)
-                un.CmBatt = await BattExist(item.CmBatt);
-            if (item.CmTemp != null)
-                un.CmTemp = await TempExist(item.CmTemp);
-            if (item.CmGps != null)
-                un.CmGps = await GpsExist(item.CmGps);
-            if (item.CmSignalStatus != null)
-                un.CmSignalStatus = await SignalExist(item.CmSignalStatus);
-            if (item.FuelLevel != null)
-                un.FuelLevel = item.FuelLevel.Value;
-            if (item.TempLevel != null)
-                un.TempLevel = item.TempLevel.Value;
-            if (item.Speed != null)
-                un.Speed = item.Speed.Value;
-            if (item.Direction != null)
-                un.Direction = item.Direction.Value;
-            if (item.IpGps != null)
-                un.IpGps = item.IpGps;
-            if (item.Port != null)
-                un.Port = item.Port.Value;
-            if (item.LaGoogle != null)
-                un.LaGoogle = item.LaGoogle.Value;
-            if (item.LongGoogle != null)
-                un.LongGoogle = item.LongGoogle.Value;
-            if (item.DriverId != null)
-                un.DriverId = await DriverExist(item.DriverId.Value);
-            if (item.OrderId != null)
-                un.OrderId = await OrderExist(item.OrderId.Value);
-            if (item.FixOrderId != null)
-                un.FixOrderId = await FixExist(item.FixOrderId.Value);
+            un.GpsProductId = await ProductExist(item.GpsProductId.Value);
+            if (item.OrderId != null) un.OrderId = await OrderExist(item.OrderId.Value);
+            if (item.FixOrderId != null) un.FixOrderId = await FixExist(item.FixOrderId.Value);
 
             _db.Entry(un).State = EntityState.Modified;
             try
@@ -162,12 +50,42 @@ namespace gtrackProject.Repositories.universe
 
             return true;
         }
-
-        public async Task<bool> Remove(int id)
+        public async Task<bool> UpdateData(Universe item)
         {
-            var un = await IdExist(id);
+            if (item.CorrectDataId == null) throw new ArgumentNullException("CorrectDataId", "CorrectDataId is Required for this state");
+            if (item.FuelLevel == null) throw new ArgumentNullException("FuelLevel", "FuelLevel is Required for this state");
+            if (item.TempLevel == null) throw new ArgumentNullException("TempLevel", "TempLevel is Required for this state");
+            if (item.Speed == null) throw new ArgumentNullException("Speed", "Speed is Required for this state");
+            if (item.Direction == null) throw new ArgumentNullException("Speed", "Speed is Required for this state");
+            if (string.IsNullOrEmpty(item.IpGps)) throw new ArgumentNullException("IpGps", "IpGps is Required for this state");
+            if (item.Port == null) throw new ArgumentNullException("Port", "Port is Required for this state");
+            if (item.LongGoogle == null) throw new ArgumentNullException("LongGoogle", "LongGoogle is Required for this state");
+            if (item.LaGoogle == null) throw new ArgumentNullException("LaGoogle", "LaGoogle is Required for this state");
 
-            _db.Universes.Remove(un);
+            var un = await IdExist(item.Id);
+            un.CurrentDataDatetime = DateTime.UtcNow;
+            un.CorrectDataId = item.CorrectDataId.Value;
+            un.CorrectDataDatetime = item.CorrectDataDatetime;
+
+            un.CmCommand = await CommExist(item.CmCommand);
+            un.CmEngine = await EngineExist(item.CmEngine);
+            un.CmMeter = await MeterExist(item.CmMeter);
+            un.CmBatt = await BattExist(item.CmBatt);
+            un.FuelLevel = item.FuelLevel.Value;
+            un.CmTemp = await TempExist(item.CmTemp);
+            un.TempLevel = item.TempLevel.Value;
+            un.CmGps = await GpsExist(item.CmGps);
+            un.Speed = item.Speed.Value;
+            un.Direction = item.Direction.Value;
+            un.LongGoogle = item.LongGoogle.Value;
+            un.LaGoogle = item.LaGoogle.Value;
+            //fag
+            un.CmSignalStatus = await SignalExist(item.CmSignalStatus);
+
+            un.IpGps = item.IpGps;
+            un.Port = item.Port.Value;
+
+            _db.Entry(un).State = EntityState.Modified;
             try
             {
                 await _db.SaveChangesAsync();
@@ -179,18 +97,100 @@ namespace gtrackProject.Repositories.universe
 
             return true;
         }
+        //public async Task<bool> UpdateDataString(string item)
+        //{
+        //    var data = item.Split(',');
+        //    var hd = data[0];
+        //    var idcar = data[1];
+
+        //    var un = await _db.Universes.FirstOrDefaultAsync(u => u.Vehicle.Hd.Value == hd && u.Vehicle.IdCar == idcar);
+
+        //    un.CurrentDataDatetime = DateTime.UtcNow;
+        //    un.CorrectDataId = item.CorrectDataId.Value;
+        //    un.CorrectDataDatetime = item.CorrectDataDatetime;
+
+        //    un.CmCommand = await CommExist(data[2]);
+        //    un.CmEngine = await EngineExist(data[4]);
+        //    un.CmMeter = await MeterExist(data[3]);
+        //    un.CmBatt = await BattExist(data[5]);
+        //    try
+        //    {
+        //        var fuel = Convert.ToDecimal(data[6]);
+        //        un.FuelLevel = fuel;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+
+        //    try
+        //    {
+        //        var tempLvl = Convert.ToByte();
+        //        un.TempLevel = tempLvl;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        un.CmTemp = await TempExist(item.CmTemp);
+        //        throw;
+        //    }
+            
+        //    un.CmTemp = await TempExist(item.CmTemp);
+        //    un.TempLevel = item.TempLevel.Value;
+        //    un.CmGps = await GpsExist(item.CmGps);
+        //    un.Speed = item.Speed.Value;
+        //    un.Direction = item.Direction.Value;
+        //    un.LongGoogle = item.LongGoogle.Value;
+        //    un.LaGoogle = item.LaGoogle.Value;
+        //    //fag
+        //    un.CmSignalStatus = await SignalExist(item.CmSignalStatus);
+
+        //    un.IpGps = item.IpGps;
+        //    un.Port = item.Port.Value;
+
+        //    _db.Entry(un).State = EntityState.Modified;
+
+        //    _db.Entry(un).State = EntityState.Modified;
+        //    try
+        //    {
+        //        await _db.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException exception)
+        //    {
+        //        throw new DbUpdateConcurrencyException(exception.Message);
+        //    }
+
+        //    return true;
+        //}
+        public async Task<bool> GetOffGps(int id)
+        {
+            var un = await IdExist(id);
+            if (un.GpsProductId == null) throw new ArgumentNullException("GpsProductId", "GpsProductId is currently Null");
+
+            var gps = un.ProductGps;
+            gps.Sim = null;
+            _db.Entry(gps).State = EntityState.Modified;
+            try
+            {
+                await _db.SaveChangesAsync();
+
+                un.GpsProductId = null;
+                _db.Entry(un).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException exception)
+            {
+                throw new DbUpdateConcurrencyException(exception.Message);
+            }
+
+            return true;
+        }
         
+
         private async Task<Universe> IdExist(int id)
         {
             var un = await _db.Universes.FirstOrDefaultAsync(v => v.Id == id);
             if (un != null) return un;
             throw new KeyNotFoundException("id");
-        }
-        private async Task<int> VehicleExist(int id)
-        {
-            var veh = await _db.Vehicles.FirstOrDefaultAsync(v => v.Id == id);
-            if (veh != null) return id;
-            throw new ArgumentException("VehicleId Not Found");
         }
         private async Task<int> ProductExist(int id)
         {
@@ -239,18 +239,6 @@ namespace gtrackProject.Repositories.universe
             var signal = await _db.UnCmSignals.FirstOrDefaultAsync(s => s.Id == fag);
             if (signal != null) return fag;
             throw new ArgumentException("CmSignalStatus Not Found");
-        }
-        private async Task<byte> DisplayExist(byte id)
-        {
-            var dis = await _db.UnDisplayStatuss.FirstOrDefaultAsync(d => d.Id == id);
-            if (dis != null) return id;
-            throw new ArgumentException("DisplayStatus Not Found");
-        }
-        private async Task<int> DriverExist(int id)
-        {
-            var driver = await _db.Drivers.FirstOrDefaultAsync(d => d.Id == id);
-            if (driver != null) return id;
-            throw new ArgumentException("DriverId Not Found");
         }
         private async Task<int> OrderExist(int id)
         {

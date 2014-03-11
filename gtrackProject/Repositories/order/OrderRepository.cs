@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using gtrackProject.Models.dbContext;
 using gtrackProject.Models.order;
-using gtrackProject.Models.product;
 using gtrackProject.Models.universe;
 using gtrackProject.Models.vehicle;
 using gtrackProject.Repositories.order.IRepos;
@@ -92,7 +91,7 @@ namespace gtrackProject.Repositories.order
                     
                     if (item.Comment != null) order.Comment = item.Comment;
 
-                    //changeHD ... move vehicle from ole hd to new hd
+                    //changeHD ... move vehicle from old hd to new hd
                     //changeQuantity ... add or delete vehicle to eq New Order Quantity
                     if (changeHd || changeQuantity)
                         await ChangeOrder(changeHd, order.HdId, item.HdId, order.Quantity, order.Id);
@@ -186,6 +185,32 @@ namespace gtrackProject.Repositories.order
             return true;
         }
 
+        public async Task<bool> UserActive(int orderId, string aspId , bool isQC)
+        {
+            var usr = await _db.Employees.FirstOrDefaultAsync(e => e.AspId == aspId);
+            if (usr == null) throw new ArgumentException("Invalid User Access!!!");
+
+            var order = await _db.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            if (order == null) throw new ArgumentException("orderId Not Found");
+
+            if (order.CurrentUser != null) throw new ArgumentException("Another User is currently use this order");
+
+            order.CurrentUser = usr.Id;
+            if (isQC) order.State = 3;
+
+            _db.Entry(order).State = EntityState.Modified;
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException exception)
+            {
+                throw new DbUpdateConcurrencyException(exception.Message);
+            }
+
+            return true;
+        }
+
         private async Task<Order> IdExist(int id)
         {
             var order = await _db.Orders.FirstOrDefaultAsync(o => o.Id == id);
@@ -209,12 +234,6 @@ namespace gtrackProject.Repositories.order
             var ver = await _db.GpsVersions.FirstOrDefaultAsync(o => o.Id == id);
             if (ver != null) return id;
             throw new ArgumentException("ProductGpsVersion Not Found");
-        }
-        private async Task<byte> StatusExist(byte id)
-        {
-            var status = await _db.OrderStates.FirstOrDefaultAsync(o => o.Id == id);
-            if (status != null) return id;
-            throw new ArgumentException("OrderStatus Not Found");
         }
 
         private async Task<bool> AddVehicle(int quantity,short hdId,int orderId)

@@ -116,6 +116,10 @@ namespace gtrackProject.Repositories.product
                     product.QcDate = d;
                     product.State = 3;
                     product.OrderId = item.OrderId.Value;
+
+                    //todo: check all product.state = 3 in this order
+        //          //todo: update order status = 4 (QCcomplete)
+
                     break;
                 /*case 4: //Install (installation) ... update in order process
                     if (item.InstallBy == null)

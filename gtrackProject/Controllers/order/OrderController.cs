@@ -8,10 +8,10 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using gtrackProject.Models.order;
 using gtrackProject.Repositories.order.IRepos;
+using Microsoft.AspNet.Identity;
 
 namespace gtrackProject.Controllers.order
 {
-
     /// <summary>
     /// OrderController - CRUD Order By admin, cs.
     /// </summary>
@@ -59,8 +59,8 @@ namespace gtrackProject.Controllers.order
         {
             try
             {
-                var fix = await _repository.Get(id);
-                return Ok(fix);
+                var order = await _repository.Get(id);
+                return Ok(order);
             }
             catch (KeyNotFoundException)
             {
@@ -85,8 +85,8 @@ namespace gtrackProject.Controllers.order
 
             try
             {
-                var fix = await _repository.Add(value);
-                return Ok(fix);
+                var order = await _repository.Add(value);
+                return Ok(order);
             }
             catch (ArgumentException msgArgumentException)
             {
@@ -145,7 +145,6 @@ namespace gtrackProject.Controllers.order
         /// <param name="id">id *int*</param>
         /// <returns>HTTP Status</returns>
         [HttpDelete]
-        [ResponseType(typeof(Order))]
         public async Task<IHttpActionResult> Delete(int id)
         {
             try
@@ -159,6 +158,35 @@ namespace gtrackProject.Controllers.order
             catch (KeyNotFoundException)
             {
                 return NotFound();
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // PUT api/ActiveOrder/5
+        /// <summary>
+        /// Active User in Order
+        /// </summary>
+        /// <param name="id">id *int*</param>
+        /// <returns>HTTP Status</returns>
+        [Authorize(Roles = "cs, qc, install")]
+        [Route("ActiveOrder")]
+        [HttpPut]
+        public async Task<IHttpActionResult> UserActive(int id)
+        {
+            try
+            {
+                var usr = User.Identity.GetUserId();
+                var isQc = User.IsInRole("qc");
+                await _repository.UserActive(id, usr, isQc);
+            }
+            catch (DbUpdateConcurrencyException msgDbUpdateConcurrencyException)
+            {
+                return InternalServerError(msgDbUpdateConcurrencyException);
+            }
+            catch (ArgumentException msgArgumentException)
+            {
+                return BadRequest(msgArgumentException.Message);
             }
 
             return StatusCode(HttpStatusCode.NoContent);

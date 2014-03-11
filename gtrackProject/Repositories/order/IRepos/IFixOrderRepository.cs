@@ -11,5 +11,6 @@ namespace gtrackProject.Repositories.order.IRepos
         Task<FixOrder> Add(FixOrder item);
         Task<bool> Update(FixOrder item);
         Task<bool> Remove(int id);
+        Task<bool> UserActive(int fixId, string aspId, bool isQC);
     }
 }
