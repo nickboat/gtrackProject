@@ -13,8 +13,7 @@ namespace gtrackProject.Models.product
         [Required]
         [ForeignKey("CreateByEmployee")]
         public int CreateBy { get; set; }
-        [Required]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         [Required]
         [ForeignKey("Gps")]
         public int GpsId { get; set; }

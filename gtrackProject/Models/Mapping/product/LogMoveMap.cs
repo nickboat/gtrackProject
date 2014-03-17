@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Web;
 using gtrackProject.Models.product;
 
 namespace gtrackProject.Models.Mapping.product
 {
-    public class LogMoveMap : EntityTypeConfiguration<LogMove>
+    public class LogMoveGpsMap : EntityTypeConfiguration<LogMoveGps>
     {
-        public LogMoveMap()
+        public LogMoveGpsMap()
         {
             // Primary Key
             HasKey(t => t.Id);
 
             // Table & Column Mappings
-            ToTable("log_move");
+            ToTable("log_move_gps");
             Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Comment).HasColumnName("Comment");
             Property(t => t.Status).HasColumnName("Status");
@@ -31,7 +27,7 @@ namespace gtrackProject.Models.Mapping.product
                 .WithMany(t => t.LogMoves)
                 .HasForeignKey(d => d.GpsId);
             HasRequired(t => t.CreateByEmployee)
-                .WithMany(t => t.LogMoves)
+                .WithMany(t => t.LogMoveGpses)
                 .HasForeignKey(d => d.CreateBy);
             HasRequired(t => t.LogStatus)
                 .WithMany(t => t.LogMoves)

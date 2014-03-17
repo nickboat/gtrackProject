@@ -9,7 +9,7 @@ namespace gtrackProject.Models.product
         public LogStatus()
         {
             LogDeletes=new List<LogDelete>();
-            LogMoves=new List<LogMove>();
+            LogMoves=new List<LogMoveGps>();
             LogSwaps=new List<LogSwap>();
         }
 
@@ -25,7 +25,7 @@ namespace gtrackProject.Models.product
         public ICollection<LogDelete> LogDeletes { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<LogMove> LogMoves { get; set; }
+        public ICollection<LogMoveGps> LogMoves { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogSwap> LogSwaps { get; set; }

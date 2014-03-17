@@ -46,7 +46,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<GpsVersion> GpsVersions { get; set; }
         public DbSet<LogDelete> LogDeletes { get; set; }
         public DbSet<LogFee> LogFees { get; set; }
-        public DbSet<LogMove> LogMoves { get; set; }
+        public DbSet<LogMoveGps> LogMoveGpses { get; set; }
         public DbSet<LogSim> LogSims { get; set; }
         public DbSet<LogStatus> LogStatuses { get; set; }
         public DbSet<LogSwap> LogSwaps { get; set; }
@@ -97,7 +97,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new GpsVersionMap());
             modelBuilder.Configurations.Add(new LogDeleteMap());
             modelBuilder.Configurations.Add(new LogFeeMap());
-            modelBuilder.Configurations.Add(new LogMoveMap());
+            modelBuilder.Configurations.Add(new LogMoveGpsMap());
             modelBuilder.Configurations.Add(new LogSimMap());
             modelBuilder.Configurations.Add(new LogStatusMap());
             modelBuilder.Configurations.Add(new LogSwapMap());

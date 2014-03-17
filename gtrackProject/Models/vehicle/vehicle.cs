@@ -15,10 +15,11 @@ namespace gtrackProject.Models.vehicle
         {
             Universes = new List<Universe>();
             LogDeletes=new List<LogDelete>();
-            FirstLogMoves=new List<LogMove>();
-            MoveLogMoves=new List<LogMove>();
+            FirstLogMoves=new List<LogMoveGps>();
+            MoveLogMoves=new List<LogMoveGps>();
             LogASwaps=new List<LogSwap>();
             LogBSwaps=new List<LogSwap>();
+            LogMoveVehicles=new List<LogMoveVehicle>();
         }
         [Key]
         public int Id { get; set; }
@@ -63,15 +64,18 @@ namespace gtrackProject.Models.vehicle
         public ICollection<LogDelete> LogDeletes { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<LogMove> FirstLogMoves { get; set; }
+        public ICollection<LogMoveGps> FirstLogMoves { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<LogMove> MoveLogMoves { get; set; }
+        public ICollection<LogMoveGps> MoveLogMoves { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogSwap> LogASwaps { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogSwap> LogBSwaps { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogMoveVehicle> LogMoveVehicles { get; set; }
     }
 }

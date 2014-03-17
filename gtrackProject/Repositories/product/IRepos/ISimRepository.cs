@@ -4,7 +4,7 @@ using gtrackProject.Models.product;
 
 namespace gtrackProject.Repositories.product.IRepos
 {
-    interface ISimRepository
+    public interface ISimRepository
     {
         IQueryable<Sim> GetAll();
         Task<Sim> Get(int id);

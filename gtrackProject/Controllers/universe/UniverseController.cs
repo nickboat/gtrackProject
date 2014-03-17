@@ -98,7 +98,7 @@ namespace gtrackProject.Controllers.universe
         /// <param name="value">The <see cref="Universe"/>.</param>
         /// <returns></returns>
         /// todo put universe fromurl - possible???
-        [Authorize(Roles = "admin, cs, install, server")]
+        /*[Authorize(Roles = "admin, cs, install, server")]
         [HttpPut]
         public async Task<IHttpActionResult> Put(int id, [FromBody]Universe value)
         {
@@ -130,7 +130,7 @@ namespace gtrackProject.Controllers.universe
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
 
         // DELETE api/Universe/5
         /*[HttpDelete] //becuz fk_vehicle : cascade

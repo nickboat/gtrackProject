@@ -20,7 +20,7 @@ namespace gtrackProject.Models.product
             LogFees = new List<LogFee>();
             LogSims = new List<LogSim>();
             LogDeletes=new List<LogDelete>();
-            LogMoves=new List<LogMove>();
+            LogMoves=new List<LogMoveGps>();
             LogASwaps=new List<LogSwap>();
             LogBSwaps=new List<LogSwap>();
         }
@@ -117,7 +117,7 @@ namespace gtrackProject.Models.product
         public ICollection<LogDelete> LogDeletes { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<LogMove> LogMoves { get; set; }
+        public ICollection<LogMoveGps> LogMoves { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogSwap> LogASwaps { get; set; }

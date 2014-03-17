@@ -15,6 +15,7 @@ namespace gtrackProject.Models.account
             Orders = new List<Order>();
             Vehicles = new List<Vehicle>();
             Customers = new List<Customer>();
+            LogMoveVehicles=new List<LogMoveVehicle>();
         }
 
         public string Value { get; set; }
@@ -43,6 +44,9 @@ namespace gtrackProject.Models.account
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<Customer> Customers { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogMoveVehicle> LogMoveVehicles { get; set; }
 
     }
 }

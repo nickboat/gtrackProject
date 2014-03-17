@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using gtrackProject.Models.order;
 using gtrackProject.Models.product;
+using gtrackProject.Models.vehicle;
 using Newtonsoft.Json;
 
 namespace gtrackProject.Models.account
@@ -32,9 +33,9 @@ namespace gtrackProject.Models.account
             LogFees = new List<LogFee>();
             LogSims = new List<LogSim>();
             LogDeletes=new List<LogDelete>();
-            LogMoves=new List<LogMove>();
+            LogMoveGpses = new List<LogMoveGps>();
             LogSwaps=new List<LogSwap>();
-
+            LogMoveVehicles=new List<LogMoveVehicle>();
         }
         [Key]
         public int Id { get; set; }
@@ -125,9 +126,12 @@ namespace gtrackProject.Models.account
         public ICollection<LogDelete> LogDeletes { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
-        public ICollection<LogMove> LogMoves { get; set; }
+        public ICollection<LogMoveGps> LogMoveGpses { get; set; }
         [JsonIgnore]
         //[IgnoreDataMember]
         public ICollection<LogSwap> LogSwaps { get; set; }
+        [JsonIgnore]
+        //[IgnoreDataMember]
+        public ICollection<LogMoveVehicle> LogMoveVehicles { get; set; }
     }
 }
