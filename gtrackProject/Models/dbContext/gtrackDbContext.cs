@@ -65,6 +65,7 @@ namespace gtrackProject.Models.dbContext
         public DbSet<UnDisplayStatus> UnDisplayStatuss { get; set; }
         public DbSet<Universe> Universes { get; set; }
         //vehicle
+        public DbSet<LogMoveVehicle> LogMoveVehicles { get; set; }
         public DbSet<VehicleBrand> VehicleBrands { get; set; }
         public DbSet<VehicleColor> VehicleColors { get; set; }
         public DbSet<VehicleHeadType> VehicleHeadTypes { get; set; }
@@ -116,6 +117,7 @@ namespace gtrackProject.Models.dbContext
             modelBuilder.Configurations.Add(new UnDisplayStatusMap());
             modelBuilder.Configurations.Add(new UniverseMap());
             //vehicle
+            modelBuilder.Configurations.Add(new LogMoveVehicleMap());
             modelBuilder.Configurations.Add(new VehicleBrandMap());
             modelBuilder.Configurations.Add(new VehicleColorMap());
             modelBuilder.Configurations.Add(new VehicleHeadTypeMap());

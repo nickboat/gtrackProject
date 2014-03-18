@@ -34,6 +34,10 @@ namespace gtrackProject
             container.RegisterType<ICustomerRepository, CustomerRepository>();
 
             //Repositories.product
+            container.RegisterType<ILogMoveGpsRepository, LogMoveGpsRepository>();
+            container.RegisterType<ILogSimRepository, LogSimRepository>();
+            container.RegisterType<ILogStatusRepository, LogStatusRepository>();
+            container.RegisterType<ISimRepository, SimRepository>();
             container.RegisterType<ISimStatusRepository, SimStatusRepository>();
             container.RegisterType<ISimNetworkRepository, SimNetworkRepository>();
             container.RegisterType<ISimFeeTypeRepository, SimFeeTypeRepository>();
@@ -42,6 +46,7 @@ namespace gtrackProject
             container.RegisterType<IProductGpsRepository, ProductGpsRepository>();
 
             //Repositories.vehicle
+            container.RegisterType<ILogMoveVehicleRepository, LogMoveVehicleRepository>();
             container.RegisterType<ILpTypeRepository, LpTypeRepository>();
             container.RegisterType<IProvinceRepository, ProvinceRepository>();
             container.RegisterType<IVehicleColorRepository, VehicleColorRepository>();
@@ -68,7 +73,7 @@ namespace gtrackProject
             container.RegisterType<IFixOrderRepository, FixOrderRepository>();
             container.RegisterType<IOrderRepository, OrderRepository>();
 
-            //Repositories.order
+            //Repositories.Driver
             container.RegisterType<IDriverCateRepository, DriverCateRepository>();
             container.RegisterType<IDriverRepository, DriverRepository>();
 

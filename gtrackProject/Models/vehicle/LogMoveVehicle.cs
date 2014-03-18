@@ -20,12 +20,12 @@ namespace gtrackProject.Models.vehicle
         public DateTime CreateDate { get; set; }
         [Required]
         [ForeignKey("FirstHd")]
-        public int HdAtFirst { get; set; }
+        public short HdAtFirst { get; set; }
         [Required]
         public string IdCarAtFirst { get; set; }
         [Required]
         [ForeignKey("MoveHd")]
-        public int HdMoveTo { get; set; }
+        public short HdMoveTo { get; set; }
         [Required]
         public string IdCarMoveTo { get; set; }
         public string Comment { get; set; }

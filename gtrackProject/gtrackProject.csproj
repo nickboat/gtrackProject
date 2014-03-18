@@ -396,6 +396,7 @@
     <Compile Include="Repositories\universe\UnCmSignalRepository.cs" />
     <Compile Include="Repositories\universe\UnCmTempRepository.cs" />
     <Compile Include="Repositories\universe\UniverseRepository.cs" />
+    <Compile Include="Repositories\vehicle\IRepos\ILogMoveVehicleRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\ILpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IProvinceRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleBrandRepository.cs" />
@@ -405,6 +406,7 @@
     <Compile Include="Repositories\vehicle\IRepos\IVehicleOganizeRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleRepository.cs" />
     <Compile Include="Repositories\vehicle\IRepos\IVehicleTypeRepository.cs" />
+    <Compile Include="Repositories\vehicle\LogMoveVehicleRepository.cs" />
     <Compile Include="Repositories\vehicle\LpTypeRepository.cs" />
     <Compile Include="Repositories\vehicle\ProvinceRepository.cs" />
     <Compile Include="Repositories\vehicle\VehicleBrandRepository.cs" />
